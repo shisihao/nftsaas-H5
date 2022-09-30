@@ -1,0 +1,28 @@
+
+:root {
+	--root-theme-color: #1275E4; // 主题色
+	--root-theme-color-rgb: 18, 117, 228; // 主题色
+	--root-auxiliary-color1: #FF5E5E; // 辅助色1
+	--root-auxiliary-color2: #40A6D7; // 辅助色1
+
+	--root-text-color1: #333333; // 文字颜色1
+	--root-text-color2: #666666; // 文字颜色2
+	--root-text-color3: #999999; // 文字颜色3
+	--root-text-color4: #CCCCCC; // 文字颜色4 占位
+	--root-text-color5: #FFFFFF; // 文字颜色5 按钮
+
+	--root-dividing-color1: #E2E2E2; // 分割线1
+	--root-bg-color1: #F2F4F6; // 背景色1
+	--root-bg-color2: #FFFFFF; // 背景色2
+	
+	--root-button-color1: #DFDFDF; // 按钮1
+
+	--root-page-spacing: 15px; // 页面边距
+	--root-max-width: 375px; // 页面最大宽度
+}
+
+// $white: #fff;
+
+:export {
+	//white: $white;
+}

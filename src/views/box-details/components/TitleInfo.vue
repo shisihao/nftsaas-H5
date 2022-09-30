@@ -1,0 +1,73 @@
+<template>
+  <div class="title-section">
+    <div class="title">
+      {{ item.name }}
+    </div>
+    <div v-if="item.interest_rebate" class="interest-rebate">
+      ¥{{ item.cny_price }}
+    </div>
+    <div v-if="cnyPrice(item) >= 0 || parseFloat(item.integral_price) >= 0" class="price">
+      <em v-if="cnyPrice(item) > 0"><span>¥</span>{{ cnyPrice(item) }}</em>
+      <em v-if="cnyPrice(item) > 0 && parseFloat(item.integral_price || 0) > 0"><span>+</span></em>
+      <em v-if="parseFloat(item.integral_price || 0) > 0">{{ item.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+      <em v-if="cnyPrice(item) === 0 && parseFloat(item.integral_price || 0) === 0">0.00<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { computed } from 'vue'
+import { integralOptions } from '/@/utils/explain'
+import { paraphrase } from '/@/filters/index'
+
+defineProps({
+  item: {
+    type: Object,
+    default: () => {}
+  }
+})
+
+const cnyPrice = computed(() => {
+  return (item) => {
+    if (item.interest_rebate) {
+      return parseFloat(item.interest_rebate.cny_price || 0).toFixed(2)
+    } else {
+      return parseFloat(item.cny_price  || 0).toFixed(2)
+    }
+  }
+})
+
+</script>
+
+<style lang="scss" scoped>
+  .title-section {
+    background-image: url('/@/assets/images/public/detail_img_title_bg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-color: var(--root-bg-color1);
+    border-radius: 12px;
+    padding: 20px 0;
+    margin-top: 15px;
+    .title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 500;
+    }
+    .interest-rebate {
+      text-align: center;
+      text-decoration: line-through;
+      color: var(--root-text-color3);
+      margin-top: 12px;
+    }
+    .price {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 24px;
+      color: var(--root-auxiliary-color);
+      em {
+        font-style: normal;
+      }
+    }
+  }
+</style>
