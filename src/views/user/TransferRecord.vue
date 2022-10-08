@@ -144,6 +144,7 @@ const onCopy = async (value) => {
     }
     .van-tab--active {
       color: var(--root-text-color5);
+      background-color: var(--root-theme-color);
     }
   }
   .transfer-wrapper {

@@ -95,6 +95,7 @@ const onTabChange = val => {
 	color: var(--root-text-color3);
 }
 :deep(.van-tab--active) {
+	background-color: var(--root-theme-color);
 	color: var(--root-text-color5);
 }
 .content {
