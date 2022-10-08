@@ -143,6 +143,8 @@ const onSubmit = () => {
 
 <style lang="scss" scoped>
 .account-section {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   overflow: hidden;
   .account {
     margin-top: 60px;
@@ -168,7 +170,7 @@ const onSubmit = () => {
         padding: 0;
         margin-top: 24px;
         overflow: visible;
-        background-color: var(--root-bg-color1);
+        background-color: var(--root-bg-color2);
         &::after {
           border: 0;
         }
@@ -177,7 +179,6 @@ const onSubmit = () => {
       .van-field {
         :deep(.van-field__body) {
           padding: 12px 12px 12px 36px;
-          border: 1px solid var(--root-text-color4);
           position: relative;
           &::after {
             content: '';

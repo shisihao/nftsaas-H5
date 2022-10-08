@@ -11,6 +11,7 @@
             :value="state.form.password"
             :focused="state.showKeyboard"
             @focus="state.showKeyboard = true"
+            :gutter="5"
           />
           <!-- 数字键盘 -->
           <van-number-keyboard
@@ -90,6 +91,8 @@ const onSubmit = () => {
 
 <style lang="scss" scoped>
 .paypass-section {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   overflow: hidden;
   .content {
     margin-top: 120px;

@@ -15,20 +15,22 @@
             v-model="state.form.name"
             autocomplete="off"
             name="name"
-            label="真实姓名"
-            placeholder="真实姓名"
-
+            label="姓名"
+            placeholder="请输入您的真实姓名"
+            input-align="right"
             clearable
-            :rules="[{ required: true, message: '请填写真实姓名' }]"
+            :rules="[{ required: true, message: '请输入您的真实姓名' }]"
           />
           <van-field
+            class="field-number"
             v-model="state.form.number"
             autocomplete="off"
             name="number"
-            label="身份证号"
-            placeholder="身份证号"
+            label="证件号码"
+            placeholder="请输入待认证的证件号码"
+            input-align="right"
             clearable
-            :rules="[{ required: true, message: '请填写身份证号' }]"
+            :rules="[{ required: true, message: '请输入待认证的证件号码' }]"
           />
           <div class="account">
             <span>
@@ -183,16 +185,17 @@ const onSubmit = () => {
 
 <style lang="scss" scoped>
 .main-contain {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   .describe {
-    padding: 0 var(--root-page-spacing);
+    padding: 30px var(--root-page-spacing) 0 var(--root-page-spacing);
     span {
       display: block;
-      margin-top: 30px;
       font-size: 24px;
     }
     p {
       margin-top: 10px;
-      color: var(--root-auxiliary-color);
+      color: var(--root-auxiliary-color1);
       font-size: 12px;
     }
   }
@@ -205,8 +208,8 @@ const onSubmit = () => {
         border-color: var(--root-dividing-color1);
       }
       .van-cell {
-        background-color: var(--root-bg-color1);
         color: var(--root-text-color1);
+        padding: var(--root-page-spacing);
         &:after {
           border-color: var(--root-dividing-color1);
         }
@@ -219,6 +222,11 @@ const onSubmit = () => {
           input {
             color: var(--root-text-color1);
           }
+        }
+      }
+      .field-number {
+        &:after {
+          border: none;
         }
       }
       .field-code {
@@ -247,15 +255,14 @@ const onSubmit = () => {
         }
       }
       .account {
-        margin-top: 30px;
-        padding: 0 var(--root-page-spacing);
+        background: var(--root-bg-color1);
+        padding: 30px var(--root-page-spacing) 10px var(--root-page-spacing);
         span {
           font-size: 12px;
           color: var(--root-text-color2);
         }
         p{
           margin-top: 10px;
-          margin-bottom: 20px;
           font-size: 18px;
         }
       }

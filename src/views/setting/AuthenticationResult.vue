@@ -73,11 +73,14 @@ if (query.response) {
 
 <style lang="scss" scoped>
 .main-contain {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   .certify-result {
+    padding-top: 30px;
     .certify-img {
       width: 75px;
       height: 87px;
-      margin: 32px auto 0;
+      margin: auto;
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
@@ -101,7 +104,7 @@ if (query.response) {
         border-color: var(--root-dividing-color1);
       }
       .van-cell {
-        background-color: var(--root-bg-color1);
+        padding: var(--root-page-spacing);
         color: var(--root-text-color1);
         &:after {
           border-color: var(--root-dividing-color1);

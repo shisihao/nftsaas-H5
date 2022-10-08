@@ -31,9 +31,11 @@ const typeOptions = [
 
 <style lang="scss" scoped>
 .main-contain {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   .contain {
     .content-text{
-      margin: 15px;
+      padding: var(--root-page-spacing);
       color: var(--root-text-color2);
       line-height: 1.5;
       word-break: break-all;

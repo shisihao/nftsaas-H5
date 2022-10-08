@@ -31,12 +31,13 @@ const phone = computed(() => mosaicTel(store.state.user.info?.phone))
 
 <style lang="scss" scoped>
 .replace-phone {
-
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
+  padding-top: 20px;
   .logo-wrap {
     width: 255px;
     height: 88px;
-    margin: 36px auto 39px;
-
+    margin: 0 auto 39px;
     img {
       width: 100%;
       height: 100%;
@@ -64,7 +65,8 @@ const phone = computed(() => mosaicTel(store.state.user.info?.phone))
     text-align: center;
     font-size: 18px;
     margin: 0 auto;
-    background: var(--root-button-color1);
+    background: var(--root-theme-color);
+    color: var(--root-text-color5);
     border-radius: 22px;
   }
 }

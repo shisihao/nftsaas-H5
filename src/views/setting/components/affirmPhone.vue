@@ -138,7 +138,7 @@ const onSubmit = (values) => {
   display: flex;
   align-items: center;
   height: 64px !important;
-  background-color: var(--root-bg-color1);
+  background-color: var(--root-bg-color2);
   color: var(--root-text-color1);
   box-shadow: inset 0px 1px 0px 0px var(--root-bg-color2);
 
@@ -213,14 +213,13 @@ const onSubmit = (values) => {
 .submit-button {
   width: 343px;
   height: 44px;
-  background: var(--root-button-color1);
   border-radius: 22px;
   margin: 24px auto 0;
-  color: var(--root-text-color1);
+  background: var(--root-theme-color);
+  color: var(--root-text-color5);
   font-size: 18px;
 }
 .disable{
-  background: var(--root-button-color2);
-  color: var(--root-text-color2);
+  background: #ccc;
 }
 </style>

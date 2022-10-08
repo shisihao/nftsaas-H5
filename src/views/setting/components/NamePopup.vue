@@ -111,7 +111,7 @@ const onSubmit = () => {
 <style lang="scss" scoped>
 .main-section {
   :deep(.van-popup) {
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     padding-bottom: 50px;
   }
   .title {
@@ -134,7 +134,7 @@ const onSubmit = () => {
         :deep(.van-cell__value) {
           position: relative;
           .van-field__body {
-            background-color: var(--root-bg-color2);
+            background-color: var(--root-bg-color1);
             padding: 10px 10px;
             input {
               color: var(--root-text-color1);
@@ -162,13 +162,12 @@ const onSubmit = () => {
         height: 36px;
       }
       .cancel {
-        color: var(--root-theme-color);
-        background: none;
-        border: 1px solid var(--root-theme-color);
+        color: var(--root-text-color5);
+        background-color: var(--root-button-color1);
       }
       .submit {
-        color: var(--root-text-color1);
-        background-image: var(--root-button-color1);
+        color: var(--root-text-color5);
+        background-color: var(--root-theme-color);
       }
     }
   }
