@@ -7,7 +7,7 @@
     </div>
     <van-image v-else fit="cover" :src="Array.isArray(item?.images) ? `${domin}${item?.images[0]}` : ''" />
     <div v-show="item?.is_three" class="cover-touch"></div>
-    <img v-show="item?.is_three" class="full-screen" src="/@/assets/images/public/mine_icon_cangping_fangda.png" alt="" @click="onFullScreen" />
+    <img v-show="item?.is_three" class="full-screen" src="@/assets/images/public/mine_icon_cangping_fangda.png" alt="" @click="onFullScreen" />
     <van-popup v-model:show="show" class="threejs-popup" closeable :duration="0">
       <iframe v-if="item?.is_three && item.three_url?.three_type === 'gltf'" class="threejs-content" scrolling="no" :src="`${domin}threejs/3d_gltf.html?fullscreen=true&gltf=${item.three_url?.three_gltf}`" frameborder="0"></iframe>
       <iframe v-if="item?.is_three && item.three_url?.three_type === 'obj'" class="threejs-content" scrolling="no" :src="`${domin}threejs/3d.html?fullscreen=true&obj=${item.three_url?.three_obj}&mtl=${item.three_url?.three_mtl}`" frameborder="0"></iframe>
@@ -17,8 +17,8 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import { DominKey, getToken } from '/@/utils/auth'
-import store from '/@/store/index'
+import { DominKey, getToken } from '@/utils/auth'
+import store from '@/store/index'
 
 const domin = getToken(DominKey)
 

@@ -74,9 +74,9 @@
 </template>
 
 <script setup>
-import { DominKey, getToken } from '/@/utils/auth'
+import { DominKey, getToken } from '@/utils/auth'
 import { ref, reactive, computed, watch, nextTick,inject} from 'vue'
-import { synthesis } from '/@/api/synthesis'
+import { synthesis } from '@/api/synthesis'
 import { showLoadingToast, allowMultipleToast } from 'vant'
 
 const loading=ref(false)
@@ -249,7 +249,7 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 		width: 20px;
 		height: 20px;
 		border: 1px solid var(--root-bg-color1);
-		background: url('/@/assets/images/synthesis/mine_icon_hecheng_close@2x.png') no-repeat;
+		background: url('@/assets/images/synthesis/mine_icon_hecheng_close@2x.png') no-repeat;
 		background-size: contain;
 	}
 }
@@ -320,13 +320,13 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 			right: 5px;
 			width: 22px;
 			height: 22px;
-			background: url('/@/assets/images/synthesis/mine_icon_hecheng_weixuan@2x.png') no-repeat;
+			background: url('@/assets/images/synthesis/mine_icon_hecheng_weixuan@2x.png') no-repeat;
 			background-size: contain;
 			border-radius: 50%;
 			cursor: pointer;
 
 			&.active {
-				background: url('/@/assets/images/synthesis/mine_icon_hecheng_xuanze@2x.png') no-repeat;
+				background: url('@/assets/images/synthesis/mine_icon_hecheng_xuanze@2x.png') no-repeat;
 				background-size: contain;
 			}
 		}
@@ -354,7 +354,7 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 			position: absolute;
 			width: 12px;
 			height: 12px;
-			background: url('/@/assets/images/public/common_icon_number.png') no-repeat center;
+			background: url('@/assets/images/public/common_icon_number.png') no-repeat center;
 			background-size: 100%;
 			left: 0;
 			top: 0;

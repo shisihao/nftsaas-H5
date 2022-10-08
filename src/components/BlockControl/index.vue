@@ -12,7 +12,7 @@
 
 <script setup>
 import { reactive } from 'vue'
-import { paraphrase } from '/@/filters/index'
+import { paraphrase } from '@/filters/index'
 
 const caretOptinos = [
   { label: '收起', icon: 'arrow-up', value: 0 },

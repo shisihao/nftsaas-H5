@@ -25,12 +25,12 @@
 
 <script setup>
 import { reactive, defineExpose } from 'vue'
-import store from '/@/store/index'
-import globleFun from '/@/utils/link'
-import { DominKey, getToken } from '/@/utils/auth'
-import { integralOptions } from '/@/utils/explain'
-import { paraphrase } from '/@/filters/index'
-import { getImageUrl } from '/@/utils/index'
+import store from '@/store/index'
+import globleFun from '@/utils/link'
+import { DominKey, getToken } from '@/utils/auth'
+import { integralOptions } from '@/utils/explain'
+import { paraphrase } from '@/filters/index'
+import { getImageUrl } from '@/utils/index'
 
 const domin = getToken(DominKey)
 

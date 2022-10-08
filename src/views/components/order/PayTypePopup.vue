@@ -38,11 +38,11 @@
 <script setup>
 import { ref, computed, reactive } from 'vue'
 import { showToast, showLoadingToast } from 'vant'
-import store from '/@/store/index'
-import { payTypeOptions, integralOptions } from '/@/utils/explain'
-import { orderPay, boxPlace } from '/@/api/order'
-import globleFun from '/@/utils/link'
-import SvgIcon from '/@/components/YuSvgIcon'
+import store from '@/store/index'
+import { payTypeOptions, integralOptions } from '@/utils/explain'
+import { orderPay, boxPlace } from '@/api/order'
+import globleFun from '@/utils/link'
+import SvgIcon from '@/components/YuSvgIcon'
 import PayPassPopup from './PayPassPopup.vue'
 import PayInputPopup from './PayInputPopup.vue'
 

@@ -1,5 +1,5 @@
 
-import http from '/@/utils/request'
+import http from '@/utils/request'
 
 export function tableList( data ) {
   return http.request( {

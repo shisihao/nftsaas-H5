@@ -1,5 +1,5 @@
 
-import { asyncRoutes, constantRoutes } from '/@/router'
+import { asyncRoutes, constantRoutes } from '@/router'
 import { toRaw } from '@vue/reactivity'
 
 /**

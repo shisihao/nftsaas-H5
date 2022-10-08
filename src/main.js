@@ -8,11 +8,11 @@ import globleFun from './utils/link'
 import Vant from 'vant'
 import { Lazyload } from 'vant' 
 import 'vant/lib/index.css'
-import '/@/plugins/theme.scss'
+import '@/plugins/theme.scss'
 // import 'lib-flexible/flexible'
 
 import 'normalize.css/normalize.css'
-import '/@/assets/iconfont/iconfont.css'
+import '@/assets/iconfont/iconfont.css'
 
 import "./assets/iconfont/iconfont.js"
 import "./assets/iconfont/iconfont.css"

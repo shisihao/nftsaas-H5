@@ -15,8 +15,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import settings from '/@/settings'
-import store from '/@/store/index'
+import settings from '@/settings'
+import store from '@/store/index'
 
 const router = useRouter()
 let show = ref(false)

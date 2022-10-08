@@ -10,8 +10,8 @@
 </template>
 
 <script setup>
-import NavigationTitle from '/@/components/NavigationTitle/index.vue'
-import BlockControl from '/@/components/BlockControl/index.vue'
+import NavigationTitle from '@/components/NavigationTitle/index.vue'
+import BlockControl from '@/components/BlockControl/index.vue'
 
 defineProps({
   wordText: {

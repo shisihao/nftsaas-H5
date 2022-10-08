@@ -8,7 +8,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { ref } from 'vue'
-import { getMyGoodsDetail } from '/@/api/goods'
+import { getMyGoodsDetail } from '@/api/goods'
 import goodsZs from './components/goods-zs.vue'
 import goodsTrade from './components/goods-trade.vue'
 

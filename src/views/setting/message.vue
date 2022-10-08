@@ -26,9 +26,9 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import { dataList } from '/@/api/message'
+import { dataList } from '@/api/message'
 import { useRouter } from 'vue-router'
-import { getImageUrl } from '/@/utils/index'
+import { getImageUrl } from '@/utils/index'
 
 const router = useRouter()
 const state = reactive({
@@ -78,7 +78,7 @@ const onClick = (item) => {
     padding: 0 5px;
     color: var(--root-text-color1);
     font-size: 22px;
-    // background: url('/@/assets/images/setting/user_tag_bg@2x.png') no-repeat center right;
+    // background: url('@/assets/images/setting/user_tag_bg@2x.png') no-repeat center right;
     background-size: contain;
     margin-bottom: 14px;
   }

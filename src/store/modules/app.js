@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
-// import { localStorageHandle } from "/@/utils/storages";
-// import { store } from "/@/store";
+// import { localStorageHandle } from "@/utils/storages";
+// import { store } from "@/store";
 
 const state = {
   sidebar : {

@@ -27,11 +27,11 @@
 
 <script setup>
 import { reactive, computed } from 'vue'
-import { certifyAli, getCertify } from '/@/api/certification'
-import { paraphrase } from '/@/filters/index'
-import { attestationOptions } from '/@/utils/explain'
+import { certifyAli, getCertify } from '@/api/certification'
+import { paraphrase } from '@/filters/index'
+import { attestationOptions } from '@/utils/explain'
 import { useRouter } from 'vue-router'
-import store from '/@/store/index'
+import store from '@/store/index'
 
 const router = useRouter()
 let query = router.currentRoute.value.query
@@ -73,11 +73,14 @@ if (query.response) {
 
 <style lang="scss" scoped>
 .main-contain {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   .certify-result {
+    padding-top: 30px;
     .certify-img {
       width: 75px;
       height: 87px;
-      margin: 32px auto 0;
+      margin: auto;
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
@@ -89,10 +92,10 @@ if (query.response) {
       font-weight: 500;
     }
     .certify-success {
-      background-image: url('/@/assets/images/public/set_certification_icon_success.png');
+      background-image: url('@/assets/images/public/set_certification_icon_success.png');
     }
     .certify-fail {
-      background-image: url('/@/assets/images/public/set_certification_icon_failure.png');
+      background-image: url('@/assets/images/public/set_certification_icon_failure.png');
     }
 
     .van-cell-group {
@@ -101,7 +104,7 @@ if (query.response) {
         border-color: var(--root-dividing-color1);
       }
       .van-cell {
-        background-color: var(--root-bg-color1);
+        padding: var(--root-page-spacing);
         color: var(--root-text-color1);
         &:after {
           border-color: var(--root-dividing-color1);

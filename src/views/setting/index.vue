@@ -42,12 +42,12 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import DefaultAvatar from '/@/components/DefaultAvatar/index.vue'
-import store from '/@/store/index'
-import { mosaicTel } from '/@/filters/index'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
+import store from '@/store/index'
+import { mosaicTel } from '@/filters/index'
 import SignOut from './components/SignOut.vue'
 import NamePopup from './components/NamePopup.vue'
-import { DominKey, getToken } from '/@/utils/auth'
+import { DominKey, getToken } from '@/utils/auth'
 
 const domin = getToken(DominKey)
 
@@ -67,14 +67,16 @@ const onChangeName = () => {
 
 <style lang="scss" scoped>
 .setting-section {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   .card {
-    margin-top: 12px;
+    padding-top: 12px;
     .van-cell-group {
       &:after {
         border-color: var(--root-dividing-color1);
       }
       .van-cell {
-        background-color: var(--root-bg-color1);
+        background-color: var(--root-bg-color2);
         color: var(--root-text-color1);
         &:after {
           border-color: var(--root-dividing-color1);
@@ -92,7 +94,8 @@ const onChangeName = () => {
   }
   .sign-out-wrapper {
     .sign-out {
-      background-color: var(--root-bg-color1);
+      background-color: var(--root-bg-color2);
+      color: var(--root-auxiliary-color1);
       padding: 16px 0;
       text-align: center;
     }

@@ -1,10 +1,10 @@
 import router from './router'
 import store from './store'
-import { TokenKey } from '/@/utils/auth'
+import { TokenKey } from '@/utils/auth'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { getCookieByKey } from '/@/utils/cookies'
-import getPageTitle from '/@/utils/get-page-title'
+import { getCookieByKey } from '@/utils/cookies'
+import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure( { showSpinner : false } )
 

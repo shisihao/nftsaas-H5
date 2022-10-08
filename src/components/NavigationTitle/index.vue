@@ -45,7 +45,7 @@ defineProps({
       margin-top: -7.5px;
       width: 22px;
       height: 15px;
-      background-image: url('/@/assets/images/public/common_icon_title.png');
+      background-image: url('@/assets/images/public/common_icon_title.png');
       background-position: center;
       background-repeat: no-repeat;
       background-size: 100%;

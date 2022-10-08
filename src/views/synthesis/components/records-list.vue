@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { DominKey, getToken } from '/@/utils/auth'
+import { DominKey, getToken } from '@/utils/auth'
 import { watch, ref } from 'vue'
 
 const props = defineProps({
@@ -99,7 +99,7 @@ imgList.value = props.item.map(v => {
       position: absolute;
       width: 12px;
       height: 12px;
-      background: url('/@/assets/images/public/common_icon_number.png') no-repeat center;
+      background: url('@/assets/images/public/common_icon_number.png') no-repeat center;
       background-size: 100%;
       left: 0;
       top: 1px;

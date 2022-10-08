@@ -11,6 +11,7 @@
             :value="state.form.password"
             :focused="state.showKeyboard"
             @focus="state.showKeyboard = true"
+            :gutter="5"
           />
           <!-- 数字键盘 -->
           <van-number-keyboard
@@ -48,9 +49,9 @@
 <script setup>
 import { reactive, toRefs, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import store from '/@/store/index'
+import store from '@/store/index'
 import { showSuccessToast, showFailToast } from 'vant'
-import { payPassword } from '/@/api/user'
+import { payPassword } from '@/api/user'
 import md5 from 'js-md5'
 
 const router = useRouter()
@@ -90,6 +91,8 @@ const onSubmit = () => {
 
 <style lang="scss" scoped>
 .paypass-section {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   overflow: hidden;
   .content {
     margin-top: 120px;

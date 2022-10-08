@@ -17,17 +17,17 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import ThreeModel from '/@/components/ThreeModel/index.vue'
+import ThreeModel from '@/components/ThreeModel/index.vue'
 import TitleInfo from './components/TitleInfo.vue'
 import CirculationNum from './components/CirculationNum.vue'
 import GoodDescribe from '../components/good/GoodDescribe.vue'
 import ExplainInfo from '../components/good/ExplainInfo.vue'
 import PlaceOrder from '../components/good/PlaceOrder.vue'
 import BoxExplain from './components/BoxExplain.vue'
-import { boxDetail } from '/@/api/box'
-import store from '/@/store/index'
-import { integralOptions } from '/@/utils/explain'
-import { paraphrase } from '/@/filters/index'
+import { boxDetail } from '@/api/box'
+import store from '@/store/index'
+import { integralOptions } from '@/utils/explain'
+import { paraphrase } from '@/filters/index'
 
 let info = computed(() => store.state.user.info)
 

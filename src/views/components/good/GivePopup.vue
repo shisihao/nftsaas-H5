@@ -35,13 +35,13 @@
 
 <script setup>
 import { ref, reactive, defineExpose } from 'vue'
-import store from '/@/store/index'
-import { DominKey, getToken } from '/@/utils/auth'
-import { integralOptions } from '/@/utils/explain'
-import { sleep } from '/@/utils/index'
-import { paraphrase } from '/@/filters/index'
+import store from '@/store/index'
+import { DominKey, getToken } from '@/utils/auth'
+import { integralOptions } from '@/utils/explain'
+import { sleep } from '@/utils/index'
+import { paraphrase } from '@/filters/index'
 import GiveConfirm from './GiveConfirm.vue'
-import { giveAccount } from '/@/api/goods'
+import { giveAccount } from '@/api/goods'
 
 const domin = getToken(DominKey)
 

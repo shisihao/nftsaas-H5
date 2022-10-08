@@ -1,4 +1,4 @@
-import { GLOBAL_DATA } from '/@/api/constant'
+import { GLOBAL_DATA } from '@/api/constant'
 
 const env = import.meta.env
 const { MODE } = env

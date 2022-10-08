@@ -45,9 +45,9 @@
 </template>
 
 <script  setup>
-import { getImageUrl } from '/@/utils/index'
-import { DominKey, getToken } from '/@/utils/auth'
-import store from '/@/store/index'
+import { getImageUrl } from '@/utils/index'
+import { DominKey, getToken } from '@/utils/auth'
+import store from '@/store/index'
 import { computed, ref } from "vue"
 
 const props = defineProps({
@@ -134,7 +134,7 @@ const accordion = ref(false)
       left: 0;
       top: 50%;
       transform: translateY(-50%);
-      background-image: url('/@/assets/images/public/common_icon_number.png');
+      background-image: url('@/assets/images/public/common_icon_number.png');
       background-size: 100%;
       background-position: center;
       background-repeat: no-repeat;

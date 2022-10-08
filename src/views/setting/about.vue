@@ -21,7 +21,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import store from '/@/store/index'
+import store from '@/store/index'
 import Logo from '../components/common/Logo.vue'
 
 let config = computed(() => store.state.user.config)
@@ -30,10 +30,13 @@ let config = computed(() => store.state.user.config)
 
 <style lang="scss" scoped>
 .main-contain {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   .contain {
     background-color: var(--root-bg-color1);
     .banner{
-      margin-top: var(--root-page-spacing);
+      padding-top: var(--root-page-spacing);
+      background-color: var(--root-bg-color2);
       overflow: hidden;
     }
     .content-text {
@@ -49,7 +52,7 @@ let config = computed(() => store.state.user.config)
           border-color: var(--root-dividing-color1);
         }
         .van-cell {
-          background-color: var(--root-bg-color1);
+          background-color: var(--root-bg-color2);
           color: var(--root-text-color1);
           &:after {
             border-color: var(--root-dividing-color1);

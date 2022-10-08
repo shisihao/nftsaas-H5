@@ -1,4 +1,4 @@
-import request from '/@/utils/request'
+import request from '@/utils/request'
 
 // 发起认证请求
 export function certifyInfo(data) {

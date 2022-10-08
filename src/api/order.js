@@ -1,4 +1,4 @@
-import request from '/@/utils/request'
+import request from '@/utils/request'
 
 // 订单列表
 export function dataList(data) {

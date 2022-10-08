@@ -51,16 +51,16 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import NavigationTitle from '/@/components/NavigationTitle/index.vue'
-import store from '/@/store/index'
-import { getInvite } from '/@/api/user'
-import DefaultAvatar from '/@/components/DefaultAvatar/index.vue'
-import { pages as commonPages } from '/@/utils/explain'
+import NavigationTitle from '@/components/NavigationTitle/index.vue'
+import store from '@/store/index'
+import { getInvite } from '@/api/user'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
+import { pages as commonPages } from '@/utils/explain'
 import useClipboard from 'vue-clipboard3'
 import to from 'await-to-js'
 import { showToast } from 'vant'
-import { DominKey, getToken } from '/@/utils/auth'
-import { paraphrase } from '/@/filters/index'
+import { DominKey, getToken } from '@/utils/auth'
+import { paraphrase } from '@/filters/index'
 
 const domin = getToken(DominKey)
 

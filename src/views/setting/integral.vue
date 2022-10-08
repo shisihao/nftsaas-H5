@@ -31,13 +31,13 @@
 
 <script setup>
 import { ref, reactive, computed } from 'vue'
-import { walletLogs } from '/@/api/setting.js'
+import { walletLogs } from '@/api/setting.js'
 import useClipboard from 'vue-clipboard3'
 import to from 'await-to-js'
 import { showToast } from 'vant'
-import { pages as commonPages, integralOptions } from '/@/utils/explain'
-import { paraphrase } from '/@/filters/index'
-import store from '/@/store/index'
+import { pages as commonPages, integralOptions } from '@/utils/explain'
+import { paraphrase } from '@/filters/index'
+import store from '@/store/index'
 
 let info = computed(() => store.state.user.info)
 
@@ -186,7 +186,7 @@ const onTabChange = (val) => {
       .copy-btn {
         width: 16px;
         height: 16px;
-        background: url('/@/assets/images/setting/common_icon_cpoy@2x.png') no-repeat;
+        background: url('@/assets/images/setting/common_icon_cpoy@2x.png') no-repeat;
         background-size: contain;
       }
     }

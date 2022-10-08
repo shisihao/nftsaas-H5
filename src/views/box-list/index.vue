@@ -40,14 +40,14 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { getMyBox } from '/@/api/box'
-import { pages as commonPages, integralOptions } from '/@/utils/explain'
-import { getImageUrl } from '/@/utils/index'
-import { paraphrase } from '/@/filters/index'
-import DefaultAvatar from '/@/components/DefaultAvatar/index.vue'
+import { getMyBox } from '@/api/box'
+import { pages as commonPages, integralOptions } from '@/utils/explain'
+import { getImageUrl } from '@/utils/index'
+import { paraphrase } from '@/filters/index'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 import OpenTipsPopup from './components/OpenTipsPopup.vue'
-import { DominKey, getToken } from '/@/utils/auth'
-import globleFun from '/@/utils/link'
+import { DominKey, getToken } from '@/utils/auth'
+import globleFun from '@/utils/link'
 
 const domin = getToken(DominKey)
 
@@ -211,15 +211,15 @@ const onRefreshList = ({ id, item }) => {
         background-repeat: no-repeat;
       }
       .box-primary {
-        background-image: url('/@/assets/images/public/common_icon_biaoqian.png');
+        background-image: url('@/assets/images/public/common_icon_biaoqian.png');
       }
       .box-success {
         height: 152px;
-        background-image: url('/@/assets/images/public/box_open.png');
+        background-image: url('@/assets/images/public/box_open.png');
       }
       .box-warning {
         height: 152px;
-        background-image: url('/@/assets/images/public/box_close.png');
+        background-image: url('@/assets/images/public/box_close.png');
       }
     }
     .collection-info {

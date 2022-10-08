@@ -58,9 +58,9 @@
 
 <script setup>
 import { reactive } from 'vue'
-import { changePassword } from '/@/api/user'
+import { changePassword } from '@/api/user'
 import { showToast } from 'vant'
-import globleFun from '/@/utils/link'
+import globleFun from '@/utils/link'
 
 const validatorPassWord = (value, rule) => {
   if (value.length < 6) return '密码不能小于6位'
@@ -112,6 +112,8 @@ const onSubmit = () => {
 
 <style lang="scss" scoped>
 .change-section {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   overflow: hidden;
   .van-form {
     margin-top: 10px;
@@ -122,7 +124,7 @@ const onSubmit = () => {
         border-width: 0;
       }
       .van-cell {
-        background-color: var(--root-bg-color1);
+        background-color: var(--root-bg-color2);
         :deep(.van-field__label) {
           color: var(--root-text-color1);
         }
@@ -151,7 +153,7 @@ const onSubmit = () => {
         margin-top: 30px;
         font-size: 16px;
         text-align: center;
-        color: var(--root-text-color2);
+        color: var(--root-auxiliary-color2);
       }
     }
   }

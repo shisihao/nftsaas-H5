@@ -1,4 +1,4 @@
-import request from '/@/utils/request'
+import request from '@/utils/request'
 
 // 广告位
 export function getAdPos(data) {

@@ -33,10 +33,10 @@
 
 <script setup>
 import { computed, ref, reactive, provide } from 'vue'
-import store from '/@/store/index'
+import store from '@/store/index'
 import moment from 'moment'
-import { parseDate } from '/@/utils/index'
-import { orderPlace, boxPlace } from '/@/api/order'
+import { parseDate } from '@/utils/index'
+import { orderPlace, boxPlace } from '@/api/order'
 import { showToast } from 'vant'
 import { useRouter } from 'vue-router'
 import PayTypePopup from '../order/PayTypePopup.vue'

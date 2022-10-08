@@ -7,7 +7,7 @@
           fit="cover"
           :src="Array.isArray(item.images) && `${domin}${item.images[0]}` "
         />
-        <img v-if="item.target_type === 'box'" class="box-sign" src="/@/assets/images/public/common_icon_biaoqian.png" alt="">
+        <img v-if="item.target_type === 'box'" class="box-sign" src="@/assets/images/public/common_icon_biaoqian.png" alt="">
         <div class="sales-status" :class="paraphrase({ value: salesStatus(item).tipType, options: salesOptions, l: 'class' })">
           <div v-if="salesStatus(item).tipType === 1">{{ item.start_time }} 开售</div>
           <div v-if="salesStatus(item).tipType === 2" class="sales-start"><van-icon name="clock-o" /><span>即将开售</span><van-count-down :time="salesStatus(item).timeDown" @finish="onFinish(index)" /></div>
@@ -44,11 +44,11 @@
 
 <script setup>
 import { reactive, computed } from 'vue'
-import { DominKey, getToken } from '/@/utils/auth'
-import { dataList } from '/@/api/goods'
-import { parseDate } from '/@/utils/index'
-import { salesOptions, integralOptions } from '/@/utils/explain'
-import { paraphrase } from '/@/filters/index'
+import { DominKey, getToken } from '@/utils/auth'
+import { dataList } from '@/api/goods'
+import { parseDate } from '@/utils/index'
+import { salesOptions, integralOptions } from '@/utils/explain'
+import { paraphrase } from '@/filters/index'
 import moment from 'moment'
 
 const domin = getToken(DominKey)

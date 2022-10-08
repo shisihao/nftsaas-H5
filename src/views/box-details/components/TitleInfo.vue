@@ -17,8 +17,8 @@
 
 <script setup>
 import { computed } from 'vue'
-import { integralOptions } from '/@/utils/explain'
-import { paraphrase } from '/@/filters/index'
+import { integralOptions } from '@/utils/explain'
+import { paraphrase } from '@/filters/index'
 
 defineProps({
   item: {
@@ -41,7 +41,7 @@ const cnyPrice = computed(() => {
 
 <style lang="scss" scoped>
   .title-section {
-    background-image: url('/@/assets/images/public/detail_img_title_bg.png');
+    background-image: url('@/assets/images/public/detail_img_title_bg.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto 100%;

@@ -19,9 +19,9 @@ import SwipeSlide from './components/SwipeSlide.vue'
 import IconsGrid from './components/IconsGrid.vue'
 import CollectionList from './components/CollectionList.vue'
 import AttestationButton from './components/AttestationButton.vue'
-import NavigationTitle from '/@/components/NavigationTitle/index.vue'
-import NoMore from '/@/components/NoMore/index.vue'
-import store from '/@/store/index'
+import NavigationTitle from '@/components/NavigationTitle/index.vue'
+import NoMore from '@/components/NoMore/index.vue'
+import store from '@/store/index'
 
 let info = computed(() => store.state.user.info)
 const collectionList = ref(null)

@@ -33,10 +33,10 @@
 </template>
 
 <script setup>
-import { DominKey, getToken } from '/@/utils/auth'
+import { DominKey, getToken } from '@/utils/auth'
 import { reactive } from 'vue'
-import { dataList } from '/@/api/synthesis'
-import { pages as commonPages  } from '/@/utils/explain'
+import { dataList } from '@/api/synthesis'
+import { pages as commonPages  } from '@/utils/explain'
 
 const domin = getToken(DominKey)
 const state = reactive({
@@ -99,7 +99,7 @@ const onRefresh = () => {
     .title-r {
       padding: 6px 12px 6px 32px;
       font-size: 16px;
-      background: url('/@/assets/images/synthesis/mine_icon_hecheng_jilu@2x.png') no-repeat;
+      background: url('@/assets/images/synthesis/mine_icon_hecheng_jilu@2x.png') no-repeat;
       background-color: var(--root-bg-color1);
       background-size: 19px;
       background-position: 10px 5px;

@@ -26,8 +26,8 @@
 
 <script  setup>
 import { ref,reactive } from 'vue'
-import { getImageUrl } from '/@/utils/index'
-import { DominKey, getToken } from '/@/utils/auth'
+import { getImageUrl } from '@/utils/index'
+import { DominKey, getToken } from '@/utils/auth'
 
 // const emits = defineEmits(['closeSuccess'])
 const data = ref({})
@@ -55,7 +55,7 @@ defineExpose({ init })
   height: 354px;
   border-radius: 8px;
   overflow: hidden;
-  background: url('/@/assets/images/synthesis/manghe_img_kaiqi_bg@2x.png') no-repeat;
+  background: url('@/assets/images/synthesis/manghe_img_kaiqi_bg@2x.png') no-repeat;
   background-size: cover;
 
   .bg-img {
@@ -127,7 +127,7 @@ defineExpose({ init })
       position: absolute;
       width: 12px;
       height: 12px;
-      background: url('/@/assets/images/public/common_icon_number.png') no-repeat center;
+      background: url('@/assets/images/public/common_icon_number.png') no-repeat center;
       background-size: 100%;
       left: 0;
       bottom: 2px;

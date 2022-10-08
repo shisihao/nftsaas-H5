@@ -16,7 +16,7 @@
           取消
         </div>
         <div class="btn submit" @click="onSubmit">
-          退出
+          确定
         </div>
       </div>
     </van-popup>
@@ -25,7 +25,7 @@
 
 <script setup>
 import { reactive, defineExpose } from 'vue'
-import store from '/@/store/index'
+import store from '@/store/index'
 
 const state = reactive({
   show: false
@@ -68,18 +68,18 @@ const onSubmit = () => {
     display: flex;
     justify-content: space-around;
     .btn {
-      padding: 6px 36px;
+      padding: 10px 40px;
       border-radius: 20px;
       border-width: 1px;
       border-style: solid;
     }
     .cancel {
-      color: var(--root-theme-color);
+      color: var(--root-text-color5);
+      background-color: var(--root-button-color1);
     }
     .submit {
-      color: var(--root-text-color1);
-      background-color: var(--root-auxiliary-color);
-      border-color: var(--root-auxiliary-color);
+      color: var(--root-text-color5);
+      background-color: var(--root-auxiliary-color1);
     }
   }
 }

@@ -4,37 +4,37 @@
     <div class="fun-section">
       <div class="grid">
         <div class="grid-item" @click="$globleFun.onGoto('/box-list')">
-          <img src="/@/assets/images/user/mine_icon_wdmh.png" alt="">
+          <img src="@/assets/images/user/mine_icon_wdmh.png" alt="">
           <p>
             我的盲盒
           </p>
         </div>
         <div class="grid-item" @click="$globleFun.onGoto('/synthesis-list')">
-          <img src="/@/assets/images/user/mine_icon_hccp.png" alt="">
+          <img src="@/assets/images/user/mine_icon_hccp.png" alt="">
           <p>
             合成藏品
           </p>
         </div>
         <div class="grid-item" @click="$globleFun.onGoto('/order')">
-          <img src="/@/assets/images/user/mine_icon_wddd.png" alt="">
+          <img src="@/assets/images/user/mine_icon_wddd.png" alt="">
           <p>
             我的订单
           </p>
         </div>
         <div class="grid-item" @click="onInvite">
-          <img src="/@/assets/images/user/mine_icon_yqhy.png" alt="">
+          <img src="@/assets/images/user/mine_icon_yqhy.png" alt="">
           <p>
             邀请好友
           </p>
         </div>
         <!-- <div class="grid-item" @click="onWallet">
-          <img src="/@/assets/images/user/mine_icon_qbgl.png" alt="">
+          <img src="@/assets/images/user/mine_icon_qbgl.png" alt="">
           <p>
             钱包管理
           </p>
         </div> -->
         <div class="grid-item" @click="$globleFun.onGoto('/setting')">
-          <img src="/@/assets/images/user/mine_icon_sz.png" alt="">
+          <img src="@/assets/images/user/mine_icon_sz.png" alt="">
           <p>
             设置
           </p>
@@ -49,8 +49,8 @@
 import { computed } from 'vue'
 import UserTitle from './UserTitle.vue'
 import { showToast } from 'vant'
-import globleFun from '/@/utils/link'
-import store from '/@/store/index'
+import globleFun from '@/utils/link'
+import store from '@/store/index'
 
 let info = computed(() => store.state.user.info)
 

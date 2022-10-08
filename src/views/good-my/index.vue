@@ -17,15 +17,15 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import ThreeModel from '/@/components/ThreeModel/index.vue'
+import ThreeModel from '@/components/ThreeModel/index.vue'
 import TitleInfo from './components/TitleInfo.vue'
 import CertificationInfo from '../components/good/CertificationInfo.vue'
 import CopyrightInfo from '../components/good/CopyrightInfo.vue'
 import GoodDescribe from '../components/good/GoodDescribe.vue'
 import ExplainInfo from '../components/good/ExplainInfo.vue'
 import GoodActionBar from './components/GoodActionBar.vue'
-import { getMyGoodsDetail } from '/@/api/goods'
-import store from '/@/store/index'
+import { getMyGoodsDetail } from '@/api/goods'
+import store from '@/store/index'
 
 const router = useRouter()
 let query = router.currentRoute.value.query

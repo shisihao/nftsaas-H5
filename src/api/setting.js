@@ -1,4 +1,4 @@
-import request from '/@/utils/request'
+import request from '@/utils/request'
 
 // 账号换绑
 export function userChange(data) {

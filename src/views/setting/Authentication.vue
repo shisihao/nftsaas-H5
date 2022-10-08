@@ -15,20 +15,22 @@
             v-model="state.form.name"
             autocomplete="off"
             name="name"
-            label="真实姓名"
-            placeholder="真实姓名"
-
+            label="姓名"
+            placeholder="请输入您的真实姓名"
+            input-align="right"
             clearable
-            :rules="[{ required: true, message: '请填写真实姓名' }]"
+            :rules="[{ required: true, message: '请输入您的真实姓名' }]"
           />
           <van-field
+            class="field-number"
             v-model="state.form.number"
             autocomplete="off"
             name="number"
-            label="身份证号"
-            placeholder="身份证号"
+            label="证件号码"
+            placeholder="请输入待认证的证件号码"
+            input-align="right"
             clearable
-            :rules="[{ required: true, message: '请填写身份证号' }]"
+            :rules="[{ required: true, message: '请输入待认证的证件号码' }]"
           />
           <div class="account">
             <span>
@@ -79,13 +81,13 @@
 <script setup>
 import { ref, reactive, computed, onBeforeUnmount } from 'vue'
 import Cookies from 'js-cookie'
-import { certifyInfo } from '/@/api/certification'
-import { paraphrase, mosaicTel } from '/@/filters/index'
-import store from '/@/store/index'
+import { certifyInfo } from '@/api/certification'
+import { paraphrase, mosaicTel } from '@/filters/index'
+import store from '@/store/index'
 import { showToast } from 'vant'
-import { verificationCode } from '/@/api/common'
+import { verificationCode } from '@/api/common'
 import Agreement from '../login/components/Agreement.vue'
-import settings from '/@/settings'
+import settings from '@/settings'
 
 let info = computed(() => store.state.user.info)
 
@@ -183,16 +185,17 @@ const onSubmit = () => {
 
 <style lang="scss" scoped>
 .main-contain {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   .describe {
-    padding: 0 var(--root-page-spacing);
+    padding: 30px var(--root-page-spacing) 0 var(--root-page-spacing);
     span {
       display: block;
-      margin-top: 30px;
       font-size: 24px;
     }
     p {
       margin-top: 10px;
-      color: var(--root-auxiliary-color);
+      color: var(--root-auxiliary-color1);
       font-size: 12px;
     }
   }
@@ -205,8 +208,8 @@ const onSubmit = () => {
         border-color: var(--root-dividing-color1);
       }
       .van-cell {
-        background-color: var(--root-bg-color1);
         color: var(--root-text-color1);
+        padding: var(--root-page-spacing);
         &:after {
           border-color: var(--root-dividing-color1);
         }
@@ -221,6 +224,11 @@ const onSubmit = () => {
           }
         }
       }
+      .field-number {
+        &:after {
+          border: none;
+        }
+      }
       .field-code {
         :deep(.van-field__body) {
           padding-left: 36px;
@@ -233,7 +241,7 @@ const onSubmit = () => {
             transform: translateY(-50%);
             width: 16px;
             height: 16px;
-            background-image: url('/@/assets/images/public/set_input_icon_validation.png');
+            background-image: url('@/assets/images/public/set_input_icon_validation.png');
             background-position: center;
             background-repeat: no-repeat;
             background-size: 100%;
@@ -247,15 +255,14 @@ const onSubmit = () => {
         }
       }
       .account {
-        margin-top: 30px;
-        padding: 0 var(--root-page-spacing);
+        background: var(--root-bg-color1);
+        padding: 30px var(--root-page-spacing) 10px var(--root-page-spacing);
         span {
           font-size: 12px;
           color: var(--root-text-color2);
         }
         p{
           margin-top: 10px;
-          margin-bottom: 20px;
           font-size: 18px;
         }
       }

@@ -40,15 +40,15 @@
 
 <script setup>
 import { ref, computed, reactive } from 'vue'
-import { pages as commonPages, actionTransferOptions } from '/@/utils/explain'
-import { DominKey, getToken } from '/@/utils/auth'
-import { getGoodsTransfer } from '/@/api/goods'
-import DefaultAvatar from '/@/components/DefaultAvatar/index.vue'
-import store from '/@/store/index'
+import { pages as commonPages, actionTransferOptions } from '@/utils/explain'
+import { DominKey, getToken } from '@/utils/auth'
+import { getGoodsTransfer } from '@/api/goods'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
+import store from '@/store/index'
 import useClipboard from 'vue-clipboard3'
 import to from 'await-to-js'
 import { showToast } from 'vant'
-import SvgIcon from '/@/components/YuSvgIcon'
+import SvgIcon from '@/components/YuSvgIcon'
 
 const active = ref('')
 const pages = { ...commonPages }
@@ -161,12 +161,12 @@ const onCopy = async (value) => {
         }
         &.title-income {
           &::before {
-            background-image: url('/@/assets/images/public/examples_record_icon_received.png');
+            background-image: url('@/assets/images/public/examples_record_icon_received.png');
           }
         }
         &.title-expend {
           &::before {
-            background-image: url('/@/assets/images/public/examples_record_icon_giving.png');
+            background-image: url('@/assets/images/public/examples_record_icon_giving.png');
           }
         }
       }

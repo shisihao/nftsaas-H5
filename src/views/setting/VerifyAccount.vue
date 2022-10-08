@@ -48,13 +48,13 @@
 <script setup>
 import { reactive, computed, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
-import store from '/@/store/index'
+import store from '@/store/index'
 import Cookies from 'js-cookie'
 import Logo from '../components/common/Logo.vue'
-import { changePassword } from '/@/api/user'
+import { changePassword } from '@/api/user'
 import { showToast } from 'vant'
-import { verificationCode, verificationCodeCheck } from '/@/api/common'
-import { mosaicTel } from '/@/filters/index'
+import { verificationCode, verificationCodeCheck } from '@/api/common'
+import { mosaicTel } from '@/filters/index'
 
 const router = useRouter()
 
@@ -143,6 +143,8 @@ const onSubmit = () => {
 
 <style lang="scss" scoped>
 .account-section {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   overflow: hidden;
   .account {
     margin-top: 60px;
@@ -168,7 +170,7 @@ const onSubmit = () => {
         padding: 0;
         margin-top: 24px;
         overflow: visible;
-        background-color: var(--root-bg-color1);
+        background-color: var(--root-bg-color2);
         &::after {
           border: 0;
         }
@@ -177,7 +179,6 @@ const onSubmit = () => {
       .van-field {
         :deep(.van-field__body) {
           padding: 12px 12px 12px 36px;
-          border: 1px solid var(--root-text-color4);
           position: relative;
           &::after {
             content: '';
@@ -187,7 +188,7 @@ const onSubmit = () => {
             transform: translateY(-50%);
             width: 16px;
             height: 16px;
-            background-image: url('/@/assets/images/public/set_input_icon_validation.png');
+            background-image: url('@/assets/images/public/set_input_icon_validation.png');
             background-position: center;
             background-repeat: no-repeat;
             background-size: 100%;

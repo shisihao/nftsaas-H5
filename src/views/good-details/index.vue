@@ -18,7 +18,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import ThreeModel from '/@/components/ThreeModel/index.vue'
+import ThreeModel from '@/components/ThreeModel/index.vue'
 import TitleInfo from './components/TitleInfo.vue'
 import CirculationNum from './components/CirculationNum.vue'
 import CertificationInfo from '../components/good/CertificationInfo.vue'
@@ -26,8 +26,8 @@ import CopyrightInfo from '../components/good/CopyrightInfo.vue'
 import GoodDescribe from '../components/good/GoodDescribe.vue'
 import ExplainInfo from '../components/good/ExplainInfo.vue'
 import PlaceOrder from '../components/good/PlaceOrder.vue'
-import { goodsDetail } from '/@/api/goods'
-import store from '/@/store/index'
+import { goodsDetail } from '@/api/goods'
+import store from '@/store/index'
 
 let info = computed(() => store.state.user.info)
 

@@ -54,12 +54,12 @@
 </template>
 
 <script setup>
-import store from '/@/store/index'
+import store from '@/store/index'
 import { computed, ref } from 'vue'
-import { DominKey, getToken } from '/@/utils/auth'
-import DefaultAvatar from '/@/components/DefaultAvatar/index.vue'
-import { interest } from '/@/api/interest'
-import { getImageUrl } from '/@/utils/index'
+import { DominKey, getToken } from '@/utils/auth'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
+import { interest } from '@/api/interest'
+import { getImageUrl } from '@/utils/index'
 
 const domin = getToken(DominKey)
 const info = computed(() => store.state.user.info)

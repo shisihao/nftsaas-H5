@@ -40,14 +40,14 @@
 
 <script setup>
 import { ref, reactive, computed } from 'vue'
-import DefaultAvatar from '/@/components/DefaultAvatar/index.vue'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 import CommonFun from './components/CommonFun.vue'
 import MyService from './components/MyService.vue'
 import MyGoods from './components/MyGoods.vue'
-import store from '/@/store/index'
-import { DominKey, getToken } from '/@/utils/auth'
-import { attestationOptions, integralOptions } from '/@/utils/explain'
-import { paraphrase } from '/@/filters/index'
+import store from '@/store/index'
+import { DominKey, getToken } from '@/utils/auth'
+import { attestationOptions, integralOptions } from '@/utils/explain'
+import { paraphrase } from '@/filters/index'
 
 const domin = getToken(DominKey)
 
@@ -117,18 +117,18 @@ let statusClass = computed(() => {
         .attestation-primary {
           color: var(--root-text-color2);
           &::before {
-            background-image: url('/@/assets/images/user/mine_icon_wrZ.png');
+            background-image: url('@/assets/images/user/mine_icon_wrZ.png');
           }
         }
         .attestation-danger {
           color: var(--root-auxiliary-color);
           &::before {
-            background-image: url('/@/assets/images/user/mine_icon_rzsb.png');
+            background-image: url('@/assets/images/user/mine_icon_rzsb.png');
           }
         }
         .attestation-success {
           &::before {
-            background-image: url('/@/assets/images/user/mine_icon_rzz.png');
+            background-image: url('@/assets/images/user/mine_icon_rzz.png');
           }
         }
         .user-id {
@@ -152,7 +152,7 @@ let statusClass = computed(() => {
         bottom: 0;
         width: 53px;
         height: 36px;
-        background-image: url('/@/assets/images/user/mine_equities_card.png');
+        background-image: url('@/assets/images/user/mine_equities_card.png');
         background-position: center;
         background-repeat: no-repeat;
         background-size: 100%;
