@@ -1,5 +1,5 @@
 <template>
-  <div class="card-section login-section">
+  <div class="login-section">
     <logo />
     <div class="title">
       欢迎登录
@@ -77,18 +77,17 @@
 
 <script setup>
 import { ref, reactive, watch, onBeforeUnmount, onMounted } from 'vue'
-import Cookies from 'js-cookie'
 import { useRoute } from 'vue-router'
+import { showToast } from 'vant'
+import Cookies from 'js-cookie'
+import { paraphrase } from '@/filters/index'
 import { TokenKey } from '@/utils/auth'
 import { validPhone } from '@/utils/validate'
-import { paraphrase } from '@/filters/index'
-import Logo from '../components/common/Logo.vue'
-import Agreement from './components/Agreement.vue'
+import globleFun from '@/utils/link'
 import { login } from '@/api/user'
 import { verificationCode } from '@/api/common'
-import { showToast } from 'vant'
-import globleFun from '@/utils/link'
-import settings from '@/settings'
+import Logo from '../components/common/Logo.vue'
+import Agreement from './components/Agreement.vue'
 
 const route = useRoute()
 route.query.code && sessionStorage.setItem('invitation-code', route.query.code)
@@ -197,7 +196,7 @@ onBeforeUnmount(() => {
 
 const onSubmit = (values) => {
   if (!state.checked) {
-    return showToast(`请阅读并同意《${settings.title}用户协议》和《${settings.title}隐私协议》`)
+    return showToast(`请阅读并同意《用户协议》和《隐私协议》`)
   }
 
   const data = { ...state.form }
@@ -222,19 +221,12 @@ const onSubmit = (values) => {
 </script>
 
 <style lang="scss" scoped>
-.card-section {
-  // background-color: var(--root-bg-color2);
-  background-color: rgba(var(--root-theme-color1), 0.5);
-  // background-image: linear-gradient(var(--root-theme-color) 0, var(--root-bg-color1) 40%);
-  max-width: 375px;
-  margin: 0 auto;
-  min-height: 100vh;
-  overflow: hidden;
-}
 
 .login-section {
+  min-height: 100vh;
+  background-color: var(--root-bg-color2);
   padding-bottom: 50px;
-
+  overflow: hidden;
   .title {
     font-size: 36px;
     text-align: center;
@@ -303,7 +295,6 @@ const onSubmit = (values) => {
 
     .submit-button {
       margin-top: 30px;
-      background-image: var(--root-button-color1);
     }
 
     .agreement {

@@ -19,7 +19,7 @@ import store from '@/store/index'
 const router = useRouter()
 let query = router.currentRoute.value.query
 
-let config = computed(() => store.state.user.config)
+const config = computed(() => store.state.user.config)
 
 const typeOptions = [
   { type: 'register', title: '用户协议' },

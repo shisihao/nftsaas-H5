@@ -3,6 +3,9 @@ export const pages = {
   limit: 10
 }
 
+// 默认主题色
+export const themeColor = '#1275E4'
+
 export const salesOptions = [
   { label: '开售', class: 'sales-default', value: 1 },
   { label: '即将开售', class: 'sales-primary', value: 2 },

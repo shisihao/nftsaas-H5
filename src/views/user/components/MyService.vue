@@ -35,7 +35,7 @@ import UserPopup from './UserPopup.vue'
 import ChainQuery from './ChainQuery.vue'
 import store from '@/store/index'
 
-let config = computed(() => store.state.user.config)
+const config = computed(() => store.state.user.config)
 let info = computed(() => store.state.user.info)
 
 const chain = ref(null)

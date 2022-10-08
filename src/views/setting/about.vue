@@ -24,7 +24,7 @@ import { computed } from 'vue'
 import store from '@/store/index'
 import Logo from '../components/common/Logo.vue'
 
-let config = computed(() => store.state.user.config)
+const config = computed(() => store.state.user.config)
 
 </script>
 

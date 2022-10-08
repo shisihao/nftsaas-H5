@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper">
+  <div>
     <nav-bar />
     <app-main />
     <foot-bar />
@@ -15,10 +15,6 @@
   
   // 用户信息
   store.dispatch('user/getInfo')
-
-  // 配置信息
-  store.dispatch('user/getConfig')
-  
 </script>
 
 <style lang="scss">

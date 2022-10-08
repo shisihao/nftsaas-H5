@@ -1,6 +1,6 @@
 <template>
   <div class="agreement-section">
-    <van-checkbox v-model="checkedValue" @change="onChange">我已阅读并同意<span @click.stop="onConfig('register')">《{{settings.title}}用户协议》</span>和<span @click.stop="onConfig('privacy')">《{{settings.title}}隐私协议》</span></van-checkbox>
+    <van-checkbox v-model="checkedValue" @change="onChange">我已阅读并同意<span @click.stop="onConfig('register')">《用户协议》</span>和<span @click.stop="onConfig('privacy')">《隐私协议》</span></van-checkbox>
 
     <van-popup 
       v-model:show="show"
@@ -15,14 +15,13 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import settings from '@/settings'
 import store from '@/store/index'
 
 const router = useRouter()
 let show = ref(false)
 let content = ref('')
 
-let config = computed(() => store.state.user.config)
+const config = computed(() => store.state.user.config)
 
 const props = defineProps({
   checkedValue: {

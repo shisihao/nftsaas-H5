@@ -183,7 +183,7 @@ const state = reactive({
 
 invitationCode && (state.form.invite_code = invitationCode)
 
-let config = computed(() => store.state.user.config)
+const config = computed(() => store.state.user.config)
 
 // 顶象
 const dingxiang = ref(null)

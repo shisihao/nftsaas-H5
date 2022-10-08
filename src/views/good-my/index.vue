@@ -32,7 +32,7 @@ let query = router.currentRoute.value.query
 
 const item = ref({})
 let info = computed(() => store.state.user.info)
-let config = computed(() => store.state.user.config)
+const config = computed(() => store.state.user.config)
 
 const giveStatus = computed(() => {
   return (item, config) => {
