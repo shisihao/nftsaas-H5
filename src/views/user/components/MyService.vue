@@ -33,7 +33,7 @@ import { ref, computed } from 'vue'
 import UserTitle from './UserTitle.vue'
 import UserPopup from './UserPopup.vue'
 import ChainQuery from './ChainQuery.vue'
-import store from '/@/store/index'
+import store from '@/store/index'
 
 let config = computed(() => store.state.user.config)
 let info = computed(() => store.state.user.info)
@@ -78,16 +78,16 @@ const onWallet = () => {
         background-repeat: no-repeat;
         background-size: 100%;
         background-position: center;
-        background-image: url('/@/assets/images/user/common_icon_next_mini.png');
+        background-image: url('@/assets/images/user/common_icon_next_mini.png');
       }
       &:nth-child(1) {
         span::before {
-          background-image: url('/@/assets/images/user/mine_icon_lscx.png');
+          background-image: url('@/assets/images/user/mine_icon_lscx.png');
         }
       }
       &:nth-child(2) {
         span::before {
-          background-image: url('/@/assets/images/user/mine_icon_qbdz.png');
+          background-image: url('@/assets/images/user/mine_icon_qbdz.png');
         }
       }
       span {

@@ -48,9 +48,9 @@
 
 <script setup>
 import { computed, ref, reactive, inject } from 'vue'
-import { getToken, DominKey } from '/@/utils/auth'
+import { getToken, DominKey } from '@/utils/auth'
 import { showToast } from 'vant'
-import NoMore from '/@/components/NoMore/index.vue'
+import NoMore from '@/components/NoMore/index.vue'
 import moment from 'moment'
 
 let info = computed(() => store.state.user.info)

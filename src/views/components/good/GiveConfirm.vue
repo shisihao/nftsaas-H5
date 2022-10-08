@@ -49,12 +49,12 @@
 
 <script setup>
 import { ref, reactive, defineExpose, inject, computed } from 'vue'
-import store from '/@/store/index'
-import globleFun from '/@/utils/link'
-import { DominKey, getToken } from '/@/utils/auth'
-import { integralOptions } from '/@/utils/explain'
-import { paraphrase } from '/@/filters/index'
-import { giveGoods } from '/@/api/goods'
+import store from '@/store/index'
+import globleFun from '@/utils/link'
+import { DominKey, getToken } from '@/utils/auth'
+import { integralOptions } from '@/utils/explain'
+import { paraphrase } from '@/filters/index'
+import { giveGoods } from '@/api/goods'
 import PayPassPopup from '../order/PayPassPopup.vue'
 import PayInputPopup from '../order/PayInputPopup.vue'
 import { showSuccessToast } from 'vant'
@@ -174,7 +174,7 @@ const onPayPassword = (value) => {
               background-repeat: no-repeat;
               background-position: center;
               background-size: 100%;
-              background-image: url('/@/assets/images/public/common_icon_number.png');
+              background-image: url('@/assets/images/public/common_icon_number.png');
               position: absolute;
               left: 0;
               top: 0;

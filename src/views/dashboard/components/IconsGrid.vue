@@ -31,8 +31,8 @@
 
 <script setup>
 import { reactive } from 'vue'
-import { getImageUrl } from '/@/utils/index'
-import { getMsgCount } from '/@/api/message'
+import { getImageUrl } from '@/utils/index'
+import { getMsgCount } from '@/api/message'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

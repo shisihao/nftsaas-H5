@@ -27,12 +27,12 @@
 
 <script setup>
 import { toRefs } from 'vue'
-import NavigationTitle from '/@/components/NavigationTitle/index.vue'
-import BlockControl from '/@/components/BlockControl/index.vue'
+import NavigationTitle from '@/components/NavigationTitle/index.vue'
+import BlockControl from '@/components/BlockControl/index.vue'
 import useClipboard from 'vue-clipboard3'
 import to from 'await-to-js'
 import { showToast } from 'vant'
-import { centrEllipsis } from '/@/utils/index'
+import { centrEllipsis } from '@/utils/index'
 
 const { toClipboard } = useClipboard()
 

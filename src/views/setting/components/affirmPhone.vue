@@ -24,12 +24,12 @@
 
 <script setup>
 import { ref, reactive, watch, onMounted, onBeforeUnmount } from 'vue'
-import { validPhone } from '/@/utils/validate'
+import { validPhone } from '@/utils/validate'
 import Cookies from 'js-cookie'
-import { userChange } from '/@/api/setting'
+import { userChange } from '@/api/setting'
 import { showToast } from 'vant'
-import store from '/@/store/index'
-import { verificationCode } from '/@/api/common'
+import store from '@/store/index'
+import { verificationCode } from '@/api/common'
 
 const validatorAccount = (value, rule) => {
   if (!validPhone(value)) return false
@@ -166,7 +166,7 @@ const onSubmit = (values) => {
       transform: translateY(-50%);
       width: 16px;
       height: 16px;
-      background-image: url('/@/assets/images/setting/set_input_icon_phone@2x.png');
+      background-image: url('@/assets/images/setting/set_input_icon_phone@2x.png');
       background-position: center;
       background-repeat: no-repeat;
       background-size: 100%;
@@ -187,7 +187,7 @@ const onSubmit = (values) => {
       transform: translateY(-50%);
       width: 16px;
       height: 16px;
-      background-image: url('/@/assets/images/public/set_input_icon_validation.png');
+      background-image: url('@/assets/images/public/set_input_icon_validation.png');
       background-position: center;
       background-repeat: no-repeat;
       background-size: 100%;

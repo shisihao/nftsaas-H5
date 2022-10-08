@@ -26,7 +26,7 @@
 
 <script setup>
 import { ref, watch } from "vue"
-import { getGoodsTrade } from '/@/api/goods'
+import { getGoodsTrade } from '@/api/goods'
 
 const accordion = ref(false)
 const list = ref([])

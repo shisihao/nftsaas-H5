@@ -1,4 +1,4 @@
-import request from '/@/utils/request'
+import request from '@/utils/request'
 
 // 用户盲盒
 export function getMyBox(data) {

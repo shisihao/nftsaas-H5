@@ -10,7 +10,7 @@ import deatilsHeader from './components/deatils-header.vue'
 import { useRoute } from 'vue-router'
 import {ref} from 'vue'
 import deatilsContent from './components/deatils-content.vue'
-import { interestList } from '/@/api/interest'
+import { interestList } from '@/api/interest'
 
 const route = useRoute();
 const item =route.query;

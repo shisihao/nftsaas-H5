@@ -16,10 +16,10 @@
 
 <script  setup>
 import { computed, reactive } from 'vue'
-import { getImageUrl } from '/@/utils/index'
-import store from '/@/store/index'
+import { getImageUrl } from '@/utils/index'
+import store from '@/store/index'
 import affirmPhone from './components/affirmPhone.vue'
-import { mosaicTel } from '/@/filters/index'
+import { mosaicTel } from '@/filters/index'
 
 const state = reactive({
   step: 1

@@ -1,6 +1,6 @@
 <template>
   <div class="logo-section">
-    <img src="/@/assets/images/login/login_icon_logo.png" alt="">
+    <img src="@/assets/images/login/login_icon_logo.png" alt="">
   </div>
 </template>
 

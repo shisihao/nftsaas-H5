@@ -82,11 +82,11 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import UserTitle from './UserTitle.vue'
-import { getGoodsList, getGoodsTags, getGoodsTagsList } from '/@/api/goods'
-import { pages as commonPages } from '/@/utils/explain'
-import { DominKey, getToken } from '/@/utils/auth'
-import DefaultAvatar from '/@/components/DefaultAvatar/index.vue'
-import store from '/@/store/index'
+import { getGoodsList, getGoodsTags, getGoodsTagsList } from '@/api/goods'
+import { pages as commonPages } from '@/utils/explain'
+import { DominKey, getToken } from '@/utils/auth'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
+import store from '@/store/index'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -227,7 +227,7 @@ watch(activeNames, (newValue, oldValue) => {
           background-repeat: no-repeat;
           background-position: center;
           background-size: 100%;
-          background-image: url('/@/assets/images/public/common_icon_number.png');
+          background-image: url('@/assets/images/public/common_icon_number.png');
           position: absolute;
           left: 0;
           top: 0;

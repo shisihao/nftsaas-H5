@@ -10,7 +10,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import { dataList } from '/@/api/help'
+import { dataList } from '@/api/help'
 
 const list = ref([])
 const loading = ref(false)

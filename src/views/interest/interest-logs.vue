@@ -19,9 +19,9 @@
 
 <script setup>
 import { ref, reactive, computed } from 'vue'
-import { pages as commonPages } from '/@/utils/explain'
-import { paraphrase } from '/@/filters/index'
-import { interestLogs } from '/@/api/interest'
+import { pages as commonPages } from '@/utils/explain'
+import { paraphrase } from '@/filters/index'
+import { interestLogs } from '@/api/interest'
 
 const state = reactive({
 	loading: false,

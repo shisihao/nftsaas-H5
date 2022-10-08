@@ -9,7 +9,7 @@
 
 <script setup>
 import { defineProps } from 'vue'
-import { getImageUrl } from '/@/utils/index'
+import { getImageUrl } from '@/utils/index'
 
 const props = defineProps({
   round: {

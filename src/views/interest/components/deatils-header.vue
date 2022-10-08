@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts" setup>
-import { getImageUrl } from '/@/utils/index'
-import { paraphrase } from '/@/filters/index'
+import { getImageUrl } from '@/utils/index'
+import { paraphrase } from '@/filters/index'
 
 const props = defineProps({
 	item: {

@@ -33,12 +33,12 @@
 </template>
 
 <script setup>
-import { DominKey, getToken } from '/@/utils/auth'
-import { paraphrase } from '/@/filters/index'
-import { getImageUrl } from '/@/utils/index'
+import { DominKey, getToken } from '@/utils/auth'
+import { paraphrase } from '@/filters/index'
+import { getImageUrl } from '@/utils/index'
 import rulesPopup from './rules-popup.vue'
 import {ref,toRef} from 'vue'
-import NoMore from '/@/components/NoMore/index.vue'
+import NoMore from '@/components/NoMore/index.vue'
 
 const domin = getToken(DominKey)
 const props = defineProps({
@@ -128,7 +128,7 @@ const onShowRules = (item) => {
 					position: absolute;
 					width: 12px;
 					height: 12px;
-					background: url('/@/assets/images/public/common_icon_number.png') no-repeat center;
+					background: url('@/assets/images/public/common_icon_number.png') no-repeat center;
 					background-size: 100%;
 					left: 0;
 					top: 1px;

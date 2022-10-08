@@ -21,8 +21,8 @@
 </template>
 <script setup>
 import { reactive, ref } from 'vue'
-import { dataList } from '/@/api/order'
-import { orderOptions, pages as commonPages } from '/@/utils/explain'
+import { dataList } from '@/api/order'
+import { orderOptions, pages as commonPages } from '@/utils/explain'
 import OrderItem from './components/OrderItem.vue'
 import CancelOrder from '../components/order/CancelOrder.vue'
 

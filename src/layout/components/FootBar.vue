@@ -21,8 +21,8 @@
 <script setup>
   import { onMounted, ref } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
-  import { getImageUrl } from '/@/utils/index'
-  import { special } from '/@/router/index'
+  import { getImageUrl } from '@/utils/index'
+  import { special } from '@/router/index'
 
   const router = useRouter()
   const route = useRoute()

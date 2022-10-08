@@ -46,13 +46,13 @@
 
 <script setup>
 import { ref, reactive, computed,provide } from 'vue'
-import ThreeModel from '/@/components/ThreeModel/index.vue'
+import ThreeModel from '@/components/ThreeModel/index.vue'
 import { useRoute } from 'vue-router'
-import { synthesisDetail } from '/@/api/synthesis'
-import { DominKey, getToken } from '/@/utils/auth'
+import { synthesisDetail } from '@/api/synthesis'
+import { DominKey, getToken } from '@/utils/auth'
 import materialPopup from './components/material-popup.vue'
 import successPopup from './components/success-popup.vue'
-import { parseDate } from '/@/utils/index.js'
+import { parseDate } from '@/utils/index.js'
 
 const domin = getToken(DominKey)
 const route = useRoute()

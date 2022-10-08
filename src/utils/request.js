@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { showFailToast } from 'vant'
-import store from '/@/store/index'
-import router from '/@/router/index'
-import { getToken, TokenKey } from '/@/utils/auth'
+import store from '@/store/index'
+import router from '@/router/index'
+import { getToken, TokenKey } from '@/utils/auth'
 
 /* import Qs from 'qs' */
 /* import { encryption, decryption } from '@/utils/cryption' */

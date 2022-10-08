@@ -47,10 +47,10 @@
 </template>
 <script setup>
 import { reactive } from 'vue'
-import { getToken, DominKey } from '/@/utils/auth'
-import { orderOptions, integralOptions } from '/@/utils/explain'
-import { paraphrase } from '/@/filters/index'
-import { orderClose } from '/@/api/order'
+import { getToken, DominKey } from '@/utils/auth'
+import { orderOptions, integralOptions } from '@/utils/explain'
+import { paraphrase } from '@/filters/index'
+import { orderClose } from '@/api/order'
 import { showToast } from 'vant'
 
 const domin = getToken(DominKey)

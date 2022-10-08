@@ -14,8 +14,8 @@
 
 <script setup>
 import { reactive } from 'vue'
-import { getAdPos, getAdList } from '/@/api/ad'
-import { DominKey, getToken } from '/@/utils/auth'
+import { getAdPos, getAdList } from '@/api/ad'
+import { DominKey, getToken } from '@/utils/auth'
 import { useRouter } from 'vue-router'
 
 const domin = getToken(DominKey)

@@ -22,7 +22,7 @@ defineProps({
 
 <style lang="scss" scoped>
   .title-section {
-    background-image: url('/@/assets/images/public/detail_img_title_bg.png');
+    background-image: url('@/assets/images/public/detail_img_title_bg.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto 100%;
@@ -51,7 +51,7 @@ defineProps({
           background-repeat: no-repeat;
           background-position: center;
           background-size: 100%;
-          background-image: url('/@/assets/images/public/common_icon_number.png');
+          background-image: url('@/assets/images/public/common_icon_number.png');
           position: absolute;
           left: 0;
           top: 0;

@@ -29,8 +29,8 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { DominKey, getToken } from '/@/utils/auth'
-import DefaultAvatar from '/@/components/DefaultAvatar/index.vue'
+import { DominKey, getToken } from '@/utils/auth'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
@@ -82,7 +82,7 @@ if (!route.params.item) {
           background-repeat: no-repeat;
           background-position: center;
           background-size: 100%;
-          background-image: url('/@/assets/images/public/common_icon_number.png');
+          background-image: url('@/assets/images/public/common_icon_number.png');
           position: absolute;
           left: 0;
           top: 0;

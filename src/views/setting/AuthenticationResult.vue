@@ -27,11 +27,11 @@
 
 <script setup>
 import { reactive, computed } from 'vue'
-import { certifyAli, getCertify } from '/@/api/certification'
-import { paraphrase } from '/@/filters/index'
-import { attestationOptions } from '/@/utils/explain'
+import { certifyAli, getCertify } from '@/api/certification'
+import { paraphrase } from '@/filters/index'
+import { attestationOptions } from '@/utils/explain'
 import { useRouter } from 'vue-router'
-import store from '/@/store/index'
+import store from '@/store/index'
 
 const router = useRouter()
 let query = router.currentRoute.value.query
@@ -89,10 +89,10 @@ if (query.response) {
       font-weight: 500;
     }
     .certify-success {
-      background-image: url('/@/assets/images/public/set_certification_icon_success.png');
+      background-image: url('@/assets/images/public/set_certification_icon_success.png');
     }
     .certify-fail {
-      background-image: url('/@/assets/images/public/set_certification_icon_failure.png');
+      background-image: url('@/assets/images/public/set_certification_icon_failure.png');
     }
 
     .van-cell-group {

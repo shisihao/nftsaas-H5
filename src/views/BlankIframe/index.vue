@@ -6,7 +6,7 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
-import { getToken } from '/@/utils/auth'
+import { getToken } from '@/utils/auth'
 
 const route = useRoute()
 const src = `${route.query.src}?token=${getToken()}`

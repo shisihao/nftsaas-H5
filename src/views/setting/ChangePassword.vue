@@ -58,9 +58,9 @@
 
 <script setup>
 import { reactive } from 'vue'
-import { changePassword } from '/@/api/user'
+import { changePassword } from '@/api/user'
 import { showToast } from 'vant'
-import globleFun from '/@/utils/link'
+import globleFun from '@/utils/link'
 
 const validatorPassWord = (value, rule) => {
   if (value.length < 6) return '密码不能小于6位'

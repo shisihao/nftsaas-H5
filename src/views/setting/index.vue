@@ -42,12 +42,12 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import DefaultAvatar from '/@/components/DefaultAvatar/index.vue'
-import store from '/@/store/index'
-import { mosaicTel } from '/@/filters/index'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
+import store from '@/store/index'
+import { mosaicTel } from '@/filters/index'
 import SignOut from './components/SignOut.vue'
 import NamePopup from './components/NamePopup.vue'
-import { DominKey, getToken } from '/@/utils/auth'
+import { DominKey, getToken } from '@/utils/auth'
 
 const domin = getToken(DominKey)
 

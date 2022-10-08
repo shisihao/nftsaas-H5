@@ -77,14 +77,14 @@
 <script setup>
 import { ref, reactive, watch, onBeforeUnmount, onMounted, computed } from 'vue'
 import Cookies from 'js-cookie'
-import { validPhone } from '/@/utils/validate'
-import { TokenKey } from '/@/utils/auth'
-import globleFun from '/@/utils/link'
-import { paraphrase } from '/@/filters/index'
-import { forgetPassword } from '/@/api/user'
-import { verificationCode } from '/@/api/common'
+import { validPhone } from '@/utils/validate'
+import { TokenKey } from '@/utils/auth'
+import globleFun from '@/utils/link'
+import { paraphrase } from '@/filters/index'
+import { forgetPassword } from '@/api/user'
+import { verificationCode } from '@/api/common'
 import { showToast } from 'vant'
-import store from '/@/store/index'
+import store from '@/store/index'
 
 const validatorAccount = (value, rule) => {
   if (!validPhone(value)) return false

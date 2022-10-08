@@ -23,7 +23,7 @@ export default ( { command, mode } ) => {
     base,
     resolve: {
       alias : {
-        '/@' : pathResolve( 'src' ),
+        '@' : pathResolve( 'src' ),
       }
     },
     server : {

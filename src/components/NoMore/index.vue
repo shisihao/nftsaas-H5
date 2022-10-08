@@ -1,6 +1,6 @@
 <template>
   <div class="nomore" :class="show ? '' : 'none'">
-    <img src="/@/assets/images/public/nomore.png" alt="">
+    <img src="@/assets/images/public/nomore.png" alt="">
   </div>
 </template>
 

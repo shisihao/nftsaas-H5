@@ -22,7 +22,7 @@
 <script setup>
 import { reactive, defineEmits } from 'vue'
 import { showToast } from 'vant'
-import { orderClose } from '/@/api/order'
+import { orderClose } from '@/api/order'
 
 const state = reactive({
   show: false,

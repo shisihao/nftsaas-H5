@@ -14,7 +14,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import store from '/@/store/index'
+import store from '@/store/index'
 
 const router = useRouter()
 let query = router.currentRoute.value.query

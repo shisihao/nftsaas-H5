@@ -79,13 +79,13 @@
 <script setup>
 import { ref, reactive, computed, onBeforeUnmount } from 'vue'
 import Cookies from 'js-cookie'
-import { certifyInfo } from '/@/api/certification'
-import { paraphrase, mosaicTel } from '/@/filters/index'
-import store from '/@/store/index'
+import { certifyInfo } from '@/api/certification'
+import { paraphrase, mosaicTel } from '@/filters/index'
+import store from '@/store/index'
 import { showToast } from 'vant'
-import { verificationCode } from '/@/api/common'
+import { verificationCode } from '@/api/common'
 import Agreement from '../login/components/Agreement.vue'
-import settings from '/@/settings'
+import settings from '@/settings'
 
 let info = computed(() => store.state.user.info)
 
@@ -233,7 +233,7 @@ const onSubmit = () => {
             transform: translateY(-50%);
             width: 16px;
             height: 16px;
-            background-image: url('/@/assets/images/public/set_input_icon_validation.png');
+            background-image: url('@/assets/images/public/set_input_icon_validation.png');
             background-position: center;
             background-repeat: no-repeat;
             background-size: 100%;

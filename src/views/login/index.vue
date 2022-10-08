@@ -79,16 +79,16 @@
 import { ref, reactive, watch, onBeforeUnmount, onMounted } from 'vue'
 import Cookies from 'js-cookie'
 import { useRoute } from 'vue-router'
-import { TokenKey } from '/@/utils/auth'
-import { validPhone } from '/@/utils/validate'
-import { paraphrase } from '/@/filters/index'
+import { TokenKey } from '@/utils/auth'
+import { validPhone } from '@/utils/validate'
+import { paraphrase } from '@/filters/index'
 import Logo from '../components/common/Logo.vue'
 import Agreement from './components/Agreement.vue'
-import { login } from '/@/api/user'
-import { verificationCode } from '/@/api/common'
+import { login } from '@/api/user'
+import { verificationCode } from '@/api/common'
 import { showToast } from 'vant'
-import globleFun from '/@/utils/link'
-import settings from '/@/settings'
+import globleFun from '@/utils/link'
+import settings from '@/settings'
 
 const route = useRoute()
 route.query.code && sessionStorage.setItem('invitation-code', route.query.code)

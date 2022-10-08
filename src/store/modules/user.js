@@ -1,9 +1,9 @@
-import { login, logout, getInfo } from '/@/api/user'
-import { getConfig } from '/@/api/common'
-import { TokenKey, DominKey, setToken } from '/@/utils/auth'
-import { getCookieByKey, setCookie, removeCookieByKey, clearAllCookies } from '/@/utils/cookies'
-import router, { resetRouter } from '/@/router'
-import globleFun from '/@/utils/link'
+import { login, logout, getInfo } from '@/api/user'
+import { getConfig } from '@/api/common'
+import { TokenKey, DominKey, setToken } from '@/utils/auth'
+import { getCookieByKey, setCookie, removeCookieByKey, clearAllCookies } from '@/utils/cookies'
+import router, { resetRouter } from '@/router'
+import globleFun from '@/utils/link'
 
 const state = {
   token: getCookieByKey( 'token' ),

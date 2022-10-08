@@ -42,11 +42,11 @@
 
 <script setup>
 import { ref, computed, reactive, defineExpose } from 'vue'
-import store from '/@/store/index'
-import { putUser } from '/@/api/user'
-import globleFun from '/@/utils/link'
+import store from '@/store/index'
+import { putUser } from '@/api/user'
+import globleFun from '@/utils/link'
 import { showToast } from 'vant'
-import { isSpace } from '/@/utils/validate'
+import { isSpace } from '@/utils/validate'
 
 defineProps({
   title: {

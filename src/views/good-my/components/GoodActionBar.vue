@@ -48,7 +48,7 @@
 import { ref, computed, provide } from 'vue'
 import GivePopup from '../../components/good/GivePopup.vue'
 import BuyAdvancePopup from '../../components/good/BuyAdvancePopup.vue'
-import TipsPopup from '/@/components/TipsPopup/index.vue'
+import TipsPopup from '@/components/TipsPopup/index.vue'
 import moment from 'moment'
 
 const props = defineProps({

@@ -3,7 +3,7 @@
     <div class="open-tips-popup-contain">
       <van-popup v-model:show="state.show">
         <div class="tips-img">
-          <img src="/@/assets/images/public/mbox_img_boxlable.png" alt="">
+          <img src="@/assets/images/public/mbox_img_boxlable.png" alt="">
         </div>
         <div class="title">
           是否开启盲盒
@@ -27,10 +27,10 @@
 
 <script setup>
 import { ref, reactive, defineExpose } from 'vue'
-import store from '/@/store/index'
-import globleFun from '/@/utils/link'
+import store from '@/store/index'
+import globleFun from '@/utils/link'
 import OpenBoxPopup from './OpenBoxPopup.vue'
-import { boxOpen } from '/@/api/box'
+import { boxOpen } from '@/api/box'
 
 defineProps({
   title: {

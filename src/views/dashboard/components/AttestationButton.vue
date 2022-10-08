@@ -1,6 +1,6 @@
 <template>
   <div class="attestation" @click="$globleFun.onGoto('/authentication')">
-    <img src="/@/assets/images/dashboard/home_icon_renzheng.png" alt="">
+    <img src="@/assets/images/dashboard/home_icon_renzheng.png" alt="">
   </div>
 </template>
 

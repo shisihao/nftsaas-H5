@@ -15,7 +15,7 @@
 
 <script setup>
 import { useRouter, useRoute } from 'vue-router'
-import { special } from '/@/router/index'
+import { special } from '@/router/index'
 
 const router = useRouter()
 const route = useRoute()

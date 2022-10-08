@@ -13,10 +13,10 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import { recordList } from '/@/api/synthesis'
+import { recordList } from '@/api/synthesis'
 import recordsList from './components/records-list.vue'
 import recordDescribe from './components/record-describe.vue'
-import NoMore from '/@/components/NoMore/index.vue'
+import NoMore from '@/components/NoMore/index.vue'
 
 const loading = ref(false);
 const list = ref([]);

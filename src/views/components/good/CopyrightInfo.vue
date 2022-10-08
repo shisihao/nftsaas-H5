@@ -24,10 +24,10 @@
 </template>
 
 <script setup>
-import NavigationTitle from '/@/components/NavigationTitle/index.vue'
-import BlockControl from '/@/components/BlockControl/index.vue'
-import DefaultAvatar from '/@/components/DefaultAvatar/index.vue'
-import { DominKey, getToken } from '/@/utils/auth'
+import NavigationTitle from '@/components/NavigationTitle/index.vue'
+import BlockControl from '@/components/BlockControl/index.vue'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
+import { DominKey, getToken } from '@/utils/auth'
 
 const domin = getToken(DominKey)
 
