@@ -3,6 +3,7 @@
     <van-popup
       v-model:show="state.show"
       position="bottom"
+      round
     >
       <div class="title">
         {{ title }}
@@ -78,7 +79,8 @@ const onCopy = async () => {
     padding-bottom: 20px;
     font-size: 18px;
     text-align: center;
-    border-bottom: 1px solid var(--root-text-color2);
+    color: var(--root-text-color1);
+    border-bottom: 1px solid var(--root-dividing-color1);
   }
   .content {
     padding: 24px 12px;
@@ -98,11 +100,13 @@ const onCopy = async () => {
       border-style: solid;
     }
     .copy {
+      font-size: 18px;
       color: #fff;
-      background-image: var(--root-button-color1);
+      background-color: var(--root-theme-color);
     }
     .cancel {
-      color: var(--root-text-color2);
+      font-size: 18px;
+      color: var(--root-text-color3);
       border-width: 0;
     }
   }

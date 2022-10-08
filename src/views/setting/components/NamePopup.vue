@@ -136,6 +136,7 @@ const onSubmit = () => {
           .van-field__body {
             background-color: var(--root-bg-color1);
             padding: 10px 10px;
+            border-radius: 8px;
             input {
               color: var(--root-text-color1);
             }

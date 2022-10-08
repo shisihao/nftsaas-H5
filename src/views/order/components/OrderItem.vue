@@ -10,21 +10,21 @@
     </div>
     <div class="order-content" @click="$globleFun.onGoto(`/ordering?order_no=${item.order_no}`)">
       <div class="img-box">
-        <van-image fit="cover" :src="Array.isArray(item.goods.images) ? domin + item.goods.images[0] : ''" />
+        <van-image fit="cover" :src="Array.isArray(item.goods?.images) ? domin + item.goods?.images[0] : ''" />
       </div>
       <div class="good-info">
         <div class="good-title">
-          {{ item.goods.name }}
+          {{ item?.goods?.name }}
         </div>
         <div class="good-author-price">
           
         </div>
         <div class="author">
           <div class="author-box">
-            <van-image round fit="cover" :src="item.goods.author_avatar ? domin + item.goods.author_avatar : ''" />
+            <van-image round fit="cover" :src="item?.goods?.author_avatar ? domin + item?.goods?.author_avatar : ''" />
           </div>
           <div class="author-name">
-            {{ item.goods.author }}
+            {{ item?.goods?.author }}
           </div>
         </div>
         <div v-if="parseFloat(item.cny_price) >= 0 || parseFloat(item.integral_price) >= 0" class="price">
@@ -70,7 +70,7 @@ const onCancel = (order_no) => {
 </script>
 <style lang="scss" scoped>
   .order-item {
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     border-radius: 8px;
     margin-bottom: 15px;
     &:last-child {
@@ -141,7 +141,7 @@ const onCancel = (order_no) => {
         }
         .price {
           white-space:nowrap;
-          color: var(--root-auxiliary-color);
+          color: var(--root-auxiliary-color1);
           font-size: 15px;
           text-align: right;
           font-weight: 500;
@@ -160,12 +160,13 @@ const onCancel = (order_no) => {
         margin-left: 24px;
         border-radius: 28px;
         &.cancel {
-          border: 1px solid var(--root-text-color1);
+          border: 1px solid var(--root-dividing-color1);
           padding: 8px 10px;
         }
         &.pay {
           padding: 8px 18px;
-          background-image: var(--root-button-color1);
+          background-color: var(--root-theme-color);
+          color: var(--root-text-color5);
         }
       }
     }

@@ -1,6 +1,6 @@
 <template>
   <div class="main-contain">
-    <van-tabs v-model:active="active" sticky shrink offset-top="1.2rem" @change="onChangeTab">
+    <van-tabs v-model:active="active" sticky shrink type="card" offset-top="1.2rem" @change="onChangeTab">
       <van-tab v-for="(item, index) in actionTransferOptions" :key="index" :name="item.value" :title="item.label">
         <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
           <van-list
@@ -112,18 +112,14 @@ const onCopy = async (value) => {
 
 <style lang="scss" scoped>
 .main-contain {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   :deep(.van-tabs__nav) {
     background: none;
     background-color: var(--root-bg-color2);
+    border: none;
     .van-tabs__line {
       background: var(--root-text-color1);
-    }
-    .van-tab {
-      color: var(--root-text-color1);
-      margin-right: 20px;
-    }
-    .van-tab--active {
-      color: var(--root-text-color1);
     }
   }
   .van-tabs {
@@ -135,10 +131,25 @@ const onCopy = async (value) => {
       bottom: 0;
     }
   }
+  :deep(.van-tabs__wrap) {
+    background: var(--root-bg-color2);
+    padding: 10px 0;
+    .van-tab {
+      color: var(--root-text-color1);
+    }
+    .van-tab--card {
+      border: none;
+      border-radius: 15px;
+      padding: 0 20px;
+    }
+    .van-tab--active {
+      color: var(--root-text-color5);
+    }
+  }
   .transfer-wrapper {
     padding: var(--root-page-spacing) var(--root-page-spacing) 0 var(--root-page-spacing);
     .transfer-item {
-      background-color: var(--root-bg-color1);
+      background-color: var(--root-bg-color2);
       padding: 15px;
       border-radius: 12px;
       margin-bottom: 15px;

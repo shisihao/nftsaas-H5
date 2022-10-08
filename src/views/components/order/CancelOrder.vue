@@ -76,7 +76,7 @@ const onCancel = (data) => {
     }
     .content {
       font-size: 16px;
-      color: #A5A5AC;
+      color: var(--root-text-color2);
       text-align: center;
       margin-top: 24px;
       line-height: 1.5;
@@ -96,8 +96,8 @@ const onCancel = (data) => {
         background-color: rgba(75, 75, 89, 0.1);
       }
       .btn-submit {
-        color: var(--root-text-color1);
-        background-image: var(--root-button-color1);
+        color: var(--root-text-color5);
+        background-color: var(--root-theme-color);
       }
     }
   }

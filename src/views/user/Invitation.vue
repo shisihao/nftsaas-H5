@@ -121,8 +121,10 @@ const onChangeTab = () => {
 
 <style lang="scss" scoped>
   .main-contain {
+    min-height: calc(100vh - 46px);
+    background-color: var(--root-bg-color1);
     .code-title {
-      margin-top: 40px;
+      padding-top: 40px;
     }
     .code-title-list {
       margin-bottom: 20px;
@@ -135,7 +137,7 @@ const onChangeTab = () => {
       .invitation-code {
         width: 48px;
         height: 48px;
-        background-color: var(--root-bg-color1);
+        background-color: var(--root-bg-color2);
         border-radius: 4px;
         font-size: 24px;
         text-align: center;
@@ -147,18 +149,23 @@ const onChangeTab = () => {
       display: flex;
       justify-content: space-around;
       .van-button {
-        background-image: var(--root-button-color1);
+        background-color: var(--root-theme-color);
         font-size: 18px;
-        color: var(--root-text-color1);
+        color: var(--root-text-color5);
         padding: 0 24px;
+        &:first-child {
+          background-color: rgba($color: #1275E4, $alpha: 0.1);
+          color: var(--root-theme-color);
+        }
       }
+      
     }
     .invitation-wrapper {
       :deep(.van-tabs__nav) {
         background: none;
         background-color: var(--root-bg-color2);
         .van-tabs__line {
-          background: var(--root-text-color1);
+          background: var(--root-theme-color);
         }
         .van-tab {
           color: var(--root-text-color3);
@@ -170,7 +177,7 @@ const onChangeTab = () => {
       .business-card {
         padding: 0 var(--root-page-spacing);
         .business-item {
-          background: var(--root-bg-color1);
+          background: var(--root-bg-color2);
           border-radius: 12px;
           padding: 16px 0;
           margin-top: 10px;

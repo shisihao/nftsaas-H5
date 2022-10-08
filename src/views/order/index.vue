@@ -84,11 +84,13 @@ const onSubUnit = (order_no) => {
 </script>
 <style lang="scss" scoped>
 .main-contain {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   :deep(.van-tabs__nav) {
     background: none;
     background-color: var(--root-bg-color2);
     .van-tabs__line {
-      background: var(--root-text-color1);
+      background: var(--root-theme-color);
     }
     .van-tab {
       color: var(--root-text-color1);

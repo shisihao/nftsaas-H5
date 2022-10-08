@@ -8,9 +8,9 @@
       <div class="service-item" @click="onWallet">
         <span>钱包地址</span>
       </div>
-      <div class="service-item" @click="$globleFun.onGoto('/transfer-record')">
+      <!-- <div class="service-item">
         <span>转赠记录</span>
-      </div>
+      </div> -->
     </div>
 
     <chain-query ref="chain" title="链上查询">
@@ -61,7 +61,7 @@ const onWallet = () => {
     justify-content: space-between;
     .service-item {
       width: 48%;
-      background-color: var(--root-bg-color1);
+      background-color: var(--root-bg-color2);
       border-radius: 8px;
       font-size: 15px;
       padding: 18px 10px;

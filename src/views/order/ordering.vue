@@ -9,13 +9,13 @@
               {{ parseInt(state.data.status) >= 0 ? paraphrase({ value: state.data.status, options: orderOptions }) : '' }}
             </div>
             <div v-if="state.data.status === 0" class="time">
-              <span>支付剩余</span><van-count-down millisecond :time="(state.data.close_seconds || 0) * 1000" format="mm:ss" @finish="onFinish" />
+              <span>支付剩余时间</span><van-count-down millisecond :time="(state.data.close_seconds || 0) * 1000" format="mm:ss" @finish="onFinish" />
             </div>
           </div>
           <div class="card">
             <div class="good-box">
               <div class="img-box">
-                <van-image fit="cover" :src="state.data.images.length > 0 ? domin + state.data.images[0] : ''" />
+                <van-image fit="cover" :src="state.data?.images.length > 0 ? domin + state.data.images[0] : ''" />
               </div>
               <div class="good-info">
                 <div class="good-title">
@@ -65,13 +65,12 @@
             </div>
           </div>
           <div class="card order-info">
-            <h5>订单信息</h5>
             <div class="order-list">
               <div class="order-item" @click="onClipboard(state.data.order_no)">
                 <div class="order-label">
                   订单编号：
                 </div>
-                <div class="order-value">
+                <div class="order-value copy-value" @click="onClipboard(state.data.order_no)">
                   {{ state.data.order_no }}
                 </div>
               </div>
@@ -95,7 +94,7 @@
                 </div>
               </div>
             </div>
-            <div class="chain" :class="`${ state.data.status === 2 ? 'chain-after' : '' }`" @click="onClipboard(state.data.identification)">
+            <div class="chain" :class="`${ state.data.status === 2 ? 'chain-after' : '' }`" @click="onClipboard(state.data.hash)">
               <div>
                 链上HASH：
               </div>
@@ -131,7 +130,10 @@ import { paraphrase } from '@/filters/index'
 import { orderOptions, integralOptions } from '@/utils/explain'
 import PayTypePopup from '../components/order/PayTypePopup.vue'
 import CancelOrder from '../components/order/CancelOrder.vue'
+import to from 'await-to-js'
+import useClipboard from 'vue-clipboard3'
 
+const { toClipboard } = useClipboard()
 const route = useRoute()
 const router = useRouter()
 const domin = getToken(DominKey)
@@ -173,8 +175,11 @@ if (route.query.order_no) {
   router.back(-1)
 }
 
-const onClipboard = (text) => {
-  
+const onClipboard = async (value) => {
+  let err, clipboard
+  [err, clipboard] = await to(toClipboard(String(value)))
+  if (err) return showToast('复制失败')
+  showToast('复制成功')
 }
 
 const onFinish = () => {
@@ -196,7 +201,8 @@ const onPostOrder = (data) => {
 </script>
 <style lang="scss" scoped>
 .main-contain {
-  min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   /* &.bg-await {
     background-image: url('~@/assets/mine/order_img_pindan_bg.png');
   }
@@ -234,6 +240,7 @@ const onPostOrder = (data) => {
         .status {
           font-size: 20px;
           font-weight: 500;
+          color: var(--root-text-color5);
           .van-icon {
             font-size: 24px;
             vertical-align: top;
@@ -242,17 +249,18 @@ const onPostOrder = (data) => {
         .time {
           span {
             margin-right: 6px;
+            color: var(--root-text-color5);
           }
           .van-count-down {
             display: inline-block;
             font-size: 14px;
-            color: var(--root-text-color1);
+            color: var(--root-text-color5);
           }
         }
       }
       .card {
         padding: 20px 12px;
-        background-color: var(--root-bg-color1);
+        background-color: var(--root-bg-color2);
         border-radius: 8px;
         .good-box {
           display: flex;
@@ -297,8 +305,7 @@ const onPostOrder = (data) => {
           padding: 15px 0;
           border-bottom: 1px solid var(--root-dividing-color1);
           &:first-child {
-            margin-top: 20px;
-            border-top: 1px solid var(--root-dividing-color1);
+            margin-top: 10px;
           }
           &:last-child {
             border-bottom-width: 0;
@@ -322,7 +329,7 @@ const onPostOrder = (data) => {
             }
           }
           .last-price {
-            color: var(--root-auxiliary-color);
+            color: var(--root-auxiliary-color1);
             font-size: 18px;
             font-weight: 500;
           }
@@ -342,17 +349,13 @@ const onPostOrder = (data) => {
             position: absolute;
             right: 0;
             bottom: 0;
-            width: 76.6%;
+            width: 100%;
             height: 1px;
             background-color: var(--root-dividing-color1);
           }
           .order-item {
             display: flex;
             padding-bottom: 15px;
-            &:first-child {
-              margin-top: 15px;
-              position: relative;
-            }
             .order-label {
               flex-shrink: 0;
             }
@@ -361,7 +364,21 @@ const onPostOrder = (data) => {
               word-break: break-word;
               overflow: hidden;
               box-sizing: border-box;
-              padding-right: 15px;
+              text-align: right;
+            }
+            .copy-value {
+              margin-right: 20px;
+              &::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 16px;
+                height: 16px;
+                background: url('@/assets/images/setting/common_icon_cpoy@2x.png') no-repeat;
+                background-size: contain;
+                background-repeat: no-repeat;
+              }
             }
           }
         }
@@ -369,21 +386,22 @@ const onPostOrder = (data) => {
           margin-top: 15px;
           font-size: 15px;
           position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
           &.chain-after::after {
             content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 24px;
-            height: 24px;
-            background-image: url('~@/assets/common/common_icon_copy.png');
-            background-size: 100%;
+            margin-left: 5px;
+            width: 16px;
+            height: 16px;
+            background: url('@/assets/images/setting/common_icon_cpoy@2x.png') no-repeat;
+            background-size: contain;
             background-repeat: no-repeat;
-            background-position: center top;
           }
           .chain-value {
-            margin-top: 12px;
             overflow-wrap: break-word;
+            text-align: right;
+            flex: 1;
           }
         }
       }
@@ -400,14 +418,14 @@ const onPostOrder = (data) => {
         margin-right: 15px;
         border-radius: 14px;
         &.cancel {
-          padding: 6px 10px;
-          border: 1px solid var(--root-text-color2);
+          padding: 8px 10px;
+          border: 1px solid var(--root-dividing-color1);
           color: var(--root-text-color2);
         }
         &.pay {
-          padding: 6px 16px;
-          color: var(--root-theme-color);
-          border: 1px solid var(--root-theme-color);
+          padding: 8px 16px;
+          background-color: var(--root-theme-color);
+          color: var(--root-text-color5);
         }
       }
     }

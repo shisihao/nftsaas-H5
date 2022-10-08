@@ -2,7 +2,7 @@
 	<div class="logs-section">
 		<van-pull-refresh v-model="state.refreshing" @refresh="onRefresh" success-text="刷新成功">
 			<van-list v-model:loading="state.loading" :finished="state.finished" finished-text="没有更多了" @load="onLoad">
-				<van-tabs v-model:active="active" shrink @change="onTabChange">
+				<van-tabs v-model:active="active" shrink @change="onTabChange" type="card">
 					<van-tab v-for="(item, index) in activeOptions" :key="index" :title="item.label" :name="item.value"></van-tab>
 				</van-tabs>
         <div class="content">
@@ -71,41 +71,53 @@ const onTabChange = val => {
 
 <style lang="scss" scoped>
 .logs-section{
-  padding: 0 var(--root-page-spacing);
+	min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
 }
 :deep(.van-tabs__line) {
 	background: var(--root-theme-color);
 	width: 24px;
 	bottom: 22px;
 }
+:deep(.van-tabs) {
+	background: var(--root-bg-color2);
+	padding: 10px 0;
+}
 :deep(.van-tabs__nav) {
-	background: transparent;
+	border: none;
+}
+:deep(.van-tab--card) {
+	border: none;
+	border-radius: 15px;
+	padding: 0 10px;
 }
 :deep(.van-tab) {
 	color: var(--root-text-color3);
 }
 :deep(.van-tab--active) {
-	color: var(--root-text-color1);
+	color: var(--root-text-color5);
 }
-
+.content {
+	padding: 0 var(--root-page-spacing);
+}
 .list-item{
-background: var(--root-bg-color1);
-padding: 15px 12px;
-border-radius: 12px;
-margin-bottom: 12px;
-.title{
-  font-size: 16px;
-  margin-bottom: 8px;
-    @include textoverflow()
-}
-.desc,.time{
-  font-size: 12px;
-  color: var(--root-text-color3);
-  margin-bottom: 8px;
-  @include textoverflow()
-}
-.time{
-  margin-bottom: 0;
-}
+	background: var(--root-bg-color2);
+	padding: 15px 12px;
+	border-radius: 12px;
+	margin-top: 12px;
+	.title{
+		font-size: 16px;
+		margin-bottom: 8px;
+			@include textoverflow()
+	}
+	.desc,.time{
+		font-size: 12px;
+		color: var(--root-text-color3);
+		margin-bottom: 8px;
+		@include textoverflow()
+	}
+	.time{
+		margin-bottom: 0;
+	}
 }
 </style>

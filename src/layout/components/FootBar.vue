@@ -38,7 +38,7 @@
 <style lang="scss" scoped>
   .tabbar-box {
     :deep(.van-tabbar) {
-      background-color: var(--root-bg-color1);
+      background-color: var(--root-bg-color2);
       max-width: 375px;
       right: 0;
       margin: 0 auto;
@@ -56,7 +56,7 @@
       }
     }
     .van-tabbar-item--active {
-      background-color: var(--root-bg-color1);
+      background-color: var(--root-bg-color2);
       .tabbar-text {
         color: var(--root-theme-color);
       }

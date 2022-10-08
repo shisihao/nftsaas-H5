@@ -4,7 +4,8 @@
       <van-list v-model:loading="state.loading" :finished="state.finished" finished-text="没有更多了" @load="onLoad">
         <div class="integral-header">
           <div class="integral-num">{{ info?.balance || 0 }}</div>
-          <div class="integral-text">{{ paraphrase({ value: 'integral', options: integralOptions }) }}额度</div>
+          <div class="integral-text">{{ paraphrase({ value: 'integral', options: integralOptions }) }}余额</div>
+          <div class="integral-get" @click="onGetIntegral">领取{{ paraphrase({ value: 'integral', options: integralOptions })}}</div>
         </div>
         <div class="integral-cotent-wrap">
           <van-tabs v-model:active="active" shrink @change="onTabChange">
@@ -26,6 +27,8 @@
         </div>
       </van-list>
     </van-pull-refresh>
+
+    <integral-popup ref="integralPopup" />
   </div>
 </template>
 
@@ -38,8 +41,10 @@ import { showToast } from 'vant'
 import { pages as commonPages, integralOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
 import store from '@/store/index'
+import IntegralPopup from './components/IntegralPopup.vue'
 
 let info = computed(() => store.state.user.info)
+let integralPopup = ref(null)
 
 const { toClipboard } = useClipboard()
 const active = ref(0)
@@ -95,20 +100,30 @@ const onCopy = async (value) => {
 const onTabChange = (val) => {
   onRefresh()
 }
+
+const onGetIntegral = () => {
+  integralPopup.value.init()
+}
+
 </script>
 
 <style lang="scss" scoped>
 .integral-wrap {
-  background-color: var(--root-bg-color6);
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
 }
 
 .integral-header {
-  height: 90px;
+  height: 125px;
   border-radius: 0 0 10px 10px;
   overflow: hidden;
-  background: var(--root-button-color1);
-  color: var(--root-text-color1);
+  color: var(--root-text-color5);
   text-align: center;
+  background-image: url('@/assets/images/user/equities_card_bg.png');
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  background-position: right center;
+  background-color: var(--root-theme-color);
 
   .integral-num {
     margin: 17px auto 8px;
@@ -117,6 +132,14 @@ const onTabChange = (val) => {
 
   .integral-text {
     font-size: 12px;
+  }
+  .integral-get {
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 16px;
+    background: var(--root-text-color5);
+    color: var(--root-theme-color) ;
+    margin: 18px auto 0;
   }
 }
 
@@ -130,7 +153,7 @@ const onTabChange = (val) => {
   padding: var(--root-page-spacing);
 
   .integral-list {
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     padding: 10px 12px;
     border-radius: 12px;
 

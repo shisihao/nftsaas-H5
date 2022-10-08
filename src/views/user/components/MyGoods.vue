@@ -174,7 +174,8 @@ watch(activeNames, (newValue, oldValue) => {
     }
     .num {
       font-size: 18px;
-      background-color: var(--root-bg-color1);
+      background-color: var(--root-theme-color);
+      color: var(--root-text-color5);
       border-radius: 10px;
       padding: 0 12px;
       margin-left: 10px;

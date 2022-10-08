@@ -33,6 +33,12 @@
             钱包管理
           </p>
         </div> -->
+        <div class="grid-item" @click="$globleFun.onGoto('/transfer-record')">
+          <img src="@/assets/images/user/mine_icon_jilu.png" alt="">
+          <p>
+            转赠记录
+          </p>
+        </div>
         <div class="grid-item" @click="$globleFun.onGoto('/setting')">
           <img src="@/assets/images/user/mine_icon_sz.png" alt="">
           <p>
@@ -77,7 +83,7 @@ const onInvite = () => {
       grid-template-columns: 108.3px 108.3px 108.3px;
       grid-template-rows: 108.3px 108.3px;
       .grid-item {
-        background-color: var(--root-bg-color1);
+        background-color: var(--root-bg-color2);
         border-radius: 8px;
         display: flex;
         flex-direction: column;

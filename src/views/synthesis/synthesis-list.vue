@@ -83,8 +83,9 @@ const onRefresh = () => {
 
 <style lang="scss" scoped>
 .synthesis-container {
-  padding: 15px 0;
-
+  padding: var(--root-page-spacing) 0;
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
   .title-wrap {
     display: flex;
     justify-content: space-between;
@@ -99,12 +100,12 @@ const onRefresh = () => {
     .title-r {
       padding: 6px 12px 6px 32px;
       font-size: 16px;
-      background: url('@/assets/images/synthesis/mine_icon_hecheng_jilu@2x.png') no-repeat;
+      background: url('@/assets/images/public/equities_icon_rule@2x.png') no-repeat;
       background-color: var(--root-bg-color1);
       background-size: 19px;
       background-position: 10px 5px;
       border-radius: 16px 0px 0px 16px;
-      color: var(--root-text-color1);
+      color: var(--root-text-color2);
     }
   }
 
@@ -116,7 +117,7 @@ const onRefresh = () => {
       display: flex;
       justify-content: space-between;
       padding: 14px 12px;
-      background-color: var(--root-bg-color1);
+      background-color: var(--root-bg-color2);
       margin-bottom: 12px;
 
       border-radius: 8px;
@@ -156,9 +157,9 @@ const onRefresh = () => {
               display: inline-block;
               font-size: 11px;
               padding: 4px 7px 3px;
-              border-radius: 10px 0px 0px 10px;
+              border-radius: 6px 0px 0px 6px;
               background-color: var(--root-theme-color);
-              color: var(--root-text-color1);
+              color: var(--root-text-color5);
             }
 
             .tag-num {
@@ -166,18 +167,19 @@ const onRefresh = () => {
               box-shadow: 0 0 0 1px var(--root-theme-color);
               font-size: 11px;
               padding: 3px 5px 2px;
-              color: var(--root-text-color1);
-              border-radius: 0px 10px 10px 0px;
+              color: var(--root-theme-color);
+              border-radius: 0px 6px 6px 0px;
             }
           }
 
           .remain {
             .tag-name {
-              background-color: var(--root-button-color2);
+              background-color: var(--root-text-color3);
             }
 
             .tag-num {
-              box-shadow: 0 0 0 1px var(--root-button-color2);
+              box-shadow: 0 0 0 1px var(--root-text-color3);
+              color: var(--root-text-color2);
             }
           }
 

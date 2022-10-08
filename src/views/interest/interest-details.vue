@@ -21,4 +21,8 @@ interestList({ label: item.type }).then(res => {
 </script>
 
 <style scoped>
+.details-section {
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color1);
+}
 </style>

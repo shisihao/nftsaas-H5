@@ -13,14 +13,16 @@
           <div class="attestation" :class="statusClass">
             {{ info && paraphrase({ value: info.cer_status, options: attestationOptions }) }}
           </div>
+        </div>
+        <div class="multinomial">
+          <div class="user-id">
+            id: {{ info?.show_id }}
+          </div>
           <div class="integral" @click="$globleFun.onGoto('/integral')">
             {{ paraphrase({ value: 'integral', options: integralOptions }) }}
             {{ info?.balance || 0 }}
             <van-icon name="arrow" />
           </div>
-        </div>
-        <div class="user-id">
-          id: {{ info?.show_id }}
         </div>
       </div>
     </div>
@@ -68,6 +70,7 @@ let statusClass = computed(() => {
 
 <style lang="scss" scoped>
   .user-section {
+    background: linear-gradient(180deg, rgba(18,117,228,0.2) 0%, var(--root-bg-color1) 40%);
     padding: 0 var(--root-page-spacing);
     overflow: hidden;
     .user-info {
@@ -108,8 +111,9 @@ let statusClass = computed(() => {
             }
           }
           .integral {
-            background-image: var(--root-button-color1);
-            padding: 2px 8px;
+            background-color: rgba($color: #1275E4, $alpha: 0.1);
+            color: var(--root-theme-color);
+            padding: 4px 8px;
             font-size: 13px;
             border-radius: 10px;
           }
@@ -139,29 +143,34 @@ let statusClass = computed(() => {
     .equity {
       margin-top: 24px;
       width: 100%;
-      background-color: var(--root-theme-color);
       position: relative;
       display: flex;
       justify-content: space-between;
-      padding: 6px 0;
+      padding: 19px 0;
       border-radius: 6px;
+      background-image: url('@/assets/images/user/equities_card_bg.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: var(--root-theme-color);
       &::before {
         content: '';
         position: absolute;
         left: var(--root-page-spacing);
-        bottom: 0;
-        width: 53px;
-        height: 36px;
+        width: 20px;
+        height: 20px;
         background-image: url('@/assets/images/user/mine_equities_card.png');
         background-position: center;
         background-repeat: no-repeat;
         background-size: 100%;
       }
       div:nth-child(1) {
-        margin-left: 70px;
+        margin-left: 50px;
+        font-size: 18px;
+        color: var(--root-text-color5);
       }
       div:nth-child(2) {
         margin-right: var(--root-page-spacing);
+        color: var(--root-text-color5);
       }
     }
   }
