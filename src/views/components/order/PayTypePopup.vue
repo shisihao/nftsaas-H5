@@ -50,7 +50,7 @@ const show = ref(false)
 const payPassPopup = ref(null)
 const payInputPopup = ref(null)
 
-let config = computed(() => store.state.user.config)
+const config = computed(() => store.state.user.config)
 let info = computed(() => store.state.user.info)
 
 const props = defineProps({
