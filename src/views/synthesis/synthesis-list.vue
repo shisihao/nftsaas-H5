@@ -110,8 +110,6 @@ const onRefresh = () => {
 
 	.list-wrap {
 		padding: var(--root-page-spacing);
-		margin-top: 12px;
-
 		.list-item {
 			display: flex;
 			justify-content: space-between;

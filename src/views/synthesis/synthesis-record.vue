@@ -38,7 +38,7 @@ onRefresh()
 
   .record-list {
     padding: 19px 12px;
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     border-radius: 8px;
 
     &:not(:last-child) {

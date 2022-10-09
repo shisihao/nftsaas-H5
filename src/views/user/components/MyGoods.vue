@@ -187,6 +187,7 @@ watch(activeNames, (newValue, oldValue) => {
     }
     .transfer {
       font-size: 16px;
+      color: var(--root-theme-color);
     }
   }
   .goods-section {

@@ -2,7 +2,7 @@
   <div class="replace-phone">
     <div v-if="state.step === 1">
       <div class="logo-wrap">
-        <img :src="getImageUrl('setting/login_icon_logo.png')" alt="">
+        <logo />
       </div>
       <div class="account">当前账号</div>
       <div class="phone">{{ phone }}</div>
@@ -20,6 +20,7 @@ import { getImageUrl } from '@/utils/index'
 import store from '@/store/index'
 import affirmPhone from './components/affirmPhone.vue'
 import { mosaicTel } from '@/filters/index'
+import Logo from '../components/common/Logo.vue'
 
 const state = reactive({
   step: 1
@@ -35,13 +36,7 @@ const phone = computed(() => mosaicTel(store.state.user.info?.phone))
   background-color: var(--root-bg-color1);
   padding-top: 20px;
   .logo-wrap {
-    width: 255px;
-    height: 88px;
     margin: 0 auto 39px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
   }
 
   .account {
