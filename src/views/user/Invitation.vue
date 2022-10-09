@@ -154,7 +154,7 @@ const onChangeTab = () => {
         color: var(--root-text-color5);
         padding: 0 24px;
         &:first-child {
-          background-color: rgba($color: #1275E4, $alpha: 0.1);
+          background-color: rgba(var(--root-theme-color-rgb), $alpha: 0.1);
           color: var(--root-theme-color);
         }
       }

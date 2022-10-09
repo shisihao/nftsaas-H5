@@ -190,8 +190,9 @@ const onRefreshList = ({ id, item }) => {
   .collection-item {
     border-radius: 12px;
     overflow: hidden;
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     margin-top: 20px;
+    padding: var(--root-page-spacing);
     .collection-img {
       padding-bottom: 100%;
       position: relative;
@@ -223,7 +224,7 @@ const onRefreshList = ({ id, item }) => {
       }
     }
     .collection-info {
-      padding: 0 var(--root-page-spacing) var(--root-page-spacing) var(--root-page-spacing);
+      padding: 0 0 var(--root-page-spacing) 0;
       .collection-title {
         margin-top: 20px;
         font-size: 18px;

@@ -14,9 +14,6 @@
 			</div>
 			<div class="use">已享受 {{ props.item?.used }} 次</div>
 		</div>
-		<div class="header-r">
-			<span class="header-r-tag">?次</span>
-		</div>
 	</div>
 </template>
 
@@ -90,16 +87,6 @@ const props = defineProps({
 				color: var(--root-text-color3);
 			}
 
-	}
-	.header-r {
-		font-weight: 700;
-    .header-r-tag {
-			padding: 4px 10px;
-			background: #cde0f5;
-			color: var(--root-theme-color);
-			border-radius: 22px;
-			font-size: 12px;
-		}
 	}
 }
 </style>

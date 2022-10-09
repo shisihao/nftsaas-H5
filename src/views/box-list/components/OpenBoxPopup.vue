@@ -78,10 +78,7 @@ const onSubmit = () => {
     .tips-img {
       width: 80px;
       height: 80px;
-      position: absolute;
-      left: 50%;
-      margin-left: -40px;
-      top: -40px;
+      margin: 40px auto 0 auto;
       border-radius: 8px;
       overflow: hidden;
       img {
@@ -92,7 +89,7 @@ const onSubmit = () => {
       font-size: 18px;
       color: var(--root-text-color1);
       text-align: center;
-      margin-top: 54px;
+      margin-top: 28px;
     }
     .content {
       font-size: 16px;
@@ -116,9 +113,9 @@ const onSubmit = () => {
         background-color: rgba(75, 75, 89, 0.1);
       }
       .btn-submit {
-        color: var(--root-bg-color1);
+        color: var(--root-text-color5);
         border-radius: 44px;
-        background-image: var(--root-button-color1);
+        background-color: var(--root-theme-color);
       }
     }
   }

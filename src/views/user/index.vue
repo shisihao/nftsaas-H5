@@ -115,7 +115,7 @@ let statusClass = computed(() => {
             }
           }
           .integral {
-            background-color: rgba($color: #1275E4, $alpha: 0.1);
+            background-color: rgba(var(--root-theme-color-rgb), 0.1);
             color: var(--root-theme-color);
             padding: 4px 8px;
             font-size: 13px;
