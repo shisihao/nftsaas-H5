@@ -1,4 +1,5 @@
 import { login, logout, getInfo } from '@/api/user'
+import { showLoadingToast } from 'vant'
 import { getConfig } from '@/api/common'
 import { TokenKey, DominKey, setToken } from '@/utils/auth'
 import { getCookieByKey, setCookie, removeCookieByKey, clearAllCookies } from '@/utils/cookies'
@@ -96,11 +97,17 @@ const actions = {
 
   getConfig({ commit, state }) {
     return new Promise((resolve, reject) => {
+      const toast = showLoadingToast({
+        overlay: true,
+        duration: 0,
+        message: '加载中...',
+      })
       getConfig()
         .then(response => {
           const { data } = response
           setToken({ key: DominKey, value: data.cdn_domain })
           commit('SET_CONFIG', data)
+          toast.close()
           resolve(data)
         }).catch(error => {
           reject(error)
