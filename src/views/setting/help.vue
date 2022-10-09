@@ -35,7 +35,7 @@ const onRefresh = () => {
   padding: 8px 0;
 
   .help-cell {
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     font-size: 15px;
     color: var(--root-text-color1);
     height: auto;

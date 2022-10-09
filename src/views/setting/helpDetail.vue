@@ -14,6 +14,8 @@ const data = JSON.parse(route.query.data)
 <style lang="scss" scoped>
 .help-detail{
   padding: 30px 16px;
+  min-height: calc(100vh - 46px);
+  background-color: var(--root-bg-color2);
   .title{
     color: var(--root-text-color1);
     font-size: 18px;
