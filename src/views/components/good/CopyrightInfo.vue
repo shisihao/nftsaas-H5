@@ -5,7 +5,7 @@
       <div class="card-wrapper">
         <template v-for="(item, index) in copyrightOptions" :key="index">
           <div v-if="row[item.value]" class="copyright-item">
-            <van-divider>{{ item.label }}</van-divider>
+            <van-divider dashed>{{ item.label }}</van-divider>
             <div class="copyright-info">
               <div v-if="item.value !== 'issuer'" class="avatar">
                 <default-avatar v-if="item.value === 'author'" :src="`${domin}${row.author_avatar}`" />
@@ -58,7 +58,7 @@ const copyrightOptions = [
 .card-wrapper {
   padding-top: 24px;
   .copyright-item {
-    background-color: var(--root-bg-color2);
+    background-color: var(--root-bg-color1);
     padding: 20px 12px;
     border-radius: 8px;
     &:not(:last-child) {
@@ -68,7 +68,7 @@ const copyrightOptions = [
       margin: 0;
       color: var(--root-text-color2);
       &::before, &::after {
-        border-color: var(--root-bg-color2);
+        border-color: var(--root-dividing-color1);
       }
     }
     .copyright-info {
@@ -83,7 +83,6 @@ const copyrightOptions = [
       }
       .name {
         margin-top: 8px;
-        @include textoverflow(1)
       }
     }
   }

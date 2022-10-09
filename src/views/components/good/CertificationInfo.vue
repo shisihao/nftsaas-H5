@@ -11,7 +11,7 @@
                   {{ item.label }}
                 </div>
                 <div class="item-copy" @click="onCopy(row[item.value])">
-                  复制
+                  <svg-icon icon-class="copy" class-name="grid-icon"/>
                 </div>
               </div>
               <div class="item-hash">
@@ -26,13 +26,13 @@
 </template>
 
 <script setup>
-import { toRefs } from 'vue'
-import NavigationTitle from '@/components/NavigationTitle/index.vue'
-import BlockControl from '@/components/BlockControl/index.vue'
+import { showToast } from 'vant'
 import useClipboard from 'vue-clipboard3'
 import to from 'await-to-js'
-import { showToast } from 'vant'
 import { centrEllipsis } from '@/utils/index'
+import SvgIcon from '@/components/YuSvgIcon'
+import NavigationTitle from '@/components/NavigationTitle/index.vue'
+import BlockControl from '@/components/BlockControl/index.vue'
 
 const { toClipboard } = useClipboard()
 
@@ -70,6 +70,7 @@ const onCopy = async (value) => {
     border-radius: 8px;
     overflow: hidden;
     position: relative;
+    background-color: rgba(var(--root-theme-color-rgb), 0.1);
     &::after {
       content: '';
       width: 100%;

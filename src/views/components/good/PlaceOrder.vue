@@ -193,7 +193,7 @@ const onEquityItem = (value) => {
     right: auto;
     transform: translateX(-50%);
     z-index: 999;
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     .place-button {
       margin: 0 var(--root-page-spacing);
       background: none;
@@ -218,17 +218,16 @@ const onEquityItem = (value) => {
       }
     }
     .place-button-info {
-      color: var(--root-text-color2);
-      background-color: var(--root-button-color2);
+      color: var(--root-text-color5);
+      background-color: var(--root-button-color1);
     }
     .place-button-warning {
       color: var(--root-theme-color);
-      background-image: var(--root-button-color3);
-      border: 1px solid var(--root-theme-color);
+      background-color: rgba(var(--root-theme-color-rgb), 0.1);
     }
     .place-button-primary {
-      color: var(--root-text-color1);
-      background-image: var(--root-button-color1);
+      color: var(--root-text-color5);
+      background-color: var(--root-theme-color);
     }
   }
   .attestation-wrapper {
@@ -237,7 +236,7 @@ const onEquityItem = (value) => {
     top: -50px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     border-radius: 8px;
     box-sizing: border-box;
     padding: 6px var(--root-page-spacing);
@@ -245,13 +244,13 @@ const onEquityItem = (value) => {
     justify-content: space-between;
     align-items: center;
     .attestation-tip {
-      color: var(--root-auxiliary-color);
+      color: var(--root-auxiliary-color1);
     }
     .van-button {
       background: none;
       background-color: var(--root-theme-color);
       padding: 2px 20px;
-      color: var(--root-text-color1);
+      color: var(--root-text-color5);
     }
   }
 }

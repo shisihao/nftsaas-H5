@@ -46,13 +46,9 @@ const cnyPrice = computed(() => {
 
 <style lang="scss" scoped>
   .title-section {
-    background-image: url('@/assets/images/public/detail_img_title_bg.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: auto 100%;
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     border-radius: 12px;
-    padding: 20px 0;
+    padding: 15px 0;
     margin-top: 15px;
     .title {
       text-align: center;
@@ -61,15 +57,15 @@ const cnyPrice = computed(() => {
     }
     .label {
       text-align: center;
-      margin-top: 12px;
+      margin-top: 10px;
       span {
         display: inline-block;
         border-radius: 4px;
         font-size: 12px;
-        color: var(--root-text-color2);
-        border: 1px solid var(--root-text-color2);
-        padding: 1px 10px;
-        margin-right: 10px;
+        color: var(--root-text-color3);
+        border: 1px solid var(--root-text-color3);
+        padding: 3px 8px;
+        margin-right: 8px;
         margin-bottom: 6px;
         &:last-child {
           margin-right: 0;
@@ -80,13 +76,13 @@ const cnyPrice = computed(() => {
       text-align: center;
       text-decoration: line-through;
       color: var(--root-text-color3);
-      margin-top: 12px;
+      margin-top: 8px;
     }
     .price {
       text-align: center;
-      margin-top: 12px;
-      font-size: 24px;
-      color: var(--root-auxiliary-color);
+      margin-top: 8px;
+      font-size: 18px;
+      color: var(--root-auxiliary-color1);
       em {
         font-style: normal;
       }

@@ -5,7 +5,7 @@
       <span>{{ item.total_stock }}份</span>
     </div>
     <div class="surplus">
-      剩余 <span>{{ item.stock }}份</span>
+      剩余 <span>{{ item.stock }}</span>份
     </div>
   </div>
 </template>
@@ -25,16 +25,26 @@ defineProps({
   .circulation-section {
     background-color: var(--root-bg-color2);
     border-radius: 12px;
-    padding: 18px 12px;
+    padding: 14px 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 2.5%;
+      top: -0.5px;
+      width: 95%;
+      border-top: 1px dashed var(--root-dividing-color1);
+    }
     .circulation {
       border: 1px solid var(--root-theme-color);
       font-size: 14px;
       border-radius: 4px;
       display: flex;
       b {
+        color: #fff;
         font-weight: normal;
         padding: 2px 6px;
         background-color: var(--root-theme-color);
@@ -46,7 +56,7 @@ defineProps({
     }
     .surplus {
       span {
-        color: var(--root-auxiliary-color);
+        color: var(--root-theme-color);
       }
     }
   }

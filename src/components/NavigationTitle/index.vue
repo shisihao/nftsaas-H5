@@ -31,6 +31,7 @@ defineProps({
 <style lang="scss" scoped>
 .navigation-title {
   b {
+    padding: 0 30px;
     font-weight: 500;
     position: relative;
     &.font-size-20 {

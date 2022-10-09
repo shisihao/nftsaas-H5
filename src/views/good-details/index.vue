@@ -65,7 +65,7 @@ const onRefresh = () => {
     }
     .card-section {
       margin-top: var(--root-page-spacing);
-      background-color: var(--root-bg-color1);
+      background-color: var(--root-bg-color2);
       border-radius: 12px;
       padding: 24px 12px;
       :deep(.card-wrapper) {
