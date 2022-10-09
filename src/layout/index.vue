@@ -15,6 +15,10 @@
   
   // 用户信息
   store.dispatch('user/getInfo')
+
+  // osskey
+  store.dispatch('user/getOssKey')
+  
 </script>
 
 <style lang="scss">

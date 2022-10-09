@@ -2,7 +2,7 @@
   <div class="setting-section">
     <div class="card">
       <van-cell-group>
-        <van-cell class="avatar-cell" title="头像">
+        <van-cell class="avatar-cell" title="头像" @click="onChangeAvatar">
           <template #value>
             <default-avatar v-if="info?.avatar" :src="info ? `${domin}${info.avatar}` : ''" />
             <default-avatar v-else />
@@ -37,6 +37,7 @@
     </div>
     <sign-out ref="signOut" />
     <name-popup ref="namePopup" />
+    <change-avatar-popup ref="changeAvatarRef"/>
   </div>
 </template>
 
@@ -47,12 +48,14 @@ import store from '@/store/index'
 import { mosaicTel } from '@/filters/index'
 import SignOut from './components/SignOut.vue'
 import NamePopup from './components/NamePopup.vue'
+import ChangeAvatarPopup from './components/ChangeAvatarPopup.vue'
 import { DominKey, getToken } from '@/utils/auth'
 
 const domin = getToken(DominKey)
 
 let signOut = ref(null)
 let namePopup = ref(null)
+const changeAvatarRef = ref()
 let info = computed(() => store.state.user.info)
 
 const onSignOut = () => {
@@ -61,6 +64,9 @@ const onSignOut = () => {
 
 const onChangeName = () => {
   namePopup.value.init(info.value)
+}
+const onChangeAvatar = () => { 
+	changeAvatarRef.value.init()
 }
 
 </script>

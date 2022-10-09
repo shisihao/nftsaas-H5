@@ -20,3 +20,8 @@ export function getConfig(data) {
     ...data
   })
 }
+
+// 获取OSSKEY
+export function getOssKey() {
+  return request.post(`/upload/token`)
+}

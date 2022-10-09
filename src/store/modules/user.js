@@ -1,7 +1,7 @@
 import { login, logout, getInfo } from '@/api/user'
 import { showLoadingToast } from 'vant'
-import { getConfig } from '@/api/common'
-import { TokenKey, DominKey, setToken } from '@/utils/auth'
+import { getConfig, getOssKey } from '@/api/common'
+import { TokenKey, DominKey, setToken, OssKey } from '@/utils/auth'
 import { getCookieByKey, setCookie, removeCookieByKey, clearAllCookies } from '@/utils/cookies'
 import router, { resetRouter } from '@/router'
 import globleFun from '@/utils/link'
@@ -73,6 +73,14 @@ const actions = {
     })
   },
   
+  getOssKey({ commit }) {
+    return new Promise((resolve, reject) => { 
+      getOssKey().then(response => {
+        setToken({ key: OssKey, value: JSON.stringify(response.data)  })
+      })
+    })
+  },
+
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
