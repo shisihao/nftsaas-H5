@@ -1,6 +1,6 @@
 <template>
   <div class="section user-section">
-    <div class="user-info">
+    <div class="user-info padding">
       <div class="avatar-uploader">
         <default-avatar v-if="info?.avatar" :src="info ? `${domin}${info.avatar}` : ''" />
         <default-avatar v-else />
@@ -26,17 +26,19 @@
         </div>
       </div>
     </div>
-    <div class="equity">
-      <div>
-        权益中心
-      </div>
-      <div @click="$globleFun.onGoto('/interest')">
-        点击进入>
+    <div class="padding">
+      <div class="equity">
+        <div>
+          权益中心
+        </div>
+        <div @click="$globleFun.onGoto('/interest')">
+          点击进入>
+        </div>
       </div>
     </div>
-    <common-fun />
-    <my-service />
-    <my-goods />
+    <common-fun class="padding" />
+    <my-service class="padding" />
+    <my-goods class="padding" />
   </div>
 </template>
 
@@ -71,8 +73,10 @@ let statusClass = computed(() => {
 <style lang="scss" scoped>
   .user-section {
     background: linear-gradient(180deg, rgba(18,117,228,0.2) 0%, var(--root-bg-color1) 40%);
-    padding: 0 var(--root-page-spacing);
     overflow: hidden;
+    .padding {
+      padding: 0 var(--root-page-spacing);
+    }
     .user-info {
       margin-top: 24px;
       display: flex;

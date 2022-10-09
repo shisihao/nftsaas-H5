@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-goods-section">
     <div class="title-section">
       <div>
         <span class="title">
@@ -163,9 +163,14 @@ watch(activeNames, (newValue, oldValue) => {
 </script>
 
 <style lang="scss" scoped>
+.my-goods-section {
+  background-color: var(--root-bg-color2);
+  border-radius: 20px 20px 0 0;
+}
   .title-section {
     margin-top: 24px;
     margin-bottom: 18px;
+    padding-top: var(--root-page-spacing);
     display: flex;
     align-items: center;
     justify-content: space-between;
