@@ -1,13 +1,15 @@
 <template>
-  <div class="section dashboard-section">
+  <div class="dashboard-section">
     <van-pull-refresh v-model="loading" success-text="刷新成功" @refresh="onRefresh">
-      <logo-title />
-      <swipe-slide />
-      <icons-grid />
-      <navigation-title class="navigation-hot" title="热卖藏品" position="center" />
-      <collection-list ref="collectionList" />
-      <attestation-button v-if="info && info.cer_status === -1" />
-      <no-more />
+      <div class="dashboard-content">
+        <logo-title />
+        <swipe-slide />
+        <icons-grid />
+        <navigation-title class="navigation-hot" title="热卖藏品" position="center" />
+        <collection-list ref="collectionList" />
+        <attestation-button v-if="info && info.cer_status === -1" />
+        <no-more />
+      </div>
     </van-pull-refresh>
   </div>
 </template>
@@ -35,15 +37,19 @@ const onRefresh = () => {
         loading.value = false
       })
 }
-
-
 </script>
 
 <style lang="scss" scoped>
 .dashboard-section {
-  padding-top: 0.1px;
-  .navigation-hot {
-    margin-top: 32px;
+  .dashboard-content {
+    min-height: calc(100vh - 50px);
+    background-image: linear-gradient(rgba(var(--root-theme-color-rgb), 0.2), var(--root-bg-color1)), url('@/assets/images/dashboard/home_img_bg.png');
+    background-size: 100% 300px, 100% auto;
+    background-repeat: no-repeat, no-repeat;
+
+    .navigation-hot {
+      margin-top: 32px;
+    }
   }
 }
 </style>

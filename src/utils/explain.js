@@ -34,7 +34,7 @@ export const payTypeOptions = [
 ]
 
 export const integralOptions = [
-  { label: '瓦当', icon: 'integral', value: 'integral' }
+  { label: '积分', icon: 'integral', value: 'integral' }
 ]
 
 export const actionTransferOptions = [
