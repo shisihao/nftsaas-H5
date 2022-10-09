@@ -18,13 +18,13 @@
 								<div class="list-item-img" v-if="goodsItem?.images">
 									<van-image lazy-load fit="cover"
 										:src="Array.isArray(goodsItem?.images) && `${domin}${goodsItem?.images[0]}`" />
-									<div class="check-btn" :class="{ active: goodsItem?.oldFlag }" @click="selectGoods(goodsItem, index)">
-									</div>
 								</div>
 								<div class="list-item-content">
 									<div class="list-item-name">{{ goodsItem?.name }}</div>
 									<div class="list-item-num">
 										{{ `${goodsItem?.serial}#${goodsItem?.user_goods?.num}/${goodsItem?.cast_goods_stock}` }}
+									</div>
+									<div class="check-btn" :class="{ active: goodsItem?.oldFlag }" @click="selectGoods(goodsItem, index)">
 									</div>
 								</div>
 							</div>
@@ -128,19 +128,30 @@ const getIsFlag = () => {
 	})
 	return arr
 }
-
 // 选择合成藏品
 const selectGoods = (item, index) => {
 	if (props.materials.count > 0) {
 		if (item.oldFlag) {
 			item.oldFlag = false
 		} else {
-			// 第一次选择
-			if (getIsFlag().length === 0) {
-				item.oldFlag = true
-			} else {
-				// 已选择的材料数量小于所拥有的材料数量且不大于所需的材料数量
-				if (getIsFlag().length < props.materials.count && getIsFlag().length < props.materials.num) {
+			if(props.materials.num == 1) {
+				// 单选
+				props.materials.goods = props.materials.goods.map((v, i) =>{
+					v.oldFlag = i === index
+					return v
+				})
+			}else {
+				// 多选
+				if (getIsFlag().length <= props.materials.count) {
+					if (getIsFlag().length >= props.materials.num) {
+						// 取消已选的第一个
+						for(var i = 0; i < props.materials.goods.length-1; i++) {
+							if ( props.materials.goods[i].oldFlag ) {
+								props.materials.goods[i].oldFlag = false
+								break
+							}
+						}	
+					}
 					item.oldFlag = true
 				}
 			}
@@ -289,7 +300,7 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 
 .list-item {
 	display: flex;
-
+	margin-top: 30px;
 	.list-item-img {
 		position: relative;
 		width: 84px;
@@ -298,35 +309,22 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 		border-radius: 8px;
 		box-shadow: 0 0 0 2px var(--root-theme-color);
 		overflow: hidden;
-
-		.check-btn {
-			position: absolute;
-			bottom: 5px;
-			right: 5px;
-			width: 22px;
-			height: 22px;
-			background: url('@/assets/images/synthesis/mine_icon_hecheng_weixuan@2x.png') no-repeat;
-			background-size: contain;
-			border-radius: 50%;
-			cursor: pointer;
-
-			&.active {
-				background: url('@/assets/images/synthesis/mine_icon_hecheng_xuanze@2x.png') no-repeat;
-				background-size: contain;
-			}
-		}
 	}
 
 	.list-item-content {
 		flex: 1;
 		background: linear-gradient(270deg, var(--root-bg-color2) 0%, var(--root-bg-color1) 100%);
 		padding-left: 12px;
+		position: relative;
+		margin-left: 2px;
 		.list-item-name {
-			font-size: 14px;
-			color: var(--root-text-color3);
+			font-size: 18px;
+			font-weight: bold;
+			color: var(--root-text-color1);
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
+			margin-top: 15px;
 			margin-bottom: 10px;
 		}
 
@@ -347,6 +345,23 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 				background-size: 100%;
 				left: 0;
 				top: 0;
+			}
+		}
+
+		.check-btn {
+			position: absolute;
+			bottom: 18px;
+			right: 5px;
+			width: 22px;
+			height: 22px;
+			background: url('@/assets/images/synthesis/mine_icon_hecheng_weixuan@2x.png') no-repeat;
+			background-size: contain;
+			border-radius: 50%;
+			cursor: pointer;
+
+			&.active {
+				background: url('@/assets/images/synthesis/mine_icon_hecheng_xuanze@2x.png') no-repeat;
+				background-size: contain;
 			}
 		}
 	}
