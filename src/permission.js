@@ -15,14 +15,11 @@ router.beforeEach( async( to, from, next ) => {
   NProgress.start()
   document.title = getPageTitle( to.meta.title )
   const hasToken = getCookieByKey( TokenKey )
-  if ( hasToken && hasToken !== 'undefined' ) {
+  if ((hasToken && hasToken !== 'undefined') || whiteList.includes(to.path)) {
+    ['/dashboard', '/user'].includes(to.path) && store.commit('user/SET_ACTIVETABBAR', to.name)
     next()
   } else {
-    if ( whiteList.indexOf( to.path ) !== -1 ) {
-      next()
-    } else {
-      next( `/login` )
-    }
+    next( `/login` )
   }
   NProgress.done()
   /* if ( hasToken && hasToken !== 'undefined' ) {

@@ -12,7 +12,6 @@
 <script setup>
 import SvgIcon from '@/components/YuSvgIcon'
 
-
 </script>
 
 <style lang="scss" scoped>

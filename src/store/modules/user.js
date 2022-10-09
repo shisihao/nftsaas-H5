@@ -11,7 +11,11 @@ const state = {
   name: '灰是小灰灰的灰',
   avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
   introduction: '',
-  roles: []
+  roles: [],
+  info: {},
+  config: {},
+  domain: '',
+  activeTabbar: ''
 }
 
 const mutations = {
@@ -49,6 +53,9 @@ const mutations = {
   SET_CONFIG: (state, config) => {
     state.config = config
   },
+  SET_ACTIVETABBAR: (state, active) => { 
+    state.activeTabbar = active
+  }
 }
 
 const actions = {
