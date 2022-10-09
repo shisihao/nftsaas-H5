@@ -4,19 +4,14 @@
 			<div class="container">
 				<template v-if="props.item.type === 1">
 					<div class="popup-content-header">
-						<div class="popup-title-header">
-							<div class="popup-title">选择将哪个藏品用于合成用途</div>
-							<div class="popup-close" @click="show = !show"></div>
-						</div>
-						<div class="popup-notice" v-if="props.materials.is_destroy">
-							确认合成后<br />
-							该藏品将<span class="popup-notice-rgb">进行销毁/不可再次进行合成</span>操作
-						</div>
+						<div class="popup-title">选择合成材料</div>
+						<div class="popup-title-desc">请选择用于合成的藏品材料确认合成后该藏品将<i>销毁</i></div>
+						<div class="divider-line"></div>
 					</div>
 					<div class="popup-content">
 						<div class="popup-contnt-title">
-							<div>所需材料 {{ props.materials.num }}</div>
-							<div class="popup-content-num">已拥有x{{ props.materials.count }}</div>
+							<div>所需材料 <i>x{{ props.materials.num }}</i></div>
+							<div>我已拥有 <i>x{{ props.materials.count }}</i></div>
 						</div>
 						<div class="popup-content-list">
 							<div class="list-item" v-for="(goodsItem, index) in props.materials.goods" :key="index">
@@ -26,9 +21,11 @@
 									<div class="check-btn" :class="{ active: goodsItem?.oldFlag }" @click="selectGoods(goodsItem, index)">
 									</div>
 								</div>
-								<div class="list-item-name">{{ goodsItem?.name }}</div>
-								<div class="list-item-num">
-									{{ `${goodsItem?.serial}#${goodsItem?.user_goods?.num}/${goodsItem?.cast_goods_stock}`}}
+								<div class="list-item-content">
+									<div class="list-item-name">{{ goodsItem?.name }}</div>
+									<div class="list-item-num">
+										{{ `${goodsItem?.serial}#${goodsItem?.user_goods?.num}/${goodsItem?.cast_goods_stock}` }}
+									</div>
 								</div>
 							</div>
 						</div>
@@ -47,7 +44,7 @@
 					</div>
 					<div class="popup-content">
 						<div class="popup-contnt-title">
-							<div>所需材料 {{ props.item.num }}</div>
+							<div>所需材料 x{{ props.item.num }}</div>
 							<div class="popup-content-num">已拥有x{{ props.item.count }}</div>
 						</div>
 						<div class="synthetic-list">
@@ -58,8 +55,7 @@
 								</div>
 								<div class="list-item-name">{{ goodsItem.name }}</div>
 								<div class="list-item-num">{{
-										`${goodsItem?.serial}#${goodsItem?.user_goods?.num}/${goodsItem?.cast_goods_stock}`
-								}}</div>
+								`${goodsItem?.serial}#${goodsItem?.user_goods?.num}/${goodsItem?.cast_goods_stock}` }}</div>
 							</div>
 						</div>
 					</div>
@@ -75,11 +71,11 @@
 
 <script setup>
 import { DominKey, getToken } from '@/utils/auth'
-import { ref, reactive, computed, watch, nextTick,inject} from 'vue'
+import { ref, watch, inject } from 'vue'
 import { synthesis } from '@/api/synthesis'
 import { showLoadingToast, allowMultipleToast } from 'vant'
 
-const loading=ref(false)
+const loading = ref(false)
 const show = ref(false)
 const isSynthetic = inject('isSynthetic')
 const init = inject('init')
@@ -99,7 +95,9 @@ const props = defineProps({
 	}
 })
 // 所需总材料和已拥有总材料
-watch(() => props.data,() => {
+watch(
+	() => props.data,
+	() => {
 		props.item.count = props.data.gathers
 			.map(v => {
 				return v.count
@@ -109,8 +107,9 @@ watch(() => props.data,() => {
 			.map(v => {
 				return v.num
 			})
-		.reduce((a, b) => a + b, 0)
-	},{deep: true}
+			.reduce((a, b) => a + b, 0)
+	},
+	{ deep: true }
 )
 
 const domin = getToken(DominKey)
@@ -200,7 +199,7 @@ const onChooseSubmit = () => {
 			props.data.synthesis_num++
 			init(props.data)
 			isSynthetic(props.data)
-			props.item.type=1
+			props.item.type = 1
 			chooseAllGoods.value = []
 			emits('success', res.data)
 		})
@@ -230,27 +229,30 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 
 .popup-content-header {
 	padding: 24px 16px 0;
+	text-align: center;
+
+	.divider-line {
+		width: 100%;
+		height: 1px;
+		background-color: var(--root-dividing-color1);
+		margin-top: 20px;
+		opacity: 0.6;
+	}
 }
 
-.popup-title-header {
-	position: relative;
+.popup-title {
+	font-weight: 700;
+	font-size: 18px;
+}
 
-	.popup-title {
-		color: var(--root-text-color1);
-		font-size: 20px;
-		font-weight: 600;
-		@include textoverflow();
-	}
+.popup-title-desc {
+	color: var(--root-text-color3);
+	font-size: 12px;
+	margin-top: 12px;
+	@include textoverflow();
 
-	.popup-close {
-		position: absolute;
-		right: 0;
-		bottom: 1px;
-		width: 20px;
-		height: 20px;
-		border: 1px solid var(--root-bg-color1);
-		background: url('@/assets/images/synthesis/mine_icon_hecheng_close@2x.png') no-repeat;
-		background-size: contain;
+	i {
+		color: var(--root-auxiliary-color1);
 	}
 }
 
@@ -265,54 +267,37 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 }
 
 .popup-content {
-	background-color: var(--root-bg-color1);
 	padding: 18px 16px;
 
 	.popup-contnt-title {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		font-size: 18px;
-		font-weight: 600;
-		padding-bottom: 20px;
+		font-size: 12px;
 		color: var(--root-text-color2);
 
-		.popup-content-num {
-			background-color: var(--root-button-color2);
-			height: 24px;
-			line-height: 24px;
-			font-weight: normal;
-			font-size: 13px;
-			padding: 0 11px;
-			color: var(--root-text-color2);
-			border-radius: 15px;
+		i {
+			font-size: 21px;
+			font-weight: 600;
 		}
 	}
 
 	.popup-content-list {
-		display: flex;
-		overflow-y: hidden;
-		overflow-x: auto;
-		white-space: nowrap;
-
-		&::-webkit-scrollbar {
-			display: none;
-		}
+		margin-top: 15px;
 	}
 }
 
 .list-item {
-	margin-right: 19px;
-	max-width: 158px;
-	margin-bottom: 10px;
+	display: flex;
 
 	.list-item-img {
 		position: relative;
-		width: 158px;
-		height: 158px;
-		border-radius: 4px;
+		width: 84px;
+		height: 84px;
+		flex-shrink: 0;
+		border-radius: 8px;
+		box-shadow: 0 0 0 2px var(--root-theme-color);
 		overflow: hidden;
-		margin-bottom: 8px;
 
 		.check-btn {
 			position: absolute;
@@ -332,32 +317,37 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 		}
 	}
 
-	.list-item-name {
-		font-size: 14px;
-		color: var(--root-text-color3);
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		margin-bottom: 10px;
-	}
+	.list-item-content {
+		flex: 1;
+		background: linear-gradient(270deg, var(--root-bg-color2) 0%, var(--root-bg-color1) 100%);
+		padding-left: 12px;
+		.list-item-name {
+			font-size: 14px;
+			color: var(--root-text-color3);
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			margin-bottom: 10px;
+		}
 
-	.list-item-num {
-		position: relative;
-		color: var(--root-text-color3);
-		padding-left: 16px;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
+		.list-item-num {
+			position: relative;
+			color: var(--root-text-color3);
+			padding-left: 16px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 
-		&::before {
-			content: '';
-			position: absolute;
-			width: 12px;
-			height: 12px;
-			background: url('@/assets/images/public/common_icon_number.png') no-repeat center;
-			background-size: 100%;
-			left: 0;
-			top: 0;
+			&::before {
+				content: '';
+				position: absolute;
+				width: 12px;
+				height: 12px;
+				background: url('@/assets/images/public/common_icon_number.png') no-repeat center;
+				background-size: 100%;
+				left: 0;
+				top: 0;
+			}
 		}
 	}
 }
@@ -372,7 +362,6 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 	align-items: center;
 	padding: 0 16px;
 	justify-content: space-between;
-	background-color: var(--root-bg-color1);
 
 	.popup-btn-l,
 	.popup-btn-r {
@@ -397,13 +386,10 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 		overflow-y: auto;
 		flex-wrap: wrap;
 
-		&::-webkit-scrollbar {
-			// display: none;
-		}
-
 		.list-item {
-			margin-left: 5px;
-			margin-right: 8px;
+			&:not(:last-child) {
+				margin-bottom: 30px;
+			}
 		}
 	}
 }

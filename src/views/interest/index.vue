@@ -10,7 +10,9 @@
 				</div>
 				<div class="header-r">
 					<div class="name">{{ info?.name }}</div>
-					您已累计享受权益<span>{{ data.total }}</span>次
+					<div class="desc">
+						您已累计享受权益<span>{{ data.total }}</span>次
+					</div>
 				</div>
 			</div>
 			<div class="content">
@@ -19,22 +21,7 @@
 					<div class="logs" @click="$globleFun.onGoto(`/interest-logs`)">使用记录</div>
 				</div>
 				<div class="details">
-					<div class="list-item">
-						<div class="list-item-l">
-							<div class="list-img-box">
-								<img :src="getImageUrl('interest/quanyi_icon_tqg.png')" alt="" />
-							</div>
-							<div class="list-item-text">
-								<div class="num">藏品提前抢购</div>
-								<div class="use">已经享受 {{  }} 次</div>
-							</div>
-						</div>
-						<div class="list-item-r">
-							<span class="list-item-tag">?次</span>
-						</div>
-					</div>
-					<div class="list-item"
-						@click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'prior', used: data.prior?.used } })">
+					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'prior', used: data.prior?.used ,usable:data.prior?.usable } })">
 						<div class="list-item-l">
 							<div class="list-img-box">
 								<img :src="getImageUrl('interest/equities_icon_yougou@2x.png')" alt="" />
@@ -59,25 +46,14 @@
 							</div>
 						</div>
 						<div class="list-item-r">
-							<span class="list-item-tag">?次</span>
+							<div class="list-item-r-hd">
+								<div class="num">藏品提前抢购</div>
+								<div class="tag">{{ data.prior?.usable }} 次</div>
+							</div>
+							<div class="use">已享受 {{ data.prior?.used }} 次</div>
 						</div>
 					</div>
-					<div class="list-item">
-						<div class="list-item-l">
-							<div class="list-img-box">
-								<img :src="getImageUrl('interest/quanyi_icon_lyg.png')" alt="" />
-							</div>
-							<div class="list-item-text">
-								<div class="num">藏品0元购 1次</div>
-								<div class="use">已经享受 {{  }} 次</div>
-							</div>
-						</div>
-						<div class="list-item-r">
-							<span class="list-item-tag">?次</span>
-						</div>
-					</div>
-					<div class="list-item"
-					@click="$globleFun.onGoto({path:'/interest-details', query: { type: 'give', used: data.give?.used }})">
+					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'give', used: data.give?.used,usable:data.give?.usable } })">
 						<div class="list-item-l">
 							<div class="list-img-box">
 								<img :src="getImageUrl('interest/equities_icon_zhuanzeng@2x.png')" alt="" />
@@ -88,11 +64,38 @@
 							</div>
 						</div>
 						<div class="list-item-r">
-							<span class="list-item-tag">?次</span>
+							<div class="list-item-r-hd">
+								<div class="num">藏品提前赠送</div>
+								<div class="tag">{{ data.give?.usable }} 次</div>
+							</div>
+							<div class="use">已享受 {{ data.give?.used }} 次</div>
 						</div>
 					</div>
-					<div class="list-item"
-					@click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'rebate', used: data.rebate?.used }} )">
+					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'free_integral', used: data.free_integral?.used,usable:data.free_integral?.usable } })">
+						<div class="list-item-l">
+							<img :src="getImageUrl('interest/quanyi_icon_mzz@2x.png')" alt="" />
+						</div>
+						<div class="list-item-r">
+							<div class="list-item-r-hd">
+								<div class="num">免积分抢购藏品</div>
+								<div class="tag">{{ data.free_integral?.usable }} 次</div>
+							</div>
+							<div class="use">已享受 {{ data.free_integral?.used }} 次</div>
+						</div>
+					</div>
+					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'free_cny', used: data.free_cny?.used,usable:data.free_cny?.usable } })">
+						<div class="list-item-l">
+							<img :src="getImageUrl('interest/quanyi_icon_lyg@2x.png')" alt="" />
+						</div>
+						<div class="list-item-r">
+							<div class="list-item-r-hd">
+								<div class="num">藏品0元购 1次</div>
+								<div class="tag">{{ data.free_cny?.usable }} 次</div>
+							</div>
+							<div class="use">已享受 {{ data.free_cny?.used }} 次</div>
+						</div>
+					</div>
+					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'rebate', used: data.rebate?.used ,usable:data.rebate?.usable} })">
 						<div class="list-item-l">
 							<div class="list-img-box">
 								<img :src="getImageUrl('interest/equities_icon_zhekou@2x.png')" alt="" />
@@ -103,7 +106,11 @@
 							</div>
 						</div>
 						<div class="list-item-r">
-							<span class="list-item-tag">?次</span>
+							<div class="list-item-r-hd">
+								<div class="num">藏品折扣</div>
+								<div class="tag">{{ data.rebate?.usable }} 次</div>
+							</div>
+							<div class="use">已享受 {{ data.rebate?.used }} 次</div>
 						</div>
 					</div>
 				</div>
@@ -138,48 +145,54 @@ onRefresh()
 
 <style lang="scss" scoped>
 .interest-section {
+	padding: var(--root-page-spacing);
+	background-color: var(--root-bg-color1);
 	min-height: calc(100vh - 46px);
-  background-color: var(--root-bg-color1);
-	padding: 12px var(--root-page-spacing);
 }
 
 .header {
 	display: flex;
 	align-items: center;
-	border-radius: 12px 12px 0 0;
-	background-image: url('@/assets/images/user/equities_card_bg.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: var(--root-theme-color);
+	border-radius: 12px;
+	margin: 0 var(--root-page-spacing);
+	background: url('@/assets/images/interest/equities_card_bg@2x.png') no-repeat;
+	background-color: var(--root-theme-color);
+	background-size: 100%;
 	padding: 16px 12px;
-	margin: 0 15px;
 
 	.header-l {
 		display: flex;
 		align-items: center;
+		margin-right: 10px;
 
 		.avatar {
 			width: 40px;
 			height: 40px;
 			border-radius: 50%;
 			overflow: hidden;
-			margin-right: 10px;
+			box-shadow: 0 0 0 1px var(--root-bg-color2);
 		}
 	}
 
 	.header-r {
+		height: 40px;
+		color: var(--root-text-color5);
 		font-size: 12px;
-		color: var(--root-text-color4);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
 		.name {
 			font-size: 16px;
-			font-weight: 700;
-			color: var(--root-text-color5);
-			margin-bottom: 4px;
 		}
-		span {
-			margin: 0 6px;
-			font-size: 16px;
-			color: var(--root-text-color5);
+		.desc {
+			color: var(--root-text-color4);
+			span {
+				font-weight: 700;
+				margin: 0 6px;
+				font-size: 16px;
+				color: var(--root-text-color5);
+			}
 		}
 	}
 }
@@ -187,8 +200,8 @@ onRefresh()
 .content {
 	background: var(--root-bg-color2);
 	border-radius: 12px;
-	padding: 12px;
-
+	padding: 15px 12px;
+	margin-top: -8px;
 	.title-wrap {
 		display: flex;
 		justify-content: space-between;
@@ -201,18 +214,16 @@ onRefresh()
 		}
 
 		.logs {
-			font-size: 14px;
 			color: var(--root-text-color2);
 			font-weight: normal;
-			&::before {
+			&::before{
 				content: '';
 				display: inline-block;
-				width: 20px;
-				height: 20px;
-				background-image: url('@/assets/images/public/equities_icon_rule@2x.png');
-				background-size: cover;
-				margin-right: 4px;
-				transform: translateY(5px);
+				width: 16px;
+				height: 16px;
+				background: url('@/assets/images/interest/equities_icon_rule@2x.png') no-repeat;
+				background-size: 100%;
+				vertical-align: bottom;
 			}
 		}
 	}
@@ -224,43 +235,39 @@ onRefresh()
 
 		.list-item-l {
 			height: 44px;
+			line-height: 44px;
+			text-align: center;
 			flex-shrink: 0;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			.list-img-box {
-				width: 44px;
-				height: 44px;
-				border-radius: 50%;
-				background: var(--root-bg-color1);
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
+			background: url('@/assets/images/interest/quayi_img_bg@2x.png') no-repeat;
+			background-size: 100%;
+
 			img {
-				width: 23px;
-				height: 23px;
-			}
-			.list-item-text {
-				margin-left: 10px;
-				.num {
-					font-weight: 700;
-				}
-				.use {
-					margin-top: 6px;
-					font-size: 12px;
-					color: var(--root-text-color3);
-				}
+				display: inline-block;
+				vertical-align: middle;
+				width: 21px;
 			}
 		}
 
 		.list-item-r {
-			margin-top: 8px;
-			.list-item-tag {
-				padding: 4px 10px;
-				background: #cde0f5;
-				color: var(--root-theme-color);
-				border-radius: 22px;
+			flex: 1;
+			margin-left: 10px;
+			.list-item-r-hd {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.num {
+					font-weight: 700;
+				}
+				.tag {
+					padding: 3px 10px;
+					border-radius: 11px;
+					background-color: rgba(var(--root-theme-color-rgb), 0.1);
+					color: var(--root-theme-color);
+				}
+			}
+
+			.use {
+				margin-top: 6px;
 				font-size: 12px;
 			}
 		}

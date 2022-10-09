@@ -47,4 +47,3 @@ export const avatarActions = [
 	{ name: '相册', color: 'var(--root-theme-color)' }
 ]
 
-

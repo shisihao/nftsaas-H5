@@ -1,19 +1,19 @@
 <template>
 	<div class="logs-section">
-		<van-pull-refresh v-model="state.refreshing" @refresh="onRefresh" success-text="刷新成功">
-			<van-list v-model:loading="state.loading" :finished="state.finished" finished-text="没有更多了" @load="onLoad">
-				<van-tabs v-model:active="active" shrink @change="onTabChange" type="card">
-					<van-tab v-for="(item, index) in activeOptions" :key="index" :title="item.label" :name="item.value"></van-tab>
-				</van-tabs>
-        <div class="content">
-          <div class="list-item" v-for="(item, index) in state.list" :key="index">
-            <div class="title">{{item.title}}</div>
-            <div class="desc">藏品信息：{{item.goods?.name}}</div>
-            <div class="time">{{item.created_at}}</div>
-          </div>
-        </div>
-			</van-list>
-		</van-pull-refresh>
+		<van-tabs v-model:active="active" shrink @change="onTabChange">
+			<van-tab v-for="(item, index) in activeOptions" :key="index" :title="item.label" :name="item.value"></van-tab>
+		</van-tabs>
+		<div class="content">
+			<van-pull-refresh v-model="state.refreshing" @refresh="onRefresh" success-text="刷新成功">
+				<van-list v-model:loading="state.loading" :finished="state.finished" finished-text="没有更多了" @load="onLoad">
+					<div class="list-item" v-for="(item, index) in state.list" :key="index">
+						<div class="title">{{ item.title }}</div>
+						<div class="desc">藏品信息：{{ item.goods?.name }}</div>
+						<div class="time">{{ item.created_at }}</div>
+					</div>
+				</van-list>
+			</van-pull-refresh>
+		</div>
 	</div>
 </template>
 
@@ -30,12 +30,14 @@ const state = reactive({
 	finished: false,
 	total: 0
 })
-const active = ref('')
+const active = ref('prior')
 const pages = { ...commonPages }
 const activeOptions = [
-	{ label: '藏品优购', value: 'prior' },
-	{ label: '提前转赠', value: 'give' },
-	{ label: '折扣', value: 'rebate' }
+	{ label: '提前购', value: 'prior' },
+	{ label: '提前赠', value: 'give' },
+	{ label: '免积分', value: 'free_integral' },
+	{ label: '折扣购', value: 'rebate' },
+	{ label: '0元购', value: 'free_cny' }
 ]
 
 // 获取消息列表
@@ -70,9 +72,12 @@ const onTabChange = val => {
 </script>
 
 <style lang="scss" scoped>
-.logs-section{
-	min-height: calc(100vh - 46px);
-  background-color: var(--root-bg-color1);
+
+.logs-section {
+	padding: 0 var(--root-page-spacing);
+}
+:deep(.van-pull-refresh__track){
+	min-height: calc(100vh - 46px - 44px);
 }
 :deep(.van-tabs__line) {
 	background: var(--root-theme-color);
@@ -98,26 +103,25 @@ const onTabChange = val => {
 	background-color: var(--root-theme-color);
 	color: var(--root-text-color5);
 }
-.content {
-	padding: 0 var(--root-page-spacing);
-}
-.list-item{
-	background: var(--root-bg-color2);
+
+.list-item {
+	background: var(--root-bg-color1);
 	padding: 15px 12px;
 	border-radius: 12px;
-	margin-top: 12px;
-	.title{
+	margin-bottom: 12px;
+	.title {
 		font-size: 16px;
 		margin-bottom: 8px;
-			@include textoverflow()
+		@include textoverflow();
 	}
-	.desc,.time{
+	.desc,
+	.time {
 		font-size: 12px;
 		color: var(--root-text-color3);
 		margin-bottom: 8px;
-		@include textoverflow()
+		@include textoverflow();
 	}
-	.time{
+	.time {
 		margin-bottom: 0;
 	}
 }
