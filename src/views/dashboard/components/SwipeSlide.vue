@@ -70,6 +70,8 @@ getAdPos()
           width: 8px;
           height: 4px;
           border-radius: 2px;
+          background-color: #CCCCCC;
+          opacity: 1;
         }
         .van-swipe__indicator--active {
           width: 12px;

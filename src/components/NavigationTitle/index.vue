@@ -1,8 +1,10 @@
 <template>
   <div class="navigation-title" :class="`positon-${position}`">
-    <span :class="`font-size-${fontSize}`">
+    <b :class="`font-size-${fontSize}`">
+      <span class="icon-left"></span>
       {{ title }}
-    </span>
+      <span class="icon-right"></span>
+    </b>
   </div>
 </template>
 
@@ -28,8 +30,7 @@ defineProps({
 
 <style lang="scss" scoped>
 .navigation-title {
-  span {
-    padding: 0 30px;
+  b {
     font-weight: 500;
     position: relative;
     &.font-size-20 {
@@ -38,24 +39,31 @@ defineProps({
     &.font-size-16 {
       font-size: 16px;
     }
-    &::before, &::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      margin-top: -7.5px;
-      width: 22px;
-      height: 15px;
-      background-image: url('@/assets/images/public/common_icon_title.png');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 100%;
-      vertical-align: middle;
-    }
-    &::before {
-      left: 0;
-    }
-    &::after {
-      right: 0;
+    span {
+      position: relative;
+      &::before, &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        margin-top: -6px;
+        width: 12px;
+        height: 12px;
+        background-color: rgba(var(--root-theme-color-rgb), 0.5);
+        border-radius: 3px;
+        transform: rotate(45deg);
+      }
+      &.icon-left::before {
+        left: -30px;
+      }
+      &.icon-left::after {
+        left: -20px;
+      }
+      &.icon-right::before {
+        right: -30px;
+      }
+      &.icon-right::after {
+        right: -20px;
+      }
     }
   }
 }

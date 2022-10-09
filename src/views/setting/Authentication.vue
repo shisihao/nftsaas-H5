@@ -87,7 +87,6 @@ import store from '@/store/index'
 import { showToast } from 'vant'
 import { verificationCode } from '@/api/common'
 import Agreement from '../login/components/Agreement.vue'
-import settings from '@/settings'
 
 let info = computed(() => store.state.user.info)
 
@@ -168,7 +167,7 @@ onBeforeUnmount(() => {
 
 const onSubmit = () => {
   if (!state.checked) {
-    return showToast(`请阅读并同意《${settings.title}用户协议》和《${settings.title}隐私协议》`)
+    return showToast(`请阅读并同意《用户协议》和《隐私协议》`)
   }
   state.btnLoading = true
   certifyInfo(state.form)

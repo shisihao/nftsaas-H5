@@ -118,7 +118,6 @@ import { register } from '@/api/user'
 import { verificationCode, verificationCodeCheck } from '@/api/common'
 import { showToast } from 'vant'
 import store from '@/store/index'
-import settings from '@/settings'
 
 const route = useRoute()
 const invitationCode = sessionStorage.getItem('invitation-code')
@@ -268,7 +267,7 @@ const onHandleStep = () => {
   form.value.validate(['account', 'code'])
     .then(() => {
         if (!state.checked) {
-          return showToast(`请阅读并同意《${settings.title}用户协议》和《${settings.title}隐私协议》`)
+          return showToast(`请阅读并同意《用户协议》和《隐私协议》`)
         }
         const data = { ...state.form, ...state.verifyCode }
         state.btnLoading = true

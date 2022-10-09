@@ -1,29 +1,53 @@
 <template>
   <div class="attestation" @click="$globleFun.onGoto('/authentication')">
-    <img src="@/assets/images/dashboard/home_icon_renzheng.png" alt="">
+    <div class="tip-box">
+      <svg-icon icon-class="renzheng" class-name="icon-tip"/>
+    </div>
+    <b>
+      去认证
+    </b>
   </div>
 </template>
 
 <script setup>
+import SvgIcon from '@/components/YuSvgIcon'
+
 
 </script>
 
 <style lang="scss" scoped>
 .attestation {
-  width: 375px;
+  width: 100px;
   height: 36px;
+  background-color: var(--root-theme-color);
+  border-radius: 18px 0 0 18px;
   position: fixed;
   left: 50%;
-  margin-left: -187.5px;
+  margin-left: 87.5px;
   bottom: 0;
-  margin-bottom: calc(env(safe-area-inset-bottom) + 50px + 20px);
   z-index: 99;
-  img {
-    width: 101px;
-    height: 36px;
-    position: absolute;
-    right: 0;
-    top: 0;
+  margin-bottom: calc(env(safe-area-inset-bottom) + 50px + 20px);
+  display: flex;
+  align-items: center;
+  .tip-box {
+    width: 32px;
+    height: 32px;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin-left: 2px;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.7) inset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .icon-tip {
+      font-size: 18px;
+      color: var(--root-theme-color);
+    }
+  }
+  b {
+    flex-grow: 1;
+    color: var(--root-text-color5);
+    text-align: center;
   }
 }
 </style>

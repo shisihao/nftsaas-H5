@@ -129,7 +129,7 @@ const onFinish = (index) => {
   .collection-item {
     border-radius: 12px;
     overflow: hidden;
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     margin-top: 20px;
     .collection-img {
       padding-bottom: 100%;
@@ -155,12 +155,12 @@ const onFinish = (index) => {
         border-radius: 12px;
       }
       .sales-default {
-        color: var(--root-auxiliary-color);
-        background-color: var(--root-text-color5);
+        color: var(--root-auxiliary-color1);
+        background-color: rgba(0, 0, 0, 0.7);
       }
       .sales-primary {
-        color: var(--root-auxiliary-color);
-        background-color: var(--root-text-color5);
+        color: var(--root-auxiliary-color1);
+        background-color: rgba(0, 0, 0, 0.7);
         .sales-start {
           display: flex;
           align-items: center;
@@ -168,16 +168,17 @@ const onFinish = (index) => {
             margin: 0 2px;
           }
           .van-count-down {
-            color: var(--root-text-color1);
+            color: #fff;
           }
         }
       }
       .sales-warning {
-        background-color: var( --root-auxiliary-color);
+        color: var(--root-text-color5);
+        background-color: var( --root-auxiliary-color1);
       }
       .sales-info {
-        color: var(--root-text-color2);
-        background-color: rgba(0, 0, 0, 0.3);
+        color: var(--root-text-color3);
+        background-color: rgba(0, 0, 0, 0.7);
       }
     }
     .collection-info {
@@ -192,8 +193,8 @@ const onFinish = (index) => {
           display: inline-block;
           border-radius: 4px;
           font-size: 12px;
-          color: var(--root-text-color2);
-          border: 1px solid var(--root-text-color2);
+          color: var(--root-text-color3);
+          border: 1px solid var(--root-text-color3);
           padding: 1px 10px;
           margin-right: 10px;
           margin-bottom: 6px;
@@ -212,6 +213,7 @@ const onFinish = (index) => {
           flex-shrink: 0;
           b {
             font-weight: normal;
+            color: var(--root-text-color5);
             padding: 2px 6px;
             background-color: var(--root-theme-color);
           }
@@ -221,8 +223,8 @@ const onFinish = (index) => {
           }
         }
         .price {
-          color: var(--root-auxiliary-color);
-          font-size: 24px;
+          color: var(--root-auxiliary-color1);
+          font-size: 18px;
           em {
             font-style: normal;
           }

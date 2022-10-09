@@ -1,26 +1,25 @@
 <template>
   <div class="logo-title">
-    <img :src="getImageUrl('dashboard/home_icon_logo.png')" alt="logo"/>
+    <img :src="config?.cdn_domain + config?.design_style?.invite_logo" alt="logo"/>
   </div>
 </template>
 
 <script setup>
-  import { getImageUrl } from '@/utils/index'
+import { computed } from 'vue'
+import store from '@/store/index'
 
+const config = computed(() => store.state.user.config)
 </script>
 
 <style lang="scss" scoped>
   .logo-title {
-    width: 120px;
+    width: 128px;
+    height: 48px;
     margin-left: var(--root-page-spacing);
-    /* background-image: url('@/assets/images/dashboard/home_icon_logo_bg.png'); */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    display: flex;
-    justify-content: flex-start;
+    overflow: hidden;
     img {
-      width: 100%;  
+      width: 100%;
+      height: 32px;
       margin-top: 16px;
     }
   }

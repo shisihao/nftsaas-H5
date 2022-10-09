@@ -1,9 +1,9 @@
 <template>
   <ul class="icons-wrapper">
     <li>
-      <van-badge :content="state.count > 0 ? state.count : ''" max="99">
+      <van-badge :content="state.count > 0 ? state.count : ''" max="99" :offset="['-0.15rem', 0]">
         <div class="icon-img" @click="$globleFun.onGoto('/message')">
-          <img :src="getImageUrl('dashboard/home_icon_gonggao.png')" alt="">
+          <svg-icon icon-class="xiaoxi" class-name="grid-icon"/>
         </div>
       </van-badge>
       <p>
@@ -12,7 +12,7 @@
     </li>
     <li>
       <div class="icon-img" @click="onActivity">
-        <img :src="getImageUrl('dashboard/home_icon_yaoxin.png')" alt="">
+        <svg-icon icon-class="yaoxin" class-name="grid-icon"/>
       </div>
       <p>
         邀新活动
@@ -20,7 +20,7 @@
     </li>
     <li>
       <div class="icon-img" @click="$globleFun.onGoto('/help')">
-        <img :src="getImageUrl('dashboard/home_icon_wenti.png')" alt="">
+        <svg-icon icon-class="wenti" class-name="grid-icon"/>
       </div>
       <p>
         常见问题
@@ -31,9 +31,10 @@
 
 <script setup>
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import { getImageUrl } from '@/utils/index'
 import { getMsgCount } from '@/api/message'
-import { useRouter } from 'vue-router'
+import SvgIcon from '@/components/YuSvgIcon'
 
 const router = useRouter()
 const state = reactive({
@@ -60,11 +61,20 @@ const onActivity = () => {
     display: flex;
     align-items: center;
     flex-direction: column;
+    :deep(.van-badge) {
+      background-color: var(--root-auxiliary-color1);
+    }
     .icon-img {
       width: 44px;
       height: 44px;
-      img {
-        width: 100%;
+      background-color: rgba(var(--root-theme-color-rgb), 0.1);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .grid-icon {
+        font-size: 24px;
+        color: var(--root-theme-color);
       }
     }
     p {
