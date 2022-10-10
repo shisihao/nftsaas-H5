@@ -10,7 +10,7 @@
             @load="onLoad"
           >
             <div class="order-wrapper">
-              <order-item v-for="(x, y) in list" :key="y" :item="x" @sub-unit="onSubUnit" />
+              <order-item v-for="(x, y) in list" :key="y" :item="x" @sub-unit="onSubUnit" @timeFinish="onTimeFinish" />
             </div>
           </van-list>
         </van-pull-refresh>
@@ -81,6 +81,20 @@ const onSubUnit = (order_no) => {
   state.order_no = order_no
   cancelOrder.value.init()
 }
+
+const onTimeFinish = (id) => {
+  if(active.value === 0) {
+    list.value = list.value.filter(item =>{
+      return item.id != id
+    })
+  } else {
+    list.value = list.value.map(item =>{
+      if(item.id == id) item.status = 3
+      return item
+    })
+  }
+}
+
 </script>
 <style lang="scss" scoped>
 .main-contain {

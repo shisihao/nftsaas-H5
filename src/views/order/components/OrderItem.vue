@@ -4,8 +4,9 @@
       <div class="order-no">
         {{ item?.created_at }}
       </div>
-      <div class="order-status" :class="{ 'order-await': item.status === 1, 'order-success': item.status === 2, 'order-cancel': item.status === 3 }" >
+      <div class="order-status" :class="{ 'order-await': item.status === 0, 'order-success': item.status === 2, 'order-cancel': item.status === 3 }" >
         {{ paraphrase({ value: item.status, options: orderOptions }) }}
+        <van-count-down v-if="item.status == 0" millisecond :time="(item.close_seconds || 0) * 1000" format="mm:ss" @finish="onTimeFinish(item.id)"/>
       </div>
     </div>
     <div class="order-content" @click="$globleFun.onGoto(`/ordering?order_no=${item.order_no}`)">
@@ -62,11 +63,15 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['subUnit'])
+const emit = defineEmits(['subUnit','timeFinish'])
 
 const onCancel = (order_no) => {
   emit('subUnit', order_no)
 }
+const onTimeFinish = (id) => {
+  emit('timeFinish', id)
+}
+
 </script>
 <style lang="scss" scoped>
   .order-item {
@@ -88,9 +93,15 @@ const onCancel = (order_no) => {
       }
       .order-status {
         flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        :deep(.van-count-down) {
+          margin-left: 10px;
+          color: var(--root-auxiliary-color1);
+        }
       }
       .order-await {
-        color: var(--root-auxiliary-color);
+        color: var(--root-auxiliary-color1);
       }
       .order-success {
         color: var(--root-text-color1);
