@@ -68,7 +68,7 @@ const getInitialData = () => ({
   btnLoading: false,
   item: {},
   form: {
-    account: ''
+    account: '18048974737'
   },
   rules: {
     account: [

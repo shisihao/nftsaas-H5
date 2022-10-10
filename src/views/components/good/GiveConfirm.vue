@@ -3,10 +3,9 @@
     <div class="give-confirm-contain">
       <van-popup v-model:show="state.show" round position="bottom" >
         <div class="title">
-          转赠藏品
+          转赠给用户「{{ state.name }}」
         </div>
         <div class="content">
-          <p>是否将“{{ row?.goods?.name }}”转赠给用户「{{ state.name }}」</p>
           <div class="goods-item">
             <div class="goods-img">
               <van-image
@@ -15,6 +14,7 @@
                 :src="Array.isArray(row?.goods?.images) && `${domin}${row.goods.images[0]}` "
               />
             </div>
+            <p>是否确认转赠</p>
             <div class="goods-name">
               {{ row?.goods?.name }}
             </div>
@@ -37,7 +37,7 @@
             取消
           </van-button>
           <van-button class="btn btn-submit" round loading-text="请求中..." :loading="state.btnLoading" @click="onSubmit">
-            确认转赠
+            确认
           </van-button>
         </div>
       </van-popup>
@@ -113,7 +113,7 @@ const onPayPassword = (value) => {
     .then((response) => {
       showSuccessToast(response.msg)
       onClose()
-      globleFun.onGoto(-1, 'go')
+      globleFun.onGoto('/user')
     })
     .finally(() => {
       state.btnLoading = false
@@ -124,29 +124,34 @@ const onPayPassword = (value) => {
 <style lang="scss" scoped>
 .give-confirm-contain {
   :deep(.van-popup) {
-    width: 288px;
-    border-radius: 12px;
+    max-width: var(--root-max-width);
+    right: 0;
+    margin: 0 auto;
     padding-bottom: 20px;
-    overflow: visible;
+    overflow: hidden;
     .title {
       font-size: 18px;
-      color: var(--root-text-color1);
+      font-weight: 500;
+      background-color: var(--root-bg-color1);
       text-align: center;
-      margin-top: 24px;
+      padding: 20px 0;
     }
     .content {
       font-size: 14px;
       line-height: 1.5;
-      color: var(--root-text-color3);
       margin-top: 14px;
       padding: 0 var(--root-page-spacing);
       text-align: center;
       p {
         display: inline-block;
         text-align: left;
+        color: var(--root-text-color3);
+        margin-top: 6px;
       }
       .goods-item {
-        margin-top: 10px;
+        padding: 20px 0;
+        background-image: linear-gradient(rgba(var(--root-theme-color-rgb), 0.2) 10%, var(--root-bg-color2) 50%);
+        border-radius: 12px;
         .goods-img {
           width: 128px;
           height: 128px;
@@ -157,8 +162,9 @@ const onPayPassword = (value) => {
           }
         }
         .goods-name {
-          margin-top: 10px;
-          @include textoverflow()
+          font-size: 18px;
+          margin-top: 6px;
+          color: var(--root-text-color1);
         }
         .goods-num {
           margin-top: 10px;
@@ -200,23 +206,24 @@ const onPayPassword = (value) => {
       }
     }
     .button-row {
-      margin-top: 20px;
+      margin-top: 22px;
       display: flex;
       justify-content: space-around;
       .btn {
         font-size: 16px;
         height: auto;
-        padding: 8px 22px;
+        width: 40%;
+        padding: 10px 0;
       }
       .btn-close {
-        color: var(--root-text-color3);
+        color: var(--root-text-color5);
         border-radius: 44px;
-        background-color: rgba(75, 75, 89, 0.1);
+        background-color: var(--root-button-color1);
       }
       .btn-submit {
-        color: var(--root-bg-color1);
+        color: var(--root-text-color5);
         border-radius: 44px;
-        background-image: var(--root-button-color1);
+        background-color: var(--root-theme-color);
       }
     }
   }
