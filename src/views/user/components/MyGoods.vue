@@ -85,11 +85,10 @@ import UserTitle from './UserTitle.vue'
 import { getGoodsList, getGoodsTags, getGoodsTagsList } from '@/api/goods'
 import { pages as commonPages } from '@/utils/explain'
 import { DominKey, getToken } from '@/utils/auth'
+import globleFun from '@/utils/link'
 import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 import store from '@/store/index'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
 const domin = getToken(DominKey)
 
 let info = computed(() => store.state.user.info)
@@ -119,7 +118,8 @@ const onLoad = () => {
 }
 
 const onGoodsList = (item) => {
-  router.push({ name: 'my-goods-list', params: { item: JSON.stringify(item) } })
+  sessionStorage.setItem('goodSpecific', JSON.stringify(item))
+  globleFun.onGoto('my-goods-list')
 }
 
 // 切换标签

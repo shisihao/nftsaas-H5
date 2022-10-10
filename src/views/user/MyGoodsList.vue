@@ -1,26 +1,25 @@
 <template>
   <div class="goods-section">
-    <div class="goods-item" v-for="(item, index) in list.user_goods" :key="index" @click="$globleFun.onGoto('/good-my?id=' + item.id)">
+    <div class="goods-item" v-for="(item, index) in state.list.user_goods" :key="index" @click="$globleFun.onGoto('/good-my?id=' + item.id)">
       <div class="goods-img">
         <van-image
           lazy-load
           fit="cover"
-          :src="Array.isArray(list?.goods?.images) && `${domin}${list.goods.images[0]}` "
+          :src="Array.isArray(state.list?.goods?.images) && `${domin}${state.list.goods.images[0]}` "
         />
       </div>
       <div class="goods-name">
-        {{ list?.goods?.name }}
+        {{ state.list?.goods?.name }}
       </div>
       <div class="goods-num">
-        {{ `${list?.goods?.serial}#${item.num}/${list?.goods?.cast_goods_stock}` }}
+        {{ `${state.list?.goods?.serial}#${item.num}/${state.list?.goods?.cast_goods_stock}` }}
       </div>
       <div class="collection-gather">
         <div class="avatar">
-          <default-avatar v-if="list?.goods?.author_avatar" :src="`${domin}${list.goods.author_avatar}`" />
-          <default-avatar v-else />
+          <default-avatar :src="`${domin}${state.list.goods.author_avatar}`" />
         </div>
         <div class="name">
-          {{ list?.goods?.author }}
+          {{ state.list?.goods?.author }}
         </div>
       </div>
     </div>
@@ -28,22 +27,15 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { reactive, computed } from 'vue'
 import { DominKey, getToken } from '@/utils/auth'
 import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
-import { useRoute, useRouter } from 'vue-router'
 
-const route = useRoute()
-const router = useRouter()
 const domin = getToken(DominKey)
 
-const list = ref({})
-
-if (!route.params.item) {
-  router.go(-1)
-} else {
-  list.value = JSON.parse(route.params.item || {})
-}
+const state = reactive({
+  list: JSON.parse(sessionStorage.getItem('goodSpecific') || {})
+})
 
 </script>
 

@@ -1,5 +1,5 @@
 import { login, logout, getInfo } from '@/api/user'
-import { showLoadingToast } from 'vant'
+import { showFailToast, showLoadingToast } from 'vant'
 import { getConfig, getOssKey } from '@/api/common'
 import { TokenKey, DominKey, setToken, OssKey } from '@/utils/auth'
 import { getCookieByKey, setCookie, removeCookieByKey, clearAllCookies } from '@/utils/cookies'
@@ -115,7 +115,7 @@ const actions = {
       const toast = showLoadingToast({
         overlay: true,
         duration: 0,
-        message: '加载中...',
+        message: '加载中...'
       })
       getConfig()
         .then(response => {
@@ -125,6 +125,12 @@ const actions = {
           toast.close()
           resolve(data)
         }).catch(error => {
+          toast.close()
+          showFailToast({
+            overlay: true,
+            duration: 0,
+            message: '请求失败，请刷新重试'
+          })
           reject(error)
         })
     })
