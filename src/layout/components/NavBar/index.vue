@@ -20,14 +20,8 @@ import { special } from '@/router/index'
 const router = useRouter()
 const route = useRoute()
 const onHandleRouter = () => {
-  if (route.name === 'authentication-result') {
-    router.replace({ path: '/setting' })
-  } else {
-    router.go(-1)
-  }
+  router.go(-1)
 }
-
-
 </script>
 
 <style lang="scss" scoped>

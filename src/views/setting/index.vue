@@ -13,7 +13,7 @@
     </div>
     <div class="card">
       <van-cell-group>
-        <van-cell title="实名认证" is-link @click="$globleFun.onGoto(info.cer_status === -1 ? '/authentication' : '/authentication-result', info.cer_status === -1 ? 'replace' :'push')" />
+        <van-cell title="实名认证" is-link @click="$globleFun.onGoto(info.cer_status === -1 ? '/authentication' : '/authentication-result')" />
       </van-cell-group>
     </div>
     <div class="card">
