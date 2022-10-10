@@ -1,6 +1,6 @@
 <template>
   <div class="open-box-popup-contain">
-    <van-popup v-model:show="state.show">
+    <van-popup v-model:show="state.show" :close-on-click-overlay="false">
       <div class="tips-img">
         <van-image fit="cover" :src="state.item?.goods?.images[0] ? domin + state.item?.goods?.images[0] : getImageUrl('public/boxdetails_img_wadang.png')" />
       </div>
@@ -12,9 +12,9 @@
         快去看看吧～
       </div>
       <div class="button-row">
-        <van-button class="btn btn-close" round @click="onClose">
+        <!-- <van-button class="btn btn-close" round @click="onClose">
           稍后再说
-        </van-button>
+        </van-button> -->
         <van-button class="btn btn-submit" round @click="onSubmit">
           去看看
         </van-button>
@@ -61,9 +61,9 @@ const onClose = () => {
 
 const onSubmit = () => {
   if (state.item?.goods_id > 0) {
-    globleFun.onGoto(`/good-my?id=${state.item?.user_goods_id}`)
+    globleFun.onGoto(`/good-my?id=${state.item?.user_goods_id}`, 'replace')
   } else {
-    globleFun.onGoto('/integral')
+    globleFun.onGoto('/integral', 'replace')
   }
 }
 </script>
