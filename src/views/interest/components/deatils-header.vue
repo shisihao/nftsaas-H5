@@ -20,12 +20,13 @@
 
 <script setup>
 import { getImageUrl } from '@/utils/index'
+import { integralOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
 
 const interestOptions = [
 	{ label: '藏品提前抢购', value: 'prior' },
 	{ label: '藏品提前赠送', value: 'give' },
-	{ label: '免积分抢购藏品', value: 'free_integral' },
+	{ label: `免${paraphrase({ value: 'integral', options: integralOptions})}抢购藏品`, value: 'free_integral' },
 	{ label: '藏品0元购 1次', value: 'free_cny' },
 	{ label: '藏品折扣', value: 'rebate' }
 ]

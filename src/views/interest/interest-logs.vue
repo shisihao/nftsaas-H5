@@ -19,7 +19,7 @@
 
 <script setup>
 import { ref, reactive, computed } from 'vue'
-import { pages as commonPages } from '@/utils/explain'
+import { pages as commonPages, integralOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
 import { interestLogs } from '@/api/interest'
 
@@ -35,7 +35,7 @@ const pages = { ...commonPages }
 const activeOptions = [
 	{ label: '提前购', value: 'prior' },
 	{ label: '提前赠', value: 'give' },
-	{ label: '免积分', value: 'free_integral' },
+	{ label: `免${paraphrase({ value: 'integral', options: integralOptions})}`, value: 'free_integral' },
 	{ label: '折扣购', value: 'rebate' },
 	{ label: '0元购', value: 'free_cny' }
 ]

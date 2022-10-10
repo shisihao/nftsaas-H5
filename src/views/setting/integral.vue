@@ -34,6 +34,7 @@
 
 <script setup>
 import { ref, reactive, computed } from 'vue'
+import { useRoute } from "vue-router"
 import { walletLogs } from '@/api/setting.js'
 import useClipboard from 'vue-clipboard3'
 import to from 'await-to-js'
@@ -42,6 +43,9 @@ import { pages as commonPages, integralOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
 import store from '@/store/index'
 import IntegralPopup from './components/IntegralPopup.vue'
+
+const route = useRoute()
+route.meta.title = document.title = `我的${paraphrase({ value: 'integral', options: integralOptions})}`
 
 let info = computed(() => store.state.user.info)
 let integralPopup = ref(null)

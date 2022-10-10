@@ -57,7 +57,7 @@
 						</div>
 						<div class="list-item-r">
 							<div class="list-item-r-hd">
-								<div class="num">免积分抢购藏品</div>
+								<div class="num">免{{ paraphrase({ value: 'integral', options: integralOptions })}}抢购藏品</div>
 								<div class="tag">{{ data.free_integral?.usable }} 次</div>
 							</div>
 							<div class="use">已享受 {{ data.free_integral?.used }} 次</div>
@@ -104,6 +104,8 @@ import { DominKey, getToken } from '@/utils/auth'
 import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 import { interest } from '@/api/interest'
 import { getImageUrl } from '@/utils/index'
+import { integralOptions } from '@/utils/explain'
+import { paraphrase } from '@/filters/index'
 
 const domin = getToken(DominKey)
 const info = computed(() => store.state.user.info)

@@ -227,7 +227,7 @@ export const asyncRoutes = [
         name: "integral",
         component: () => import('@/views/setting/integral.vue'),
         meta: {
-          title : '我的瓦当'
+          title : '我的积分'
         }
       },
       {
