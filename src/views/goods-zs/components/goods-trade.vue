@@ -1,32 +1,40 @@
 <template>
   <div class="trade-container">
-    <div class="zs-content-hd">
-      <div class="title">交易信息</div>
-      <van-icon @click="accordion = !accordion" class="icon" :name="accordion ? 'arrow-up' : 'arrow-down'" />
-    </div>
-    <div class="zs-content-bd" :class="{ active: accordion }">
-      <div class="content-list" v-for="(item, index) in list" :key="index">
-        <div class="content-bd-l">
-          <div class="circle"></div>
-          <div class="line"></div>
-        </div>
-        <div class="content-bd-r">
-          <div class="title">{{ item.name }}</div>
-          <div class="description">
-            <div class="description-title">交易时间</div>
-            <div class="description-content">{{ item.trade_time }}</div>
-            <div class="description-title">链上hash</div>
-            <div class="description-content">{{ item.hash }}</div>
+    <div class="card-section">
+      <navigation-title title="交易信息" fontSize="16" />
+      <block-control>
+        <div class="card-wrapper">
+          <div class="zs-content-bd" :class="{ active: accordion }">
+            <div class="content-list" v-for="(item, index) in list" :key="index">
+              <div class="content-bd-r">
+                <div class="title">{{ item.name }}</div>
+                <div class="description">
+                  <template v-if="index == 0">
+                    <div class="description-title">铸造时间</div>
+                    <div class="description-content">{{ item.created_at }}</div>
+                  </template>
+                  <template v-else>
+                    <div class="description-title">交易时间</div>
+                    <div class="description-content">{{ item.trade_time }}</div>
+                  </template>
+                  <div class="description-title">交易hash</div>
+                  <div class="description-content">{{ item.hash }}</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </block-control>
     </div>
+
   </div>
 </template>
 
 <script setup>
 import { ref, watch } from "vue"
 import { getGoodsTrade } from '@/api/goods'
+import NavigationTitle from '@/components/NavigationTitle/index.vue'
+import BlockControl from '@/components/BlockControl/index.vue'
 
 const accordion = ref(false)
 const list = ref([])
@@ -50,8 +58,17 @@ watch(() => props.data, () => {
 </script>
 
 <style lang="scss" scoped>
+.card-section {
+  margin-top: var(--root-page-spacing);
+  background-color: var(--root-bg-color2);
+  border-radius: 12px;
+  padding: 24px 12px;
+  :deep(.card-wrapper) {
+    padding-top: 24px;
+  }
+}
 .trade-container {
-  padding: 0 12px;
+  padding: 12px 0 0;
   background-color: var(--root-bg-color1);
   border-radius: 12px;
 }
@@ -80,44 +97,19 @@ watch(() => props.data, () => {
   }
 }
 
-.content-list {
-  display: flex;
+.zs-content-bd {
+  background-color: var(--root-bg-color1);
+  padding: 12px;
 }
 
-.content-bd-l {
+.content-list {
   display: flex;
-  flex: 1;
-  margin-right: 12px;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 12px;
-
-  .circle {
-    width: 14px;
-    height: 14px;
-    background: var(--root-theme-color);
-    border-radius: 50%;
-    position: relative;
-
-    &::after {
-      position: absolute;
-      content: '';
-      left: 50%;
-      top: 50%;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background-color: var(--root-bg-color1);
-      transform: translate(-50%, -50%);
-      z-index: 999;
-    }
-  }
-
-  .line {
-    height: 131px;
-    width: 1px;
-    border-right: 1px dotted var(--root-text-color3);
-    margin: 5px 0;
+  background-color: var(--root-bg-color2);
+  border-radius: 8px;
+  padding: 20px 0;
+  margin-top: 20px;
+  &:nth-child(1) {
+    margin-top: 0;
   }
 }
 
@@ -128,11 +120,13 @@ watch(() => props.data, () => {
     font-size: 18px;
     margin-bottom: 18px;
   }
-
+  .title {
+    padding: 0 12px;
+  }
   .description {
     padding: 18px 12px 0;
     font-size: 12px;
-    color: var(--root-text-color3);
+    color: var(--root-text-color1);
 
     .description-title {
       margin-bottom: 6px;

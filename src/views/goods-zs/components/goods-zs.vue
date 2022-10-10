@@ -1,45 +1,50 @@
 <template>
   <div class="zs-container">
     <div class="zs-header">
-      <img class="logo" :src="getImageUrl('public/logo2.png')" alt="">
-      <div>殿藏·数藏官方认证</div>
+      <logo />
     </div>
-    <div class="divider"></div>
-    <div class="zs-content">
-      <div class="zs-content-hd">
-        <div class="title">藏品数据</div>
-        <van-icon @click="accordion = !accordion" class="icon" :name="accordion ? 'arrow-up' : 'arrow-down'" />
-      </div>
-      <div class="zs-content-bd" :class="{ active: accordion }">
-        <div class="img-wrap" v-if="props.data.goods?.images">
-          <van-image lazy-load fit="cover"
-            :src="Array.isArray(props.data.goods?.images) && `${domin}${props.data.goods?.images[0]}`" />
+    <div class="card-section">
+      <navigation-title title="认证信息" fontSize="16" />
+      <block-control>
+        <div class="card-wrapper">
+          <div class="zs-content-bd" :class="{ active: accordion }">
+            <div class="zs-content-info">
+              <div class="img-wrap" v-if="props.data.goods?.images">
+                <van-image lazy-load fit="cover"
+                  :src="Array.isArray(props.data.goods?.images) && `${domin}${props.data.goods?.images[0]}`" />
+              </div>
+              <div class="name">{{ props.data.goods?.name }}xxxxx</div>
+              <div class="code title-icon">{{`${props.data.goods?.serial}#${props.data.num}/${props.data.goods?.cast_goods_stock}`}}</div>
+            </div>
+            <div class="zs-content-bd-list">
+              <div class="title">拥有者</div>
+              <div class="avatar-item">
+                <van-image lazy-load fit="cover" round :src="`${domin}${info?.avatar}`" class="avatar" />
+                <div class="content">{{ info?.name }}</div>
+              </div>
+            </div>
+            <div class="zs-content-bd-list">
+              <div class="title">创作者</div>
+              <div class="avatar-item">
+                <van-image lazy-load fit="cover" round :src="`${domin}${props.data.author_avatar}`" class="avatar" />
+                <div class="content">{{ props.data?.author }}</div>
+              </div>
+            </div>
+            <div class="zs-content-bd-list">
+              <div class="title">发行方</div>
+              <div class="content">{{ props.data.goods?.issuer }}</div>
+            </div>
+            <div class="zs-content-bd-list">
+              <div class="title">链上标识</div>
+              <div class="content hash">{{ centrEllipsis(props.data?.identifications, 18) }}</div>
+            </div>
+            <div class="zs-content-bd-list">
+              <div class="title">合约地址</div>
+              <div class="content hash">{{ centrEllipsis(props.data?.address, 18) }}</div>
+            </div>
+          </div>
         </div>
-        <div class="zs-content-bd-list">
-          <div class="title">藏品名称</div>
-          <div class="content">{{ props.data.goods?.name }}</div>
-        </div>
-        <div class="zs-content-bd-list">
-          <div class="title">藏品编号</div>
-          <div class="content title-icon">{{`${props.data.goods?.serial}#${props.data.num}/${props.data.goods?.cast_goods_stock}`}}</div>
-        </div>
-        <div class="zs-content-bd-list">
-          <div class="title">持有者</div>
-          <div class="content">{{ info?.name }}</div>
-        </div>
-        <div class="zs-content-bd-list">
-          <div class="title">发行方</div>
-          <div class="content">{{ props.data.goods?.issuer }}</div>
-        </div>
-        <div class="zs-content-bd-list">
-          <div class="title">发行时间</div>
-          <div class="content">{{ props.data.created_at }}</div>
-        </div>
-        <div class="zs-content-bd-list">
-          <div class="title">链上hash</div>
-          <div class="content hash">{{ props.data.hash }}</div>
-        </div>
-      </div>
+      </block-control>
     </div>
   </div>
 </template>
@@ -49,11 +54,15 @@ import { getImageUrl } from '@/utils/index'
 import { DominKey, getToken } from '@/utils/auth'
 import store from '@/store/index'
 import { computed, ref } from "vue"
+import Logo from '../../components/common/Logo.vue'
+import { centrEllipsis } from '@/utils/index'
+import NavigationTitle from '@/components/NavigationTitle/index.vue'
+import BlockControl from '@/components/BlockControl/index.vue'
 
 const props = defineProps({
   data: {
     type: Object,
-    default: () => { }
+    default: () => {}
   }
 })
 const info = computed(() => store.state.user.info)
@@ -62,31 +71,31 @@ const accordion = ref(false)
 </script>
 
 <style lang="scss" scoped>
+.card-section {
+  margin-top: var(--root-page-spacing);
+  background-color: var(--root-bg-color2);
+  border-radius: 12px;
+  padding: 24px 12px;
+  :deep(.card-wrapper) {
+    padding-top: 24px;
+  }
+}
 .zs-container {
-  padding: 12px 15px 0px;
+  padding: 12px 0 0;
   background-color: var(--root-bg-color1);
   border-radius: 12px;
-  margin-bottom: 12px;
 }
 
 .zs-header {
   display: flex;
   align-items: center;
-  font-size: 20px;
-
-  .logo {
-    width: 50px;
-    height: 50px;
-    margin-right: 26px;
-    margin-bottom: 9px;
-  }
+  justify-content: center;
 }
-
-.divider {
-  height: 1px;
-  background: var(--root-dividing-color1);
+.zs-content {
+  background: var(--root-bg-color2);
+  padding: 0 10px 10px;
+  border-radius: 16px;
 }
-
 .zs-content-hd {
   display: flex;
   justify-content: space-between;
@@ -99,24 +108,70 @@ const accordion = ref(false)
   }
 }
 
-.zs-content-bd {
-  
+.zs-content-info {
+  padding-bottom: 15px;
   .img-wrap {
-    width: 100%;
-    height: 321px;
+    width: 140px;
+    height: 140px;
     border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 18px;
+    margin: 15px auto;
   }
+  .name {
+      @include textoverflow();
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--root-text-color1);
+  }
+  .code {
+    width: fit-content;
+    margin: 12px auto;
+    @include textoverflow();
+    color: var(--root-text-color1);
+  }
+    .title-icon {
+      position: relative;
+      padding-left: 18px;
+    }
+    .title-icon::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background-image: url('@/assets/images/public/common_icon_number.png');
+      background-size: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+}
+
+.zs-content-bd {
+  background-color: var(--root-bg-color1);
+  padding: 12px;
 
   .zs-content-bd-list {
-    display: flex;
-    margin-bottom: 24px;
-
+    margin-top: 12px;
+    background-color: var(--root-bg-color2);
+    padding: 12px;
+    border-radius: 8px;
+    .avatar-item {
+      display: flex;
+      align-items: center;
+      .avatar {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+      }
+    }
     .title {
       flex-shrink: 0;
       color: var(--root-text-color3);
       width: 90px;
+      margin-bottom: 12px;
     }
 
     .content {
@@ -140,11 +195,6 @@ const accordion = ref(false)
       background-repeat: no-repeat;
     }
   }
-}
-
-.active {
-  height: 0;
-  overflow: hidden;
 }
 
 .zs-content-bd .zs-content-bd-list .hash {
