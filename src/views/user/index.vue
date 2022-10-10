@@ -72,7 +72,9 @@ let statusClass = computed(() => {
 
 <style lang="scss" scoped>
   .user-section {
-    background: linear-gradient(180deg, rgba(18,117,228,0.2) 0%, var(--root-bg-color1) 20%);
+    background-image: linear-gradient(rgba(var(--root-theme-color-rgb), 0.2), var(--root-bg-color1));
+    background-size: 100% 200px;
+    background-repeat: no-repeat;
     overflow: hidden;
     .padding {
       padding: 0 var(--root-page-spacing);
