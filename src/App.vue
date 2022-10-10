@@ -7,7 +7,7 @@
 <script setup>
 import store from '@/store/index'
 import { hexToRgb } from '@/utils/index'
-import { themeColor } from '@/utils/explain'
+import { themeColor, integralOptions } from '@/utils/explain'
 
 // 配置信息
 store.dispatch('user/getConfig')
@@ -18,5 +18,10 @@ store.dispatch('user/getConfig')
     document.documentElement.style.setProperty(`--root-theme-color-rgb`, hexToRgb(defaultColor).toString())
 
     document.querySelector('link[rel="icon"]').href = `${response.cdn_domain}${response.design_style.inside_logo}`
+    
+    integralOptions.forEach(element => {
+      element.label = response.integral_config?.name
+      element.icon = response.integral_config?.image
+    })
   })
 </script>
