@@ -24,25 +24,7 @@
 					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'prior', used: data.prior?.used ,usable:data.prior?.usable } })">
 						<div class="list-item-l">
 							<div class="list-img-box">
-								<img :src="getImageUrl('interest/equities_icon_yougou@2x.png')" alt="" />
-							</div>
-							<div class="list-item-text">
-								<div class="num">藏品优购</div>
-								<div class="use">已经享受 {{ data.prior?.used }} 次</div>
-							</div>
-						</div>
-						<div class="list-item-r">
-							<span class="list-item-tag">?次</span>
-						</div>
-					</div>
-					<div class="list-item">
-						<div class="list-item-l">
-							<div class="list-img-box">
 								<img :src="getImageUrl('interest/quanyi_icon_mzz.png')" alt="" />
-							</div>
-							<div class="list-item-text">
-								<div class="num">免积分抢购藏品</div>
-								<div class="use">已经享受 {{  }} 次</div>
 							</div>
 						</div>
 						<div class="list-item-r">
@@ -58,10 +40,6 @@
 							<div class="list-img-box">
 								<img :src="getImageUrl('interest/equities_icon_zhuanzeng@2x.png')" alt="" />
 							</div>
-							<div class="list-item-text">
-								<div class="num">藏品提前转赠</div>
-								<div class="use">已经享受 {{ data.give?.used }} 次</div>
-							</div>
 						</div>
 						<div class="list-item-r">
 							<div class="list-item-r-hd">
@@ -73,7 +51,9 @@
 					</div>
 					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'free_integral', used: data.free_integral?.used,usable:data.free_integral?.usable } })">
 						<div class="list-item-l">
-							<img :src="getImageUrl('interest/quanyi_icon_mzz@2x.png')" alt="" />
+							<div class="list-img-box">
+								<img :src="getImageUrl('interest/quanyi_icon_mzz@2x.png')" alt="" />
+							</div>
 						</div>
 						<div class="list-item-r">
 							<div class="list-item-r-hd">
@@ -85,7 +65,9 @@
 					</div>
 					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'free_cny', used: data.free_cny?.used,usable:data.free_cny?.usable } })">
 						<div class="list-item-l">
-							<img :src="getImageUrl('interest/quanyi_icon_lyg@2x.png')" alt="" />
+							<div class="list-img-box">
+								<img :src="getImageUrl('interest/quanyi_icon_lyg@2x.png')" alt="" />
+							</div>
 						</div>
 						<div class="list-item-r">
 							<div class="list-item-r-hd">
@@ -99,10 +81,6 @@
 						<div class="list-item-l">
 							<div class="list-img-box">
 								<img :src="getImageUrl('interest/equities_icon_zhekou@2x.png')" alt="" />
-							</div>
-							<div class="list-item-text">
-								<div class="num">藏品折扣</div>
-								<div class="use">已经享受 {{ data.rebate?.used }} 次</div>
 							</div>
 						</div>
 						<div class="list-item-r">
@@ -235,16 +213,22 @@ onRefresh()
 
 		.list-item-l {
 			height: 44px;
-			line-height: 44px;
-			text-align: center;
 			flex-shrink: 0;
-			background: url('@/assets/images/interest/quayi_img_bg@2x.png') no-repeat;
-			background-size: 100%;
-
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.list-img-box {
+				width: 44px;
+				height: 44px;
+				border-radius: 50%;
+				background: var(--root-bg-color1);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
 			img {
-				display: inline-block;
-				vertical-align: middle;
-				width: 21px;
+				width: 23px;
+				height: 23px;
 			}
 		}
 

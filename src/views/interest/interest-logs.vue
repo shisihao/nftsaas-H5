@@ -1,6 +1,6 @@
 <template>
 	<div class="logs-section">
-		<van-tabs v-model:active="active" shrink @change="onTabChange">
+		<van-tabs v-model:active="active" shrink @change="onTabChange" type="card">
 			<van-tab v-for="(item, index) in activeOptions" :key="index" :title="item.label" :name="item.value"></van-tab>
 		</van-tabs>
 		<div class="content">
@@ -72,10 +72,7 @@ const onTabChange = val => {
 </script>
 
 <style lang="scss" scoped>
-
-.logs-section {
-	padding: 0 var(--root-page-spacing);
-}
+.logs-section {}
 :deep(.van-pull-refresh__track){
 	min-height: calc(100vh - 46px - 44px);
 }
@@ -103,7 +100,9 @@ const onTabChange = val => {
 	background-color: var(--root-theme-color);
 	color: var(--root-text-color5);
 }
-
+.content {
+	padding: 0 var(--root-page-spacing);
+}
 .list-item {
 	background: var(--root-bg-color1);
 	padding: 15px 12px;
