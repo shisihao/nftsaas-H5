@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="give-confirm-contain">
-      <van-popup v-model:show="state.show">
+      <van-popup v-model:show="state.show" round position="bottom" >
         <div class="title">
           转赠藏品
         </div>

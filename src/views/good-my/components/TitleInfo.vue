@@ -22,11 +22,7 @@ defineProps({
 
 <style lang="scss" scoped>
   .title-section {
-    background-image: url('@/assets/images/public/detail_img_title_bg.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: auto 100%;
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     border-radius: 12px;
     padding: 20px 0;
     margin-top: 15px;

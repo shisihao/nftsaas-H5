@@ -7,32 +7,29 @@
       >
         下载
       </van-button> -->
-      <div></div>
-      <div>
-        <div v-if="item.interest_status && props.giveStatus.type === 3" class="advance-wrapper" @click="onAdvance">
-          提前赠x{{ item.interest_give_total || 0 }}
-        </div>
-        <div v-if="[1, 2, 3].includes(giveStatus.type)" class="attestation-wrapper">
-          <div class="attestation-tip">
-            {{ giveStatus.time }}
-          </div>
-        </div>
-        <van-button
-          round
-          class="btn give-button"
-          :class="![4].includes(giveStatus.type) && 'disabled-button'"
-          @click="onHandleGive"
-        >
-          转赠
-        </van-button>
-        <van-button
-          round
-          class="btn certificate-button"
-          @click="$globleFun.onGoto(`/goods-zs?id=${item.id}`)"
-        >
-          查看证书
-        </van-button>
+      <div v-if="item.interest_status && props.giveStatus.type === 3" class="advance-wrapper" @click="onAdvance">
+        提前赠x{{ item.interest_give_total || 0 }}
       </div>
+      <div v-if="[1, 2, 3].includes(giveStatus.type)" class="attestation-wrapper">
+        <div class="attestation-tip">
+          {{ giveStatus.time }}
+        </div>
+      </div>
+      <van-button
+        round
+        class="btn certificate-button"
+        @click="$globleFun.onGoto(`/goods-zs?id=${item.id}`)"
+      >
+        证书
+      </van-button>
+      <van-button
+        round
+        class="btn give-button"
+        :disabled="![4].includes(giveStatus.type) || config?.give?.switch === 'off'"
+        @click="onHandleGive"
+      >
+        转赠
+      </van-button>
     </van-action-bar>
     <give-popup ref="givePopup" />
     <buy-advance-popup ref="buyAdvancePopup" type="give" @equity-item="onEquityItem" />
@@ -46,10 +43,13 @@
 
 <script setup>
 import { ref, computed, provide } from 'vue'
+import store from '@/store/index'
 import GivePopup from '../../components/good/GivePopup.vue'
 import BuyAdvancePopup from '../../components/good/BuyAdvancePopup.vue'
 import TipsPopup from '@/components/TipsPopup/index.vue'
 import moment from 'moment'
+
+const config = computed(() => store.state.user.config)
 
 const props = defineProps({
   item: {
@@ -104,24 +104,22 @@ const onEquityItem = (value) => {
     right: auto;
     transform: translateX(-50%);
     z-index: 999;
-    background-color: var(--root-bg-color1);
-    justify-content: space-between;
+    background-color: var(--root-bg-color2);
+    justify-content: space-around;
     padding: 0 var(--root-page-spacing);
     box-sizing: border-box;
     .btn {
-      border: 1px solid var(--root-theme-color);
       color: var(--root-theme-color);
-      padding: 8px 22px;
+      padding: 8px 30px;
       height: auto;
     }
     .certificate-button {
-      margin-left: 10px;
       color: var(--root-text-color5);
       background-color: var(--root-theme-color);
     }
-    .disabled-button {
-      border-color: var(--root-text-color3);
-      color: var(--root-text-color3);
+    .give-button {
+      color: var(--root-text-color5);
+      background-color: var(--root-auxiliary-color1);
     }
   }
   .advance-wrapper {
