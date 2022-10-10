@@ -33,8 +33,6 @@
         </div>
       </van-list>
     </van-pull-refresh>
-
-    <open-tips-popup ref="openTipsPopup" @refresh-list="onRefreshList" />
   </div>
 </template>
 
@@ -45,16 +43,14 @@ import { pages as commonPages, integralOptions } from '@/utils/explain'
 import { getImageUrl } from '@/utils/index'
 import { paraphrase } from '@/filters/index'
 import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
-import OpenTipsPopup from './components/OpenTipsPopup.vue'
 import { DominKey, getToken } from '@/utils/auth'
 import globleFun from '@/utils/link'
 
 const domin = getToken(DominKey)
 
-const openTipsPopup = ref(null)
 const onHandleBox = (item) => {
   if (item.is_open === 0) {
-    openTipsPopup.value.init(item)
+    globleFun.onGoto(`/box-my?id=${item?.user_goods_id}`)
   } else {
     if (item?.open_goods.goods) {
       globleFun.onGoto(`/good-my?id=${item?.user_goods_id}`)

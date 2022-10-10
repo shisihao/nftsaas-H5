@@ -61,7 +61,6 @@ const onClose = () => {
 const emit = defineEmits(['refreshList'])
 
 const onSubmit = () => {
-  openBoxPopup.value.init(state.item)
   state.btnLoading = true
   boxOpen({ user_box_id: state.user_box_id })
     .then((response) => {

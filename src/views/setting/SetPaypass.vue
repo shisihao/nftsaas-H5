@@ -63,8 +63,8 @@ const state = reactive({
   isDisabled: false,
   showKeyboard: false,
   form: {
-    code: params.code,
-    password: ''
+    code: params.code || 111111,
+    password: '',
   }
 })
 

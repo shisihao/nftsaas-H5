@@ -1,7 +1,7 @@
 <template>
   <div class="zs-container">
     <div class="zs-header">
-      <logo />
+      <logo-title />
     </div>
     <div class="card-section">
       <navigation-title title="认证信息" fontSize="16" />
@@ -26,8 +26,8 @@
             <div class="zs-content-bd-list">
               <div class="title">创作者</div>
               <div class="avatar-item">
-                <van-image lazy-load fit="cover" round :src="`${domin}${props.data.author_avatar}`" class="avatar" />
-                <div class="content">{{ props.data?.author }}</div>
+                <van-image lazy-load fit="cover" round :src="`${domin}${props.data?.goods?.author_avatar}`" class="avatar" />
+                <div class="content">{{ props.data?.goods?.author }}</div>
               </div>
             </div>
             <div class="zs-content-bd-list">
@@ -36,11 +36,11 @@
             </div>
             <div class="zs-content-bd-list">
               <div class="title">链上标识</div>
-              <div class="content hash">{{ centrEllipsis(props.data?.identifications, 18) }}</div>
+              <div class="content hash">{{ centrEllipsis(props.data?.identification, 18) }}</div>
             </div>
             <div class="zs-content-bd-list">
               <div class="title">合约地址</div>
-              <div class="content hash">{{ centrEllipsis(props.data?.address, 18) }}</div>
+              <div class="content hash">{{ centrEllipsis(props.data?.goods?.address, 18) }}</div>
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@ import { getImageUrl } from '@/utils/index'
 import { DominKey, getToken } from '@/utils/auth'
 import store from '@/store/index'
 import { computed, ref } from "vue"
-import Logo from '../../components/common/Logo.vue'
+import LogoTitle from '@/views/dashboard/components/LogoTitle.vue'
 import { centrEllipsis } from '@/utils/index'
 import NavigationTitle from '@/components/NavigationTitle/index.vue'
 import BlockControl from '@/components/BlockControl/index.vue'
@@ -81,7 +81,7 @@ const accordion = ref(false)
   }
 }
 .zs-container {
-  padding: 12px 0 0;
+  padding: 0;
   background-color: var(--root-bg-color1);
   border-radius: 12px;
 }

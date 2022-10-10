@@ -20,3 +20,11 @@ export function boxOpen(data) {
     ...data
   })
 }
+
+// 用户盲盒详情
+export function getMyBoxDetail(data) {
+  return request.post(`/user_box/detail`, {
+    ...data
+  })
+}
+

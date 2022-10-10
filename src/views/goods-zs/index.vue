@@ -29,7 +29,7 @@ getMyGoodsDetail({ user_goods_id:route.query.id }).then(res => {
     width: 335px;
     height: 44px;
     background-color: rgba(var(--root-theme-color-rgb), 0.5);
-    border-radius: 16px;
+    border-radius: 8px;
     margin: 20px 0;
     color: var(--root-theme-color);
     text-align: center;

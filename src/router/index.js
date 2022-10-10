@@ -119,6 +119,14 @@ export const asyncRoutes = [
         }
       },
       {
+        path: "/box-my",
+        name: "box-my",
+        component: () => import('@/views/box-my/index.vue'),
+        meta: {
+          title : '我的盲盒'
+        }
+      },
+      {
         path: "/setting",
         name: "setting",
         component: () => import('@/views/setting/index.vue'),

@@ -9,14 +9,8 @@
               <div class="content-bd-r">
                 <div class="title">{{ item.name }}</div>
                 <div class="description">
-                  <template v-if="index == 0">
-                    <div class="description-title">铸造时间</div>
-                    <div class="description-content">{{ item.created_at }}</div>
-                  </template>
-                  <template v-else>
-                    <div class="description-title">交易时间</div>
-                    <div class="description-content">{{ item.trade_time }}</div>
-                  </template>
+                  <div class="description-title"> {{ index == list.length-1 ?'铸造':'交易'}}时间</div>
+                  <div class="description-content">{{ item.trade_time }}</div>
                   <div class="description-title">交易hash</div>
                   <div class="description-content">{{ item.hash }}</div>
                 </div>
@@ -44,6 +38,7 @@ const props = defineProps({
     default: () => { }
   }
 })
+console.log(props.data);
 watch(() => props.data, () => {
   getGoodsTrade({ user_goods_id: props.data.id }).then(res => {
     list.value = res.data
