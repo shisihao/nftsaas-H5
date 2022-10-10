@@ -77,18 +77,24 @@ const onInvite = () => {
 <style lang="scss" scoped>
   .fun-section {
     .grid {
-      display: grid;
-      column-gap: 10px;
-      row-gap: 10px;
-      grid-template-columns: 108.3px 108.3px 108.3px;
-      grid-template-rows: 108.3px 108.3px;
+      display: flex;
+      flex-wrap: wrap;
       .grid-item {
+        width: 104px;
+        height: 104px;
+        margin: 15px 15px 0 0;
         background-color: var(--root-bg-color2);
         border-radius: 8px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        &:nth-child(-n+3) {
+          margin-top: 0;
+        }
+        &:nth-child(3n) {
+          margin-right: 0;
+        }
         img {
           width: 41px;
           height: 41px;

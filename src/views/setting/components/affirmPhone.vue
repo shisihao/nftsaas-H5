@@ -154,6 +154,7 @@ const onSubmit = (values) => {
 }
 
 .phone {
+  border-bottom: 1px solid var(--root-dividing-color1);
   :deep(.van-field__body) {
     padding-left: 36px;
     position: relative;
