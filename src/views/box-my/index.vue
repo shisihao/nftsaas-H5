@@ -1,13 +1,11 @@
 <template>
   <div class="good-section">
-    <three-model :item="item?.goods" />
+    <three-model :item="item?.box" />
     <div class="good-details" :class="{ 'good-bottom': [1, 2, 3].includes(giveStatus(item, config).type) }">
       <title-info :item="item" />
-      <good-describe title="盲盒详情" :rich-text="item?.goods?.detail" />
-      <copyright-info
-        :row="{ author: item?.goods?.author, author_avatar: item?.goods?.author_avatar, issuer: item?.goods?.issuer, user: info?.name, avatar: info?.avatar }" />
-      
-      <explain-info :word-text="item?.goods?.desc" />
+      <good-describe title="盲盒详情" :rich-text="item?.box?.detail" />      
+      <box-explain :row="item" />
+      <explain-info :word-text="item?.box?.desc" />
       <good-action-bar :item="item" :give-status="giveStatus(item, config)" />
     </div>
   </div>
@@ -23,6 +21,7 @@ import CopyrightInfo from '../components/good/CopyrightInfo.vue'
 import GoodDescribe from '../components/good/GoodDescribe.vue'
 import ExplainInfo from '../components/good/ExplainInfo.vue'
 import GoodActionBar from './components/GoodActionBar.vue'
+import BoxExplain from './components/BoxExplain.vue'
 import { getMyBoxDetail } from '@/api/box'
 import store from '@/store/index'
 

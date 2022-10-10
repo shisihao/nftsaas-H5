@@ -1,10 +1,12 @@
 <template>
   <div class="title-section">
     <div class="title">
-      {{ item?.goods?.name }}
+      {{ item?.box?.name }}
     </div>
-    <div class="goods-num">
-      <span>{{ `${item?.goods?.serial || ''}#${item.num || ''}/${item?.goods?.cast_goods_stock || ''}` }}</span>
+    <div class="label">
+      <span v-for="(x, y) in item?.box?.tags" :key="y">
+        {{ x?.name }}
+      </span>
     </div>
   </div>
 </template>
@@ -51,6 +53,23 @@ defineProps({
           position: absolute;
           left: 0;
           top: 0;
+        }
+      }
+    }
+    .label {
+      text-align: center;
+      margin-top: 10px;
+      span {
+        display: inline-block;
+        border-radius: 4px;
+        font-size: 12px;
+        color: var(--root-text-color3);
+        border: 1px solid var(--root-text-color3);
+        padding: 3px 8px;
+        margin-right: 8px;
+        margin-bottom: 6px;
+        &:last-child {
+          margin-right: 0;
         }
       }
     }

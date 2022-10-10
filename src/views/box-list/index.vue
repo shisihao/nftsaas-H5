@@ -50,7 +50,7 @@ const domin = getToken(DominKey)
 
 const onHandleBox = (item) => {
   if (item.is_open === 0) {
-    globleFun.onGoto(`/box-my?id=${item?.user_goods_id}`)
+    globleFun.onGoto(`/box-my?id=${item?.id}`)
   } else {
     if (item?.open_goods.goods) {
       globleFun.onGoto(`/good-my?id=${item?.user_goods_id}`)
@@ -216,7 +216,7 @@ const onRefreshList = ({ id, item }) => {
       }
       .box-warning {
         height: 152px;
-        background-image: url('@/assets/images/public/box_close.png');
+        background-image: url('@/assets/images/public/mbox_img_boxlable.png');
       }
     }
     .collection-info {
