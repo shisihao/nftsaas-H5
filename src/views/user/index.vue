@@ -2,8 +2,7 @@
   <div class="section user-section">
     <div class="user-info padding">
       <div class="avatar-uploader">
-        <default-avatar v-if="info?.avatar" :src="info ? `${domin}${info.avatar}` : ''" />
-        <default-avatar v-else />
+        <default-avatar :src="info ? `${domin}${info.avatar}` : ''" />
       </div>
       <div class="user-detail">
         <div class="name">
@@ -12,11 +11,6 @@
         <div class="multinomial">
           <div class="attestation" :class="statusClass">
             {{ info && paraphrase({ value: info.cer_status, options: attestationOptions }) }}
-          </div>
-        </div>
-        <div class="multinomial">
-          <div class="user-id">
-            id: {{ info?.show_id }}
           </div>
           <div class="integral" @click="$globleFun.onGoto('/integral')">
             {{ paraphrase({ value: 'integral', options: integralOptions }) }}
@@ -91,30 +85,49 @@ let statusClass = computed(() => {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
         padding-left: 10px;
         .name {
           font-size: 20px;
           @include textoverflow()
         }
         .multinomial {
+          margin-top: 10px;
           display: flex;
           justify-content: space-between;
           .attestation {
-            padding-left: 21px;
+            height: 20px;
+            line-height: 20px;
+            margin-left: 10px;
+            padding:0 10px;
             position: relative;
+            font-size: 12px;
+            border-radius: 0 0 10px 0;
             &::before {
               content: '';
-              width: 17px;
-              height: 17px;
+              width: 20px;
+              height: 20px;
               position: absolute;
-              left: 0;
+              left: -10px;
               top: 50%;
               transform: translateY(-50%);
+              background-image: url('@/assets/images/user/mine_icon_rz.png');
               background-repeat: no-repeat;
               background-size: 100%;
               background-position: center;
             }
+          }
+          .attestation-primary {
+            color: var(--root-text-color1);
+            background-color: rgba(0, 0, 0, 0.1);
+          }
+          .attestation-danger {
+            color: var(--root-auxiliary-color1);
+            background-color: rgba(255, 94, 94, 0.1);
+          }
+          .attestation-success {
+            color: var(--root-text-color1);
+            background-color: rgba(0, 0, 0, 0.1);
           }
           .integral {
             background-color: rgba(var(--root-theme-color-rgb), 0.1);
@@ -123,26 +136,6 @@ let statusClass = computed(() => {
             font-size: 13px;
             border-radius: 10px;
           }
-        }
-        .attestation-primary {
-          color: var(--root-text-color2);
-          &::before {
-            background-image: url('@/assets/images/user/mine_icon_wrZ.png');
-          }
-        }
-        .attestation-danger {
-          color: var(--root-auxiliary-color);
-          &::before {
-            background-image: url('@/assets/images/user/mine_icon_rzsb.png');
-          }
-        }
-        .attestation-success {
-          &::before {
-            background-image: url('@/assets/images/user/mine_icon_rzz.png');
-          }
-        }
-        .user-id {
-          color: var(--root-text-color2);
         }
       }
     }

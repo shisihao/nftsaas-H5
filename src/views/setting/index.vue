@@ -4,8 +4,7 @@
       <van-cell-group>
         <van-cell class="avatar-cell" title="头像" @click="onChangeAvatar">
           <template #value>
-            <default-avatar v-if="info?.avatar" :src="info ? `${domin}${info.avatar}` : ''" />
-            <default-avatar v-else />
+            <default-avatar :src="info ? `${domin}${info.avatar}` : ''" />
           </template>
         </van-cell>
         <van-cell title="昵称" is-link :value="info?.name" @click="onChangeName" />
