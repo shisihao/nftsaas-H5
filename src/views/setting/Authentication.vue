@@ -68,7 +68,7 @@
             loading-text="请求中..."
             :loading="state.btnLoading"
           >
-            下一步
+            提交
           </van-button>
           <agreement v-model:checkedValue="state.checked" class="agreement" />
         </div>
@@ -81,11 +81,12 @@
 <script setup>
 import { ref, reactive, computed, onBeforeUnmount } from 'vue'
 import Cookies from 'js-cookie'
-import { certifyInfo } from '@/api/certification'
+import { postCertify } from '@/api/certification'
+import { verificationCode } from '@/api/common'
 import { paraphrase, mosaicTel } from '@/filters/index'
 import store from '@/store/index'
 import { showToast } from 'vant'
-import { verificationCode } from '@/api/common'
+import globleFun from '@/utils/link'
 import Agreement from '../login/components/Agreement.vue'
 
 let info = computed(() => store.state.user.info)
@@ -97,7 +98,6 @@ const validatorCode = (value, rule) => {
 
 const state = reactive({
   form: {
-    metaInfo: JSON.stringify(getMetaInfo()),
     number: '',
     name: '',
     code: ''
@@ -170,9 +170,9 @@ const onSubmit = () => {
     return showToast(`请阅读并同意《用户协议》和《隐私协议》`)
   }
   state.btnLoading = true
-  certifyInfo(state.form)
+  postCertify(state.form)
     .then((response) => {
-      location.href = response.data.result.certifyUrl
+      globleFun.onGoto('/authentication-result', 'replace')
     })
     .finally(() => {
       state.btnLoading = false

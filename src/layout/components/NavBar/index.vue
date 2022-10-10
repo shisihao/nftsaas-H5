@@ -21,7 +21,7 @@ const router = useRouter()
 const route = useRoute()
 const onHandleRouter = () => {
   if (route.name === 'authentication-result') {
-    router.replace({ path: 'user' })
+    router.replace({ path: '/setting' })
   } else {
     router.go(-1)
   }

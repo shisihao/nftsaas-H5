@@ -2,7 +2,7 @@
   <van-image
     fit="cover"
     :round="round"
-    :src="src"
+    :src="src && ''"
   />
 </template>
 

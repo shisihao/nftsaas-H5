@@ -1,16 +1,16 @@
 <template>
   <div class="main-contain">
     <div class="certify-result">
-      <div class="certify-img" :class="state.status === 1 ? 'certify-success' : 'certify-fail'">
+      <div class="certify-img" :class="state.item.status === 1 ? 'certify-success' : 'certify-fail'">
       </div>
       <div class="certify-title">
-        {{ paraphrase({ value: state.status, options: attestationOptions }) }}
+        {{ paraphrase({ value: state.item.status, options: attestationOptions }) }}
       </div>
       <van-cell-group>
-        <van-cell title="姓名" :value="state.certify.name" />
-        <van-cell title="证件号码" :value="state.certify.number" />
+        <van-cell title="姓名" :value="state.item.name" />
+        <van-cell title="证件号码" :value="state.item.number" />
       </van-cell-group>
-      <div v-if="state.status === 2" class="certify-row">
+      <div v-if="state.item.status === 2" class="certify-row">
         <van-button
           round
           block
@@ -27,47 +27,19 @@
 
 <script setup>
 import { reactive, computed } from 'vue'
-import { certifyAli, getCertify } from '@/api/certification'
+import { getCertify } from '@/api/certification'
 import { paraphrase } from '@/filters/index'
 import { attestationOptions } from '@/utils/explain'
-import { useRouter } from 'vue-router'
 import store from '@/store/index'
 
-const router = useRouter()
-let query = router.currentRoute.value.query
-let result = JSON.parse(query?.response || '{}')
-
-let info = computed(() => store.state.user.info)
-
 const state = reactive({
-  form: {
-    certifyId: result?.extInfo?.certifyId,
-  },
-  certify: {
-    name: '',
-    number: ''
-  },
-  status: result?.code === 1000 ? 1 : 2
+  item: {}
 })
 
-if (query.response) {
-  certifyAli(state.form)
-    .then((response) => {
-      state.certify.name = response.data.name
-      state.certify.number = response.data.number
-
-      store.dispatch('user/getInfo')
-    })
-} else {
-  if (info.value?.cer_status === 1) {
-    state.status = 1
-    getCertify()
-      .then((response) => {
-        state.certify.name = response.data.name
-        state.certify.number = response.data.number
-      })
-  }
-}
+getCertify()
+  .then((response) => {
+    state.item = response.data
+  })
 
 </script>
 
