@@ -10,64 +10,24 @@
         做任务，领取{{ paraphrase({ value: 'integral', options: integralOptions }) }}
       </div>
       <div class="content">
-        <div class="card">
+        <div class="card" v-for="(item,index) in state.taskList" :key="index">
           <div class="card-l">
-            <img src="@/assets/images/integral/integral_icon_qd.png" alt="">
+            <img :src="paraphrase({ value: item.hook, options: taskOptions, l: 'icon' })" alt="">
             <div>
-              <p>每日签到</p>
-              <p class="integral">+2 {{ paraphrase({ value: 'integral', options: integralOptions }) }}</p>
+              <p>{{item.name}}</p>
+              <p class="integral">+{{item.reward}}{{ paraphrase({ value: 'integral', options: integralOptions }) }}</p>
             </div>
           </div>
           <div class="card-r">
-            <div class="card-btn"> 签到 </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-l">
-            <img src="@/assets/images/integral/integral_icon_gmcp.png" alt="">
-            <div>
-              <p>购买藏品</p>
-              <p class="integral">+2 {{ paraphrase({ value: 'integral', options: integralOptions }) }}</p>
+            <div class="card-btn disabled" v-if="item.state == 1"> 已完成 </div>
+            <div v-else @click="onTask(item.hook)">
+              <div v-if="item.progress > 0">
+                <div class="card-btn"> {{item.progress}}/{{item.number}} </div>
+              </div>
+              <div class="card-btn" v-else> 
+                {{ item.hook === 'sign:in' ? '签到' : '去完成' }}
+              </div>
             </div>
-          </div>
-          <div class="card-r">
-            <div class="card-btn"> 1/2 </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-l">
-            <img src="@/assets/images/integral/integral_icon_yqhy.png" alt="">
-            <div>
-              <p>邀请好友</p>
-              <p class="integral">+2 {{ paraphrase({ value: 'integral', options: integralOptions }) }}</p>
-            </div>
-          </div>
-          <div class="card-r">
-            <div class="card-btn"> 去完成 </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-l">
-            <img src="@/assets/images/integral/integral_icon_qdrz.png" alt="">
-            <div>
-              <p>注册并认证</p>
-              <p class="integral">+2 {{ paraphrase({ value: 'integral', options: integralOptions }) }}</p>
-            </div>
-          </div>
-          <div class="card-r">
-            <div class="card-btn disabled"> 已完成 </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-l">
-            <img src="@/assets/images/integral/integral_icon_dzsc.png" alt="">
-            <div>
-              <p>点赞收藏</p>
-              <p class="integral">+2 {{ paraphrase({ value: 'integral', options: integralOptions }) }}</p>
-            </div>
-          </div>
-          <div class="card-r">
-            <div class="card-btn disabled"> 已完成 </div>
           </div>
         </div>
       </div>
@@ -77,18 +37,63 @@
 
 <script setup>
 import { ref, computed, reactive, defineExpose } from 'vue'
-import { integralOptions } from '@/utils/explain'
+import { integralOptions, taskOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
 import store from '@/store/index'
+import { tasksList, subTasks } from '@/api/setting'
+import { showToast } from 'vant'
+import globleFun from '@/utils/link'
 
 let info = computed(() => store.state.user.info)
 
 const state = reactive({
   show: false,
+  taskList: []
 })
 
+
 const init = (value) => {
-  state.show = true
+  getList()
+}
+
+const getList = () =>{
+  tasksList().then(({ data }) =>{
+    state.taskList = [...data.day, ...data.more, ...data.once];
+    state.show = true
+  })
+}
+
+const onTask = (hook) =>{
+  const toastHooks = ["share:goods", "show:goods", "collect:goods"]
+  const buyHooks = ["buy:goods", "integral:goods"]
+
+  if(hook === 'sign:in') {
+    subTasks({ hook }).then(()=>{
+      getList()
+      store.dispatch('user/getInfo')
+      showToast("操作成功")
+    })
+  }
+  
+  if(hook === "real:name:auth") {
+    globleFun.onGoto('/authentication')
+  }
+
+  if(hook === "invite:friend") {
+    if (info.value?.cer_status !== 1) {
+      showToast('请先实名认证')
+    } else {
+      globleFun.onGoto('/invitation')
+    }
+  }
+
+  if(buyHooks.includes(hook)) {
+    globleFun.onGoto('/dashboard')
+  }
+
+  if(toastHooks.includes(hook)) {
+    showToast("请下载App进行操作")
+  }
 }
 
 defineExpose({ init })
@@ -112,6 +117,8 @@ const onClose = () => {}
   }
   .content {
     padding: var(--root-page-spacing);
+    max-height: 75vh;
+    overflow-y: auto;
     .card {
       background-color: var(--root-bg-color2);
       padding: 19px 16px;

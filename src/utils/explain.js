@@ -1,3 +1,5 @@
+import { getImageUrl } from '@/utils/index'
+
 export const pages = {
   page: 1,
   limit: 10
@@ -47,3 +49,14 @@ export const avatarActions = [
 	{ name: '相册', color: 'var(--root-theme-color)' }
 ]
 
+export const taskOptions = [
+  { icon: getImageUrl('integral/qd.png'), value: 'sign:in' }, // 签到
+  { icon: getImageUrl('integral/fenxiang.png'), value: 'share:goods' }, // 分享藏品
+  { icon: getImageUrl('integral/zhuce.png'), value: 'register' }, // 注册
+  { icon: getImageUrl('integral/shoucang.png'), value: 'collect:goods' }, // 收藏
+  { icon: getImageUrl('integral/xuanyao.png'), value: 'show:goods' }, // 炫耀
+  { icon: getImageUrl('integral/rz.png'), value: 'real:name:auth' }, // 实名认证
+  { icon: getImageUrl('integral/jfgm.png'), value: 'integral:goods' }, // 积分购买
+  { icon: getImageUrl('integral/gmcp.png'), value: 'buy:goods' }, // 购买藏品
+  { icon: getImageUrl('integral/yqhy.png'), value: 'invite:friend' }, // 邀请好友
+]
