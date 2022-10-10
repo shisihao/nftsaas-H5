@@ -5,6 +5,7 @@
       position="bottom"
       @closed="onClose"
       round
+      safe-area-inset-bottom
     >
       <div class="title">
         做任务，领取{{ paraphrase({ value: 'integral', options: integralOptions }) }}
@@ -108,15 +109,19 @@ const onClose = () => {}
 <style lang="scss" scoped>
 .main-section {
   :deep(.van-popup) {
+    max-width: 375px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     background-color: var(--root-bg-color1);
   }
   .title {
-    margin-top: 25px;
-    font-size: 18px;
-    padding: 0 30px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 25px 30px 15px 30px;
   }
   .content {
-    padding: var(--root-page-spacing);
+    padding: 0 var(--root-page-spacing) var(--root-page-spacing) var(--root-page-spacing);
     max-height: 75vh;
     overflow-y: auto;
     .card {
