@@ -1,8 +1,8 @@
 <template>
   <div class="cancel-contain">
-    <van-popup v-model:show="state.show">
+    <van-popup v-model:show="state.show" position="bottom" round>
       <div class="title">
-        取消订单
+        确认取消
       </div>
       <div class="content">
         订单一经取消，无法恢复<br/>
@@ -13,7 +13,7 @@
           暂不
         </van-button>
         <van-button class="btn btn-submit" round :loading="state.btnLoading" @click="onCancel">
-          确认
+          确定
         </van-button>
       </div>
     </van-popup>
@@ -65,9 +65,13 @@ const onCancel = (data) => {
 <style lang="scss" scoped>
 .cancel-contain {
   :deep(.van-popup) {
-    width: 288px;
-    border-radius: 12px;
+    max-width: 375px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    overflow: visible;
     padding-bottom: 20px;
+    background-color: var(--root-bg-color1) ;
     .title {
       font-size: 18px;
       color: #2C2C42;
@@ -92,8 +96,8 @@ const onCancel = (data) => {
         padding: 0 40px;
       }
       .btn-close {
-          color: var(--root-text-color2);
-        background-color: rgba(75, 75, 89, 0.1);
+        color: var(--root-text-color5);
+        background-color: var(--root-text-color4);
       }
       .btn-submit {
         color: var(--root-text-color5);
