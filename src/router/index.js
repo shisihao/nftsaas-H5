@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import Layout from '@/layout/index.vue'
 
-export const special =  ['dashboard', 'user']
+export const special = ['dashboard', 'user']
 
 export const constantRoutes = [
 
@@ -11,33 +11,42 @@ export const constantRoutes = [
     hidden: true,
     component: () => import("@/views/login/index.vue"),
     meta: {
-      title : '登录',
-      noCache : true,
+      title: '登录',
+      noCache: true,
     },
   },
-  
+
   {
     path: "/register",
     name: "register",
     hidden: true,
     component: () => import("@/views/login/register.vue"),
     meta: {
-      title : '注册',
-      noCache : true,
+      title: '注册',
+      noCache: true,
     },
   },
-  
+
   {
     path: "/forgot",
     name: "forgot",
     hidden: true,
     component: () => import("@/views/login/forgot.vue"),
     meta: {
-      title : '忘记密码',
-      noCache : true,
+      title: '忘记密码',
+      noCache: true,
     },
   },
-  
+
+  {
+    path: "/public-agreement",
+    name: "public-agreement",
+    component: () => import('@/views/components/common/agreement.vue'),
+    meta: {
+      title: '协议'
+    }
+  },
+
   {
     path: '/404',
     component: () => import('@/views/error-page/404.vue'),
@@ -52,7 +61,7 @@ export const constantRoutes = [
 
 
 export const asyncRoutes = [
-  
+
   {
     path: "/",
     name: "dashboard",
@@ -64,10 +73,10 @@ export const asyncRoutes = [
         name: "dashboard",
         component: () => import("@/views/dashboard/index.vue"),
         meta: {
-          title : '首页',
+          title: '首页',
           icon: "dashboard",
-          noCache : true,
-          roles : ['admin', 'user'],
+          noCache: true,
+          roles: ['admin', 'user'],
         },
       },
       {
@@ -75,7 +84,7 @@ export const asyncRoutes = [
         name: "user",
         component: () => import('@/views/user/index.vue'),
         meta: {
-          title : '我的'
+          title: '我的'
         }
       },
       {
@@ -83,7 +92,7 @@ export const asyncRoutes = [
         name: "invitation",
         component: () => import('@/views/user/Invitation.vue'),
         meta: {
-          title : '邀请好友'
+          title: '邀请好友'
         }
       },
       {
@@ -91,7 +100,7 @@ export const asyncRoutes = [
         name: "good-details",
         component: () => import('@/views/good-details/index.vue'),
         meta: {
-          title : '藏品详情'
+          title: '藏品详情'
         }
       },
       {
@@ -99,7 +108,7 @@ export const asyncRoutes = [
         name: "box-details",
         component: () => import('@/views/box-details/index.vue'),
         meta: {
-          title : '盲盒详情'
+          title: '盲盒详情'
         }
       },
       {
@@ -107,7 +116,7 @@ export const asyncRoutes = [
         name: "good-my",
         component: () => import('@/views/good-my/index.vue'),
         meta: {
-          title : '我的藏品'
+          title: '我的藏品'
         }
       },
       {
@@ -115,7 +124,7 @@ export const asyncRoutes = [
         name: "box-list",
         component: () => import('@/views/box-list/index.vue'),
         meta: {
-          title : '我的盲盒'
+          title: '我的盲盒'
         }
       },
       {
@@ -123,7 +132,7 @@ export const asyncRoutes = [
         name: "box-my",
         component: () => import('@/views/box-my/index.vue'),
         meta: {
-          title : '我的盲盒'
+          title: '我的盲盒'
         }
       },
       {
@@ -131,7 +140,7 @@ export const asyncRoutes = [
         name: "setting",
         component: () => import('@/views/setting/index.vue'),
         meta: {
-          title : '设置'
+          title: '设置'
         }
       },
       {
@@ -139,7 +148,7 @@ export const asyncRoutes = [
         name: "change-password",
         component: () => import('@/views/setting/ChangePassword.vue'),
         meta: {
-          title : '修改登录密码'
+          title: '修改登录密码'
         }
       },
       {
@@ -147,7 +156,7 @@ export const asyncRoutes = [
         name: "verify-account",
         component: () => import('@/views/setting/VerifyAccount.vue'),
         meta: {
-          title : '账号验证'
+          title: '账号验证'
         }
       },
       {
@@ -155,7 +164,7 @@ export const asyncRoutes = [
         name: "set-paypass",
         component: () => import('@/views/setting/SetPaypass.vue'),
         meta: {
-          title : '设置支付密码'
+          title: '设置支付密码'
         }
       },
       {
@@ -163,7 +172,7 @@ export const asyncRoutes = [
         name: "about",
         component: () => import('@/views/setting/about.vue'),
         meta: {
-          title : '关于我们'
+          title: '关于我们'
         }
       },
       {
@@ -171,7 +180,7 @@ export const asyncRoutes = [
         name: "authentication",
         component: () => import('@/views/setting/Authentication.vue'),
         meta: {
-          title : '实名认证'
+          title: '实名认证'
         }
       },
       {
@@ -179,7 +188,7 @@ export const asyncRoutes = [
         name: "authentication-result",
         component: () => import('@/views/setting/AuthenticationResult.vue'),
         meta: {
-          title : '实名认证'
+          title: '实名认证'
         }
       },
       {
@@ -187,7 +196,7 @@ export const asyncRoutes = [
         name: "agreement",
         component: () => import('@/views/setting/agreement.vue'),
         meta: {
-          title : '协议'
+          title: '协议'
         }
       },
       {
@@ -195,7 +204,7 @@ export const asyncRoutes = [
         name: "message",
         component: () => import('@/views/setting/message.vue'),
         meta: {
-          title : '公告中心'
+          title: '公告中心'
         }
       },
       {
@@ -203,7 +212,7 @@ export const asyncRoutes = [
         name: "messageDetail",
         component: () => import('@/views/setting/messageDetail.vue'),
         meta: {
-          title : '详情'
+          title: '详情'
         }
       },
       {
@@ -211,7 +220,7 @@ export const asyncRoutes = [
         name: "help",
         component: () => import('@/views/setting/help.vue'),
         meta: {
-          title : '常见问题'
+          title: '常见问题'
         }
       },
       {
@@ -219,7 +228,7 @@ export const asyncRoutes = [
         name: "helpDetail",
         component: () => import('@/views/setting/helpDetail.vue'),
         meta: {
-          title : '详情'
+          title: '详情'
         }
       },
       {
@@ -227,7 +236,7 @@ export const asyncRoutes = [
         name: "replacePhone",
         component: () => import('@/views/setting/replacePhone.vue'),
         meta: {
-          title : '更换手机号'
+          title: '更换手机号'
         }
       },
       {
@@ -235,7 +244,7 @@ export const asyncRoutes = [
         name: "integral",
         component: () => import('@/views/setting/integral.vue'),
         meta: {
-          title : '我的积分'
+          title: '我的积分'
         }
       },
       {
@@ -243,7 +252,7 @@ export const asyncRoutes = [
         name: "order",
         component: () => import('@/views/order/index.vue'),
         meta: {
-          title : '我的订单'
+          title: '我的订单'
         }
       },
       {
@@ -251,7 +260,7 @@ export const asyncRoutes = [
         name: "ordering",
         component: () => import('@/views/order/ordering.vue'),
         meta: {
-          title : '订单详情'
+          title: '订单详情'
         }
       },
       {
@@ -259,7 +268,7 @@ export const asyncRoutes = [
         name: "order-result",
         component: () => import('@/views/order/orderResult.vue'),
         meta: {
-          title : '订单结果'
+          title: '订单结果'
         }
       },
       {
@@ -267,7 +276,7 @@ export const asyncRoutes = [
         name: "synthesis-list",
         component: () => import('@/views/synthesis/synthesis-list.vue'),
         meta: {
-          title : '合成列表'
+          title: '合成列表'
         }
       },
       {
@@ -275,7 +284,7 @@ export const asyncRoutes = [
         name: "synthesis",
         component: () => import('@/views/synthesis/index.vue'),
         meta: {
-          title : '合成'
+          title: '合成'
         }
       },
       {
@@ -283,7 +292,7 @@ export const asyncRoutes = [
         name: "synthesis-record",
         component: () => import('@/views/synthesis/synthesis-record.vue'),
         meta: {
-          title : '合成记录'
+          title: '合成记录'
         }
       },
       {
@@ -291,7 +300,7 @@ export const asyncRoutes = [
         name: "transfer-record",
         component: () => import('@/views/user/TransferRecord.vue'),
         meta: {
-          title : '转赠记录'
+          title: '转赠记录'
         }
       },
       {
@@ -299,7 +308,7 @@ export const asyncRoutes = [
         name: "goods-zs",
         component: () => import('@/views/goods-zs/index.vue'),
         meta: {
-          title : '藏品证书'
+          title: '藏品证书'
         }
       },
       {
@@ -307,7 +316,7 @@ export const asyncRoutes = [
         name: "interest",
         component: () => import('@/views/interest/index.vue'),
         meta: {
-          title : '权益中心'
+          title: '权益中心'
         }
       },
       {
@@ -315,7 +324,7 @@ export const asyncRoutes = [
         name: "interest-details",
         component: () => import('@/views/interest/interest-details.vue'),
         meta: {
-          title : '权益详情'
+          title: '权益详情'
         }
       },
       {
@@ -323,7 +332,7 @@ export const asyncRoutes = [
         name: "interest-logs",
         component: () => import('@/views/interest/interest-logs.vue'),
         meta: {
-          title : '权益使用记录'
+          title: '权益使用记录'
         }
       },
       {
@@ -331,7 +340,7 @@ export const asyncRoutes = [
         name: "my-goods-list",
         component: () => import('@/views/user/MyGoodsList.vue'),
         meta: {
-          title : '我的藏品'
+          title: '我的藏品'
         }
       },
       {
@@ -339,13 +348,13 @@ export const asyncRoutes = [
         name: "blank-iframe",
         component: () => import('@/views/blank-iframe/index.vue'),
         meta: {
-          title : '活动'
+          title: '活动'
         }
       },
     ]
   },
 
-  
+
   /* {
     path: '/user',
     component: () => import('@/views/user/index.vue'),
@@ -357,14 +366,14 @@ export const asyncRoutes = [
       roles : ['admin', 'user'],
     },
   }, */
-  
-  { path : '/:pathMatch(.*)', redirect : '/404', hidden : true }
+
+  { path: '/:pathMatch(.*)', redirect: '/404', hidden: true }
 ]
 
 const createRouters = createRouter({
-  history: createWebHistory( '/' ),
-  routes: constantRoutes.concat( asyncRoutes ),
-  scrollBehavior : () => ( { left : 0, top : 0 } ),
+  history: createWebHistory('/'),
+  routes: constantRoutes.concat(asyncRoutes),
+  scrollBehavior: () => ({ left: 0, top: 0 }),
 })
 
 const router = createRouters
