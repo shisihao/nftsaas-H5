@@ -345,7 +345,7 @@ export const asyncRoutes = [
       {
         path: "/blank-iframe",
         name: "blank-iframe",
-        component: () => import('@/views/BlankIframe/index.vue'),
+        component: () => import('@/views/blank-iframe/index.vue'),
         meta: {
           title : '活动'
         }
