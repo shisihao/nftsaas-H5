@@ -2,7 +2,7 @@
   <div class="synthesis-record">
     <van-pull-refresh v-model="state.refreshing" @refresh="onRefresh" success-text="刷新成功">
       <van-list v-model:loading="state.loading" :finished="state.finished" @load="onLoad">
-        <div class="record-list" v-for="(item, index) in list" :key="index">
+        <div class="record-list" v-for="(item, index) in state.list" :key="index">
           <record-describe :item="item"></record-describe>
           <div class="divider"></div>
           <records-list :item="item.formulas"></records-list>
