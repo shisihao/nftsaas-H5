@@ -9,7 +9,7 @@ import { getToken, TokenKey } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_API, // url = base url + request url
+  baseURL: import.meta.env.VITE_USER_NODE_ENV === 'development' ? import.meta.env.VITE_APP_BASE_API : '/h5/', // url = base url + request url
   // withCredentials: true, // // `withCredentials` 表示跨域请求时是否需要使用凭证
   timeout: 60 * 1e3 // request timeout
 })

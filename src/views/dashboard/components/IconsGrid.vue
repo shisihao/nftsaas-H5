@@ -47,7 +47,11 @@ getMsgCount()
   })
 
 const onActivity = () => {
-  router.push({ path: '/blank-iframe', query: { src: import.meta.env.VITE_ACTIVITY }})
+  const url = location.origin.replace(/:\/\/.*?\./,'://h5.')
+
+  const iframeUrl = import.meta.env.VITE_USER_NODE_ENV === 'development' ? import.meta.env.VITE_ACTIVITY : `${url}/invite/detail`
+
+  router.push({ path: '/blank-iframe', query: { src: iframeUrl }})
 }
 
 </script>
