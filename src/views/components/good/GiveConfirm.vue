@@ -19,7 +19,10 @@
               {{ row[state.type]?.name }}
             </div>
             <div v-if="state.type === 'goods'" class="goods-num">
-              <span>{{ `${row?.goods?.serial}#${row.num}/${row?.goods?.cast_goods_stock}` }}</span>
+              <span>
+                <svg-icon icon-class="serial" class-name="icon-serial" />
+                {{ `${row?.goods?.serial}#${row.num}/${row?.goods?.cast_goods_stock}` }}
+              </span>
             </div>
             <!-- <div class="collection-gather">
               <div class="avatar">
@@ -49,17 +52,18 @@
 
 <script setup>
 import { ref, reactive, defineExpose, inject, computed } from 'vue'
+import { showSuccessToast } from 'vant'
 import store from '@/store/index'
+import { paraphrase } from '@/filters/index'
 import globleFun from '@/utils/link'
 import { DominKey, getToken } from '@/utils/auth'
 import { integralOptions } from '@/utils/explain'
 import { sleep } from '@/utils/index'
-import { paraphrase } from '@/filters/index'
 import { goodGive } from '@/api/goods'
 import { boxGive } from '@/api/box'
+import SvgIcon from '@/components/YuSvgIcon'
 import PayPassPopup from '../order/PayPassPopup.vue'
 import PayInputPopup from '../order/PayInputPopup.vue'
-import { showSuccessToast } from 'vant'
 
 const domin = getToken(DominKey)
 
@@ -188,19 +192,9 @@ const onPayPassword = (value) => {
           span {
             word-break:break-all;
             color: var(--root-text-color2);
-            position: relative;
-            padding-left: 18px;
-            &::before {
-              content: '';
-              width: 14px;
-              height: 14px;
-              background-repeat: no-repeat;
-              background-position: center;
-              background-size: 100%;
-              background-image: url('@/assets/images/public/common_icon_number.png');
-              position: absolute;
-              left: 0;
-              top: 0;
+            .icon-serial {
+              font-size: 12px;
+              color: var(--root-theme-color);
             }
           }
         }

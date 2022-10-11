@@ -41,6 +41,7 @@
               {{ item?.goods?.name }}
             </div>
             <div class="goods-num">
+              <svg-icon icon-class="serial" class-name="icon-serial" />
               {{ `${item?.goods?.serial}#${item?.user_goods?.[0].num}/${item?.goods?.cast_goods_stock}` }}
             </div>
             <div class="collection-gather">
@@ -87,13 +88,14 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
-import UserTitle from './UserTitle.vue'
-import { getGoodsList, getGoodsTags, getGoodsTagsList } from '@/api/goods'
+import store from '@/store/index'
 import { pages as commonPages } from '@/utils/explain'
 import { DominKey, getToken } from '@/utils/auth'
 import globleFun from '@/utils/link'
+import { getGoodsList, getGoodsTags, getGoodsTagsList } from '@/api/goods'
+import SvgIcon from '@/components/YuSvgIcon'
+import UserTitle from './UserTitle.vue'
 import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
-import store from '@/store/index'
 
 const domin = getToken(DominKey)
 
@@ -231,19 +233,9 @@ watch(activeNames, (newValue, oldValue) => {
         word-break:break-all;
         font-size: 12px;
         color: var(--root-text-color2);
-        position: relative;
-        padding-left: 16px;
-        &::before {
-          content: '';
-          width: 12px;
-          height: 12px;
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: 100%;
-          background-image: url('@/assets/images/public/common_icon_number.png');
-          position: absolute;
-          left: 0;
-          top: 0;
+        .icon-serial {
+          font-size: 12px;
+          color: var(--root-theme-color);
         }
       }
       .collection-gather {

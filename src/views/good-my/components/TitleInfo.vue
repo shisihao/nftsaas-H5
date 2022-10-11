@@ -4,7 +4,10 @@
       {{ item?.goods?.name }}
     </div>
     <div class="goods-num">
-      <span>{{ `${item?.goods?.serial || ''}#${item.num || ''}/${item?.goods?.cast_goods_stock || ''}` }}</span>
+      <span>
+        <svg-icon icon-class="serial" class-name="icon-serial" />
+        {{ `${item?.goods?.serial || ''}#${item.num || ''}/${item?.goods?.cast_goods_stock || ''}` }}
+      </span>
     </div>
   </div>
 </template>
@@ -37,20 +40,10 @@ defineProps({
       color: var(--root-text-color2);
       text-align: center;
       span {
-        position: relative;
-        padding-left: 16px;
         word-break:break-all;
-        &::before {
-          content: '';
-          width: 12px;
-          height: 12px;
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: 100%;
-          background-image: url('@/assets/images/public/common_icon_number.png');
-          position: absolute;
-          left: 0;
-          top: 0;
+        .icon-serial {
+          font-size: 12px;
+          color: var(--root-theme-color);
         }
       }
     }
