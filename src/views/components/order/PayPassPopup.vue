@@ -49,7 +49,7 @@ const onClose = () => {
     margin: 0 auto;
     .pay-pass-wrapper {
       padding: 0 var(--root-page-spacing);
-      color: var(--root-text-color4);
+      color: var(--root-text-color1);
       .title {
         font-size: 18px;
         text-align: center;
@@ -72,12 +72,12 @@ const onClose = () => {
           padding: 0 40px;
         }
         .btn-close {
-          color: var(--root-text-color2);
-          background-color: rgba(75, 75, 89, 0.1);
+          color: var(--root-text-color5);
+          background-color: var(--root-button-color1);
         }
         .btn-submit {
-          color: var(--root-text-color1);
-          background-image: var(--root-button-color1);
+          color: var(--root-text-color5);
+          background-color: var(--root-theme-color);
         }
       }
     }

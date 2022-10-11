@@ -69,7 +69,7 @@ const onClose = () => {
     right: 0;
     margin: 0 auto;
     .pay-input-wrapper {
-      color: var(--root-text-color4);
+      color: var(--root-text-color1);
       .title {
         font-size: 18px;
         text-align: center;
