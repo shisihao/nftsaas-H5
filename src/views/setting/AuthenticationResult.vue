@@ -1,6 +1,6 @@
 <template>
   <div class="main-contain">
-    <div class="certify-result">
+    <div class="certify-result" v-if="state.item">
       <div class="certify-img" :class="state.item.status === 1 ? 'certify-success' : 'certify-fail'">
       </div>
       <div class="certify-title">
@@ -33,7 +33,7 @@ import { attestationOptions } from '@/utils/explain'
 import store from '@/store/index'
 
 const state = reactive({
-  item: {}
+  item: null
 })
 
 getCertify()
