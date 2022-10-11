@@ -371,7 +371,7 @@ export const asyncRoutes = [
 ]
 
 const createRouters = createRouter({
-  history: createWebHistory('/'),
+  history: createWebHistory('/web'),
   routes: constantRoutes.concat(asyncRoutes),
   scrollBehavior: () => ({ left: 0, top: 0 }),
 })
