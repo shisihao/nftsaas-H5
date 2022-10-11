@@ -47,9 +47,10 @@ getMsgCount()
   })
 
 const onActivity = () => {
-  const url = location.origin.replace(/:\/\/.*?\./,'://h5.')
+  /* const url = location.origin.replace(/:\/\/.*?\./,'://h5.')
 
-  const iframeUrl = import.meta.env.VITE_USER_NODE_ENV === 'development' ? import.meta.env.VITE_ACTIVITY : `${url}/invite/detail`
+  const iframeUrl = import.meta.env.VITE_USER_NODE_ENV === 'development' ? import.meta.env.VITE_ACTIVITY : `${url}/invite/detail` */
+  const iframeUrl = import.meta.env.VITE_USER_NODE_ENV === 'development' ? import.meta.env.VITE_ACTIVITY : `${location.origin}/invite/detail`
 
   router.push({ path: '/blank-iframe', query: { src: iframeUrl }})
 }
