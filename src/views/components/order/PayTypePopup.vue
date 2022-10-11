@@ -15,7 +15,8 @@
             <van-cell-group>
               <van-cell clickable v-for="(item, index) in payOptions(payTypeOptions)" :key="index" @click="state.form.pay_type = item.value">
               <template #title>
-                <svg-icon :icon-class="item.icon" class-name="type-icon"/>
+                <van-image v-if="item.value === 'integral'" class="icon-img" fit="cover" :src="`${domin}${item.icon}` "/>
+                <svg-icon v-else :icon-class="item.icon" class-name="icon-type"/>
                 <span class="custom-title">
                   {{ item.label }}
                 </span>
@@ -40,11 +41,14 @@ import { ref, computed, reactive } from 'vue'
 import { showToast, showLoadingToast } from 'vant'
 import store from '@/store/index'
 import { payTypeOptions, integralOptions } from '@/utils/explain'
-import { orderPay, boxPlace } from '@/api/order'
 import globleFun from '@/utils/link'
+import { DominKey, getToken } from '@/utils/auth'
+import { orderPay, boxPlace } from '@/api/order'
 import SvgIcon from '@/components/YuSvgIcon'
 import PayPassPopup from './PayPassPopup.vue'
 import PayInputPopup from './PayInputPopup.vue'
+
+const domin = getToken(DominKey)
 
 const show = ref(false)
 const payPassPopup = ref(null)
@@ -157,7 +161,6 @@ const onPayPassword = (value) => {
     margin: 0 auto;
     .pay-type-wrapper {
       padding: 0 var(--root-page-spacing);
-      color: var(--root-text-color4);
       
       .title {
         font-size: 18px;
@@ -167,7 +170,13 @@ const onPayPassword = (value) => {
       }
       .pay-item {
         padding-bottom: 30px;
-        .type-icon {
+        .icon-img {
+          width: 40px;
+          height: 40px;
+          vertical-align: middle;
+          margin-right: 10px;
+        }
+        .icon-type {
           font-size: 40px;
           vertical-align: middle;
           margin-right: 10px;
@@ -196,8 +205,8 @@ const onPayPassword = (value) => {
         width: 100%;
         margin-bottom: 20px;
         font-size: 18px;
-        color: var(--root-text-color1);
-        background-image: var(--root-button-color1);
+        color: var(--root-text-color5);
+        background: var(--root-theme-color);
       }
     }
   }

@@ -9,10 +9,10 @@
           <svg-icon icon-class="zhuanzeng" class-name="icon-zhuanzeng" />
         </div>
         <div class="content">
-          <van-form ref="form" @submit="onSubmit">
+          <van-form ref="refForm" @submit="onSubmit">
             <van-field
               v-model="state.form.account"
-              ref="account"
+              ref="refAccount"
               name="account"
               autocomplete="off"
               label="请输入对方账号"
@@ -60,8 +60,8 @@ const domin = getToken(DominKey)
 const config = computed(() => store.state.user.config)
 
 const giveConfirm = ref(null)
-const form = ref(null)
-const account = ref(null)
+const refForm = ref(null)
+const refAccount = ref(null)
 
 const getInitialData = () => ({
   show: false,
@@ -91,22 +91,24 @@ const onClose = () => {
 }
 
 const onClosed = () => {
-  form.value.resetValidation()
+  refForm.value.resetValidation()
   Object.assign(state, getInitialData())
 }
 
 const onSubmitNext = () => {
-  form.value.submit()
+  refForm.value.submit()
 }
 
 const onSubmit = () => {
-  account.value.blur()
+  refAccount.value.blur()
   state.btnLoading = true
   sleep(600)
     .then(()=> {
       giveAccount(state.form)
         .then((response) => {
-          giveConfirm.value.init({ name: response.data, account: state.form.account, interest_goods_id: state.item?.interest_goods_id, interest_goods_num: state.item?.interest_goods_num })
+          let item = { name: response.data, account: state.form.account, interest_goods_id: state.item?.interest_goods_id, interest_goods_num: state.item?.interest_goods_num }
+          
+          giveConfirm.value.init(item)
           onClose()
         })
         .finally(() => {

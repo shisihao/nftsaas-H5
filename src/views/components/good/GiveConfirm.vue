@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="give-confirm-contain">
-      <van-popup v-model:show="state.show" round position="bottom" >
+      <van-popup v-model:show="state.show" round position="bottom" @closed="onClosed">
         <div class="title">
           转赠给用户「{{ state.name }}」
         </div>
@@ -11,14 +11,14 @@
               <van-image
                 lazy-load
                 fit="cover"
-                :src="Array.isArray(row?.goods?.images) && `${domin}${row.goods.images[0]}` "
+                :src="Array.isArray(row[state.type]?.images) && `${domin}${row[state.type].images[0]}` "
               />
             </div>
             <p>是否确认转赠</p>
             <div class="goods-name">
-              {{ row?.goods?.name }}
+              {{ row[state.type]?.name }}
             </div>
-            <div class="goods-num">
+            <div v-if="state.type === 'goods'" class="goods-num">
               <span>{{ `${row?.goods?.serial}#${row.num}/${row?.goods?.cast_goods_stock}` }}</span>
             </div>
             <!-- <div class="collection-gather">
@@ -53,8 +53,10 @@ import store from '@/store/index'
 import globleFun from '@/utils/link'
 import { DominKey, getToken } from '@/utils/auth'
 import { integralOptions } from '@/utils/explain'
+import { sleep } from '@/utils/index'
 import { paraphrase } from '@/filters/index'
-import { giveGoods } from '@/api/goods'
+import { goodGive } from '@/api/goods'
+import { boxGive } from '@/api/box'
 import PayPassPopup from '../order/PayPassPopup.vue'
 import PayInputPopup from '../order/PayInputPopup.vue'
 import { showSuccessToast } from 'vant'
@@ -72,8 +74,10 @@ const getInitialData = () => ({
   show: false,
   btnLoading: false,
   name: '',
+  type: 'goods',
   form: {
     user_goods_id: 0,
+    user_box_id: 0,
     account: '',
     pay_password: '',
     interest_goods_id: '',
@@ -86,15 +90,22 @@ const state = reactive(getInitialData())
 const init = (value) => {
   state.name = value.name
   state.form.account = value.account
-  state.form.user_goods_id = row.value.id
   state.form.interest_goods_id = value.interest_goods_id
   state.form.interest_goods_num = value.interest_goods_num
+
+  if ('box' in row.value) state.type = 'box'
+  state.type === 'box' ? state.form.user_box_id = row.value.id : state.form.user_goods_id = row.value.id
+
   state.show = true
 }
 
 defineExpose({ init })
 
 const onClose = () => {
+  state.show = false
+}
+
+const onClosed = () => {
   Object.assign(state, getInitialData())
 }
 
@@ -109,11 +120,17 @@ const onSubmit = () => {
 const onPayPassword = (value) => {
   state.form.pay_password = value
   state.btnLoading = true
-  giveGoods(state.form)
+  const type = state.type === 'box'
+  const api = type ? boxGive(state.form) : goodGive(state.form)
+
+  api
     .then((response) => {
       showSuccessToast(response.msg)
       onClose()
-      globleFun.onGoto('/user')
+      sleep(600)
+        .then(() => {
+          globleFun.onGoto(type ? '/box-list' : '/user', 'replace')
+        })
     })
     .finally(() => {
       state.btnLoading = false

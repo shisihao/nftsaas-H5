@@ -19,8 +19,17 @@ import { special } from '@/router/index'
 
 const router = useRouter()
 const route = useRoute()
+
+const pathLeftMap = new Map([
+  [ '/box-list', '/user' ]
+])
+
 const onHandleRouter = () => {
-  router.go(-1)
+  if (pathLeftMap.get(route.path)) {
+    router.replace({ path: pathLeftMap.get(route.path) })
+  } else {
+    router.go(-1)
+  }
 }
 </script>
 

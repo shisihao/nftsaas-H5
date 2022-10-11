@@ -31,7 +31,7 @@
         开盲盒
       </van-button>
     </van-action-bar>
-    <give-popup ref="givePopup" />
+    <give-popup ref="refGivePopup" />
     <buy-advance-popup ref="buyAdvancePopup" type="give" @equity-item="onEquityItem" />
     <tips-popup ref="tipsPopup">
       <template v-slot:content>
@@ -46,10 +46,10 @@
 <script setup>
 import { ref, computed, provide } from 'vue'
 import store from '@/store/index'
+import moment from 'moment'
 import GivePopup from '../../components/good/GivePopup.vue'
 import BuyAdvancePopup from '../../components/good/BuyAdvancePopup.vue'
 import TipsPopup from '@/components/TipsPopup/index.vue'
-import moment from 'moment'
 import OpenTipsPopup from '@/views/box-list/components/OpenTipsPopup.vue'
 
 const config = computed(() => store.state.user.config)
@@ -67,15 +67,15 @@ const props = defineProps({
 
 const buyAdvancePopup = ref(null)
 const openTipsPopup = ref(null)
-const refItem = computed(() => props.item)
+const computedItem = computed(() => props.item)
 
-provide('item', refItem)
+provide('item', computedItem)
 
-const givePopup = ref(null)
+const refGivePopup = ref(null)
 
 const onHandleGive = () => {
   if (props.giveStatus.type === 4) {
-    givePopup.value.init()
+    refGivePopup.value.init()
   }
 }
 
@@ -88,13 +88,13 @@ const onEquityItem = (value) => {
   const limitTime = (value?.interests?.give?.give_days ?? 0) * 1000 * 60 * 60 * 24
   const currentTime = +moment().format('x')
   if (
-    (refItem.value.give_time && (+moment(refItem.value.give_time).format('x') + limitTime) > currentTime) ||
-    (refItem.value.created_at && (+moment(refItem.value.created_at).format('x') + limitTime) > currentTime)
+    (computedItem.value.give_time && (+moment(computedItem.value.give_time).format('x') + limitTime) > currentTime) ||
+    (computedItem.value.created_at && (+moment(computedItem.value.created_at).format('x') + limitTime) > currentTime)
     ) {
     return tipsPopup.value.init()
   }
 
-  givePopup.value.init({ ...refItem.value, interest_goods_id: value.goods_id, interest_goods_num: value.goods_num })
+  refGivePopup.value.init({ ...computedItem.value, interest_goods_id: value.goods_id, interest_goods_num: value.goods_num })
 }
 
 const onHandleBox = (item) => {

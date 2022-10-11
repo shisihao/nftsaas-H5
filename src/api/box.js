@@ -30,7 +30,7 @@ export function boxOpen(data) {
 
 // 盲盒转赠
 export function boxGive(data) {
-  return request.post(`/user_box/give`, {
+  return request.post(`/user_goods/user_box/give`, {
     ...data
   })
 }
