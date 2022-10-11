@@ -14,11 +14,15 @@
               fit="cover"
               :src="imgSrc(item)"
             />
-            <div class="box-sign box-primary" :class="open(item.is_open)"></div>
+            <div class="box-sign box-primary"></div>
+            <span class="box-tag" :class="item.is_open === 1?'box-tag-warning':''"> {{item.is_open === 1 ? '已':'未'}}拆开 </span>
           </div>
           <div class="collection-info">
             <div class="collection-title">
               {{ titleName(item) }}
+            </div>
+            <div class="integral_price" v-if="item?.box?.integral_price">
+              {{ item?.box?.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions })}}</span>
             </div>
             <div v-if="authorAvatar(item) && authorName(item)" class="collection-gather">
               <div class="avatar">
@@ -198,8 +202,8 @@ const onRefreshList = ({ id, item }) => {
         overflow: hidden;
       }
       .box-sign {
-        width: 64px;
-        height: 59px;
+        width: 60px;
+        height: 60px;
         position: absolute;
         left: 10px;
         top: 10px;
@@ -208,7 +212,8 @@ const onRefreshList = ({ id, item }) => {
         background-repeat: no-repeat;
       }
       .box-primary {
-        background-image: url('@/assets/images/public/common_icon_biaoqian.png');
+        // background-image: url('@/assets/images/public/common_icon_biaoqian.png');
+        background-image: url('@/assets/images/public/mbox_img_boxlable.png');
       }
       .box-success {
         height: 152px;
@@ -218,12 +223,33 @@ const onRefreshList = ({ id, item }) => {
         height: 152px;
         background-image: url('@/assets/images/public/mbox_img_boxlable.png');
       }
+      .box-tag {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        padding: 6px 12px;
+        background-color: rgba($color: #000000, $alpha: 0.7);
+        border-radius: 12px;
+        color: var(--root-text-color3);
+      }
+      .box-tag-warning {
+        background-color: var(--root-auxiliary-color1);
+        color: var(--root-text-color5);
+      }
     }
     .collection-info {
       padding: 0 0 var(--root-page-spacing) 0;
       .collection-title {
         margin-top: 20px;
         font-size: 18px;
+      }
+      .integral_price {
+        margin-top: 10px;
+        font-size: 24px;
+        color: var(--root-auxiliary-color1);
+        span {
+          font-size: 12px;
+        }
       }
       .collection-gather {
         margin-top: 10px;

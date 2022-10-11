@@ -71,7 +71,7 @@ const props = defineProps({
         font-weight: 500;
         font-size: 15px;
         color: var(--root-text-color1);
-        background-image: linear-gradient(270deg, rgba(18,117,228,0) 0%, rgba(18,117,228,0.2) 100%);
+        background-image: linear-gradient(270deg, var(--root-bg-color1)  0%, rgba(var(--root-theme-color-rgb), 0.2) 100%);
         overflow-x: auto;
         white-space: nowrap;
         padding: 23px 10px;

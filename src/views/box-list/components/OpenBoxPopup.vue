@@ -1,15 +1,16 @@
 <template>
   <div class="open-box-popup-contain">
     <van-popup v-model:show="state.show" :close-on-click-overlay="false">
-      <div class="tips-img">
-        <van-image fit="cover" :src="state.item?.goods?.images[0] ? domin + state.item?.goods?.images[0] : getImageUrl('public/boxdetails_img_wadang.png')" />
-      </div>
-      <div class="title">
-        开启成功
-      </div>
-      <div class="content">
-        恭喜获得“{{ state.item?.goods_id > 0 ? state.item?.goods?.name : `${paraphrase({ value: 'integral', options: integralOptions })}x${state.item?.integral_num || 0}` }}”,<br/>
-        快去看看吧～
+      <div class="popup-bg">
+        <div class="tips-img">
+          <van-image fit="cover" :src="state.item?.goods?.images[0] ? domin + state.item?.goods?.images[0] : getImageUrl('public/boxdetails_img_wadang.png')" />
+        </div>
+        <div class="title">
+          开启成功
+        </div>
+        <div class="content">
+          恭喜获得“{{ state.item?.goods_id > 0 ? state.item?.goods?.name : `${paraphrase({ value: 'integral', options: integralOptions })}x${state.item?.integral_num || 0}` }}”,<br/>
+        </div>
       </div>
       <div class="button-row">
         <!-- <van-button class="btn btn-close" round @click="onClose">
@@ -73,12 +74,18 @@ const onSubmit = () => {
   :deep(.van-popup) {
     width: 288px;
     border-radius: 12px;
-    padding-bottom: 20px;
+    padding: 20px;
     overflow: visible;
+    .popup-bg {
+      background-image: linear-gradient(rgba(var(--root-theme-color-rgb), 0.2) 10%, var(--root-bg-color2) 50%);
+      border-radius: 12px;
+      margin-top: 0;
+      padding-top: 24px;
+    }
     .tips-img {
       width: 80px;
       height: 80px;
-      margin: 40px auto 0 auto;
+      margin: auto;
       border-radius: 8px;
       overflow: hidden;
       img {
