@@ -92,7 +92,7 @@
           loading-text="请求中..."
           :loading="state.btnLoading"
         >
-          进入殿藏数藏平台
+          进入{{ config?.design_style?.app_name }}
         </van-button>
       </van-form>
       <agreement v-if="state.step === 0" v-model:checkedValue="state.checked" class="agreement" />
