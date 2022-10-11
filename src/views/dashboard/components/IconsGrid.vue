@@ -1,8 +1,8 @@
 <template>
   <ul class="icons-wrapper">
-    <li>
+    <li @click="$globleFun.onGoto('/message')">
       <van-badge :content="state.count > 0 ? state.count : ''" max="99" :offset="['-0.15rem', 0]">
-        <div class="icon-img" @click="$globleFun.onGoto('/message')">
+        <div class="icon-img">
           <svg-icon icon-class="xiaoxi" class-name="grid-icon"/>
         </div>
       </van-badge>
@@ -10,16 +10,16 @@
         最新公告
       </p>
     </li>
-    <li>
-      <div class="icon-img" @click="onActivity">
+    <li @click="onActivity">
+      <div class="icon-img">
         <svg-icon icon-class="yaoxin" class-name="grid-icon"/>
       </div>
       <p>
         邀新活动
       </p>
     </li>
-    <li>
-      <div class="icon-img" @click="$globleFun.onGoto('/help')">
+    <li @click="$globleFun.onGoto('/help')">
+      <div class="icon-img">
         <svg-icon icon-class="wenti" class-name="grid-icon"/>
       </div>
       <p>
@@ -47,9 +47,10 @@ getMsgCount()
   })
 
 const onActivity = () => {
-  const url = location.origin.replace(/:\/\/.*?\./,'://h5.')
+  /* const url = location.origin.replace(/:\/\/.*?\./,'://h5.')
 
-  const iframeUrl = import.meta.env.VITE_USER_NODE_ENV === 'development' ? import.meta.env.VITE_ACTIVITY : `${url}/invite/detail`
+  const iframeUrl = import.meta.env.VITE_USER_NODE_ENV === 'development' ? import.meta.env.VITE_ACTIVITY : `${url}/invite/detail` */
+  const iframeUrl = import.meta.env.VITE_USER_NODE_ENV === 'development' ? import.meta.env.VITE_ACTIVITY : `${location.origin}/invite/detail`
 
   router.push({ path: '/blank-iframe', query: { src: iframeUrl }})
 }
