@@ -15,17 +15,11 @@
               :src="imgSrc(item)"
             />
             <div class="box-sign box-primary"></div>
-            <span class="box-tag" :class="item.is_open === 1?'box-tag-warning':''"> {{item.is_open === 1 ? '已':'未'}}拆开 </span>
+            <span class="box-tag" :class="item.is_open === 1 ? '' : 'box-tag-warning' "> {{item.is_open === 1 ? '已':'未'}}拆开 </span>
           </div>
           <div class="collection-info">
             <div class="collection-title">
               {{ titleName(item) }}
-            </div>
-            <div v-if="parseFloat(item?.box?.cny_price) >= 0 || parseFloat(item?.box?.integral_price) >= 0" class="price">
-              <em v-if="parseFloat(item?.box?.cny_price || 0) > 0"><span>¥</span>{{ item?.box?.cny_price }}</em>
-              <em v-if="parseFloat(item?.box?.cny_price || 0) > 0 && parseFloat(item?.box?.integral_price || 0) > 0"><span>+</span></em>
-              <em v-if="parseFloat(item?.box?.integral_price || 0) > 0">{{ item?.box?.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
-              <em v-if="parseFloat(item?.box?.cny_price || 0) === 0 && parseFloat(item?.box?.integral_price || 0) === 0">0.00<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
             </div>
             <div v-if="authorAvatar(item) && authorName(item)" class="collection-gather">
               <div class="avatar">

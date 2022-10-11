@@ -38,7 +38,6 @@ const props = defineProps({
     default: () => { }
   }
 })
-console.log(props.data);
 watch(() => props.data, () => {
   getGoodsTrade({ user_goods_id: props.data.id }).then(res => {
     list.value = res.data

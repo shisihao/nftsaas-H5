@@ -1,15 +1,14 @@
 <template>
   <div class="open-box-popup-contain">
-    <van-popup v-model:show="state.show" :close-on-click-overlay="false">
+    <van-popup v-model:show="state.show" position="bottom" round :close-on-click-overlay="false">
+      <div class="popup-header"> 开启成功 </div>
       <div class="popup-bg">
         <div class="tips-img">
           <van-image fit="cover" :src="state.item?.goods?.images[0] ? domin + state.item?.goods?.images[0] : getImageUrl('public/boxdetails_img_wadang.png')" />
         </div>
-        <div class="title">
-          开启成功
-        </div>
+        <div class="title"> 恭喜获得 </div>
         <div class="content">
-          恭喜获得“{{ state.item?.goods_id > 0 ? state.item?.goods?.name : `${paraphrase({ value: 'integral', options: integralOptions })}x${state.item?.integral_num || 0}` }}”,<br/>
+          “{{ state.item?.goods_id > 0 ? state.item?.goods?.name : `${paraphrase({ value: 'integral', options: integralOptions })}x${state.item?.integral_num || 0}` }}”,<br/>
         </div>
       </div>
       <div class="button-row">
@@ -72,22 +71,33 @@ const onSubmit = () => {
 <style lang="scss" scoped>
 .open-box-popup-contain {
   :deep(.van-popup) {
-    width: 288px;
-    border-radius: 12px;
-    padding: 20px;
+    max-width: 375px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     overflow: visible;
+    padding-bottom: 20px;
     .popup-bg {
       background-image: linear-gradient(rgba(var(--root-theme-color-rgb), 0.2) 10%, var(--root-bg-color2) 50%);
       border-radius: 12px;
-      margin-top: 0;
-      padding-top: 24px;
+      padding: 24px;
+      margin: 24px 20px 20px 20px;
+    }
+    .popup-header {
+      margin: 0 20px;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      border-bottom: 1px solid var(--root-dividing-color1);
     }
     .tips-img {
-      width: 80px;
-      height: 80px;
+      width: 140px;
+      height: 140px;
       margin: auto;
       border-radius: 8px;
       overflow: hidden;
+      border: 2px solid var(--root-theme-color);
       img {
         width: 100%;
       }
@@ -107,12 +117,12 @@ const onSubmit = () => {
       padding: 0 var(--root-page-spacing);
     }
     .button-row {
-      margin-top: 20px;
+      margin-top: 40px;
       display: flex;
       justify-content: space-around;
       .btn {
         font-size: 16px;
-        padding: 10px 20px;
+        padding: 10px 40px;
       }
       .btn-close {
         color: var(--root-text-color3);

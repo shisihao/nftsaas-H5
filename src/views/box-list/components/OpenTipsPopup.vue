@@ -1,16 +1,13 @@
 <template>
   <div>
     <div class="open-tips-popup-contain">
-      <van-popup v-model:show="state.show">
+      <van-popup v-model:show="state.show" position="bottom" round>
+        <div class="popup-header"> 开启盲盒 </div>
         <div class="tips-img">
           <img src="@/assets/images/public/common_icon_biaoqian.png" alt="">
         </div>
-        <div class="title">
-          是否确认开启盲盒
-        </div>
-        <div class="content">
-          开启后将随机获得藏品
-        </div>
+        <div class="title"> 是否确认开启盲盒 </div>
+        <div class="content"> 开启后将随机获得藏品 </div>
         <div class="button-row">
           <van-button class="btn btn-close" round @click="onClose">
             稍后再说
@@ -78,13 +75,23 @@ const onSubmit = () => {
 <style lang="scss" scoped>
 .open-tips-popup-contain {
   :deep(.van-popup) {
-    width: 288px;
-    border-radius: 12px;
+    max-width: 375px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     padding-bottom: 20px;
     overflow: visible;
+    .popup-header {
+      margin: 0 20px;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      border-bottom: 1px solid var(--root-dividing-color1);
+    }
     .tips-img {
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       margin: 40px auto 0 auto;
       border-radius: 8px;
       overflow: hidden;
@@ -107,12 +114,12 @@ const onSubmit = () => {
       padding: 0 var(--root-page-spacing);
     }
     .button-row {
-      margin-top: 20px;
+      margin-top: 40px;
       display: flex;
       justify-content: space-around;
       .btn {
         font-size: 16px;
-        padding: 10px 20px;
+        padding: 10px 40px;
       }
       .btn-close {
         color: var(--root-text-color3);
