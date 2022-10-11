@@ -131,7 +131,7 @@ const onSubmit = () => {
   verificationCodeCheck(data)
     .then((response) => {
       if (response.data?.ok) {
-        router.replace({ name: 'set-paypass', params: { code: state.form.code }})
+        router.replace({ name: 'set-paypass', query: { code: state.form.code }})
       }
     })
     .finally(() => {

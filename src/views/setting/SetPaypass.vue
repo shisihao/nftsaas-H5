@@ -55,15 +55,14 @@ import { payPassword } from '@/api/user'
 import md5 from 'js-md5'
 
 const router = useRouter()
-let params = router.currentRoute.value.params
-
+let query = router.currentRoute.value.query
 
 const state = reactive({
   btnLoading: false,
   isDisabled: false,
   showKeyboard: false,
   form: {
-    code: params.code,
+    code: query.code,
     password: '',
   }
 })
