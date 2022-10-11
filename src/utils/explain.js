@@ -23,7 +23,7 @@ export const attestationOptions = [
 ]
 
 export const orderOptions = [
-  { label: '全部', icon: '', value: '' },
+  { label: '全部', icon: '', value: -1 },
   { label: '待付款', icon: 'clock', value: 0 },
   { label: '发放中', icon: 'underway', value: 1 },
   { label: '已完成', icon: 'checked', value: 2 },
