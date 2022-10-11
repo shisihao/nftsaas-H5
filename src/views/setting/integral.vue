@@ -28,7 +28,7 @@
       </van-list>
     </van-pull-refresh>
 
-    <integral-popup ref="integralPopup" />
+    <integral-popup ref="integralPopup" @refresh="onRefresh" />
   </div>
 </template>
 

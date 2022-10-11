@@ -46,6 +46,7 @@ import { showToast } from 'vant'
 import globleFun from '@/utils/link'
 
 let info = computed(() => store.state.user.info)
+const emit = defineEmits(['refresh'])
 
 const state = reactive({
   show: false,
@@ -71,7 +72,7 @@ const onTask = (hook) =>{
   if(hook === 'sign:in') {
     subTasks({ hook }).then(()=>{
       getList()
-      store.dispatch('user/getInfo')
+      emit("refresh")
       showToast("操作成功")
     })
   }
