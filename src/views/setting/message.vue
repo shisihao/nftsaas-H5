@@ -2,18 +2,22 @@
   <div class="message-section">
     <van-pull-refresh v-model="state.refreshing" @refresh="onRefresh" success-text="刷新成功">
       <van-list v-model:loading="state.loading" :finished="state.finished" finished-text="没有更多了" @load="onLoad">
-        <div class="title">最新公告</div>
         <template v-if="state.list.length > 0">
-          <div class="message-list" v-for="(item, index) in state.list" :key="index" @click="onClick(item)">
-            <div class="message-list-l">
-              <img :src="getImageUrl('setting/message_list_icon@2x.png')" alt="" />
-            </div>
-            <div class="message-list-r">
-              <div class="message-list-title">{{ item.title }}</div>
-              <!-- <div class="message-list-content" v-html="item.content"></div> -->
-              <div class="time-wrap">
-                <div>{{ item.created_at }}</div>
-                <div>查看</div>
+          <div v-for="(item, index) in state.list" :key="index" >
+            <div class="message-time">{{ item.created_at }}</div>
+            <div class="message-list" @click="onClick(item)">
+              <div class="message-list-head">
+                <div class="message-list-head-l">
+                  <svg-icon icon-class="xiaoxi" class-name="grid-icon"/>
+                  系统公告
+                </div>
+                <div class="read-more">
+                  查看详情<van-icon name="arrow" />
+                </div>
+              </div>
+              <div class="message-list-main">
+                <div class="message-list-title">{{ item.title }}</div>
+                <div class="message-list-content" v-html="item.content"></div>
               </div>
             </div>
           </div>
@@ -72,25 +76,44 @@ const onClick = (item) => {
 <style lang="scss" scoped>
 .message-section {
   padding: 24px 22px;
-
-  .title {
-    display: inline-block;
-    padding: 0 5px;
-    color: var(--root-text-color1);
-    font-size: 22px;
-    // background: url('@/assets/images/setting/user_tag_bg@2x.png') no-repeat center right;
-    background-size: contain;
-    margin-bottom: 14px;
+  .message-time {
+    width: fit-content;
+    padding: 6px 20px;
+    color: var(--root-text-color2);
+    background-color: var(--root-bg-color2);
+    font-size: 12px;
+    border-radius: 18px;
+    margin: auto;
   }
-
   .message-list {
-    display: flex;
-    justify-content: space-between;
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     padding: 12px 16px;
     border-radius: 12px;
-    margin-bottom: 12px;
-
+    margin: 12px auto 18px auto;
+    .message-list-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0 16px 0;
+      border-bottom: 1px solid var(--root-dividing-color1);
+      .message-list-head-l {
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        .grid-icon {
+          font-size: 24px;
+          color: var(--root-theme-color);
+          margin-right: 8px;
+        }
+      }
+      .read-more {
+        color: var(--root-text-color3);
+        font-size: 12px;
+        i {
+          margin-left: 4px;
+        }
+      }
+    }
     .message-list-l {
       margin-top: -5px;
       margin-right: 4px;
@@ -102,13 +125,11 @@ const onClick = (item) => {
       width: 100%;
     }
 
-    .message-list-r {
-      flex: 1;
-      width: 0;
+    .message-list-main {
       .message-list-title {
         font-size: 16px;
         color: var(--root-text-color1);
-        margin-bottom: 10px;
+        margin: 15px 0 10px 0;
         word-wrap: break-word;
       }
 
@@ -122,13 +143,6 @@ const onClick = (item) => {
         :deep(img), :deep(video) {
           max-width: 100%;
         }
-      }
-
-      .time-wrap {
-        display: flex;
-        justify-content: space-between;
-        font-size: 12px;
-        color: var(--root-text-color3);
       }
     }
 
