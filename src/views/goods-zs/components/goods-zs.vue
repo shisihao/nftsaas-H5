@@ -14,7 +14,10 @@
                   :src="Array.isArray(props.data.goods?.images) && `${domin}${props.data.goods?.images[0]}`" />
               </div>
               <div class="name">{{ props.data.goods?.name }}xxxxx</div>
-              <div class="code title-icon">{{`${props.data.goods?.serial}#${props.data.num}/${props.data.goods?.cast_goods_stock}`}}</div>
+              <div class="title-icon">
+                <svg-icon icon-class="serial" class-name="icon-serial" />
+                {{`${props.data.goods?.serial}#${props.data.num}/${props.data.goods?.cast_goods_stock}`}}
+              </div>
             </div>
             <div class="zs-content-bd-list">
               <div class="title">拥有者</div>
@@ -124,29 +127,17 @@ const accordion = ref(false)
       font-weight: bold;
       color: var(--root-text-color1);
   }
-  .code {
+  .title-icon {
+    position: relative;
     width: fit-content;
     margin: 12px auto;
     @include textoverflow();
     color: var(--root-text-color1);
+    .icon-serial {
+      font-size: 12px;
+      color: var(--root-theme-color);
+    }
   }
-    .title-icon {
-      position: relative;
-      padding-left: 18px;
-    }
-    .title-icon::before {
-      content: '';
-      width: 12px;
-      height: 12px;
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      background-image: url('@/assets/images/public/common_icon_number.png');
-      background-size: 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
 }
 
 .zs-content-bd {
@@ -176,23 +167,6 @@ const accordion = ref(false)
 
     .content {
       @include textoverflow();
-    }
-    .title-icon {
-      position: relative;
-      padding-left: 18px;
-    }
-    .title-icon::before {
-      content: '';
-      width: 12px;
-      height: 12px;
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      background-image: url('@/assets/images/public/common_icon_number.png');
-      background-size: 100%;
-      background-position: center;
-      background-repeat: no-repeat;
     }
   }
 }

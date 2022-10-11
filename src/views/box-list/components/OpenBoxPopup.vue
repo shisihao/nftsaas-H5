@@ -10,6 +10,12 @@
         <div class="content">
           “{{ state.item?.goods_id > 0 ? state.item?.goods?.name : `${paraphrase({ value: 'integral', options: integralOptions })}x${state.item?.integral_num || 0}` }}”,<br/>
         </div>
+        <div class="goods-num">
+          <span>
+            <svg-icon icon-class="serial" class-name="icon-serial" />
+            {{ `${state.item?.goods?.serial || ''}#${state.item?.user_goods_num || ''}/${state.item?.goods?.cast_goods_stock || ''}` }}
+          </span>
+        </div>
       </div>
       <div class="button-row">
         <!-- <van-button class="btn btn-close" round @click="onClose">
@@ -115,6 +121,19 @@ const onSubmit = () => {
       text-align: center;
       margin-top: 14px;
       padding: 0 var(--root-page-spacing);
+    }
+    .goods-num {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--root-text-color2);
+      text-align: center;
+      span {
+        word-break:break-all;
+        .icon-serial {
+          font-size: 12px;
+          color: var(--root-theme-color);
+        }
+      }
     }
     .button-row {
       margin-top: 40px;
