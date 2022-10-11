@@ -15,6 +15,7 @@
         </div>
         <div class="title">{{ item.name }}</div>
         <div class="num">
+          <svg-icon icon-class="serial" class-name="icon-serial" />
           {{ `${item.serial}#${item.num}/${item.cast_goods_stock}` }}
         </div>
         <div class="tag" :class="{ noActive: item.is_destroy }">{{ item.is_destroy ? '销毁' : '不销毁' }}</div>
@@ -95,20 +96,12 @@ imgList.value = props.item.map(v => {
   .num {
     position: relative;
     color: var(--root-text-color2);
-    padding-left: 16px;
     @include textoverflow();
     font-size: 14px;
     margin-bottom: 10px;
-
-    &::before {
-      content: '';
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      background: url('@/assets/images/public/common_icon_number.png') no-repeat center;
-      background-size: 100%;
-      left: 0;
-      top: 1px;
+    .icon-serial {
+      font-size: 12px;
+      color: var(--root-theme-color);
     }
   }
 

@@ -14,7 +14,7 @@
 							<div>我已拥有 <i>x{{ props.materials.count }}</i></div>
 						</div>
 						<div class="popup-content-list">
-							<div class="list-item" v-for="(goodsItem, index) in props.materials.goods" :key="index">
+							<div class="list-item" v-for="(goodsItem, index) in props.materials.goods" :key="index" @click="selectGoods(goodsItem, index)">
 								<div class="list-item-img" v-if="goodsItem?.images">
 									<van-image lazy-load fit="cover"
 										:src="Array.isArray(goodsItem?.images) && `${domin}${goodsItem?.images[0]}`" />
@@ -22,9 +22,10 @@
 								<div class="list-item-content">
 									<div class="list-item-name">{{ goodsItem?.name }}</div>
 									<div class="list-item-num">
+										<svg-icon icon-class="serial" class-name="icon-serial" />
 										{{ `${goodsItem?.serial}#${goodsItem?.user_goods?.num}/${goodsItem?.cast_goods_stock}` }}
 									</div>
-									<div class="check-btn" :class="{ active: goodsItem?.oldFlag }" @click="selectGoods(goodsItem, index)">
+									<div class="check-btn" :class="{ active: goodsItem?.oldFlag }">
 									</div>
 								</div>
 							</div>
@@ -54,8 +55,10 @@
 										:src="Array.isArray(goodsItem?.images) && `${domin}${goodsItem?.images[0]}`" />
 								</div>
 								<div class="list-item-name">{{ goodsItem.name }}</div>
-								<div class="list-item-num">{{
-								`${goodsItem?.serial}#${goodsItem?.user_goods?.num}/${goodsItem?.cast_goods_stock}` }}</div>
+								<div class="list-item-num">
+									<svg-icon icon-class="serial" class-name="icon-serial" />
+									{{`${goodsItem?.serial}#${goodsItem?.user_goods?.num}/${goodsItem?.cast_goods_stock}`}}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -331,21 +334,13 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 		.list-item-num {
 			position: relative;
 			color: var(--root-text-color3);
-			padding-left: 16px;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
-
-			&::before {
-				content: '';
-				position: absolute;
-				width: 12px;
-				height: 12px;
-				background: url('@/assets/images/public/common_icon_number.png') no-repeat center;
-				background-size: 100%;
-				left: 0;
-				top: 0;
-			}
+			.icon-serial {
+        font-size: 12px;
+        color: var(--root-theme-color);
+      }
 		}
 
 		.check-btn {

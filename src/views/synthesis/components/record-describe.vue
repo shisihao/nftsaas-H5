@@ -5,9 +5,12 @@
       <van-image lazy-load fit="cover" :src="item?.synthesis.cover && `${domin}${item.synthesis.cover.filename}`" />
     </div>
     <div class="record-list-title">{{ item?.user_goods?.goods?.name }}</div>
-    <div class="record-list-num">{{
+    <div class="record-list-num">
+      <svg-icon icon-class="serial" class-name="icon-serial" />
+      {{
         `${item?.user_goods.goods?.serial}#${item?.user_goods?.num}/${item?.user_goods.goods?.cast_goods_stock}`
-    }}</div>
+      }}
+    </div>
     <div class="record-list-time">{{ item?.created_at }}</div>
   </div>
 </template>
@@ -59,21 +62,13 @@ const domin = getToken(DominKey)
     .record-list-num {
       position: relative;
       color: var(--root-text-color2);
-      padding-left: 16px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       margin-bottom: 14px;
-
-      &::before {
-        content: '';
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        background: url('@/assets/images/public/common_icon_number.png') no-repeat center;
-        background-size: 100%;
-        left: 0;
-        top: 2px;
+      .icon-serial {
+        font-size: 12px;
+        color: var(--root-theme-color);
       }
     }
 
