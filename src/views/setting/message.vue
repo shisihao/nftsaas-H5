@@ -69,7 +69,8 @@ const onRefresh = () => {
   onLoad();
 };
 const onClick = (item) => {
-  router.push({ path: '/messageDetail', query: { data: JSON.stringify(item) } })
+  sessionStorage.setItem('message-data', JSON.stringify(item))
+  router.push({ path: '/messageDetail' })
 }
 </script>
 

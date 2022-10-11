@@ -7,9 +7,7 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
-const route = useRoute()
-const data = JSON.parse(route.query.data)
+const data = JSON.parse(sessionStorage.getItem('message-data'))
 
 </script>
 
