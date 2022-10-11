@@ -140,8 +140,8 @@ const onFinish = (index) => {
         overflow: hidden;
       }
       .box-sign {
-        width: 64px;
-        height: 59px;
+        width: 60px;
+        height: 60px;
         position: absolute;
         left: 10px;
         top: 10px;

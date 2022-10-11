@@ -212,16 +212,14 @@ const onRefreshList = ({ id, item }) => {
         background-repeat: no-repeat;
       }
       .box-primary {
-        // background-image: url('@/assets/images/public/common_icon_biaoqian.png');
-        background-image: url('@/assets/images/public/mbox_img_boxlable.png');
+        background-image: url('@/assets/images/public/common_icon_biaoqian.png');
       }
       .box-success {
         height: 152px;
         background-image: url('@/assets/images/public/box_open.png');
       }
       .box-warning {
-        height: 152px;
-        background-image: url('@/assets/images/public/mbox_img_boxlable.png');
+        background-image: url('@/assets/images/public/common_icon_biaoqian.png');
       }
       .box-tag {
         position: absolute;
