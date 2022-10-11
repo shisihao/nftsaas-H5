@@ -11,8 +11,15 @@
           >
             <div class="transfer-wrapper">
               <div class="transfer-item" v-for="(x, y) in list" :key="y">
+                <span class="transfer-tag" :class="'transfer-tag-' + x.target_type">{{ x.target_type =='goods'?'藏品':'盲盒' }}</span>
                 <div class="title" :class="info.id === x.target_user_id ? 'title-income' : 'title-expend'">
-                  {{ info.id === x.target_user_id ? '收到' : '转出' }}“{{ x?.user_goods?.goods?.name }}”
+                  {{ info.id === x.target_user_id ? '收到' : '转出' }}
+                  <template v-if="x.target_type =='goods'">
+                    “{{ x?.user_goods?.goods?.name }}”
+                  </template>
+                  <template v-else>
+                    “{{ x?.user_box?.box?.name }}”
+                  </template>
                 </div>
                 <div class="user">
                   <default-avatar v-if="x?.target_user?.avatar && `${domin}${x.target_user.avatar}`" /> 
@@ -20,10 +27,10 @@
                   {{ x?.target_user?.name }}
                 </div>
                 <div class="info">
-                  <span>交易时间</span><b>{{ x.created_at }}</b>
+                  <span>时间</span><b>{{ x.created_at }}</b>
                 </div>
                 <div class="info">
-                  <span>链上HASH</span>
+                  <span>HASH</span>
                   <b>
                     {{ x.hash }}
                     <svg-icon icon-class="copy" class-name="copy-icon" @click="onCopy(x.hash)" />
@@ -154,10 +161,21 @@ const onCopy = async (value) => {
       padding: 15px;
       border-radius: 12px;
       margin-bottom: 15px;
+      .transfer-tag {
+        font-size: 12px;
+        padding: 3px 6px;
+        border-radius: 4px;
+        background-color: var(--root-theme-color);
+        color: var(--root-text-color5);
+      }
+      .transfer-tag-box {
+        background-color: var(--root-auxiliary-color1);
+      }
       .title {
         font-size: 16px;
         font-weight: 500;
-        padding-left: 20px;
+        // padding-left: 20px;
+        margin-top: 10px;
         position: relative;
         &::before {
           content: '';
@@ -171,16 +189,16 @@ const onCopy = async (value) => {
           background-repeat: no-repeat;
           background-position: center;
         }
-        &.title-income {
-          &::before {
-            background-image: url('@/assets/images/public/examples_record_icon_received.png');
-          }
-        }
-        &.title-expend {
-          &::before {
-            background-image: url('@/assets/images/public/examples_record_icon_giving.png');
-          }
-        }
+        // &.title-income {
+        //   &::before {
+        //     background-image: url('@/assets/images/public/examples_record_icon_received.png');
+        //   }
+        // }
+        // &.title-expend {
+        //   &::before {
+        //     background-image: url('@/assets/images/public/examples_record_icon_giving.png');
+        //   }
+        // }
       }
       .user {
         margin-top: 8px;
@@ -198,7 +216,7 @@ const onCopy = async (value) => {
         color: var(--root-text-color3);
         span {
           margin-top: 8px;
-          min-width: 70px;
+          min-width: 40px;
         }
         b {
           margin-top: 8px;
