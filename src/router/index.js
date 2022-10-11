@@ -263,14 +263,6 @@ export const asyncRoutes = [
         }
       },
       {
-        path: "/transfer-result",
-        name: "transfer-result",
-        component: () => import('@/views/order/TransferResult.vue'),
-        meta: {
-          title : '订单结果'
-        }
-      },
-      {
         path: "/synthesis-list",
         name: "synthesis-list",
         component: () => import('@/views/synthesis/synthesis-list.vue'),
