@@ -2,7 +2,11 @@
   <div class="record-list-bd">
     <div class="list-bd-header">
       <div>合成材料</div>
-      <van-icon @click="accordion = !accordion" class="icon" :name="accordion ? 'arrow-up' : 'arrow-down'" />
+      <div class="right-icon" @click="accordion = !accordion">
+        {{accordion ? '展开' : '收起'}}
+        <van-icon class="icon" :name="accordion ? 'arrow-up' : 'arrow-down'" />
+      </div>
+      
     </div>
     <div class="list-bd-content" :class="{ active: accordion }">
       <div class="list-item" v-for="(item, index) in imgList" :key="index">
@@ -52,7 +56,9 @@ imgList.value = props.item.map(v => {
   display: flex;
   justify-content: space-between;
   padding-top: 20px;
-
+  .right-icon {
+    color: var(--root-text-color4);
+  }
   .icon {
     color: var(--root-text-color3);
   }
@@ -115,13 +121,13 @@ imgList.value = props.item.map(v => {
     border-radius: 12px;
     padding: 1px 12px 0;
     color: var(--root-text-color2);
-    background-color: var(--root-bg-color2);
+    background-color: var(--root-bg-color1);
 
   }
 
   .noActive {
-    color: var(--root-auxiliary-color);
-    background-color: var(--root-bg-color2);
+    color: var(--root-auxiliary-color1);
+    background-color: var(--root-bg-color1);
   }
 }
 

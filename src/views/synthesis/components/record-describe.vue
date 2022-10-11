@@ -4,7 +4,7 @@
     <div class="record-list-img">
       <van-image lazy-load fit="cover" :src="item?.synthesis.cover && `${domin}${item.synthesis.cover.filename}`" />
     </div>
-    <div class="record-list-title">{{ item?.synthesis?.title }}</div>
+    <div class="record-list-title">{{ item?.user_goods?.goods?.name }}</div>
     <div class="record-list-num">{{
         `${item?.user_goods.goods?.serial}#${item?.user_goods?.num}/${item?.user_goods.goods?.cast_goods_stock}`
     }}</div>
@@ -28,6 +28,7 @@ const domin = getToken(DominKey)
 
     .record-list-header {
       font-size: 18px;
+      font-weight: bold;
       color: var(--root-text-color1);
       margin-bottom: 15px;
 
@@ -51,6 +52,7 @@ const domin = getToken(DominKey)
       font-size: 18px;
       color: var(--root-text-color1);
       margin-bottom: 14px;
+      font-weight: bold;
       @include textoverflow()
     }
 
