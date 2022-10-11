@@ -18,7 +18,7 @@
 				<div class="date-time">{{ data.start_time }}至{{ data.end_time }}</div>
 			</div>
 			<div class="material">
-				<div class="material-title">所需材料</div>
+				<navigation-title title="所需材料" fontSize="16" />
 				<div class="material-list">
 					<div class="material-item" @click="showPopup(item, index, 1)" v-for="(item, index) in showList" :key="index">
 						<div class="material-item-img" :class="{ gray: item.count <= item.num && item.count === 0 }" v-if="item?.goods">
@@ -31,7 +31,7 @@
 				<div class="material-moretext">滑动查看更多</div>
 			</div>
 			<div class="details">
-				<div class="detail-title">认证信息</div>
+				<navigation-title title="认证信息" fontSize="16" />
 				<div class="detail-content" v-html="data.intro"></div>
 			</div>
 			<div class="btn-bottom">
@@ -49,6 +49,7 @@
 <script setup>
 import { ref, reactive, computed, provide } from 'vue'
 import ThreeModel from '@/components/ThreeModel/index.vue'
+import NavigationTitle from '@/components/NavigationTitle/index.vue'
 import { useRoute } from 'vue-router'
 import { synthesisDetail } from '@/api/synthesis'
 import { DominKey, getToken } from '@/utils/auth'
@@ -159,7 +160,7 @@ provide('init', init)
 }
 .synthetic-container {
 	position: relative;
-	margin-top: -30px;
+	margin-top: 10px;
 	padding: 0 16px 16px 16px;
 }
 .isSynthetic {
@@ -225,15 +226,14 @@ provide('init', init)
 	color: var(--root-text-color);
 }
 
-.synthetic-title,
-.details-title,
-.material-title {
+.synthetic-title {
 	font-size: 18px;
 	color: var(--root-text-color1);
 	margin-bottom: 12px;
 }
 
 .material-list {
+	margin-top: 20px;
 	display: flex;
 	text-align: center;
 	justify-content: space-between;

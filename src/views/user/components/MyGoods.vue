@@ -59,7 +59,13 @@
     <div v-if="activeTags === 1" class="skeleton">
       <van-skeleton class="skeleton-line" v-if="collapseLoading" :row="3" />
       <van-collapse v-else v-model="activeNames" :border="false">
-        <van-collapse-item :border="false" v-for="(item, index) in collapseOptions" :key="index" :title="`${item.label} ${item.num}`" :name="item.value">
+        <van-collapse-item :border="false" v-for="(item, index) in collapseOptions" :key="index" :title="`${item.label} 丨 ${item.num}`" :name="item.value">
+          <template #right-icon>
+            <div class="right-icon">
+              <span>{{ activeNames.includes(item.value) ? '收起' : '展开' }}</span>
+              <van-icon :name="activeNames.includes(item.value) ?'arrow-up':'arrow-down'" />
+            </div>
+          </template>
           <van-skeleton v-if="!tagsList[item.value]" class="skeleton-line" :row="3" />
           <div v-else class="goods-item" v-for="(x, y) in tagsList[item.value]" :key="y" @click="onGoodsList(x)">
             <div v-if="x.total > 1" class="num">
@@ -308,6 +314,12 @@ watch(activeNames, (newValue, oldValue) => {
               overflow: hidden;
             }
           }
+        }
+      }
+      .right-icon {
+        span {
+          color: var(--root-text-color3);
+          margin-right: 5px;
         }
       }
     }

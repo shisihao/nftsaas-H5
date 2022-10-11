@@ -381,15 +381,15 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 	.popup-btn-l,
 	.popup-btn-r {
 		padding: 10px 45px;
-		color: var(--root-text-color2);
+		color: var(--root-text-color5);
 		font-size: 16px;
-		background-color: var(--root-button-color4);
+		background-color: var(--root-button-color1);
 		border-radius: 24px;
 	}
 
 	.popup-btn-r {
-		color: var(--root-text-color1);
-		background: var(--root-button-color1);
+		color: var(--root-text-color5);
+		background: var(--root-theme-color);
 		margin-left: 16px;
 	}
 }

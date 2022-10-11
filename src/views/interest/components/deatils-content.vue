@@ -1,6 +1,6 @@
 <template>
 	<div class="content">
-		<div class="title">权益藏品</div>
+		<navigation-title title="权益藏品" fontSize="16" position="center"/>
 		<div class="list-wrap">
 			<div class="list-item" v-for="(item, index) in props.data?.list" :key="index">
 				<div class="list-item-l">
@@ -39,6 +39,7 @@ import { getImageUrl } from '@/utils/index'
 import rulesPopup from './rules-popup.vue'
 import {ref,toRef} from 'vue'
 import NoMore from '@/components/NoMore/index.vue'
+import NavigationTitle from '@/components/NavigationTitle/index.vue'
 
 const domin = getToken(DominKey)
 const props = defineProps({
