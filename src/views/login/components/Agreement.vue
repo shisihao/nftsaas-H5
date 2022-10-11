@@ -1,14 +1,6 @@
 <template>
   <div class="agreement-section">
-    <van-checkbox v-model="checkedValue" @change="onChange">我已阅读并同意<span @click.stop="onConfig('register')">《用户协议》</span>和<span @click.stop="onConfig('privacy')">《隐私协议》</span></van-checkbox>
-
-    <van-popup 
-      v-model:show="show"
-      closeable
-    >
-      <div class="wrapper" v-html="content">
-      </div>
-    </van-popup>
+    <van-checkbox v-model="checkedValue" @change="onChange">我已阅读并同意<span @click.stop="$globleFun.onGoto('/public-agreement?type=register')">《用户协议》</span>和<span @click.stop="$globleFun.onGoto('/public-agreement?type=privacy')">《隐私协议》</span></van-checkbox>
   </div>
 </template>
 
@@ -18,8 +10,6 @@ import { useRouter } from 'vue-router'
 import store from '@/store/index'
 
 const router = useRouter()
-let show = ref(false)
-let content = ref('')
 
 const config = computed(() => store.state.user.config)
 
@@ -41,12 +31,6 @@ const onChange = (value) => {
   checkedValue.value = value
 }
 
-const onConfig = (type) => {
-  show.value = true
-
-  content.value = config.value[type]
-}
-
 </script>
 
 <style lang="scss" scoped>
@@ -66,19 +50,6 @@ const onConfig = (type) => {
         span {
           color: var(--root-theme-color);
         }
-      }
-    }
-    :deep(.van-popup) {
-      width: 90vw;
-      max-width: calc(375px - 10vw);
-      height: 90vh;
-      padding: 15px;
-      background-color: #fff;
-      color: var(--root-text-color4);
-      .wrapper {
-        width: 100%;
-        height: 100%;
-        overflow-y: auto;
       }
     }
   }
