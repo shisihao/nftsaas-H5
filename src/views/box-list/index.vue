@@ -21,8 +21,11 @@
             <div class="collection-title">
               {{ titleName(item) }}
             </div>
-            <div class="integral_price" v-if="item?.box?.integral_price">
-              {{ item?.box?.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions })}}</span>
+            <div v-if="parseFloat(item?.box?.cny_price) >= 0 || parseFloat(item?.box?.integral_price) >= 0" class="price">
+              <em v-if="parseFloat(item?.box?.cny_price || 0) > 0"><span>¥</span>{{ item?.box?.cny_price }}</em>
+              <em v-if="parseFloat(item?.box?.cny_price || 0) > 0 && parseFloat(item?.box?.integral_price || 0) > 0"><span>+</span></em>
+              <em v-if="parseFloat(item?.box?.integral_price || 0) > 0">{{ item?.box?.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+              <em v-if="parseFloat(item?.box?.cny_price || 0) === 0 && parseFloat(item?.box?.integral_price || 0) === 0">0.00<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
             </div>
             <div v-if="authorAvatar(item) && authorName(item)" class="collection-gather">
               <div class="avatar">
@@ -241,14 +244,17 @@ const onRefreshList = ({ id, item }) => {
         margin-top: 20px;
         font-size: 18px;
       }
-      .integral_price {
-        margin-top: 10px;
-        font-size: 24px;
-        color: var(--root-auxiliary-color1);
-        span {
-          font-size: 12px;
+      .price {
+          margin-top: 10px;
+          color: var(--root-auxiliary-color1);
+          font-size: 18px;
+          em {
+            font-style: normal;
+          }
+          span {
+            font-size: 16px;
+          }
         }
-      }
       .collection-gather {
         margin-top: 10px;
         display: flex;
