@@ -36,7 +36,7 @@ export function giveAccount(data) {
 }
 
 // 用户藏品转赠
-export function giveGoods(data) {
+export function goodGive(data) {
   return request.post(`/user_goods/give`, {
     ...data
   })
