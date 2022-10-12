@@ -14,37 +14,39 @@
     <div class="invitation-wrapper">
       <van-tabs v-model:active="active" sticky offset-top="1.2rem" @change="onChangeTab">
         <van-tab v-for="(item, index) in tabsOptions" :key="index" :title="item.label" :name="item.value">
-          <van-list
-            v-model:loading="loading"
-            :finished="finished"
-            finished-text="没有更多了"
-            @load="onLoad"
-          >
-            <div class="business-card">
-              <div class="business-item" v-for="(item, index) in list" :key="index">
-                <div class="avatar-uploader">
-                  <default-avatar v-if="item.avatar" :src="`${domin}${item.avatar}`" />
-                  <default-avatar v-else />
-                </div>
-                <div class="user-info">
-                  <div>
-                    {{ item.name }}
-                  </div>
-                  <div>
-                    {{ item.phone }}
-                  </div>
-                  <div>
-                    {{ item.created_at }}
-                  </div>
-                </div>
-                <div class="cer-status">
-                  <span>{{ paraphrase({ value: item.cer_status, options: tabsOptions }) }}</span>
-                </div>
-              </div>
-            </div>
-          </van-list>
         </van-tab>
       </van-tabs>
+      <van-list
+        v-model:loading="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+      >
+        <div class="business-card">
+          <div class="business-item" v-for="(item, index) in list" :key="index">
+            <div class="avatar-uploader">
+              <default-avatar v-if="item.avatar" :src="`${domin}${item.avatar}`" />
+              <default-avatar v-else />
+            </div>
+            <div class="user-info">
+              <div>
+                {{ item.name }}
+              </div>
+              <div>
+                {{ item.phone }}
+              </div>
+              <div>
+                {{ item.created_at }}
+              </div>
+            </div>
+            <div class="cer-status">
+              <span :class="item.cer_status == 1 ? 'already' : '' ">
+                {{ paraphrase({ value: item.cer_status, options: tabsOptions }) }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </van-list>
     </div>
   </div>
 </template>
@@ -207,14 +209,16 @@ const onChangeTab = () => {
             span {
               display: block;
               padding: 2px 6px;
-              background-color: #373750;
+              background-color: #F2F4F6;
               border-radius: 4px;
-              color: #A0A0B6;
+              color: var(--root-text-color3);
               &.already {
+                background-color: rgba(var(--root-theme-color-rgb), 0.1);
                 color: var(--root-theme-color);
               }
             }
           }
+          
         }
       }
     }
