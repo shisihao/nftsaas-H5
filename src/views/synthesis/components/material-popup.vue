@@ -39,15 +39,20 @@
 				<template v-if="props.item.type === 2">
 					<div class="popup-content-header">
 						<div class="popup-title-header">
-							<div class="popup-title">合成后您获得藏品“{{ props.data.goods.name }}”</div>
+							<div class="popup-title">
+								<p>“{{ props.data.goods.name }}”</p>
+								<p class="tip-text">合成成功将获得此藏品</p>
+							</div>
 							<div class="popup-close" @click="show = !show"></div>
 						</div>
+						<div class="divider-line"></div>
 					</div>
 					<div class="popup-content">
 						<div class="popup-contnt-title">
-							<div>所需材料 x{{ props.item.num }}</div>
-							<div class="popup-content-num">已拥有x{{ props.item.count }}</div>
+							<!-- <div>所需材料 x{{ props.item.num }}</div>
+							<div class="popup-content-num">已拥有x{{ props.item.count }}</div> -->
 						</div>
+						<p class="popup-contnt-tip">合成材料</p>
 						<div class="synthetic-list">
 							<div class="list-item" v-for="(goodsItem, index) in chooseAllGoods" :key="index">
 								<div class="list-item-img" v-if="goodsItem?.images">
@@ -259,6 +264,12 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 .popup-title {
 	font-weight: 700;
 	font-size: 18px;
+	.tip-text {
+		font-size: 12px;
+		color: var(--root-text-color3);
+		margin-top: 10px;
+		font-weight: normal;
+	}
 }
 
 .popup-title-desc {
@@ -297,7 +308,11 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 			font-weight: 600;
 		}
 	}
-
+	.popup-contnt-tip {
+		font-size: 16px;
+		font-weight: bold;
+		color: var(--root-text-color1);
+	}
 	.popup-content-list {
 		margin-top: 15px;
 	}
@@ -420,8 +435,8 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 		margin: 13px 20px;
 		font-size: 18px;
 		border-radius: 24px;
-		color: var(--root-text-color1);
-		background: var(--root-button-color1);
+		color: var(--root-text-color5);
+		background: var(--root-theme-color);
 	}
 }
 
