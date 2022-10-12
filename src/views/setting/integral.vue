@@ -19,8 +19,8 @@
               </div>
               <div class="list-datetime">时间<span>{{ item.created_at }}</span></div>
               <div class="list-hash">
-                <div class="text">HASH<span>{{ item.extend?.hash }}</span></div>
-                <div class="copy-btn" @click="onCopy(item.extend?.hash)"></div>
+                <div class="text">HASH<span>{{ item?.extend?.hash || '------' }}</span></div>
+                <div v-if="item?.extend?.hash" class="copy-btn" @click="onCopy(item?.extend?.hash)"></div>
               </div>
             </div>
           </div>
@@ -200,7 +200,6 @@ const onGetIntegral = () => {
       .text {
         flex: 3;
         display: flex;
-        justify-content: space-between;
         align-items: center;
         margin-right: 40px;
       }

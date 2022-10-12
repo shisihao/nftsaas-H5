@@ -5,7 +5,7 @@
       <span>{{ item.total_stock }}份</span>
     </div>
     <div class="surplus">
-      剩余 <span>{{ item.stock }}份</span>
+      剩余 <span>{{ item.stock }}</span>份
     </div>
   </div>
 </template>
