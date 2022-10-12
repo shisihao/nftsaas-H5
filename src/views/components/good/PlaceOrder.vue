@@ -105,8 +105,8 @@ const salesStatus = computed(() => {
       }
     }
 
-    // 未实名
-    if (info.value?.cer_status === -1) {
+    // 未实名、实名失败
+    if ([-1, 2].includes(info.value?.cer_status)) {
       return {
         ...data,
         tipType: 6

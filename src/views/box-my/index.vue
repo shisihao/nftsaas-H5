@@ -14,6 +14,10 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import store from '@/store/index'
+import { paraphrase } from '@/filters/index'
+import { integralOptions } from '@/utils/explain'
+import { getMyBoxDetail } from '@/api/box'
 import ThreeModel from '@/components/ThreeModel/index.vue'
 import TitleInfo from './components/TitleInfo.vue'
 import CertificationInfo from '../components/good/CertificationInfo.vue'
@@ -22,8 +26,6 @@ import GoodDescribe from '../components/good/GoodDescribe.vue'
 import ExplainInfo from '../components/good/ExplainInfo.vue'
 import GoodActionBar from './components/GoodActionBar.vue'
 import BoxExplain from './components/BoxExplain.vue'
-import { getMyBoxDetail } from '@/api/box'
-import store from '@/store/index'
 
 const router = useRouter()
 let query = router.currentRoute.value.query
@@ -64,8 +66,13 @@ const giveStatus = computed(() => {
 if (query?.id) {
   getMyBoxDetail({ user_box_id: query?.id })
     .then((response) => {
-      response.data.goods = { ...response.data.goods, modelType: 'my' }
-      item.value = response.data
+      let boxList = response.data.box.integral_list.map(v => {
+        return {
+          name: `${paraphrase({ value: 'integral', options: integralOptions })}x${v}`
+        }
+      })
+
+      item.value = { ...response.data, goods_list: response.data.box.goods_list.concat(boxList), modelType: 'my' }
     })
 } else {
   router.go(-1)

@@ -7,7 +7,7 @@
         <icons-grid />
         <navigation-title class="navigation-hot" title="热卖藏品" position="center" />
         <collection-list ref="collectionList" />
-        <attestation-button v-if="info && info.cer_status === -1" />
+        <attestation-button v-if="info && [-1, 2].includes(info.cer_status)" />
         <no-more />
       </div>
     </van-pull-refresh>
