@@ -39,7 +39,7 @@
                 {{ item.created_at }}
               </div>
             </div>
-            <div class="cer-status">
+            <div class="cer-status" v-if="item.cer_status">
               <span :class="item.cer_status == 1 ? 'already' : '' ">
                 {{ paraphrase({ value: item.cer_status, options: tabsOptions }) }}
               </span>
