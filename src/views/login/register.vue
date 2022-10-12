@@ -18,23 +18,15 @@
             clearable
             :rules="state.rules.account"
           />
-          <van-field
+          <verify-code
             v-model="state.form.code"
-            type="digit"
-            autocomplete="off"
-            maxlength="6"
-            name="code"
-            label="验证码"
-            placeholder="请输入验证码"
-            clearable
-            :rules="state.rules.code"
-          >
-            <template #button>
-              <div class="get-code" :class="state.verifyCode.isDisabled && 'get-code-disabled'" @click="onSendCode">
-                {{ state.verifyCode.word }}
-              </div>
-            </template>
-          </van-field>
+            ref="refSendCode"
+            :captcha="true"
+            :label="true"
+            :scene="state.verifyCode.scene"
+            @verify-account="onVerifyAccount"
+            @send-code="onSendCode"
+          />
           <van-field
             v-model="state.form.invite_code"
             autocomplete="off"
@@ -111,16 +103,17 @@
 import { ref, reactive, watch, onBeforeUnmount, onMounted, computed } from 'vue'
 import Cookies from 'js-cookie'
 import { useRoute } from 'vue-router'
+import { showToast } from 'vant'
+import store from '@/store/index'
 import { validPhone } from '@/utils/validate'
 import { TokenKey } from '@/utils/auth'
 import globleFun from '@/utils/link'
 import { paraphrase } from '@/filters/index'
-import Logo from '../components/common/Logo.vue'
-import Agreement from './components/Agreement.vue'
 import { register } from '@/api/user'
 import { verificationCode, verificationCodeCheck } from '@/api/common'
-import { showToast } from 'vant'
-import store from '@/store/index'
+import Logo from '../components/common/Logo.vue'
+import Agreement from './components/Agreement.vue'
+import VerifyCode from '@/components/VerifyCode/index.vue'
 
 const route = useRoute()
 const invitationCode = sessionStorage.getItem('invitation-code')
@@ -155,10 +148,7 @@ const state = reactive({
     invite_code: ''
   },
   verifyCode: {
-    isDisabled: false,
-    word: '获取验证码',
-    scene: 'register',
-    token: ''
+    scene: 'register'
   },
   checked: false,
   btnLoading: false,
@@ -172,10 +162,6 @@ const state = reactive({
       { required: true, message: '不能为空' },
       { validator: validatorPassWord }
     ],
-    code: [
-      { required: true, message: '不能为空' },
-      { validator: validatorCode, message: '验证码错误' }
-    ],
     password_confirmation: [
       { required: true, message: '不能为空' },
       { validator: validatorPassWord1 }
@@ -187,102 +173,44 @@ invitationCode && (state.form.invite_code = invitationCode)
 
 const config = computed(() => store.state.user.config)
 
-// 顶象
-const dingxiang = ref(null)
+// 滑块
 const form = ref(null)
-let isDx = computed(() => config.value?.dx_config?.open === 'on' ? true : false )
-let captcha
+const refSendCode = ref(null)
 
-// 发送验证码
-let codeTime = parseInt(Cookies.get('register-code') || 0)
-const oldTime = 60
-let sendTimer
-let time = (codeTime - parseInt(+new Date())) > 0 ? parseInt((codeTime - parseInt(+new Date())) / 1000) : oldTime
-// 计时
-const countdown = () => {
-  Cookies.set('register-code', parseInt(+new Date()) + time * 1000, { expires: new Date(parseInt(+new Date()) + time * 1000) })
-  state.verifyCode.word = time + 's后获取'
-  state.verifyCode.isDisabled = true
-  sendTimer = setInterval(function () {
-    time--
-    state.verifyCode.word = time + 's后获取'
-    Cookies.set('register-code', parseInt(+new Date()) + time * 1000)
-    if (time <= 0) {
-      state.verifyCode.isDisabled = false
-      clearInterval(sendTimer)
-      state.verifyCode.word = '获取验证码'
-      time = oldTime
-    }
-  }, 1000)
-}
-if ((codeTime - parseInt(+new Date())) > 0) {  // 默认执行
-  countdown()
-}
-
-const dxCapt = () => {
-  return _dx.Captcha(dingxiang.value, {
-    appId: config.value?.dx_config?.appid,
-    style: 'popup',
-    success: token => {
-      //console.log(token)
-    }
-  })
-}
-
-const postSend = (value = '') => {
-  isDx.value && captcha.hide()
-  state.verifyCode.token = value
+const onSendCode = (value = {}) => {
+  state.verifyCode = { ...state.verifyCode, ...value }
   const data = { ...state.form, ...state.verifyCode }
   verificationCode(data)
     .then(({ msg = '发送成功' }) => {
-      countdown()
+      refSendCode.value.countdown()
       showToast(msg)
     })
 }
 
-// 点击发送按钮
-const onSendCode = () => {
-  if (state.verifyCode.isDisabled) return false
-  form.value.validate('account')
+const onVerifyAccount = () => {
+  form.value.validate(['account'])
     .then(() => {
-      if (isDx.value) {
-        captcha = dxCapt()
-        captcha.show()
-        // 验证成功时
-        captcha.on('verifySuccess', function (security_code) {
-          postSend(security_code)
-        });
-        // 【无感验证】通过，服务端判定本次验证可直接通过，无需用户交互。如果此事件触发，则验证码直接显示为验证通过状态，将没有后面的用户交互阶段。此事件带一个参数 token。
-        captcha.on('passByServer', function (security_code) {
-          postSend(security_code)
-        })
-      } else {
-        postSend()
-      }
+      refSendCode.value.carry()
     })
 }
-// 销毁时
-onBeforeUnmount(() => {
-  clearInterval(sendTimer)
-})
 
 const onHandleStep = () => {
   form.value.validate(['account', 'code'])
     .then(() => {
-        if (!state.checked) {
-          return showToast(`请阅读并同意《用户协议》和《隐私协议》`)
-        }
-        const data = { ...state.form, ...state.verifyCode }
-        state.btnLoading = true
-        verificationCodeCheck(data)
-          .then((response) => {
-            if (response.data?.ok) {
-              state.step = 1
-            }
-          })
-          .finally(() => {
-            state.btnLoading = false
-          })
+      if (!state.checked) {
+        return showToast(`请阅读并同意《用户协议》和《隐私协议》`)
+      }
+      const data = { ...state.form, ...state.verifyCode }
+      state.btnLoading = true
+      verificationCodeCheck(data)
+        .then((response) => {
+          if (response.data?.ok) {
+            state.step = 1
+          }
+        })
+        .finally(() => {
+          state.btnLoading = false
+        })
     })
 }
 
@@ -364,14 +292,6 @@ const onSubmit = (values) => {
           position: absolute;
           bottom: -24px;
           left: 0;
-        }
-
-        :deep(.get-code) {
-          color: var(--root-theme-color);
-
-          &.get-code-disabled {
-            color: var(--root-text-color2);
-          }
         }
       }
     }
