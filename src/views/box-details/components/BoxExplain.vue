@@ -8,7 +8,7 @@
             <div class="box-img">
               <van-image
                 fit="cover"
-                :src="item?.images?.[0] ? `${domin}${item.images[0]}` : getImageUrl('public/boxdetails_img_wadang.png')"
+                :src="item?.images?.[0] ? `${domin}${item.images[0]}` : `${config?.cdn_domain}${config?.integral_config?.image}`"
               />
             </div>
             <div class="box-name">
@@ -22,12 +22,14 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import store from '@/store/index'
+import { DominKey, getToken } from '@/utils/auth'
 import NavigationTitle from '@/components/NavigationTitle/index.vue'
 import BlockControl from '@/components/BlockControl/index.vue'
-import { DominKey, getToken } from '@/utils/auth'
-import { getImageUrl } from '@/utils/index'
 
 const domin = getToken(DominKey)
+const config = computed(() => store.state.user.config)
 
 const props = defineProps({
   row: {
@@ -37,7 +39,6 @@ const props = defineProps({
     }
   }
 })
-
 
 </script>
 
