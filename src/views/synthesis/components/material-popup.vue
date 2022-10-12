@@ -315,6 +315,8 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 	}
 	.popup-content-list {
 		margin-top: 15px;
+		max-height: 50vh;
+		overflow-y: auto;
 	}
 }
 
