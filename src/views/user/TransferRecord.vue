@@ -1,47 +1,46 @@
 <template>
   <div class="main-contain">
     <van-tabs v-model:active="active" sticky shrink type="card" offset-top="1.2rem" @change="onChangeTab">
-      <van-tab v-for="(item, index) in actionTransferOptions" :key="index" :name="item.value" :title="item.label">
-        <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-          <van-list
-            v-model:loading="loading"
-            :finished="finished"
-            finished-text="没有更多了"
-            @load="onLoad"
-          >
-            <div class="transfer-wrapper">
-              <div class="transfer-item" v-for="(x, y) in list" :key="y">
-                <span class="transfer-tag" :class="'transfer-tag-' + x.target_type">{{ x.target_type =='goods'?'藏品':'盲盒' }}</span>
-                <div class="title" :class="info.id === x.target_user_id ? 'title-income' : 'title-expend'">
-                  {{ info.id === x.target_user_id ? '收到' : '转出' }}
-                  <template v-if="x.target_type =='goods'">
-                    “{{ x?.user_goods?.goods?.name }}”
-                  </template>
-                  <template v-else>
-                    “{{ x?.user_box?.box?.name }}”
-                  </template>
-                </div>
-                <div class="user">
-                  <default-avatar v-if="x?.target_user?.avatar && `${domin}${x.target_user.avatar}`" /> 
-                  <default-avatar v-else />
-                  {{ x?.target_user?.name }}
-                </div>
-                <div class="info">
-                  <span>时间</span><b>{{ x.created_at }}</b>
-                </div>
-                <div class="info">
-                  <span>HASH</span>
-                  <b>
-                    {{ x.hash }}
-                    <svg-icon icon-class="copy" class-name="copy-icon" @click="onCopy(x.hash)" />
-                  </b>
-                </div>
-              </div>
-            </div>
-          </van-list>
-        </van-pull-refresh>
-      </van-tab>
+      <van-tab v-for="(item, index) in actionTransferOptions" :key="index" :name="item.value" :title="item.label"></van-tab>
     </van-tabs>
+    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+      <van-list
+        v-model:loading="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+        >
+        <div class="transfer-wrapper">
+          <div class="transfer-item" v-for="(x, y) in list" :key="y">
+            <span class="transfer-tag" :class="'transfer-tag-' + x.target_type">{{ x.target_type =='goods'?'藏品':'盲盒' }}</span>
+            <div class="title" :class="info.id === x.target_user_id ? 'title-income' : 'title-expend'">
+              {{ info.id === x.target_user_id ? '收到' : '转出' }}
+              <template v-if="x.target_type =='goods'">
+                “{{ x?.user_goods?.goods?.name }}”
+              </template>
+              <template v-else>
+                “{{ x?.user_box?.box?.name }}”
+              </template>
+            </div>
+            <div class="user">
+              <default-avatar v-if="x?.target_user?.avatar && `${domin}${x.target_user.avatar}`" /> 
+              <default-avatar v-else />
+              {{ x?.target_user?.name }}
+            </div>
+            <div class="info">
+              <span>时间</span><b>{{ x.created_at }}</b>
+            </div>
+            <div class="info">
+              <span>HASH</span>
+              <b>
+                {{ x.hash }}
+                <svg-icon icon-class="copy" class-name="copy-icon" @click="onCopy(x.hash)" />
+              </b>
+            </div>
+          </div>
+        </div>
+      </van-list>
+    </van-pull-refresh>
   </div>
 </template>
 

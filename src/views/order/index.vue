@@ -2,21 +2,20 @@
   <div class="main-contain">
     <van-tabs v-model:active="active" sticky offset-top="1.2rem" @change="onChangeTab">
       <van-tab v-for="(item, index) in orderOptions" :key="index" :name="item.value" :title="item.label">
-        <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-          <van-list
-            v-model:loading="loading"
-            :finished="finished"
-            finished-text="没有更多了"
-            @load="onLoad"
-            :immediate-check="false"
-          >
-            <div class="order-wrapper">
-              <order-item v-for="(x, y) in list" :key="y" :item="x" @sub-unit="onSubUnit" @timeFinish="onTimeFinish" />
-            </div>
-          </van-list>
-        </van-pull-refresh>
       </van-tab>
     </van-tabs>
+    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+      <van-list
+        v-model:loading="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+      >
+        <div class="order-wrapper">
+          <order-item v-for="(x, y) in list" :key="y" :item="x" @sub-unit="onSubUnit" @timeFinish="onTimeFinish" />
+        </div>
+      </van-list>
+    </van-pull-refresh>
     <cancel-order ref="cancelOrder" :order-no="state.order_no" @refresh-data="onChangeTab"/>
   </div>
 </template>
