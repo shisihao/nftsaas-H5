@@ -38,15 +38,17 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { getMyBox } from '@/api/box'
+import store from '@/store/index'
+import globleFun from '@/utils/link'
 import { pages as commonPages, integralOptions } from '@/utils/explain'
 import { getImageUrl } from '@/utils/index'
-import { paraphrase } from '@/filters/index'
-import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 import { DominKey, getToken } from '@/utils/auth'
-import globleFun from '@/utils/link'
+import { paraphrase } from '@/filters/index'
+import { getMyBox } from '@/api/box'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 
 const domin = getToken(DominKey)
+const config = computed(() => store.state.user.config)
 
 const onHandleBox = (item) => {
   if (item.is_open === 0) {
@@ -83,7 +85,7 @@ const imgSrc = computed(() => {
       if (item.open_goods.goods) {
         return item.open_goods.goods.images && `${domin}${item.open_goods.goods.images[0]}`
       } else {
-        return getImageUrl('public/blind_box_reward_wadang.png')
+        return `${config.value?.cdn_domain}${config.value?.integral_config?.image}`
       }
     } else {
       return item?.box?.images && `${domin}${item.box.images[0]}`

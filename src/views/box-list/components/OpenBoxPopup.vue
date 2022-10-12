@@ -4,13 +4,13 @@
       <div class="popup-header"> 开启成功 </div>
       <div class="popup-bg">
         <div class="tips-img">
-          <van-image fit="cover" :src="state.item?.goods?.images[0] ? domin + state.item?.goods?.images[0] : getImageUrl('public/boxdetails_img_wadang.png')" />
+          <van-image fit="cover" :src="state.item?.goods?.images[0] ? domin + state.item?.goods?.images[0] : `${config?.cdn_domain}${config?.integral_config?.image}`" />
         </div>
         <div class="title"> 恭喜获得 </div>
         <div class="content">
           “{{ state.item?.goods_id > 0 ? state.item?.goods?.name : `${paraphrase({ value: 'integral', options: integralOptions })}x${state.item?.integral_num || 0}` }}”,<br/>
         </div>
-        <div class="goods-num">
+        <div v-if="state.item?.goods_id > 0" class="goods-num">
           <span>
             <svg-icon icon-class="serial" class-name="icon-serial" />
             {{ `${state.item?.goods?.serial || ''}#${state.item?.user_goods_num || ''}/${state.item?.goods?.cast_goods_stock || ''}` }}
@@ -39,6 +39,7 @@ import { paraphrase } from '@/filters/index'
 import { getImageUrl } from '@/utils/index'
 
 const domin = getToken(DominKey)
+const config = computed(() => store.state.user.config)
 
 defineProps({
   title: {
