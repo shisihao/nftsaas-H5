@@ -54,10 +54,12 @@
 									<van-image lazy-load fit="cover"
 										:src="Array.isArray(goodsItem?.images) && `${domin}${goodsItem?.images[0]}`" />
 								</div>
-								<div class="list-item-name">{{ goodsItem.name }}</div>
-								<div class="list-item-num">
-									<svg-icon icon-class="serial" class-name="icon-serial" />
-									{{`${goodsItem?.serial}#${goodsItem?.user_goods?.num}/${goodsItem?.cast_goods_stock}`}}
+								<div class="list-item-content">
+									<div class="list-item-name">{{ goodsItem.name }}</div>
+									<div class="list-item-num">
+										<svg-icon icon-class="serial" class-name="icon-serial" />
+										{{`${goodsItem?.serial}#${goodsItem?.user_goods?.num}/${goodsItem?.cast_goods_stock}`}}
+									</div>
 								</div>
 							</div>
 						</div>
@@ -391,7 +393,6 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 
 .popup-content {
 	.synthetic-list {
-		display: flex;
 		max-height: 330px;
 		overflow-y: auto;
 		flex-wrap: wrap;
