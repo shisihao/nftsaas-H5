@@ -39,9 +39,9 @@
                 {{ item.created_at }}
               </div>
             </div>
-            <div class="cer-status" v-if="item.cer_status">
+            <div class="cer-status">
               <span :class="item.cer_status == 1 ? 'already' : '' ">
-                {{ paraphrase({ value: item.cer_status, options: tabsOptions }) }}
+                {{ item.cer_status == 1 ? '已实名' : '未实名' }}
               </span>
             </div>
           </div>
@@ -84,7 +84,7 @@ let inviteCode = computed(() => info.value && [ ...info.value.code ]) || []
 const config = computed(() => store.state.user.config)
 
 const tabsOptions = [
-  { label: '全部', value: '' },
+  { label: '全部', value: -1 },
   { label: '未实名', value: 0 },
   { label: '已实名', value: 1 }
 ]
