@@ -13,7 +13,7 @@
                 <van-image lazy-load fit="cover"
                   :src="Array.isArray(props.data.goods?.images) && `${domin}${props.data.goods?.images[0]}`" />
               </div>
-              <div class="name">{{ props.data.goods?.name }}xxxxx</div>
+              <div class="name">{{ props.data.goods?.name }}</div>
               <div class="title-icon">
                 <svg-icon icon-class="serial" class-name="icon-serial" />
                 {{`${props.data.goods?.serial}#${props.data.num}/${props.data.goods?.cast_goods_stock}`}}
