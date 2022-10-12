@@ -29,12 +29,22 @@ defineProps({
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 2.5%;
+      top: -0.5px;
+      width: 95%;
+      border-top: 1px dashed var(--root-dividing-color1);
+    }
     .circulation {
       border: 1px solid var(--root-theme-color);
       font-size: 14px;
       border-radius: 4px;
       display: flex;
       b {
+        color: #fff;
         font-weight: normal;
         padding: 2px 6px;
         background-color: var(--root-theme-color);
@@ -46,7 +56,7 @@ defineProps({
     }
     .surplus {
       span {
-        color: var(--root-auxiliary-color);
+        color: var(--root-theme-color);
       }
     }
   }
