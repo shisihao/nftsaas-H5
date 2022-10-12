@@ -97,7 +97,7 @@ const finished = ref(false)
 const onLoad = () => {
   // 异步更新数据
   if (!loading.value) return false
-  getInvite({ status: active.value, ...pages })
+  getInvite({ cer_status: active.value, ...pages })
     .then((response) => {
       const { data, total } = response.data
       data.forEach(v => {
