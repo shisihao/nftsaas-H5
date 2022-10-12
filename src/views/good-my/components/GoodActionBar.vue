@@ -138,7 +138,7 @@ const onEquityItem = (value) => {
     top: -50px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--root-bg-color1);
+    background-color: var(--root-bg-color2);
     border-radius: 8px;
     box-sizing: border-box;
     padding: 14px var(--root-page-spacing);
@@ -146,7 +146,7 @@ const onEquityItem = (value) => {
     justify-content: space-between;
     align-items: center;
     .attestation-tip {
-      color: var(--root-auxiliary-color);
+      color: var(--root-auxiliary-color1);
     }
   }
 }

@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { reactive, defineExpose } from 'vue'
+import { reactive, defineExpose, computed } from 'vue'
 import store from '@/store/index'
 import globleFun from '@/utils/link'
 import { DominKey, getToken } from '@/utils/auth'
