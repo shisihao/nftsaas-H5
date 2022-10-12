@@ -192,7 +192,7 @@ const onSubmit = () => {
     }
     .btn-submit {
       color: var(--root-text-color5);
-      background-image: var(--root-theme-color);
+      background-color: var(--root-theme-color);
     }
   }
 }

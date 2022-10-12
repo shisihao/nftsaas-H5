@@ -23,7 +23,6 @@ import store from '@/store/index'
 const domin = getToken(DominKey)
 
 let config = computed(() => store.state.user.config)
-console.log("🚀 ~ file: index.vue ~ line 26 ~ config", config.value)
 
 const show = ref(false)
 
