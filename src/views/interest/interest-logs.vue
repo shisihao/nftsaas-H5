@@ -104,10 +104,10 @@ const onTabChange = val => {
 	padding: 0 var(--root-page-spacing);
 }
 .list-item {
-	background: var(--root-bg-color1);
+	background: var(--root-bg-color2);
 	padding: 15px 12px;
 	border-radius: 12px;
-	margin-bottom: 12px;
+	margin-top: 12px;
 	.title {
 		font-size: 16px;
 		margin-bottom: 8px;
