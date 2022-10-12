@@ -184,16 +184,15 @@ const onSubmit = () => {
       height: auto;
       font-size: 16px;
       padding: 10px 20px;
+      border-radius: 44px;
     }
     .btn-close {
-      color: var(--root-text-color3);
-      border-radius: 44px;
-      background-color: rgba(75, 75, 89, 0.1);
+      color: var(--root-text-color5);
+      background-color: var(--root-button-color1);
     }
     .btn-submit {
-      color: var(--root-bg-color1);
-      border-radius: 44px;
-      background-image: var(--root-button-color1);
+      color: var(--root-text-color5);
+      background-image: var(--root-theme-color);
     }
   }
 }
