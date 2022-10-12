@@ -13,7 +13,7 @@
     :rules="state.rules.code"
   >
     <template v-if="leftIcon" #left-icon>
-      <img class="input-icon" src="@/assets/images/login/login_icon_validation@2x.png" alt="">
+      <!-- <van-icon class="input-icon" name="shield-o" /> -->
     </template>
     <template #button>
       <div :class="state.verifyCode.isDisabled && 'wordDisabled'" @click="onSendCode">
