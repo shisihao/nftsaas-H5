@@ -52,7 +52,7 @@ const handleSuccess = res => {
 		forbidClick: true,
 		duration: 0
 	})
-	state.form.avatar = res.name
+	state.form.avatar = res
 	putUser(state.form)
 		.then(() => {
 			store.dispatch('user/getInfo')
