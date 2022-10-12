@@ -23,8 +23,7 @@
               </template>
             </div>
             <div class="user">
-              <default-avatar v-if="x?.target_user?.avatar && `${domin}${x.target_user.avatar}`" /> 
-              <default-avatar v-else />
+              <default-avatar v-if="x?.target_user?.avatar ? `${domin}${x.target_user.avatar}` : ''" /> 
               {{ x?.target_user?.name }}
             </div>
             <div class="info">
@@ -105,6 +104,7 @@ const onRefresh = () => {
 }
 
 const onChangeTab = () => {
+  console.log(11)
   onRefresh()
 }
 
