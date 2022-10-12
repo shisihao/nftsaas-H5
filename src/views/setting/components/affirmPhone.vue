@@ -2,7 +2,7 @@
   <div class="affirm-phone">
     <van-form ref="form" @submit="onSubmit">
       <van-field :border="false" class="list phone" v-model="state.form.account" type="tel" autocomplete="off"
-        name="account" placeholder="请输入手机号码" clearable :rules="state.rules.account">
+      maxlength="11" name="account" placeholder="请输入手机号码" clearable :rules="state.rules.account">
       </van-field>
       <van-field :border="false" class="list field-code" v-model="state.form.code" type="digit" autocomplete="off"
         maxlength="6" name="code" placeholder="请输入验证码" clearable :rules="state.rules.code">

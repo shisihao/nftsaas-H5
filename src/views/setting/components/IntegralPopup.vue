@@ -154,7 +154,7 @@ const onClose = () => {}
           height: 35px;
           text-align: center;
           line-height: 35px;
-          background-color: #b5d7ff;
+          background-color: rgba(var(--root-theme-color-rgb), 0.1);
           color: var(--root-theme-color);
           border-radius: 22px;
         }
