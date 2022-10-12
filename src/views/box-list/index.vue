@@ -23,8 +23,7 @@
             </div>
             <div v-if="authorAvatar(item) && authorName(item)" class="collection-gather">
               <div class="avatar">
-                <default-avatar v-if="authorAvatar(item)" :src="authorAvatar(item)" />
-                <default-avatar v-else />
+                <default-avatar :src="authorAvatar(item) || ''" />
               </div>
               <div class="name">
                 {{ authorName(item) }}

@@ -2,7 +2,7 @@
   <div class="section user-section">
     <div class="user-info padding">
       <div class="avatar-uploader">
-        <default-avatar :src="info ? `${domin}${info.avatar}` : ''" />
+        <default-avatar :src="info?.avatar ? `${domin}${info.avatar}` : ''" />
       </div>
       <div class="user-detail">
         <div class="name">

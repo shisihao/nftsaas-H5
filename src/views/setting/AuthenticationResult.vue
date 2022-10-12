@@ -1,7 +1,7 @@
 <template>
   <div class="main-contain">
     <div class="certify-result" v-if="state.item">
-      <div class="certify-img" :class="state.item.status === 1 ? 'certify-success' : 'certify-fail'">
+      <div class="certify-img" :class="paraphrase({ value: state.item.status, options: statusOptions, l: 'icon' })">
       </div>
       <div class="certify-title">
         {{ paraphrase({ value: state.item.status, options: attestationOptions }) }}
@@ -31,6 +31,11 @@ import { getCertify } from '@/api/certification'
 import { paraphrase } from '@/filters/index'
 import { attestationOptions } from '@/utils/explain'
 import store from '@/store/index'
+
+const statusOptions = [
+  { label: '认证失败', icon: 'certify-success', value: 1 },
+  { label: '认证成功', icon: 'certify-fail', value: 2 }
+]
 
 const state = reactive({
   item: null

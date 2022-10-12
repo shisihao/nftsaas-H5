@@ -4,8 +4,7 @@
 			<div class="header">
 				<div class="header-l">
 					<div class="avatar">
-						<default-avatar v-if="info?.avatar" :src="info ? `${domin}${info.avatar}` : ''" />
-						<default-avatar v-else />
+						<default-avatar :src="info?.avatar ? `${domin}${info.avatar}` : ''" />
 					</div>
 				</div>
 				<div class="header-r">

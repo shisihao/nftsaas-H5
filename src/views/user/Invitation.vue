@@ -23,8 +23,7 @@
             <div class="business-card">
               <div class="business-item" v-for="(item, index) in list" :key="index">
                 <div class="avatar-uploader">
-                  <default-avatar v-if="item.avatar" :src="`${domin}${item.avatar}`" />
-                  <default-avatar v-else />
+                  <default-avatar :src="item?.avatar ? `${domin}${item.avatar}` : ''" />
                 </div>
                 <div class="user-info">
                   <div>

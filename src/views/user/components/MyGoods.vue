@@ -46,8 +46,7 @@
             </div>
             <div class="collection-gather">
               <div class="avatar">
-                <default-avatar v-if="item?.goods?.author_avatar" :src="`${domin}${item.goods.author_avatar}`" />
-                <default-avatar v-else />
+                <default-avatar :src="item?.goods?.author_avatar ? `${domin}${item.goods.author_avatar}` : ''" />
               </div>
               <div class="name">
                 {{ item?.goods?.author }}

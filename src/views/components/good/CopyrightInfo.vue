@@ -8,8 +8,8 @@
             <van-divider dashed>{{ item.label }}</van-divider>
             <div class="copyright-info">
               <div v-if="item.value !== 'issuer'" class="avatar">
-                <default-avatar v-if="item.value === 'author'" :src="`${domin}${row.author_avatar}`" />
-                <default-avatar v-else-if="item.value === 'user' && row.avatar" :src="`${domin}${row.avatar}`" />
+                <default-avatar v-if="item.value === 'author'" :src="row.author_avatar ? `${domin}${row.author_avatar}` : ''" />
+                <default-avatar v-else-if="item.value === 'user' && row.avatar" :src="row.avatar ? `${domin}${row.avatar}` : ''" />
                 <default-avatar v-else-if="item.value === 'user' && !row.avatar" />
               </div>
               <div class="name">
