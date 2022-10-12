@@ -339,14 +339,10 @@ provide('init', init)
 }
 :deep(.van-button--disabled) {
 	background: var(--root-text-color4);
+	color: var(--root-text-color5);
 }
 .btn-no-active {
 	background: var(--root-text-color4);
-	color: var(--root-text-color2);
-}
-
-.no-active {
-	background: var(--root-dividing-color1);
-	color: var(--root-text-color2);
+	color: var(--root-text-color5);
 }
 </style>
