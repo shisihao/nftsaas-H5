@@ -1,19 +1,22 @@
 <template>
   <div>
-    <van-popup round v-model:show="show">
+    <van-popup round v-model:show="show" position="bottom">
       <div class="bg-wrap">
-        <img class="bg-img" :src="getImageUrl('synthesis/hcdetailshccp@2x.png')" alt="" />
-        <div class="bg-goods">
-          <div class="bg-img-wrap" v-if="data.goods?.images">
-            <van-image lazy-load fit="cover"
-              :src="Array.isArray(data.goods?.images) && `${domin}${data.goods?.images[0]}`" />
+        <div class="popup-header"> 合成成功 </div>
+        <div class="popup-bg">
+          <div class="bg-goods">
+            <div class="bg-img-wrap" v-if="data.goods?.images">
+              <van-image lazy-load fit="cover"
+                :src="Array.isArray(data.goods?.images) && `${domin}${data.goods?.images[0]}`" />
+            </div>
           </div>
-        </div>
-        <div class="goods-name">“{{ data.goods?.name }}”</div>
-        <div class="goods-num">
-          <span>
-            {{ `${data.goods?.serial}#${data?.num}/${data.goods?.cast_goods_stock}` }}
-          </span>
+          <div class="goods-name">{{ data.goods?.name }}</div>
+          <div class="goods-num">
+            <span>
+              <svg-icon icon-class="serial" class-name="icon-serial" />
+              {{ `${data.goods?.serial}#${data?.num}/${data.goods?.cast_goods_stock}` }}
+            </span>
+          </div>
         </div>
         <div class="popup-btn">
           <van-button class="popup-btn-l" @click="show = !show">稍后再说</van-button>
@@ -51,24 +54,32 @@ defineExpose({ init })
 <style lang="scss" scoped>
 
 .bg-wrap {
-  width: 288px;
-  height: 354px;
-  border-radius: 8px;
-  overflow: hidden;
-  background: url('@/assets/images/synthesis/manghe_img_kaiqi_bg@2x.png') no-repeat;
-  background-size: cover;
-
-  .bg-img {
-    width: 223px;
-    height: 69px;
-    margin: 20px 31px 0px 35px;
+  max-width: 375px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  overflow: visible;
+  padding-bottom: 20px;
+  .popup-header {
+    margin: 0 20px;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid var(--root-dividing-color1);
+  }
+  .popup-bg {
+    background-image: linear-gradient(rgba(var(--root-theme-color-rgb), 0.2) 10%, var(--root-bg-color2) 50%);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 20px 20px 20px;
   }
 
   .bg-goods {
-    width: 110px;
-    height: 110px;
+    width: 140px;
+    height: 140px;
     border-radius: 12px;
-    border: 2px solid #926FFC;
+    border: 2px solid var(--root-theme-color);
     padding: 2px;
     margin: 0 auto;
     margin-bottom: 15px;
@@ -89,8 +100,8 @@ defineExpose({ init })
   }
 
   .bg-img-wrap {
-    width: 96px;
-    height: 96px;
+    width: 134px;
+    height: 134px;
     border-radius: 12px;
     overflow: hidden;
     position: absolute;
@@ -110,28 +121,20 @@ defineExpose({ init })
 
   .goods-num {
     text-align: center;
-
     span {
       position: relative;
       color: var(--root-text-color2);
       margin: 0 auto;
-      padding-left: 15px;
       display: inline-block;
       max-width: calc(288px - 30px);
       overflow: hidden;
       text-overflow: ellipsis;
+      .icon-serial {
+        font-size: 12px;
+        color: var(--root-theme-color);
+      }
     }
 
-    span::before {
-      content: '';
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      background: url('@/assets/images/public/common_icon_number.png') no-repeat center;
-      background-size: 100%;
-      left: 0;
-      bottom: 2px;
-    }
   }
 
   .popup-btn {
@@ -143,16 +146,15 @@ defineExpose({ init })
     .popup-btn-r {
       flex: 1;
       padding: 10px 24px;
-      color: var(--root-text-color2);
+      color: var(--root-text-color3);
       font-size: 16px;
-      background-color: var(--root-button-color4);
-
+      background-color: rgba(75, 75, 89, 0.1);
       border-radius: 24px;
     }
 
     .popup-btn-r {
-      color: var(--root-text-color1);
-      background: var(--root-button-color1);
+      color: var(--root-text-color5);
+      background-color: var(--root-theme-color);
       margin-left: 16px;
     }
   }
