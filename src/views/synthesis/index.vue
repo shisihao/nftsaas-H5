@@ -325,19 +325,21 @@ provide('init', init)
 	margin: 0 auto;
 	max-width: 375px;
 	z-index: 999;
-	padding-bottom: env(safe-area-inset-bottom);
+	padding:0 20px env(safe-area-inset-bottom) 20px;
 }
 
 .btn {
 	height: 44px;
 	width: 100%;
 	margin: 8px 0;
-	background: var(--root-button-color1);
+	background: var(--root-theme-color);
 	border-radius: 24px;
-	color: var(--root-text-color1);
+	color: var(--root-text-color5);
 	font-size: 18px;
 }
-
+:deep(.van-button--disabled) {
+	background: var(--root-text-color4);
+}
 .btn-no-active {
 	background: var(--root-text-color4);
 	color: var(--root-text-color2);

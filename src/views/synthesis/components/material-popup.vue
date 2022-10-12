@@ -5,7 +5,7 @@
 				<template v-if="props.item.type === 1">
 					<div class="popup-content-header">
 						<div class="popup-title">选择合成材料</div>
-						<div class="popup-title-desc">请选择用于合成的藏品材料确认合成后该藏品将<i>销毁</i></div>
+						<div class="popup-title-desc" v-if="props.data.is_delete === 1">请选择用于合成的藏品材料，确认合成后该藏品将<i>销毁</i></div>
 						<div class="divider-line"></div>
 					</div>
 					<div class="popup-content">
