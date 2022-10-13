@@ -16,7 +16,7 @@
             <img :src="paraphrase({ value: item.hook, options: taskOptions, l: 'icon' })" alt="">
             <div>
               <p>{{item.name}}</p>
-              <p class="integral">+{{item.reward}}{{ paraphrase({ value: 'integral', options: integralOptions }) }}</p>
+              <p class="integral">+{{item.reward }}{{ paraphrase({ value: 'integral', options: integralOptions }) }}</p>
             </div>
           </div>
           <div class="card-r">

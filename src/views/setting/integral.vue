@@ -3,7 +3,7 @@
     <van-pull-refresh v-model="state.refreshing" @refresh="onRefresh" success-text="刷新成功">
       <van-list v-model:loading="state.loading" :finished="state.finished" finished-text="没有更多了" @load="onLoad">
         <div class="integral-header">
-          <div class="integral-num">{{ info?.balance || 0 }}</div>
+          <div class="integral-num">{{ parseFloat(info?.balance || 0 ).toFixed(2) }}</div>
           <div class="integral-text">{{ paraphrase({ value: 'integral', options: integralOptions }) }}余额</div>
           <div class="integral-get" @click="onGetIntegral">领取{{ paraphrase({ value: 'integral', options: integralOptions })}}</div>
         </div>
@@ -15,7 +15,9 @@
             <div class="integral-list" v-for="item in state.list" :key="item.id">
               <div class="list-header">
                 <div class="list-header-l">{{ item.title }}</div>
-                <div class="list-header-r">{{ item.action&&item.action===1 ? '+' : '-' }} {{ item.amount }}</div>
+                <div class="list-header-r">{{ item.action && item.action===1 ? '+' : '-' }} 
+                  {{ parseFloat(item.amount).toFixed(2) }}
+                </div>
               </div>
               <div class="list-datetime">时间<span>{{ item.created_at }}</span></div>
               <div class="list-hash">
