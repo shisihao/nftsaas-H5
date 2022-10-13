@@ -32,7 +32,7 @@
           <em v-if="parseFloat(item.cny_price || 0) > 0"><span>¥</span>{{ item.cny_price }}</em>
           <em v-if="parseFloat(item.cny_price || 0) > 0 && parseFloat(item.integral_price || 0) > 0"><span>+</span></em>
           <em v-if="parseFloat(item.integral_price || 0) > 0">{{ item.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
-          <em v-if="parseFloat(item.cny_price || 0) === 0 && parseFloat(item.integral_price || 0) === 0">0.00<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+          <em v-if="parseFloat(item.cny_price || 0) === 0 && parseFloat(item.integral_price || 0) === 0">0<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
         </div>
       </div>
     </div>
