@@ -58,7 +58,7 @@ const interestPrice = computed(() => {
     if (item.interest_rebate && item.interest_rebate.free_integral ) {
       return parseFloat(item.interest_rebate.integral_price || 0).toFixed(2)
     } else {
-      return parseFloat(item.free_integral || 0).toFixed(2)
+      return parseFloat(item.integral_price || 0).toFixed(2)
     }
   }
 })
