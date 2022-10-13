@@ -8,6 +8,7 @@
 import store from '@/store/index'
 import { hexToRgb } from '@/utils/index'
 import { themeColor, integralOptions } from '@/utils/explain'
+import defaultSettings from '@/settings'
 
 // 配置信息
 store.dispatch('user/getConfig')
@@ -23,5 +24,8 @@ store.dispatch('user/getConfig')
       element.label = response.integral_config?.name
       element.icon = response.integral_config?.image
     })
+
+    defaultSettings.title = response?.design_style?.app_name || ''
+    console.log(defaultSettings.title);
   })
 </script>
