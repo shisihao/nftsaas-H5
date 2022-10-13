@@ -3,7 +3,7 @@
     <iframe v-if="item?.is_three && item.three_url?.three_type === 'gltf'" class="threejs" scrolling="no" :src="`${domin}threejs/3d_gltf.html?gltf=${item.three_url?.three_gltf}&bg=${config?.back_image}`" frameborder="0"></iframe>
     <iframe v-else-if="item?.is_three && item.three_url?.three_type === 'obj'" class="threejs" scrolling="no" :src="`${domin}threejs/3d.html?obj=${item.three_url?.three_obj}&mtl=${item.three_url?.three_mtl}&bg=${config?.back_image}`" frameborder="0"></iframe>
     <div v-else-if="item?.is_video && config" class="video-box" :style="{ paddingBottom: `${item.video_url?.height / item.video_url?.width * 100}%` }">
-      <iframe class="iframevideo" scrolling="no" :src="`${domin}threejs/video.html?video=${item.video_url?.filename}&limitsecond=${limitsecond(config, item)}`" frameborder="0"></iframe>
+      <iframe id="iframevideo" class="iframevideo" scrolling="no" :src="`${domin}threejs/video.html?video=${item.video_url?.filename}&limitsecond=${limitsecond(config, item)}`" frameborder="0"></iframe>
     </div>
     <van-image v-else fit="cover" :src="Array.isArray(item?.images) ? `${domin}${item?.images[0]}` : ''" />
     <div v-show="item?.is_three" class="cover-touch"></div>
@@ -46,6 +46,11 @@ defineProps({
 const onFullScreen = () => {
   show.value = true
 }
+
+document.addEventListener("WeixinJSBridgeReady", function () {
+  let frame = document.querySelector("#iframevideo").contentWindow
+  frame.postMessage("接收", "*")
+}, false)
 
 </script>
 
