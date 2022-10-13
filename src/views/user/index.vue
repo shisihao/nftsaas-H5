@@ -14,7 +14,7 @@
           </div>
           <div class="integral" @click="$globleFun.onGoto('/integral')">
             {{ paraphrase({ value: 'integral', options: integralOptions }) }}
-            {{ info?.balance || 0 }}
+            {{ parseFloat(info?.balance || 0 ).toFixed(2) }}
             <van-icon name="arrow" />
           </div>
         </div>
