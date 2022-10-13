@@ -12,11 +12,11 @@
       <em v-if="cnyPrice(item) > 0"><span>¥</span>{{ cnyPrice(item) }}</em>
       <em v-if="cnyPrice(item) > 0 && interestPrice(item) > 0"><span>+</span></em>
       <em v-if="interestPrice(item) > 0">{{ interestPrice(item) }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
-      <em v-if="cnyPrice(item) == 0 && interestPrice(item) == 0">0.00<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+      <em v-if="cnyPrice(item) == 0 && interestPrice(item) == 0">0<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
     </div>
     <div v-if="item.interest_rebate" class="interest-rebate">
-      <b>¥{{ item.cny_price }}</b>
-      <b v-if="item.integral_price > 0">+</b>
+      <b v-if="item.cny_price > 0">¥{{ item.cny_price }}</b>
+      <b v-if="item.cny_price > 0 && item.integral_price > 0">+</b>
       <b v-if="item.integral_price > 0">{{ item.integral_price }}{{ paraphrase({ value: 'integral', options: integralOptions }) }}</b>
       <span v-if="item.interest_rebate?.rebate" class="discount">
         {{ item.interest_rebate?.rebate?.discount / 10 }}折
