@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { reactive, defineExpose } from 'vue'
+import { reactive } from 'vue'
 import store from '@/store/index'
 
 const state = reactive({

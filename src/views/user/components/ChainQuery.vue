@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { reactive, computed, defineExpose } from 'vue'
+import { reactive, computed } from 'vue'
 
 defineProps({
   title: {

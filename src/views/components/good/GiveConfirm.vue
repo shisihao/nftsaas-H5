@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, defineExpose, inject, computed } from 'vue'
+import { ref, reactive, inject, computed } from 'vue'
 import { showSuccessToast } from 'vant'
 import store from '@/store/index'
 import { paraphrase } from '@/filters/index'

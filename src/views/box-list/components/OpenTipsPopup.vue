@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, defineExpose } from 'vue'
+import { ref, reactive } from 'vue'
 import store from '@/store/index'
 import globleFun from '@/utils/link'
 import OpenBoxPopup from './OpenBoxPopup.vue'

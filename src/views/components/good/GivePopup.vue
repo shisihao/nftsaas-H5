@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, defineExpose } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import store from '@/store/index'
 import { DominKey, getToken } from '@/utils/auth'
 import { integralOptions } from '@/utils/explain'

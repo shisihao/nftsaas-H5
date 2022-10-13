@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, defineExpose } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import { integralOptions, taskOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
 import store from '@/store/index'

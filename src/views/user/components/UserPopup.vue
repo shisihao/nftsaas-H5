@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { reactive, computed, defineExpose } from 'vue'
+import { reactive, computed } from 'vue'
 import store from '@/store/index'
 import globleFun from '@/utils/link'
 import useClipboard from 'vue-clipboard3'

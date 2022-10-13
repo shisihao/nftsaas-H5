@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, defineExpose } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import store from '@/store/index'
 import { putUser } from '@/api/user'
 import globleFun from '@/utils/link'
