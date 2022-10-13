@@ -6,8 +6,12 @@
 
 <script setup>
 import store from '@/store/index'
+import { useRouter } from 'vue-router'
 import { hexToRgb } from '@/utils/index'
 import { themeColor, integralOptions } from '@/utils/explain'
+import getPageTitle from '@/utils/get-page-title'
+
+const router = useRouter()
 
 // 配置信息
 store.dispatch('user/getConfig')
@@ -23,5 +27,6 @@ store.dispatch('user/getConfig')
       element.label = response.integral_config?.name
       element.icon = response.integral_config?.image
     })
+    document.title =  getPageTitle(router.currentRoute.value.meta.title)
   })
 </script>
