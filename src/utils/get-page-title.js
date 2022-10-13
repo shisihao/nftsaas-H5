@@ -1,7 +1,7 @@
-import store from '@/store/index'
+import defaultSettings from '@/settings'
 
 export default function getPageTitle( pageTitle ) {
-  const title = store.state.settings.title || ''
+  const title = defaultSettings.title()
   if ( pageTitle ) {
     return `${pageTitle} ${title ? '-' : ''} ${title}`
   }

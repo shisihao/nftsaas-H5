@@ -1,10 +1,11 @@
 const settings = {
-  title : JSON.parse(sessionStorage.getItem('vuex') || '{}')?.user?.config?.design_style?.app_name,
+  title: () => {
+    return JSON.parse(sessionStorage.getItem('vuex') || '{}')?.user?.config?.design_style?.app_name  || ''
+  },
   showSettings : true,
   tagsView : true,
   fixedHeader : false,
   sidebarLogo : true,
-  errorLog : 'production'
+  errorLog : 'production',
 }
-
 export default settings

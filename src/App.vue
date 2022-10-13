@@ -23,7 +23,5 @@ store.dispatch('user/getConfig')
       element.label = response.integral_config?.name
       element.icon = response.integral_config?.image
     })
-
-    store.commit('settings/CHANGE_SETTING', { key: 'title', value: response?.design_style?.app_name || '' } )
   })
 </script>
