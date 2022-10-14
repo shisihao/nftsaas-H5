@@ -12,16 +12,16 @@
 						<svg-icon icon-class="serial" class-name="icon-serial" />
 						{{ `${item.goods?.serial}#${item.goods?.num}/${item.goods?.cast_goods_stock}` }}
 					</div>
+					<div class="circulation">
+						<b v-if="labelType === 'prior'">提前购{{ item.interests[labelType].prior_time }}分钟</b>
+						<b v-if="labelType === 'rebate'">{{ item.interests[labelType].discount / 10 }}折</b>
+						<b v-if="labelType === 'give'">提前时间{{ item.interests[labelType].give_days }}天</b>
+						<span>
+							<i v-if="item.interests[labelType].type === 'once'">{{ item.interests[labelType].num }}</i>
+							{{ labelType === 'prior'&&item.interests[labelType].type==='long'?`${item.interests[labelType].num}次/月`:paraphrase({value: item.interests[labelType].type,options: interestOptions})}}
+						</span>
+          </div>
 					<div class="item-bottom">
-						<div class="tag">
-							<span v-if="labelType === 'prior'">提前购{{ item.interests[labelType].prior_time }}分钟</span>
-							<span v-if="labelType === 'rebate'">{{ item.interests[labelType].discount / 10 }}折</span>
-							<span v-if="labelType === 'give'">提前时间{{ item.interests[labelType].give_days }}天</span>
-							<span>
-								<i v-if="item.interests[labelType].type === 'once'">{{ item.interests[labelType].num }}</i>
-								{{ labelType === 'prior'&&item.interests[labelType].type==='long'?`${item.interests[labelType].num}次/月`:paraphrase({value: item.interests[labelType].type,options: interestOptions})}}
-							</span>
-						</div>
 						<div class="rules" @click="onShowRules(item)">
 							<img :src="getImageUrl('public/equities_icon_rule@2x.png')" alt="" />
 							<span>使用规则</span>
@@ -113,8 +113,7 @@ const onShowRules = (item) => {
 			.item-title {
 				font-size: 16px;
 				font-weight: 700;
-				padding-top: 4px;
-				margin-bottom: 13px;
+				margin-bottom: 6px;
 				@include textoverflow();
 			}
 
@@ -124,7 +123,7 @@ const onShowRules = (item) => {
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
-				margin-bottom: 18px;
+				margin-bottom: 6px;
 
 				.icon-serial {
         	font-size: 12px;
@@ -132,11 +131,26 @@ const onShowRules = (item) => {
       	}
 			}
 
-			.item-bottom {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
+			.circulation {
+				width: fit-content;
+        border: 1px solid var(--root-theme-color);
+        font-size: 12px;
+        border-radius: 4px;
+        display: flex;
+        margin-bottom: 10px;
+        b {
+          font-weight: normal;
+          color: var(--root-text-color5);
+          padding: 2px 6px;
+          background-color: var(--root-theme-color);
+        }
+        span {
+          padding: 2px 6px;
+          color: var(--root-theme-color);
+        }
+      }
 
+			.item-bottom {
 				.tag {
 					display: inline-block;
 					padding: 3px 0 2px;
