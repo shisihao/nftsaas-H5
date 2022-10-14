@@ -94,7 +94,7 @@ const onShowRules = (item) => {
 	.list-item {
 		display: flex;
 		padding: 15px 12px;
-		background-color: var(--root-bg-color1);
+		background-color: var(--root-bg-color2);
 		border-radius: 12px;
 		margin-bottom: 12px;
 
