@@ -132,12 +132,13 @@ onRefresh()
 .header {
 	display: flex;
 	align-items: center;
-	border-radius: 12px;
+	border-radius: 12px 12px 0 0;
 	margin: 0 var(--root-page-spacing);
 	background: url('@/assets/images/interest/equities_card_bg@2x.png') no-repeat;
 	background-color: var(--root-theme-color);
+	background-position: center;
 	background-size: 100%;
-	padding: 16px 12px;
+	padding: 12px 18px;
 
 	.header-l {
 		display: flex;
@@ -180,7 +181,7 @@ onRefresh()
 	background: var(--root-bg-color2);
 	border-radius: 12px;
 	padding: 15px 12px;
-	margin-top: -8px;
+	// margin-top: -4px;
 	.title-wrap {
 		display: flex;
 		justify-content: space-between;
