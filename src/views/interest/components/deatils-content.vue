@@ -8,7 +8,10 @@
 				</div>
 				<div class="list-item-r">
 					<div class="item-title">{{ item.goods?.name }}</div>
-					<div class="item-num">{{ `${item.goods?.serial}#${item.goods?.num}/${item.goods?.cast_goods_stock}` }}</div>
+					<div class="item-num">
+						<svg-icon icon-class="serial" class-name="icon-serial" />
+						{{ `${item.goods?.serial}#${item.goods?.num}/${item.goods?.cast_goods_stock}` }}
+					</div>
 					<div class="item-bottom">
 						<div class="tag">
 							<span v-if="labelType === 'prior'">提前购{{ item.interests[labelType].prior_time }}分钟</span>
@@ -118,22 +121,15 @@ const onShowRules = (item) => {
 			.item-num {
 				position: relative;
 				color: var(--root-text-color3);
-				padding-left: 16px;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				margin-bottom: 18px;
 
-				&::before {
-					content: '';
-					position: absolute;
-					width: 12px;
-					height: 12px;
-					background: url('@/assets/images/public/common_icon_number.png') no-repeat center;
-					background-size: 100%;
-					left: 0;
-					top: 1px;
-				}
+				.icon-serial {
+        	font-size: 12px;
+        	color: var(--root-theme-color);
+      	}
 			}
 
 			.item-bottom {
