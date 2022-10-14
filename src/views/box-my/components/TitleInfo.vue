@@ -33,29 +33,6 @@ defineProps({
       font-size: 22px;
       font-weight: 500;
     }
-    .goods-num {
-      margin-top: 10px;
-      font-size: 12px;
-      color: var(--root-text-color2);
-      text-align: center;
-      span {
-        position: relative;
-        padding-left: 16px;
-        word-break:break-all;
-        &::before {
-          content: '';
-          width: 12px;
-          height: 12px;
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: 100%;
-          background-image: url('@/assets/images/public/common_icon_number.png');
-          position: absolute;
-          left: 0;
-          top: 0;
-        }
-      }
-    }
     .label {
       text-align: center;
       margin-top: 10px;
