@@ -1,8 +1,10 @@
 <template>
 	<div class="logs-section">
-		<van-tabs v-model:active="state.active" shrink type="card" @change="onTabChange">
-			<van-tab v-for="(item, index) in activeOptions" :key="index" :title="item.label" :name="item.value"></van-tab>
-		</van-tabs>
+		<van-sticky offset-top="1.226rem">
+			<van-tabs v-model:active="state.active" shrink type="card" @change="onTabChange">
+				<van-tab v-for="(item, index) in activeOptions" :key="index" :title="item.label" :name="item.value"></van-tab>
+			</van-tabs>
+		</van-sticky>
 		<div class="content">
 			<van-pull-refresh v-model="state.refreshing" @refresh="onRefresh" success-text="刷新成功">
 				<van-list v-model:loading="state.loading" :finished="state.finished" finished-text="没有更多了" @load="onLoad">
