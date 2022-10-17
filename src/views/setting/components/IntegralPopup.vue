@@ -3,7 +3,7 @@
     <van-popup
       v-model:show="state.show"
       position="bottom"
-      @closed="onClose"
+      @closed="onClosed"
       round
       safe-area-inset-bottom
     >
@@ -104,7 +104,7 @@ const onCancel = () => {
   state.show = false
 }
 
-const onClose = () => {}
+const onClosed = () => {}
 </script>
 
 <style lang="scss" scoped>
@@ -123,7 +123,7 @@ const onClose = () => {}
   }
   .content {
     padding: 0 var(--root-page-spacing) var(--root-page-spacing) var(--root-page-spacing);
-    max-height: 75vh;
+    max-height: 60vh;
     overflow-y: auto;
     .card {
       background-color: var(--root-bg-color2);
@@ -159,7 +159,7 @@ const onClose = () => {}
           border-radius: 22px;
         }
         .disabled {
-          background-color: var(--root-text-color4);
+          background-color: var(--root-button-color1);
           color: var(--root-text-color5);
         }
       }

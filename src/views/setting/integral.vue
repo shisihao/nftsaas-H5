@@ -3,12 +3,12 @@
     <van-pull-refresh v-model="state.refreshing" @refresh="onRefresh" success-text="刷新成功">
       <van-list v-model:loading="state.loading" :finished="state.finished" finished-text="没有更多了" @load="onLoad">
         <div class="integral-header">
-          <div class="integral-num">{{ parseFloat(info?.balance || 0 ).toFixed(2) }}</div>
+          <div class="integral-num">{{ parseFloat(info?.balance || 0).toFixed(2) }}</div>
           <div class="integral-text">{{ paraphrase({ value: 'integral', options: integralOptions }) }}余额</div>
           <div class="integral-get" @click="onGetIntegral">领取{{ paraphrase({ value: 'integral', options: integralOptions })}}</div>
         </div>
         <div class="integral-cotent-wrap">
-          <van-tabs v-model:active="active" shrink @change="onTabChange">
+          <van-tabs v-model:active="state.active" shrink @change="onTabChange">
             <van-tab v-for="(item, index) in activeOptions" :key="index" :title="item.label" :name="item.value"></van-tab>
           </van-tabs>
           <div class="integral-cotent">
@@ -22,7 +22,9 @@
               <div class="list-datetime">时间<span>{{ item.created_at }}</span></div>
               <div class="list-hash">
                 <div class="text">HASH<span>{{ item?.extend?.hash || '------' }}</span></div>
-                <div v-if="item?.extend?.hash" class="copy-btn" @click="onCopy(item?.extend?.hash)"></div>
+                <div v-if="item?.extend?.hash" class="copy-btn" @click="onCopy(item?.extend?.hash)">
+                  <svg-icon icon-class="copy" class-name="grid-icon"/>
+                </div>
               </div>
             </div>
           </div>
@@ -36,14 +38,15 @@
 
 <script setup>
 import { ref, reactive, computed } from 'vue'
-import { useRoute } from "vue-router"
-import { walletLogs } from '@/api/setting.js'
-import useClipboard from 'vue-clipboard3'
-import to from 'await-to-js'
 import { showToast } from 'vant'
-import { pages as commonPages, integralOptions } from '@/utils/explain'
-import { paraphrase } from '@/filters/index'
+import { useRoute } from 'vue-router'
+import useClipboard from 'vue-clipboard3'
 import store from '@/store/index'
+import to from 'await-to-js'
+import { pages, integralOptions } from '@/utils/explain'
+import { paraphrase } from '@/filters/index'
+import { walletLogs } from '@/api/setting'
+import SvgIcon from '@/components/YuSvgIcon'
 import IntegralPopup from './components/IntegralPopup.vue'
 
 const route = useRoute()
@@ -53,15 +56,16 @@ let info = computed(() => store.state.user.info)
 let integralPopup = ref(null)
 
 const { toClipboard } = useClipboard()
-const active = ref(0)
+
 const state = reactive({
   loading: false,
-  list: [],
   refreshing: false,
   finished: false,
-  total: 0
+
+  active: '',
+  list: [],
+  pages: { ...pages }
 })
-const pages = { ...commonPages }
 const activeOptions = [
   { label: '全部', value: '' },
   { label: '收入', value: 'income' },
@@ -70,28 +74,27 @@ const activeOptions = [
 
 // 获取消息列表
 const onLoad = () => {
-
-  walletLogs({ currency: 'integral', action: active.value, ...pages }).then(res => {
-    if (state.refreshing) {
-      state.refreshing = false;
-    }
-    state.list.push(...res.data.data)
-    state.total = res.data.total
-    state.loading = false
-    pages.page++
-    if (state.list.length >= state.total) {
-      state.finished = true
-    }
-  })
+  if (!state.loading) return false
+  walletLogs({ currency: 'integral', action: state.active, ...state.pages })
+    .then(response => {
+      const { data, total } = response.data
+      if (state.refreshing) {
+        state.list = []
+        state.refreshing = false
+      }
+      state.list.push(...response.data.data)
+      state.loading = false
+      state.pages.page++
+      if (state.list.length >= total) {
+        state.finished = true
+      }
+    })
 }
 
 const onRefresh = () => {
-  state.refreshing = true
-  pages.page = 1
-  state.list = []
-  state.finished = false
-  // 将 loading 设置为 true，表示处于加载状态
   state.loading = true
+  state.finished = false
+  state.pages.page = 1
   onLoad()
   store.dispatch('user/getInfo')
 };
@@ -103,7 +106,8 @@ const onCopy = async (value) => {
   showToast('复制成功')
 }
 
-const onTabChange = (val) => {
+const onTabChange = () => {
+  state.list = []
   onRefresh()
 }
 
@@ -132,25 +136,26 @@ const onGetIntegral = () => {
   background-color: var(--root-theme-color);
 
   .integral-num {
-    margin: 17px auto 8px;
+    margin-top: 24px;
     font-size: 25px;
   }
 
   .integral-text {
+    margin: 3px;
     font-size: 12px;
   }
   .integral-get {
+    margin: 10px auto 0;
     width: fit-content;
-    padding: 8px 14px;
+    padding: 7px 14px;
     border-radius: 16px;
-    background: var(--root-text-color5);
-    color: var(--root-theme-color) ;
-    margin: 18px auto 0;
+    background-color: var(--root-bg-color2);
+    color: var(--root-theme-color);
   }
 }
 
 :deep(.van-tabs__line) {
-  background: var(--root-theme-color);
+  background-color: var(--root-theme-color);
   width: 24px;
   bottom: 22px;
 }
@@ -214,8 +219,6 @@ const onGetIntegral = () => {
       .copy-btn {
         width: 16px;
         height: 16px;
-        background: url('@/assets/images/setting/common_icon_cpoy@2x.png') no-repeat;
-        background-size: contain;
       }
     }
   }
