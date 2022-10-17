@@ -78,7 +78,7 @@ const onLoad = () => {
         refreshing.value = false
       }
       
-      let { total, data } = response.data
+      const { total, data } = response.data
       
       data.forEach(v => {
         list.value.push(v)

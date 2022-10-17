@@ -56,7 +56,7 @@ const onLoad = () => {
 			state.refreshing = false
 		}
 
-		let { total, data } = response.data
+		const { total, data } = response.data
 
 		state.list.push(...data)
 		pages.page++
