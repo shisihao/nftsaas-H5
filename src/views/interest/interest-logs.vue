@@ -2,7 +2,7 @@
 	<div class="logs-section">
 		<van-sticky offset-top="1.226rem">
 			<van-tabs v-model:active="state.active" shrink type="card" @change="onTabChange">
-				<van-tab v-for="(item, index) in activeOptions" :key="index" :title="item.label" :name="item.value"></van-tab>
+				<van-tab v-for="(item, index) in equityOptions" :key="index" :title="item.label" :name="item.value"></van-tab>
 			</van-tabs>
 		</van-sticky>
 		<div class="content">
@@ -20,10 +20,13 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref, computed } from 'vue'
+import store from '@/store/index'
 import { paraphrase } from '@/filters/index'
-import { pages, integralOptions } from '@/utils/explain'
+import { pages } from '@/utils/explain'
 import { interestLogs } from '@/api/interest'
+
+const equityOptions = computed(() => store.state.user.equityOptions)
 
 const state = reactive({
 	active: 'prior',
@@ -34,14 +37,6 @@ const state = reactive({
 	list: [],
 	pages: { ...pages }
 })
-
-const activeOptions = [
-	{ label: '提前购', value: 'prior' },
-	{ label: '提前赠', value: 'give' },
-	{ label: `免${paraphrase({ value: 'integral', options: integralOptions })}`, value: 'free_integral' },
-	{ label: '折扣购', value: 'rebate' },
-	{ label: '0元购', value: 'free_cny' }
-]
 
 // 获取消息列表
 const onLoad = () => {

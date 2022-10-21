@@ -46,11 +46,9 @@ import to from 'await-to-js'
 import { pages, integralOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
 import { walletLogs } from '@/api/setting'
-import SvgIcon from '@/components/YuSvgIcon'
 import IntegralPopup from './components/IntegralPopup.vue'
 
 const route = useRoute()
-route.meta.title = document.title = `我的${paraphrase({ value: 'integral', options: integralOptions})}`
 
 let info = computed(() => store.state.user.info)
 let integralPopup = ref(null)

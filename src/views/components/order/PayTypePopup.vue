@@ -44,7 +44,6 @@ import { payTypeOptions, integralOptions } from '@/utils/explain'
 import globleFun from '@/utils/link'
 import { DominKey, getToken } from '@/utils/auth'
 import { orderPay, boxPlace } from '@/api/order'
-import SvgIcon from '@/components/YuSvgIcon'
 import PayPassPopup from './PayPassPopup.vue'
 import PayInputPopup from './PayInputPopup.vue'
 

@@ -1,5 +1,5 @@
 <template>
-	<van-pull-refresh v-model="loading" @refresh="onRefresh" success-text="刷新成功">
+	<van-pull-refresh v-model="state.loading" @refresh="onRefresh" success-text="刷新成功">
 		<div class="interest-section">
 			<div class="header">
 				<div class="header-l">
@@ -10,7 +10,7 @@
 				<div class="header-r">
 					<div class="name">{{ info?.name }}</div>
 					<div class="desc">
-						您已累计享受权益<span>{{ data.total }}</span>次
+						您已累计享受权益<span>{{ state.data.total }}</span>次
 					</div>
 				</div>
 			</div>
@@ -20,76 +20,21 @@
 					<div class="logs" @click="$globleFun.onGoto(`/interest-logs`)">使用记录</div>
 				</div>
 				<div class="details">
-					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'prior', used: data.prior?.used ,usable:data.prior?.usable } })">
+					<div class="list-item" v-for="(item, index) in equityOptions" :key="index" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: item.value, used: state.data[item.value]?.used ,usable:state.data[item.value]?.usable } })">
 						<div class="list-item-l">
 							<div class="list-img-box">
-								<img :src="getImageUrl('interest/quanyi_icon_mzz.png')" alt="" />
+								<svg-icon :icon-class="item.icon" class-name="icon-interest" />
 							</div>
 						</div>
 						<div class="list-item-r">
 							<div class="list-item-r-hd">
-								<div class="num">藏品提前抢购</div>
-								<div class="tag">{{ data.prior?.usable }} 次</div>
+								<div class="num">{{ item.label }}</div>
+								<div class="tag">{{ state.data[item.value]?.usable }} 次</div>
 							</div>
-							<div class="use">已享受 {{ data.prior?.used }} 次</div>
+							<div class="use">已享受 {{ state.data[item.value]?.used }} 次</div>
 						</div>
 					</div>
-					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'give', used: data.give?.used,usable:data.give?.usable } })">
-						<div class="list-item-l">
-							<div class="list-img-box">
-								<img :src="getImageUrl('interest/equities_icon_zhuanzeng@2x.png')" alt="" />
-							</div>
-						</div>
-						<div class="list-item-r">
-							<div class="list-item-r-hd">
-								<div class="num">藏品提前赠送</div>
-								<div class="tag">{{ data.give?.usable }} 次</div>
-							</div>
-							<div class="use">已享受 {{ data.give?.used }} 次</div>
-						</div>
-					</div>
-					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'free_integral', used: data.free_integral?.used,usable:data.free_integral?.usable } })">
-						<div class="list-item-l">
-							<div class="list-img-box">
-								<img :src="getImageUrl('interest/quanyi_icon_mzz@2x.png')" alt="" />
-							</div>
-						</div>
-						<div class="list-item-r">
-							<div class="list-item-r-hd">
-								<div class="num">免{{ paraphrase({ value: 'integral', options: integralOptions })}}抢购藏品</div>
-								<div class="tag">{{ data.free_integral?.usable }} 次</div>
-							</div>
-							<div class="use">已享受 {{ data.free_integral?.used }} 次</div>
-						</div>
-					</div>
-					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'free_cny', used: data.free_cny?.used,usable:data.free_cny?.usable } })">
-						<div class="list-item-l">
-							<div class="list-img-box">
-								<img :src="getImageUrl('interest/quanyi_icon_lyg@2x.png')" alt="" />
-							</div>
-						</div>
-						<div class="list-item-r">
-							<div class="list-item-r-hd">
-								<div class="num">藏品0元购 1次</div>
-								<div class="tag">{{ data.free_cny?.usable }} 次</div>
-							</div>
-							<div class="use">已享受 {{ data.free_cny?.used }} 次</div>
-						</div>
-					</div>
-					<div class="list-item" @click="$globleFun.onGoto({ path: '/interest-details', query: { type: 'rebate', used: data.rebate?.used ,usable:data.rebate?.usable} })">
-						<div class="list-item-l">
-							<div class="list-img-box">
-								<img :src="getImageUrl('interest/equities_icon_zhekou@2x.png')" alt="" />
-							</div>
-						</div>
-						<div class="list-item-r">
-							<div class="list-item-r-hd">
-								<div class="num">藏品折扣</div>
-								<div class="tag">{{ data.rebate?.usable }} 次</div>
-							</div>
-							<div class="use">已享受 {{ data.rebate?.used }} 次</div>
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</div>
@@ -97,26 +42,32 @@
 </template>
 
 <script setup>
+import { computed, reactive } from 'vue'
 import store from '@/store/index'
-import { computed, ref } from 'vue'
 import { DominKey, getToken } from '@/utils/auth'
-import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 import { interest } from '@/api/interest'
-import { getImageUrl } from '@/utils/index'
-import { integralOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 
 const domin = getToken(DominKey)
 const info = computed(() => store.state.user.info)
-const data = ref({})
-const loading = ref(false)
+const equityOptions = computed(() => store.state.user.equityOptions)
+
+const state = reactive({
+	loading: false,
+
+	data: {}
+})
 
 // 获取列表数据
 const onRefresh = () => {
-	interest().then(response => {
-		data.value = response.data
-		loading.value = false
-	})
+	interest()
+		.then(response => {
+			state.data = response.data
+		})
+		.finally(() => {
+			state.loading = false
+		})
 }
 
 onRefresh()
@@ -223,14 +174,14 @@ onRefresh()
 				width: 44px;
 				height: 44px;
 				border-radius: 50%;
-				background: var(--root-bg-color1);
 				display: flex;
 				justify-content: center;
 				align-items: center;
-			}
-			img {
-				width: 23px;
-				height: 23px;
+				background-color: var(--root-bg-color1);
+				.icon-interest {
+					font-size: 20px;
+					color: var(--root-theme-color);
+				}
 			}
 		}
 

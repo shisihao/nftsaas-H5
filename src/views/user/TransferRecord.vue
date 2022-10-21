@@ -53,7 +53,6 @@ import store from '@/store/index'
 import useClipboard from 'vue-clipboard3'
 import to from 'await-to-js'
 import { showToast } from 'vant'
-import SvgIcon from '@/components/YuSvgIcon'
 
 const active = ref('')
 const pages = { ...commonPages }

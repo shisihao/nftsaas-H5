@@ -15,7 +15,8 @@ const state = {
   info: {},
   config: {},
   domain: '',
-  activeTabbar: ''
+  activeTabbar: '',
+  equityOptions: []
 }
 
 const mutations = {
@@ -55,6 +56,9 @@ const mutations = {
   },
   SET_ACTIVETABBAR: (state, active) => { 
     state.activeTabbar = active
+  },
+  SET_EQUITYOPTIONS: (state, equityOptions) => { 
+    state.equityOptions = equityOptions
   }
 }
 

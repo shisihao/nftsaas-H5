@@ -13,7 +13,7 @@
       <div class="content">
         <div class="card" v-for="(item,index) in state.taskList" :key="index">
           <div class="card-l">
-            <img :src="paraphrase({ value: item.hook, options: taskOptions, l: 'icon' })" alt="">
+            <img :src="getImageUrl(paraphrase({ value: item.hook, options: taskOptions, l: 'icon' }))" alt="">
             <div>
               <p>{{item.name}}</p>
               <p class="integral">+{{item.reward }}{{ paraphrase({ value: 'integral', options: integralOptions }) }}</p>
@@ -38,12 +38,13 @@
 
 <script setup>
 import { ref, computed, reactive } from 'vue'
+import { showToast } from 'vant'
+import store from '@/store/index'
+import { getImageUrl } from '@/utils/index'
+import globleFun from '@/utils/link'
 import { integralOptions, taskOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
-import store from '@/store/index'
 import { tasksList, subTasks } from '@/api/setting'
-import { showToast } from 'vant'
-import globleFun from '@/utils/link'
 
 let info = computed(() => store.state.user.info)
 const emit = defineEmits(['refresh'])

@@ -61,7 +61,6 @@ import { integralOptions } from '@/utils/explain'
 import { sleep } from '@/utils/index'
 import { goodGive } from '@/api/goods'
 import { boxGive } from '@/api/box'
-import SvgIcon from '@/components/YuSvgIcon'
 import PayPassPopup from '../order/PayPassPopup.vue'
 import PayInputPopup from '../order/PayInputPopup.vue'
 

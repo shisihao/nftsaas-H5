@@ -92,7 +92,6 @@ import { pages as commonPages } from '@/utils/explain'
 import { DominKey, getToken } from '@/utils/auth'
 import globleFun from '@/utils/link'
 import { getGoodsList, getGoodsTags, getGoodsTagsList } from '@/api/goods'
-import SvgIcon from '@/components/YuSvgIcon'
 import UserTitle from './UserTitle.vue'
 import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 

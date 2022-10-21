@@ -12,7 +12,7 @@
           <div class="attestation" :class="statusClass">
             {{ info && paraphrase({ value: info.cer_status, options: attestationOptions }) }}
           </div>
-          <div class="integral" @click="$globleFun.onGoto('/integral')">
+          <div v-if="config && config?.design_style?.template_id === 1" class="integral" @click="$globleFun.onGoto('/integral')">
             {{ paraphrase({ value: 'integral', options: integralOptions }) }}
             {{ parseFloat(info?.balance || 0 ).toFixed(2) }}
             <van-icon name="arrow" />
@@ -26,7 +26,7 @@
           权益中心
         </div>
         <div @click="$globleFun.onGoto('/interest')">
-          点击进入>
+          点击进入<van-icon name="arrow" />
         </div>
       </div>
     </div>
@@ -49,7 +49,8 @@ import { paraphrase } from '@/filters/index'
 
 const domin = getToken(DominKey)
 
-let info = computed(() => store.state.user.info)
+const info = computed(() => store.state.user.info)
+const config = computed(() => store.state.user.config)
 
 let statusClass = computed(() => {
   if (info.value?.cer_status === -1) {
@@ -145,6 +146,7 @@ let statusClass = computed(() => {
       position: relative;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 19px 0;
       border-radius: 6px;
       background-image: url('@/assets/images/user/equities_card_bg.png');

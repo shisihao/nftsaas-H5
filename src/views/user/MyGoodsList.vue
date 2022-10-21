@@ -26,7 +26,6 @@
 <script setup>
 import { reactive, computed } from 'vue'
 import { DominKey, getToken } from '@/utils/auth'
-import SvgIcon from '@/components/YuSvgIcon'
 import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 
 const domin = getToken(DominKey)

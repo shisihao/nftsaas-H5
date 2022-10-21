@@ -1,15 +1,11 @@
 <template>
 	<div class="header">
 		<div class="header-l">
-			<img v-if="props.item?.type === 'prior'" :src="getImageUrl('interest/equities_icon_yougou@2x.png')" alt="" />
-			<img v-if="props.item?.type === 'give'" :src="getImageUrl('interest/equities_icon_zhuanzeng@2x.png')" alt="" />
-			<img v-if="props.item?.type === 'free_integral'" :src="getImageUrl('interest/quanyi_icon_mzz@2x.png')" alt="" />
-			<img v-if="props.item?.type === 'free_cny'" :src="getImageUrl('interest/quanyi_icon_lyg@2x.png')" alt="" />
-			<img v-if="props.item?.type === 'rebate'" :src="getImageUrl('interest/equities_icon_zhekou@2x.png')" alt="" />
+			<svg-icon :icon-class="paraphrase({ value: props.item?.type, options: equityOptions, l: 'icon' })" class-name="icon-interest" />
 		</div>
 		<div class="header-r">
 			<div class="header-r-hd">
-				<div class="name">{{ paraphrase({ value: props.item?.type, options: interestOptions }) }}</div>
+				<div class="name">{{ paraphrase({ value: props.item?.type, options: equityOptions }) }}</div>
 				<div class="tag">{{ props.item?.usable }} 次</div>
 			</div>
 			<div class="use">已享受 {{ props.item?.used }} 次</div>
@@ -19,17 +15,12 @@
 
 
 <script setup>
+import { computed } from 'vue'
+import store from '@/store/index'
 import { getImageUrl } from '@/utils/index'
-import { integralOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
 
-const interestOptions = [
-	{ label: '藏品提前抢购', value: 'prior' },
-	{ label: '藏品提前赠送', value: 'give' },
-	{ label: `免${paraphrase({ value: 'integral', options: integralOptions})}抢购藏品`, value: 'free_integral' },
-	{ label: '藏品0元购 1次', value: 'free_cny' },
-	{ label: '藏品折扣', value: 'rebate' }
-]
+const equityOptions = computed(() => store.state.user.equityOptions)
 
 const props = defineProps({
 	item: {
@@ -48,20 +39,18 @@ const props = defineProps({
 	margin-bottom: 24px;
 
 	.header-l {
-
 		width: 44px;
 		height: 44px;
-		line-height: 44px;
-		text-align: center;
+		border-radius: 50%;
 		margin-right: 10px;
-
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: var(--root-bg-color1);
 		flex-shrink: 0;
-		background: url('@/assets/images/interest/quayi_img_bg@2x.png') no-repeat;
-		background-size: 100%;
-		img {
-			display: inline-block;
-			vertical-align: middle;
-			width: 21px;
+		.icon-interest {
+			font-size: 20px;
+			color: var(--root-theme-color);
 		}
 	}
 	.header-r {

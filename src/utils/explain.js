@@ -1,4 +1,4 @@
-import { getImageUrl } from '@/utils/index'
+import { paraphrase } from '@/filters/index'
 
 export const pages = {
   page: 1,
@@ -49,14 +49,22 @@ export const avatarActions = [
 	{ name: '相册', color: 'var(--root-theme-color)' }
 ]
 
+export const equityOptions = [
+	{ label: '提前购', icon: 'quanyi_icon_tqg', value: 'prior' },
+	{ label: '提前赠', icon: 'quanyi_icon_tqz', value: 'give' },
+	{ label: `免${paraphrase({ value: 'integral', options: integralOptions })}`, icon: 'quanyi_icon_mjf', value: 'free_integral' },
+	{ label: '0元购', icon: 'quanyi_icon_lyg', value: 'free_cny' },
+	{ label: '折扣购', icon: 'quanyi_icon_zpzk', value: 'rebate' }
+]
+
 export const taskOptions = [
-  { icon: getImageUrl('integral/qd.png'), value: 'sign:in' }, // 签到
-  { icon: getImageUrl('integral/fenxiang.png'), value: 'share:goods' }, // 分享藏品
-  { icon: getImageUrl('integral/zhuce.png'), value: 'register' }, // 注册
-  { icon: getImageUrl('integral/shoucang.png'), value: 'collect:goods' }, // 收藏
-  { icon: getImageUrl('integral/xuanyao.png'), value: 'show:goods' }, // 炫耀
-  { icon: getImageUrl('integral/rz.png'), value: 'real:name:auth' }, // 实名认证
-  { icon: getImageUrl('integral/jfgm.png'), value: 'integral:goods' }, // 积分购买
-  { icon: getImageUrl('integral/gmcp.png'), value: 'buy:goods' }, // 购买藏品
-  { icon: getImageUrl('integral/yqhy.png'), value: 'invite:friend' }, // 邀请好友
+  { icon: 'integral/qd.png', value: 'sign:in' }, // 签到
+  { icon: 'integral/fenxiang.png', value: 'share:goods' }, // 分享藏品
+  { icon: 'integral/zhuce.png', value: 'register' }, // 注册
+  { icon: 'integral/shoucang.png', value: 'collect:goods' }, // 收藏
+  { icon: 'integral/xuanyao.png', value: 'show:goods' }, // 炫耀
+  { icon: 'integral/rz.png', value: 'real:name:auth' }, // 实名认证
+  { icon: 'integral/jfgm.png', value: 'integral:goods' }, // 积分购买
+  { icon: 'integral/gmcp.png', value: 'buy:goods' }, // 购买藏品
+  { icon: 'integral/yqhy.png', value: 'invite:friend' } // 邀请好友
 ]

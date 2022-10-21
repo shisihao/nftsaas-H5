@@ -52,7 +52,6 @@ import { integralOptions } from '@/utils/explain'
 import { sleep } from '@/utils/index'
 import { paraphrase } from '@/filters/index'
 import { giveAccount } from '@/api/goods'
-import SvgIcon from '@/components/YuSvgIcon'
 import GiveConfirm from './GiveConfirm.vue'
 
 const domin = getToken(DominKey)

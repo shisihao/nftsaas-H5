@@ -30,7 +30,6 @@ import { showToast } from 'vant'
 import useClipboard from 'vue-clipboard3'
 import to from 'await-to-js'
 import { centrEllipsis } from '@/utils/index'
-import SvgIcon from '@/components/YuSvgIcon'
 import NavigationTitle from '@/components/NavigationTitle/index.vue'
 import BlockControl from '@/components/BlockControl/index.vue'
 

@@ -24,7 +24,6 @@ import { useRouter, useRoute } from 'vue-router'
 import { getImageUrl } from '@/utils/index'
 import { special } from '@/router/index'
 import store from '@/store/index'
-import SvgIcon from '@/components/YuSvgIcon'
 
 const router = useRouter()
 const route = useRoute()

@@ -10,7 +10,6 @@
 </template>
 
 <script setup>
-import SvgIcon from '@/components/YuSvgIcon'
 
 </script>
 

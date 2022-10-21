@@ -34,7 +34,6 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { getImageUrl } from '@/utils/index'
 import { getMsgCount } from '@/api/message'
-import SvgIcon from '@/components/YuSvgIcon'
 
 const router = useRouter()
 const state = reactive({
