@@ -60,7 +60,7 @@ const state = reactive({
     code: ''
   },
   verifyCode: {
-    slide: config?.value?.cvm_config?.open === 'on' && props.captcha ? true : false,
+    slide: computed(() => config?.value?.cvm_config?.open === 'on' && props.captcha ? true : false),
     isDisabled: false,
     word: '获取验证码'
   },

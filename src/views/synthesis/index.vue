@@ -329,7 +329,7 @@ provide('init', init)
 	z-index: 999;
 	padding-bottom: env(safe-area-inset-bottom);
 	.btn-box {
-		padding: 0 20px;
+		padding: 0 15px;
 	}
 }
 
