@@ -103,7 +103,6 @@ const onRefresh = () => {
 }
 
 const onChangeTab = () => {
-  console.log(11)
   onRefresh()
 }
 

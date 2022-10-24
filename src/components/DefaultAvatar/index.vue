@@ -2,12 +2,14 @@
   <van-image
     fit="cover"
     :round="round"
-    :src="src || ''"
+    :src="src || `${config?.cdn_domain}${config?.design_style?.inside_logo}`"
   />
 </template>
 
 <script setup>
-import { getImageUrl } from '@/utils/index'
+import { computed } from 'vue'
+import store from '@/store/index'
+const config = computed(() => store.state.user.config)
 
 const props = defineProps({
   round: {
@@ -17,7 +19,7 @@ const props = defineProps({
   src: {
     type: String,
     default: ''
-  },
+  }
 })
 
 </script>

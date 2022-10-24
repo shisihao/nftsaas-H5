@@ -46,7 +46,7 @@
             </div>
             <div class="collection-gather">
               <div class="avatar">
-                <default-avatar :src="item?.goods?.author_avatar ? `${domin}${item.goods.author_avatar}` : ''" />
+                <van-image round fit="cover" :src="item?.goods?.author_avatar ? `${domin}${item.goods.author_avatar}` : ''" />
               </div>
               <div class="name">
                 {{ item?.goods?.author }}

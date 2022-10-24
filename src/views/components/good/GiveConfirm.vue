@@ -26,8 +26,7 @@
             </div>
             <!-- <div class="collection-gather">
               <div class="avatar">
-                <default-avatar v-if="row?.goods?.author_avatar" :src="`${domin}${row.goods.author_avatar}`" />
-                <default-avatar v-else />
+                <van-image v-if="row?.goods?.author_avatar" round fit="cover" :src="`${domin}${row.goods.author_avatar}`" />
               </div>
               <div class="name">
                 {{ row?.goods?.author }}
