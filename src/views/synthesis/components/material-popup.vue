@@ -430,7 +430,6 @@ defineExpose({ chooseAllGoods, getChooseAllGoods, show })
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background-color: var(--root-bg-color1);
 
 	.popup-sys-btn {
 		width: 335px;

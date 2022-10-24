@@ -56,7 +56,6 @@ const domin = getToken(DominKey)
       color: var(--root-text-color1);
       margin-bottom: 14px;
       font-weight: bold;
-      @include textoverflow()
     }
 
     .record-list-num {

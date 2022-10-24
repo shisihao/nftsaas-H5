@@ -78,7 +78,7 @@ imgList.value = props.item.map(v => {
   padding-top: 20px;
   margin-right: 8px;
   text-align: center;
-
+  width: 142px;
   .img-wrap {
     width: 142px;
     height: 142px;
@@ -90,18 +90,26 @@ imgList.value = props.item.map(v => {
   .title {
     font-size: 13px;
     margin-bottom: 10px;
-    @include textoverflow()
+    white-space: nowrap;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .num {
     position: relative;
     color: var(--root-text-color2);
-    @include textoverflow();
     font-size: 14px;
     margin-bottom: 10px;
+    white-space: nowrap;
+    overflow-x: auto;
     .icon-serial {
       font-size: 12px;
       color: var(--root-theme-color);
+    }
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
 

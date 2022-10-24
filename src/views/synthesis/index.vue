@@ -36,9 +36,11 @@
 			</div>
 			<div class="btn-bottom">
 				<div class="notice" v-if="!isSynthetic && activeFlag === 1">合成材料不足，无法进行合成操作</div>
-				<van-button block class="btn" @click="showPopup(data, '', 2)" v-if="activeFlag === 1 && residue !== 0" :disabled="activeStatus">立即合成</van-button>
-				<van-button block class="btn btn-no-active" v-if="activeFlag === 2 || residue === 0" :disabled="activeFlag !== 1 || residue === 0">活动已结束</van-button>
-				<van-button block class="btn btn-no-active" v-if="activeFlag === 0" :disabled="activeFlag !== 1">活动未开始</van-button>
+				<div class="btn-box">
+					<van-button block class="btn" v-if="activeFlag === 1 && residue !== 0" :disabled="activeStatus" @click="showPopup(data, '', 2)">立即合成</van-button>
+					<van-button block class="btn btn-no-active" v-if="activeFlag === 2 || residue === 0" :disabled="activeFlag !== 1 || residue === 0">活动已结束</van-button>
+					<van-button block class="btn btn-no-active" v-if="activeFlag === 0" :disabled="activeFlag !== 1">活动未开始</van-button>
+				</div>
 			</div>
 		</div>
 		<material-popup ref="materialRef" :item="state" :materials="material" :data="data" @success="success" />
@@ -238,7 +240,7 @@ provide('init', init)
 	text-align: center;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	max-height: 500px;
+	max-height: 50vh;
 	overflow: auto;
 	&::-webkit-scrollbar {
 		display: none;
@@ -325,17 +327,19 @@ provide('init', init)
 	margin: 0 auto;
 	max-width: 375px;
 	z-index: 999;
-	padding:0 20px env(safe-area-inset-bottom) 20px;
+	padding-bottom: env(safe-area-inset-bottom);
+	.btn-box {
+		padding: 0 20px;
+	}
 }
 
 .btn {
-	height: 44px;
-	width: 100%;
-	margin: 8px 0;
-	background: var(--root-theme-color);
-	border-radius: 24px;
-	color: var(--root-text-color5);
 	font-size: 18px;
+	height: 44px;
+	margin: 8px 0;
+	border-radius: 24px;
+	background-color: var(--root-theme-color);
+	color: var(--root-text-color5);
 }
 :deep(.van-button--disabled) {
 	background: var(--root-text-color4);
