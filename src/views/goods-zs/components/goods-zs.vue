@@ -22,14 +22,14 @@
             <div class="zs-content-bd-list">
               <div class="title">拥有者</div>
               <div class="avatar-item">
-                <van-image lazy-load fit="cover" round :src="`${domin}${info?.avatar}`" class="avatar" />
+                <default-avatar class="avatar" :src="info?.avatar ? `${domin}${info?.avatar}` : ''" />
                 <div class="content">{{ info?.name }}</div>
               </div>
             </div>
             <div class="zs-content-bd-list">
               <div class="title">创作者</div>
               <div class="avatar-item">
-                <van-image lazy-load fit="cover" round :src="`${domin}${props.data?.goods?.author_avatar}`" class="avatar" />
+                <van-image class="avatar" fit="cover" round :src="`${domin}${props.data?.goods?.author_avatar}`" />
                 <div class="content">{{ props.data?.goods?.author }}</div>
               </div>
             </div>
@@ -52,13 +52,14 @@
   </div>
 </template>
 
-<script  setup>
+<script setup>
+import { computed, ref } from 'vue'
+import store from '@/store/index'
 import { getImageUrl } from '@/utils/index'
 import { DominKey, getToken } from '@/utils/auth'
-import store from '@/store/index'
-import { computed, ref } from "vue"
-import LogoTitle from '@/views/dashboard/components/LogoTitle.vue'
 import { centrEllipsis } from '@/utils/index'
+import LogoTitle from '@/views/dashboard/components/LogoTitle.vue'
+import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 import NavigationTitle from '@/components/NavigationTitle/index.vue'
 import BlockControl from '@/components/BlockControl/index.vue'
 

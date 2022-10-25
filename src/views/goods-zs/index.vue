@@ -28,7 +28,7 @@ getMyGoodsDetail({ user_goods_id:route.query.id }).then(res => {
   .tips {
     width: 335px;
     height: 44px;
-    background-color: rgba(var(--root-theme-color-rgb), 0.5);
+    background-color: rgba(var(--root-theme-color-rgb), 0.1);
     border-radius: 8px;
     margin: 20px 0;
     color: var(--root-theme-color);
