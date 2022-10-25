@@ -33,9 +33,11 @@
 
 <script setup>
 import { computed, ref, reactive, provide } from 'vue'
+import { showLoadingToast } from 'vant'
 import store from '@/store/index'
 import moment from 'moment'
 import { parseDate } from '@/utils/index'
+import globleFun from '@/utils/link'
 import { orderPlace, boxPlace } from '@/api/order'
 import { showToast } from 'vant'
 import { useRouter } from 'vue-router'
@@ -44,7 +46,8 @@ import BuyAdvance from '../good/BuyAdvance.vue'
 
 const router = useRouter()
 
-let info = computed(() => store.state.user.info)
+const info = computed(() => store.state.user.info)
+const config = computed(() => store.state.user.config)
 const payTypePopup = ref(null)
 const btnLoading = ref(false)
 
@@ -161,7 +164,19 @@ const postApi = (value) => {
         return showToast(response.msg)
       }
       state.form = response.data
-      payTypePopup.value.init()
+
+      if(config.value?.design_style?.template_id === 2 && parseFloat(state.form.cny_price) === 0) {
+        showLoadingToast({
+          overlay: true,
+          duration: 1500,
+          message: '支付中...',
+          onClose: () => {
+            globleFun.onGoto('/order')
+          }
+        })
+      } else {
+        payTypePopup.value.init()
+      }
     })
     .finally(() => {
       btnLoading.value = false

@@ -30,11 +30,18 @@
             <b>发行</b>
             <span>{{ item.total_stock }}份</span>
           </div>
-          <div v-if="parseFloat(item.cny_price) >= 0 || parseFloat(item.integral_price) >= 0" class="price">
-            <em v-if="parseFloat(item.cny_price || 0) > 0"><span>¥</span>{{ item.cny_price }}</em>
-            <em v-if="parseFloat(item.cny_price || 0) > 0 && parseFloat(item.integral_price || 0) > 0"><span>+</span></em>
-            <em v-if="parseFloat(item.integral_price || 0) > 0">{{ item.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
-            <em v-if="parseFloat(item.cny_price || 0) === 0 && parseFloat(item.integral_price || 0) === 0">0.00<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+          <div v-if="config?.design_style?.template_id === 1">
+            <div v-if="parseFloat(item.cny_price) >= 0 || parseFloat(item.integral_price) >= 0" class="price">
+              <em v-if="parseFloat(item.cny_price || 0) > 0"><span>¥</span>{{ item.cny_price }}</em>
+              <em v-if="parseFloat(item.cny_price || 0) > 0 && parseFloat(item.integral_price || 0) > 0"><span>+</span></em>
+              <em v-if="parseFloat(item.integral_price || 0) > 0">{{ item.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+              <em v-if="parseFloat(item.cny_price || 0) === 0 && parseFloat(item.integral_price || 0) === 0">0.00<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+            </div>
+          </div>
+          <div v-else-if="config?.design_style?.template_id === 2">
+            <div class="price">
+              <em><span>¥</span>{{ item.cny_price }}</em>
+            </div>
           </div>
         </div>
       </div>
@@ -44,14 +51,17 @@
 
 <script setup>
 import { reactive, computed } from 'vue'
+import moment from 'moment'
+import store from '@/store/index'
 import { DominKey, getToken } from '@/utils/auth'
-import { dataList } from '@/api/goods'
 import { parseDate } from '@/utils/index'
 import { salesOptions, integralOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
-import moment from 'moment'
+import { dataList } from '@/api/goods'
 
 const domin = getToken(DominKey)
+
+const config = computed(() => store.state.user.config)
 
 const state = reactive({
   list: []

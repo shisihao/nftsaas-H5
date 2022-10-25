@@ -28,15 +28,22 @@
             {{ item?.goods?.author }}
           </div>
         </div>
-        <div v-if="parseFloat(item.cny_price) >= 0 || parseFloat(item.integral_price) >= 0" class="price">
-          <em v-if="parseFloat(item.cny_price || 0) > 0"><span>¥</span>{{ item.cny_price }}</em>
-          <em v-if="parseFloat(item.cny_price || 0) > 0 && parseFloat(item.integral_price || 0) > 0"><span>+</span></em>
-          <em v-if="parseFloat(item.integral_price || 0) > 0">{{ item.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
-          <em v-if="parseFloat(item.cny_price || 0) === 0 && parseFloat(item.integral_price || 0) === 0">0<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+        <div v-if="config?.design_style?.template_id === 1">
+          <div v-if="parseFloat(item.cny_price) >= 0 || parseFloat(item.integral_price) >= 0" class="price">
+            <em v-if="parseFloat(item.cny_price || 0) > 0"><span>¥</span>{{ item.cny_price }}</em>
+            <em v-if="parseFloat(item.cny_price || 0) > 0 && parseFloat(item.integral_price || 0) > 0"><span>+</span></em>
+            <em v-if="parseFloat(item.integral_price || 0) > 0">{{ item.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+            <em v-if="parseFloat(item.cny_price || 0) === 0 && parseFloat(item.integral_price || 0) === 0">0<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+          </div>
+        </div>
+        <div v-else-if="config?.design_style?.template_id === 2">
+          <div class="price">
+            <em><span>¥</span>{{ item.cny_price }}</em>
+          </div>
         </div>
       </div>
     </div>
-    <div v-if="item.status === 0" class="order-footer">
+    <div v-if="orderBtn(item)" class="order-footer">
       <div class="btn cancel" @click="onCancel(item.order_no)">
         取消订单
       </div>
@@ -47,14 +54,17 @@
   </div>
 </template>
 <script setup>
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
+import { showToast } from 'vant'
+import store from '@/store/index'
 import { getToken, DominKey } from '@/utils/auth'
 import { orderOptions, integralOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
 import { orderClose } from '@/api/order'
-import { showToast } from 'vant'
 
 const domin = getToken(DominKey)
+
+const config = computed(() => store.state.user.config)
 
 const props = defineProps({
   item: {
@@ -62,6 +72,18 @@ const props = defineProps({
     default: () => {}
   }
 })
+
+const orderBtn = computed(() => {
+  return (item) => {
+    if (config.value?.design_style?.template_id === 1 && item.status === 0) {
+      return true
+    } else if (config.value?.design_style?.template_id === 2 && parseFloat(item.cny_price) > 0) {
+      return true
+    }
+    return false
+  }
+})
+
 
 const emit = defineEmits(['subUnit','timeFinish'])
 
@@ -168,7 +190,7 @@ const onTimeFinish = (id) => {
       display: flex;
       justify-content: flex-end;
       .btn {
-        margin-left: 24px;
+        margin-right: 15px;
         border-radius: 28px;
         &.cancel {
           border: 1px solid var(--root-dividing-color1);

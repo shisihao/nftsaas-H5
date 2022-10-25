@@ -36,11 +36,18 @@
                 <div class="label">
                   商品金额
                 </div>
-                <div v-if="parseFloat(state.data.cny_price) >= 0 || parseFloat(state.data.integral_price) >= 0" class="price">
-                  <em v-if="parseFloat(state.data.cny_price || 0) > 0"><span>¥</span>{{ state.data.cny_price }}</em>
-                  <em v-if="parseFloat(state.data.cny_price || 0) > 0 && parseFloat(state.data.integral_price || 0) > 0"><span>+</span></em>
-                  <em v-if="parseFloat(state.data.integral_price || 0) > 0">{{ state.data.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
-                  <em v-if="parseFloat(state.data.cny_price || 0) === 0 && parseFloat(state.data.integral_price || 0) === 0">0.00<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+                <div v-if="config?.design_style?.template_id === 1">
+                  <div v-if="parseFloat(state.data.cny_price) >= 0 || parseFloat(state.data.integral_price) >= 0" class="price">
+                    <em v-if="parseFloat(state.data.cny_price || 0) > 0"><span>¥</span>{{ state.data.cny_price }}</em>
+                    <em v-if="parseFloat(state.data.cny_price || 0) > 0 && parseFloat(state.data.integral_price || 0) > 0"><span>+</span></em>
+                    <em v-if="parseFloat(state.data.integral_price || 0) > 0">{{ state.data.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+                    <em v-if="parseFloat(state.data.cny_price || 0) === 0 && parseFloat(state.data.integral_price || 0) === 0">0.00<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+                  </div>
+                </div>
+                <div v-else-if="config?.design_style?.template_id === 2">
+                  <div class="price">
+                    <em><span>¥</span>{{ state.data.cny_price }}</em>
+                  </div>
                 </div>
               </div>
               <div class="good-item">
@@ -55,11 +62,18 @@
                 <div class="label">
                   合计
                 </div>
-                <div v-if="parseFloat(state.data.cny_price) >= 0 || parseFloat(state.data.integral_price) >= 0" class="price last-price">
-                  <em v-if="parseFloat(state.data.cny_price || 0) > 0"><span>¥</span>{{ state.data.cny_price }}</em>
-                  <em v-if="parseFloat(state.data.cny_price || 0) > 0 && parseFloat(state.data.integral_price || 0) > 0"><span>+</span></em>
-                  <em v-if="parseFloat(state.data.integral_price || 0) > 0">{{ state.data.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
-                  <em v-if="parseFloat(state.data.cny_price || 0) === 0 && parseFloat(state.data.integral_price || 0) === 0">0.00<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+                <div v-if="config?.design_style?.template_id === 1">
+                  <div v-if="parseFloat(state.data.cny_price) >= 0 || parseFloat(state.data.integral_price) >= 0" class="price last-price">
+                    <em v-if="parseFloat(state.data.cny_price || 0) > 0"><span>¥</span>{{ state.data.cny_price }}</em>
+                    <em v-if="parseFloat(state.data.cny_price || 0) > 0 && parseFloat(state.data.integral_price || 0) > 0"><span>+</span></em>
+                    <em v-if="parseFloat(state.data.integral_price || 0) > 0">{{ state.data.integral_price }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+                    <em v-if="parseFloat(state.data.cny_price || 0) === 0 && parseFloat(state.data.integral_price || 0) === 0">0.00<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+                  </div>
+                </div>
+                <div v-else-if="config?.design_style?.template_id === 2">
+                  <div class="price last-price">
+                    <em><span>¥</span>{{ state.data.cny_price }}</em>
+                  </div>
                 </div>
               </div>
             </div>
@@ -96,7 +110,7 @@
             </div>
             <div class="chain" :class="`${ state.data.status === 2 ? 'chain-after' : '' }`" @click="onClipboard(state.data.hash)">
               <div>
-                链上HASH：
+                HASH：
               </div>
               <div class="chain-value">
                 {{ state.data.status === 2 ? state.data.hash : '------' }}
@@ -124,24 +138,25 @@
 import { reactive, ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showToast } from 'vant'
+import store from '@/store/index'
+import useClipboard from 'vue-clipboard3'
+import to from 'await-to-js'
 import { getToken, DominKey } from '@/utils/auth'
-import { orderDetail } from '@/api/order'
 import { paraphrase } from '@/filters/index'
 import { orderOptions, integralOptions } from '@/utils/explain'
+import { orderDetail } from '@/api/order'
 import PayTypePopup from '../components/order/PayTypePopup.vue'
 import CancelOrder from '../components/order/CancelOrder.vue'
-import to from 'await-to-js'
-import useClipboard from 'vue-clipboard3'
 
 const { toClipboard } = useClipboard()
 const route = useRoute()
 const router = useRouter()
 const domin = getToken(DominKey)
+const config = computed(() => store.state.user.config)
 
 const cancelOrder = ref(null)
 const payTypePopup = ref(null)
 const loading = ref(false)
-
 
 const state = reactive({
   order_no: '',
@@ -318,10 +333,6 @@ const onPostOrder = (data) => {
             em {
               font-style: normal;
             }
-            span {
-              font-size: 18px;
-              font-weight: 500;
-            }
           }
           .num {
             span {
@@ -387,10 +398,10 @@ const onPostOrder = (data) => {
           font-size: 15px;
           position: relative;
           display: flex;
-          align-items: center;
           justify-content: space-between;
           &.chain-after::after {
             content: '';
+            flex-shrink: 0;
             margin-left: 5px;
             width: 16px;
             height: 16px;
@@ -399,9 +410,9 @@ const onPostOrder = (data) => {
             background-repeat: no-repeat;
           }
           .chain-value {
-            overflow-wrap: break-word;
             text-align: right;
-            flex: 1;
+            word-break: break-all;
+            font-size: 14px;
           }
         }
       }

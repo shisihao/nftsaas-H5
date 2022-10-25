@@ -8,11 +8,18 @@
         {{ x?.name }}
       </span>
     </div>
-    <div v-if="cnyPrice(item) >= 0 || interestPrice(item) >= 0" class="price">
-      <em v-if="cnyPrice(item) > 0"><span>¥</span>{{ cnyPrice(item) }}</em>
-      <em v-if="cnyPrice(item) > 0 && interestPrice(item) > 0"><span>+</span></em>
-      <em v-if="interestPrice(item) > 0">{{ interestPrice(item) }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
-      <em v-if="cnyPrice(item) == 0 && interestPrice(item) == 0">0<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+    <div v-if="config?.design_style?.template_id === 1">
+      <div v-if="cnyPrice(item) >= 0 || interestPrice(item) >= 0" class="price">
+        <em v-if="cnyPrice(item) > 0"><span>¥</span>{{ cnyPrice(item) }}</em>
+        <em v-if="cnyPrice(item) > 0 && interestPrice(item) > 0"><span>+</span></em>
+        <em v-if="interestPrice(item) > 0">{{ interestPrice(item) }}<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+        <em v-if="cnyPrice(item) == 0 && interestPrice(item) == 0">0<span>{{ paraphrase({ value: 'integral', options: integralOptions }) }}</span></em>
+      </div>
+    </div>
+    <div v-else-if="config?.design_style?.template_id === 2">
+      <div class="price">
+        <em><span>¥</span>{{ cnyPrice(item) }}</em>
+      </div>
     </div>
     <div v-if="item.interest_rebate" class="interest-rebate">
       <b v-if="item.cny_price > 0">¥{{ item.cny_price }}</b>
@@ -33,6 +40,7 @@
 
 <script setup>
 import { computed, ref } from 'vue'
+import store from '@/store/index'
 import { integralOptions } from '@/utils/explain'
 import { paraphrase } from '@/filters/index'
 
@@ -42,6 +50,8 @@ defineProps({
     default: () => {}
   }
 })
+
+const config = computed(() => store.state.user.config)
 
 const cnyPrice = computed(() => {
   return (item) => {
