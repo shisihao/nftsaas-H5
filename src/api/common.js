@@ -25,3 +25,17 @@ export function getConfig(data) {
 export function getOssKey() {
   return request.post(`/upload/token`)
 }
+
+// 转赠下单
+export function orderGoodBox(data) {
+  return request.post(`/user_goods/give_order`, {
+    ...data
+  })
+}
+
+// 转赠支付
+export function payGoodBox(data) {
+  return request.post(`/user_goods/give_order/pay`, {
+    ...data
+  })
+}

@@ -46,6 +46,7 @@
     </div>
     <pay-pass-popup ref="payPassPopup" />
     <pay-input-popup ref="payInputPopup" @pay-password="onPayPassword" />
+    <pay-type-give-popup ref="refpayTypeGivePopup" :order-no="state.input.order_no" />
   </div>
 </template>
 
@@ -60,23 +61,30 @@ import { integralOptions } from '@/utils/explain'
 import { sleep } from '@/utils/index'
 import { goodGive } from '@/api/goods'
 import { boxGive } from '@/api/box'
+import { orderGoodBox } from '@/api/common'
 import PayPassPopup from '../order/PayPassPopup.vue'
 import PayInputPopup from '../order/PayInputPopup.vue'
+import PayTypeGivePopup from '../order/PayTypeGivePopup.vue'
 
 const domin = getToken(DominKey)
 
 const row = inject('item')
 
 const info = computed(() => store.state.user.info)
+const config = computed(() => store.state.user.config)
 
 const payPassPopup = ref(null)
 const payInputPopup = ref(null)
+const refpayTypeGivePopup = ref(null)
 
 const getInitialData = () => ({
   show: false,
   btnLoading: false,
   name: '',
   type: 'goods',
+  input: {
+    order_no: ''
+  },
   form: {
     user_goods_id: 0,
     user_box_id: 0,
@@ -112,10 +120,27 @@ const onClosed = () => {
 }
 
 const onSubmit = () => {
-  if (!info.value.paypass_status) {
-    payPassPopup.value.init()
-  } else {
-    payInputPopup.value.init()
+  if (config.value?.design_style?.template_id === 1) {
+    if (!info.value.paypass_status) {
+      payPassPopup.value.init()
+    } else {
+      payInputPopup.value.init()
+    }
+  } else if (config.value?.design_style?.template_id === 2) {
+    state.btnLoading = true
+    orderGoodBox({ target_id: row.value.id, account: state.form.account, type: state.type })
+      .then((response) => {
+        if (config.value?.give?.fee > 0) {
+          state.input.order_no = response.data?.order_no
+          refpayTypeGivePopup.value.init()
+        } else {
+          showSuccessToast(response.msg)
+          globleFun.onGoto('/transfer-record', 'replace')
+        }
+      })
+      .finally(() => {
+        state.btnLoading = false
+      })
   }
 }
 

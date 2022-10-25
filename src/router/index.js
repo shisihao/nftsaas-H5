@@ -264,14 +264,6 @@ export const asyncRoutes = [
         }
       },
       {
-        path: "/order-result",
-        name: "order-result",
-        component: () => import('@/views/order/orderResult.vue'),
-        meta: {
-          title: '订单结果'
-        }
-      },
-      {
         path: "/synthesis-list",
         name: "synthesis-list",
         component: () => import('@/views/synthesis/synthesis-list.vue'),

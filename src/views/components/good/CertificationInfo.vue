@@ -51,7 +51,7 @@ const props = defineProps({
 const certificationOptions = [
   { label: '链上标识', value: 'identifications' },
   { label: '合约地址', value: 'address' },
-  { label: '链上HASH', value: 'hash' }
+  { label: 'HASH', value: 'hash' }
 ]
 
 const onCopy = async (value) => {
