@@ -26,7 +26,7 @@
       <b v-if="item.cny_price > 0 && item.integral_price > 0">+</b>
       <b v-if="item.integral_price > 0">{{ item.integral_price }}{{ paraphrase({ value: 'integral', options: integralOptions }) }}</b>
       <span v-if="item.interest_rebate?.rebate" class="discount">
-        {{ item.interest_rebate?.rebate?.discount / 10 }}折
+        {{ item.interest_rebate?.rebate?.discount }}折
       </span>
       <span v-if="item.interest_rebate?.free_cny" class="zero">
         零元购
