@@ -72,7 +72,7 @@ const props = defineProps({
   }
 })
 
-let payOptions = computed(() => {
+const payOptions = computed(() => {
   return (options) => {
     let op = options.filter(v => {
       return config.value?.pay_switch[v.value] === 'on'

@@ -62,3 +62,17 @@ export function logout(data) {
     ...data
   })
 }
+
+// 杉德云账户开户
+export function sandOpen(data) {
+  return request.post(`/user/sand_open`, {
+    ...data
+  })
+}
+
+// 杉德开户支付
+export function sandOpenPay(data) {
+  return request.post(`/user/sand_open_pay`, {
+    ...data
+  })
+}

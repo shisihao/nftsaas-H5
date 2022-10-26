@@ -20,16 +20,7 @@
         </div>
       </div>
     </div>
-    <div class="padding">
-      <div class="equity">
-        <div>
-          权益中心
-        </div>
-        <div @click="$globleFun.onGoto('/interest')">
-          点击进入<van-icon name="arrow" />
-        </div>
-      </div>
-    </div>
+    <ability-fun />
     <common-fun class="padding" />
     <my-service class="padding" />
     <my-goods class="padding" />
@@ -38,14 +29,15 @@
 
 <script setup>
 import { ref, reactive, computed } from 'vue'
+import store from '@/store/index'
+import { paraphrase } from '@/filters/index'
+import { DominKey, getToken } from '@/utils/auth'
+import { attestationOptions, integralOptions } from '@/utils/explain'
 import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 import CommonFun from './components/CommonFun.vue'
 import MyService from './components/MyService.vue'
 import MyGoods from './components/MyGoods.vue'
-import store from '@/store/index'
-import { DominKey, getToken } from '@/utils/auth'
-import { attestationOptions, integralOptions } from '@/utils/explain'
-import { paraphrase } from '@/filters/index'
+import AbilityFun from './components/AbilityFun.vue'
 
 const domin = getToken(DominKey)
 
@@ -138,40 +130,6 @@ let statusClass = computed(() => {
             border-radius: 10px;
           }
         }
-      }
-    }
-    .equity {
-      margin-top: 24px;
-      width: 100%;
-      position: relative;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 19px 0;
-      border-radius: 6px;
-      background-image: url('@/assets/images/user/equities_card_bg.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-color: var(--root-theme-color);
-      &::before {
-        content: '';
-        position: absolute;
-        left: var(--root-page-spacing);
-        width: 20px;
-        height: 20px;
-        background-image: url('@/assets/images/user/mine_equities_card.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 100%;
-      }
-      div:nth-child(1) {
-        margin-left: 50px;
-        font-size: 18px;
-        color: var(--root-text-color5);
-      }
-      div:nth-child(2) {
-        margin-right: var(--root-page-spacing);
-        color: var(--root-text-color5);
       }
     }
   }
