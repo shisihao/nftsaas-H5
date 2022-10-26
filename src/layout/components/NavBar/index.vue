@@ -21,7 +21,8 @@ const router = useRouter()
 const route = useRoute()
 
 const pathLeftMap = new Map([
-  [ '/box-list', '/user' ]
+  [ '/box-list', '/user' ],
+  [ '/transfer-record', '/user' ]
 ])
 
 const onHandleRouter = () => {

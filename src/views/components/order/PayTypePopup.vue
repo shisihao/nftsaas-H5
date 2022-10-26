@@ -42,7 +42,8 @@ import { showToast, showLoadingToast } from 'vant'
 import store from '@/store/index'
 import { payTypeOptions, integralOptions } from '@/utils/explain'
 import globleFun from '@/utils/link'
-import { DominKey, getToken } from '@/utils/auth'
+import { DominKey, getToken, sandQuickUrl } from '@/utils/auth'
+import { parseParam } from '@/utils/index'
 import { orderPay } from '@/api/order'
 import PayPassPopup from './PayPassPopup.vue'
 import PayInputPopup from './PayInputPopup.vue'
@@ -111,6 +112,9 @@ const postPay = () => {
     .then((response) => {
       if (state.form.pay_type === 'alipay') {
         location.href = response.data.alipay
+      } else if (state.form.pay_type === 'bank') {
+        const data = response.data.bank
+        location.href = `${sandQuickUrl}${parseParam(data)}`
       } else {
         showLoadingToast({
           overlay: true,

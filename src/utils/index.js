@@ -58,3 +58,25 @@ export function hexToRgb(hex) {
 export function rgbToHex(r, g, b){
   return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')
 } 
+
+/**
+ * 对象转 & 拼接
+ * @param {*} param 
+ * @param {*} key 
+ * @param {*} encode 
+ * @returns 
+ */
+ export function parseParam(param, key, encode) {
+  if (param == null) return ''
+  var arr = []
+  var t = typeof (param)
+  if (t == 'string' || t == 'number' || t == 'boolean') {
+    arr.push(key + '=' + ((encode == null || encode) ? encodeURIComponent(param) : param))
+  } else {
+    for (var i in param) {
+      var k = key == null ? i : key + (param instanceof Array ? '[' + i + ']' : '.' + i)
+      arr.push(parseParam(param[i], k, encode))
+    }
+  }
+  return arr.join('&')
+}

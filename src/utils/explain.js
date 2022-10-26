@@ -32,7 +32,8 @@ export const orderOptions = [
 
 export const payTypeOptions = [
   { label: '支付宝', icon: 'alipay', value: 'alipay' },
-  { label: '微信', icon: 'wxpay', value: 'wxpay' }
+  { label: '微信', icon: 'wxpay', value: 'wxpay' },
+  { label: '银行卡', icon: 'bank', value: 'bank' }
 ]
 
 export const integralOptions = [
