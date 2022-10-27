@@ -13,16 +13,17 @@
         <div class="pay-item">
           <van-radio-group v-model="state.form.pay_type">
             <van-cell-group>
-              <van-cell clickable v-for="(item, index) in payOptions(payTypeOptions)" :key="index" @click="state.form.pay_type = item.value">
-              <template #title>
-                <van-image v-if="item.value === 'integral'" class="icon-img" fit="cover" :src="`${domin}${item.icon}` "/>
-                <svg-icon v-else :icon-class="item.icon" class-name="icon-type"/>
-                <span class="custom-title">
-                  {{ item.label }}
-                </span>
-              </template>
+              <van-cell clickable v-for="(item, index) in payOptions(payTypeOptions)" :key="index" @click="onSelectPay(item.value)">
+                <template #title>
+                  <van-image v-if="item.value === 'integral'" class="icon-img" fit="cover" :src="`${domin}${item.icon}` "/>
+                  <svg-icon v-else :icon-class="item.icon" class-name="icon-type"/>
+                  <span class="custom-title">
+                    {{ item.label }}
+                  </span>
+                </template>
                 <template #right-icon>
-                  <van-radio :name="item.value" />
+                  <div v-if="info?.open_pay_status == 0 && item.value === 'sandpay'" class="wallet" @click="globleFun.onGoto('/user')">暂无云账户，去开启<van-icon name="arrow" /></div>
+                  <van-radio v-else :name="item.value" />
                 </template>
               </van-cell>
             </van-cell-group>
@@ -42,7 +43,7 @@ import { showToast, showLoadingToast } from 'vant'
 import store from '@/store/index'
 import { payTypeOptions, integralOptions } from '@/utils/explain'
 import globleFun from '@/utils/link'
-import { DominKey, getToken, sandQuickUrl } from '@/utils/auth'
+import { DominKey, getToken, sandUrl, sandQuickUrl } from '@/utils/auth'
 import { parseParam } from '@/utils/index'
 import { orderPay } from '@/api/order'
 import PayPassPopup from './PayPassPopup.vue'
@@ -54,8 +55,8 @@ const show = ref(false)
 const payPassPopup = ref(null)
 const payInputPopup = ref(null)
 
+const info = computed(() => store.state.user.info)
 const config = computed(() => store.state.user.config)
-let info = computed(() => store.state.user.info)
 
 const props = defineProps({
   orderNo: {
@@ -106,6 +107,14 @@ const onClose = () => {
   Object.assign(state, getInitialData())
 }
 
+const onSelectPay = (value) => {
+  if (info.value?.open_pay_status == 0 && value === 'sandpay') {
+    
+  } else {
+    state.form.pay_type = value
+  }
+}
+
 const postPay = () => {
   state.btnLoading = true
   orderPay(state.form)
@@ -115,6 +124,9 @@ const postPay = () => {
       } else if (state.form.pay_type === 'bank') {
         const data = response.data.bank
         location.href = `${sandQuickUrl}${parseParam(data)}`
+      } else if (state.form.pay_type === 'sandpay') {
+        const data = response.data.sandpay
+        location.href = `${sandUrl}${parseParam(data)}`
       } else {
         showLoadingToast({
           overlay: true,
@@ -200,6 +212,13 @@ const onPayPassword = (value) => {
                 background-color: var(--root-theme-color);
                 border-color: var(--root-theme-color);
               }
+            }
+            .wallet {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 14px;
+              color: var(--root-theme-color);
             }
           }
         }

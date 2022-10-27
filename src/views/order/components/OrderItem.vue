@@ -77,7 +77,7 @@ const orderBtn = computed(() => {
   return (item) => {
     if (config.value?.design_style?.template_id === 1 && item.status === 0) {
       return true
-    } else if (config.value?.design_style?.template_id === 2 && parseFloat(item.cny_price) > 0) {
+    } else if (config.value?.design_style?.template_id === 2 && parseFloat(item.cny_price) > 0 && item.status === 0) {
       return true
     }
     return false

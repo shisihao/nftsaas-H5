@@ -128,6 +128,7 @@ const onSubmit = () => {
     right: 0;
     margin: 0 auto;
     color: var(--root-text-color1);
+    padding-bottom: 30px;
   }
   .title {
     padding-top: 20px;
@@ -185,7 +186,6 @@ const onSubmit = () => {
     display: flex;
     justify-content: space-around;
     margin-top: 30px;
-    padding-bottom: 30px;
     .btn {
       width: 40%;
       height: 40px;
