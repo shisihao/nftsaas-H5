@@ -5,6 +5,14 @@
         <div class="title">
           转赠给用户「{{ state.name }}」
         </div>
+        <div v-if="config?.design_style?.template_id === 2" class="give-fee">
+          <div>
+            本次转赠费用
+          </div>
+          <div class="fee">
+            ¥{{ config?.give?.fee }}
+          </div>
+        </div>
         <div class="content">
           <div class="goods-item">
             <div class="goods-img">
@@ -120,13 +128,13 @@ const onClosed = () => {
 }
 
 const onSubmit = () => {
-  if (config.value?.design_style?.template_id === 1) {
+  if (config.value?.design_style?.template_id === 1 || (config.value?.design_style?.template_id === 2 && config.value?.give?.fee == 0)) {
     if (!info.value.paypass_status) {
       payPassPopup.value.init()
     } else {
       payInputPopup.value.init()
     }
-  } else if (config.value?.design_style?.template_id === 2) {
+  } else if (config.value?.design_style?.template_id === 2 && config.value?.give?.fee > 0) {
     state.btnLoading = true
     orderGoodBox({ target_id: row.value.id, account: state.form.account, type: state.type })
       .then((response) => {
@@ -147,21 +155,33 @@ const onSubmit = () => {
 const onPayPassword = (value) => {
   state.form.pay_password = value
   state.btnLoading = true
-  const type = state.type === 'box'
-  const api = type ? boxGive(state.form) : goodGive(state.form)
 
-  api
-    .then((response) => {
-      showSuccessToast(response.msg)
-      onClose()
-      sleep(600)
-        .then(() => {
-          globleFun.onGoto(type ? '/box-list' : '/user', 'replace')
-        })
-    })
-    .finally(() => {
-      state.btnLoading = false
-    })
+  if (config.value?.design_style?.template_id === 1) {
+    const type = state.type === 'box'
+    const api = type ? boxGive(state.form) : goodGive(state.form)
+
+    api
+      .then((response) => {
+        showSuccessToast(response.msg)
+        onClose()
+        sleep(600)
+          .then(() => {
+            globleFun.onGoto(type ? '/box-list' : '/user', 'replace')
+          })
+      })
+      .finally(() => {
+        state.btnLoading = false
+      })
+  } else if (config.value?.design_style?.template_id === 2 && config.value?.give?.fee == 0) {
+    orderGoodBox({ target_id: row.value.id, account: state.form.account, type: state.type, pay_password: state.form.pay_password })
+      .then((response) => {
+        showSuccessToast(response.msg)
+        globleFun.onGoto('/transfer-record', 'replace')
+      })
+      .finally(() => {
+        state.btnLoading = false
+      })
+  }
 }
 </script>
 
@@ -179,6 +199,17 @@ const onPayPassword = (value) => {
       background-color: var(--root-bg-color1);
       text-align: center;
       padding: 20px 0;
+    }
+    .give-fee {
+      margin-top: 14px;
+      padding: 0 var(--root-page-spacing);
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: 400;
+      .fee {
+        color: var(--root-auxiliary-color1);
+      }
     }
     .content {
       font-size: 14px;

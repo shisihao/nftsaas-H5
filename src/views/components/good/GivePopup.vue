@@ -8,6 +8,14 @@
         <div class="subgift">
           <svg-icon icon-class="zhuanzeng" class-name="icon-zhuanzeng" />
         </div>
+        <div v-if="config?.design_style?.template_id === 2" class="give-fee">
+          <div>
+            本次转赠费用
+          </div>
+          <div class="fee">
+            ¥{{ config?.give?.fee }}
+          </div>
+        </div>
         <div class="content">
           <van-form ref="refForm" @submit="onSubmit">
             <van-field
@@ -132,6 +140,17 @@ const onSubmit = () => {
       background-color: var(--root-bg-color1);
       text-align: center;
       padding: 20px 0;
+    }
+    .give-fee {
+      margin-top: 14px;
+      padding: 0 var(--root-page-spacing);
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: 400;
+      .fee {
+        color: var(--root-auxiliary-color1);
+      }
     }
     .subgift {
       width: 80px;

@@ -39,6 +39,7 @@ import store from '@/store/index'
 import globleFun from '@/utils/link'
 import { paraphrase } from '@/filters/index'
 import { sandUrl } from '@/utils/auth'
+import { parseParam } from '@/utils/index'
 import { sandOpen } from '@/api/user'
 import SandPayPopup from './SandPayPopup.vue'
 
