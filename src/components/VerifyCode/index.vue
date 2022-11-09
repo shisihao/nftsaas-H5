@@ -3,7 +3,7 @@
     v-model="state.form.code"
     :update:model-value="emits('update:modelValue', state.form.code)"
     type="digit"
-    class="van-input-field"
+    class="van-input-field van-input-code"
     autocomplete="off"
     maxlength="6"
     name="code"

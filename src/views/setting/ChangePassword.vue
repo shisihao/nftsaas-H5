@@ -10,7 +10,7 @@
           placeholder="请输入旧密码"
           autocomplete="off"
           clearable
-          :rules="[{ required: true, message: '请填写旧密码' }]"
+          :rules="state.rules.old_password"
         />
         <van-field
           v-model="state.form.password"
@@ -20,7 +20,7 @@
           placeholder="请输入新密码"
           autocomplete="off"
           clearable
-          :rules="[{ required: true, message: '请填写新密码' }]"
+          :rules="state.rules.password"
         />
         <van-field
           v-model="state.form.password_confirmation"
@@ -30,13 +30,30 @@
           placeholder="请再次输入新密码"
           autocomplete="off"
           clearable
-          :rules="[{ required: true, message: '请填写确认密码' }]"
+          :rules="state.rules.password_confirmation"
         />
-      </van-cell-group>
-      <div class="change-row">
         <div class="password-tips">
           *限6-20个字符以内，建议使用数字字母组合，区分大小写
         </div>
+
+        <div class="account">
+          <p>
+            当前账号
+          </p>
+          <div class="phone">
+            {{ info && mosaicTel(info.phone) }}
+          </div>
+        </div>
+        <verify-code
+          v-model="state.form.code"
+          ref="refSendCode"
+          :label="true"
+          :scene="state.verifyCode.scene"
+          @verify-account="onVerifyAccount"
+          @send-code="onSendCode"
+        />
+      </van-cell-group>
+      <div class="change-row">
         <van-button
           round
           block
@@ -57,10 +74,17 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
-import { changePassword } from '@/api/user'
+import { ref, reactive, computed } from 'vue'
 import { showToast } from 'vant'
+import store from '@/store/index'
 import globleFun from '@/utils/link'
+import { mosaicTel } from '@/filters/index'
+import { changePassword } from '@/api/user'
+import { verificationCode } from '@/api/common'
+import VerifyCode from '@/components/VerifyCode/index.vue'
+
+const refSendCode = ref()
+const info = computed(() => store.state.user.info)
 
 const validatorPassWord = (value, rule) => {
   if (value.length < 6) return '密码不能小于6位'
@@ -70,15 +94,20 @@ const validatorPassWord = (value, rule) => {
 
 const validatorPassWord1 = (value, rule) => {
   if (value !== state.form.password) return '两次密码输入不一致'
+  // if (value === state.form.old_password) return '新密码不能与旧密码相同'
   return true
 }
 
 const state = reactive({
   btnLoading: false,
+  verifyCode: {
+    scene: 'set-login-pass'
+  },
   form: {
     old_password: '',
     password: '',
-    password_confirmation: ''
+    password_confirmation: '',
+    code: ''
   },
   rules: {
     old_password: [
@@ -96,12 +125,26 @@ const state = reactive({
   }
 })
 
+const onVerifyAccount = () => {
+  refSendCode.value.carry()
+}
+
+const onSendCode = (value = {}) => {
+  state.verifyCode = { ...state.verifyCode, ...value }
+  const data = { ...state.form, ...state.verifyCode }
+  verificationCode(data)
+    .then(({ msg = '发送成功' }) => {
+      refSendCode.value.countdown()
+      showToast(msg)
+    })
+}
+
 const onSubmit = () => {
   state.btnLoading = true
   changePassword(state.form)
     .then(({ msg = '修改成功' }) => {
       showToast(msg)
-      globleFun.onGoto('/setting')
+      globleFun.onGoto(-1, 'back')
     })
     .finally(() => {
       state.btnLoading = false
@@ -123,8 +166,28 @@ const onSubmit = () => {
       &::after {
         border-width: 0;
       }
+      .password-tips {
+        padding: 0 var(--root-page-spacing);
+        margin-top: 12px;
+        font-size: 12px;
+        color: var(--root-text-color2);
+      }
+      .account {
+        margin-top: 24px;
+        padding: 0 var(--root-page-spacing);
+        p {
+          font-size: 12px;
+          color: var(--root-text-color2);
+        }
+        .phone {
+          font-size: 18px;
+          margin-top: 10px;
+        }
+      }
       .van-cell {
+        margin-top: 12px;
         background-color: var(--root-bg-color2);
+        overflow: visible;
         :deep(.van-field__label) {
           color: var(--root-text-color1);
         }
@@ -132,19 +195,22 @@ const onSubmit = () => {
           input {
             color: var(--root-text-color1);
           }
+          .van-field__error-message {
+            position: absolute;
+            bottom: -26px;
+            left: 0;
+          }
         }
         &::after {
          border-color: var(--root-dividing-color1); 
         }
       }
+      .van-input-code {
+        padding: var(--van-cell-vertical-padding) var(--van-cell-horizontal-padding);
+      }
     }
     .change-row {
       padding: 0 var(--root-page-spacing);
-      .password-tips {
-        margin-top: 24px;
-        font-size: 12px;
-        color: var(--root-text-color2);
-      }
       .submit-button {
         margin-top: 50px;
         background-image: var(--root-button-color1);
