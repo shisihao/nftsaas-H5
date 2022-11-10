@@ -2,30 +2,34 @@
   <div class="main-section">
     <van-popup
       v-model:show="state.show"
-      position="bottom"
-      @closed="onClosed"
       round
       safe-area-inset-bottom
+      position="bottom"
+      @closed="onClosed"
     >
       <div class="title">
         做任务，领取{{ paraphrase({ value: 'integral', options: integralOptions }) }}
       </div>
       <div class="content">
-        <div class="card" v-for="(item,index) in state.taskList" :key="index">
+        <div class="card" v-for="(item, index) in state.taskList" :key="index">
           <div class="card-l">
-            <img :src="getImageUrl(paraphrase({ value: item.hook, options: taskOptions, l: 'icon' }))" alt="">
+            <img :src="getImageUrl( paraphrase({ value: item.hook, options: taskOptions, l: 'icon' }))" alt="" />
             <div>
-              <p>{{item.name}}</p>
-              <p class="integral">+{{item.reward }}{{ paraphrase({ value: 'integral', options: integralOptions }) }}</p>
+              <p>{{ item.name }}</p>
+              <p class="integral">
+                +{{ item.reward }}{{ paraphrase({ value: 'integral', options: integralOptions }) }}
+              </p>
             </div>
           </div>
           <div class="card-r">
-            <div class="card-btn disabled" v-if="item.state == 1"> 已完成 </div>
+            <div class="card-btn disabled" v-if="item.state == 1">已完成</div>
             <div v-else @click="onTask(item.hook)">
               <div v-if="item.progress > 0">
-                <div class="card-btn"> {{item.progress}}/{{item.number}} </div>
+                <div class="card-btn">
+                  {{ item.progress }}/{{ item.number }}
+                </div>
               </div>
-              <div class="card-btn" v-else> 
+              <div class="card-btn" v-else>
                 {{ item.hook === 'sign:in' ? '签到' : '去完成' }}
               </div>
             </div>
@@ -54,35 +58,39 @@ const state = reactive({
   taskList: []
 })
 
-
 const init = (value) => {
+  state.show = true
+  if (state.taskList.length) return false
   getList()
 }
 
-const getList = () =>{
-  tasksList().then(({ data }) =>{
-    state.taskList = [...data.day, ...data.more, ...data.once];
-    state.show = true
-  })
+const getList = () => {
+  tasksList()
+    .then(({ data: { day, more, once } }) => {
+      day ??= []
+      more ??= []
+      once ??= []
+      state.taskList = [...day, ...more, ...once]
+    })
 }
 
-const onTask = (hook) =>{
-  const toastHooks = ["share:goods", "show:goods", "collect:goods"]
-  const buyHooks = ["buy:goods", "integral:goods"]
+const onTask = (hook) => {
+  const toastHooks = ['share:goods', 'show:goods', 'collect:goods']
+  const buyHooks = ['buy:goods', 'integral:goods']
 
-  if(hook === 'sign:in') {
-    subTasks({ hook }).then(()=>{
+  if (hook === 'sign:in') {
+    subTasks({ hook }).then(() => {
       getList()
-      emit("refresh")
-      showToast("操作成功")
+      emit('refresh')
+      showToast('操作成功')
     })
   }
-  
-  if(hook === "real:name:auth") {
+
+  if (hook === 'real:name:auth') {
     globleFun.onGoto('/authentication')
   }
 
-  if(hook === "invite:friend") {
+  if (hook === 'invite:friend') {
     if (info.value?.cer_status !== 1) {
       showToast('请先实名认证')
     } else {
@@ -90,12 +98,12 @@ const onTask = (hook) =>{
     }
   }
 
-  if(buyHooks.includes(hook)) {
+  if (buyHooks.includes(hook)) {
     globleFun.onGoto('/dashboard')
   }
 
-  if(toastHooks.includes(hook)) {
-    showToast("请下载App进行操作")
+  if (toastHooks.includes(hook)) {
+    showToast('请下载App进行操作')
   }
 }
 
@@ -124,6 +132,7 @@ const onClosed = () => {}
   }
   .content {
     padding: 0 var(--root-page-spacing) var(--root-page-spacing) var(--root-page-spacing);
+    min-height: 40vh;
     max-height: 60vh;
     overflow-y: auto;
     .card {

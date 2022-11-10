@@ -1,29 +1,62 @@
 <template>
   <div class="integral-wrap">
-    <van-pull-refresh v-model="state.refreshing" @refresh="onRefresh" success-text="刷新成功">
-      <van-list v-model:loading="state.loading" :finished="state.finished" finished-text="没有更多了" @load="onLoad">
+    <van-pull-refresh
+      v-model="state.refreshing"
+      @refresh="onRefresh"
+      success-text="刷新成功"
+    >
+      <van-list
+        v-model:loading="state.loading"
+        :finished="state.finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+      >
         <div class="integral-header">
-          <div class="integral-num">{{ parseFloat(info?.balance || 0).toFixed(2) }}</div>
-          <div class="integral-text">{{ paraphrase({ value: 'integral', options: integralOptions }) }}余额</div>
-          <div class="integral-get" @click="onGetIntegral">领取{{ paraphrase({ value: 'integral', options: integralOptions })}}</div>
+          <div class="integral-num">
+            {{ parseFloat(info?.balance || 0).toFixed(2) }}
+          </div>
+          <div class="integral-text">
+            {{ paraphrase({ value: 'integral', options: integralOptions }) }}余额
+          </div>
+          <div class="integral-get" @click="onGetIntegral">
+            领取{{ paraphrase({ value: 'integral', options: integralOptions }) }}
+          </div>
         </div>
         <div class="integral-cotent-wrap">
           <van-tabs v-model:active="state.active" shrink @change="onTabChange">
-            <van-tab v-for="(item, index) in activeOptions" :key="index" :title="item.label" :name="item.value"></van-tab>
+            <van-tab
+              v-for="(item, index) in activeOptions"
+              :key="index"
+              :title="item.label"
+              :name="item.value"
+            ></van-tab>
           </van-tabs>
           <div class="integral-cotent">
-            <div class="integral-list" v-for="item in state.list" :key="item.id">
+            <div
+              class="integral-list"
+              v-for="item in state.list"
+              :key="item.id"
+            >
               <div class="list-header">
                 <div class="list-header-l">{{ item.title }}</div>
-                <div class="list-header-r">{{ item.action && item.action===1 ? '+' : '-' }} 
+                <div class="list-header-r">
+                  {{ item?.action === 1 ? '+' : '-' }}
                   {{ parseFloat(item.amount).toFixed(2) }}
                 </div>
               </div>
-              <div class="list-datetime">时间<span>{{ item.created_at }}</span></div>
+              <div class="list-datetime">
+                时间<span>{{ item.created_at }}</span>
+              </div>
               <div class="list-hash">
-                <div class="text">HASH<span>{{ item?.extend?.hash || '------' }}</span></div>
-                <div v-if="item?.extend?.hash" class="copy-btn" @click="onCopy(item?.extend?.hash)">
-                  <svg-icon icon-class="copy" class-name="grid-icon"/>
+                <div class="text">
+                  HASH<span>{{ item?.extend?.hash || '------' }}</span>
+                </div>
+                <div
+                  v-if="item?.extend?.hash"
+                  class="copy-btn"
+                  @click="onCopy(item?.extend?.hash)"
+                >
+                  <svg-icon icon-class="copy" class-name="grid-icon" />
                 </div>
               </div>
             </div>
@@ -74,13 +107,13 @@ const activeOptions = [
 const onLoad = () => {
   if (!state.loading) return false
   walletLogs({ currency: 'integral', action: state.active, ...state.pages })
-    .then(response => {
+    .then((response) => {
       const { data, total } = response.data
       if (state.refreshing) {
         state.list = []
         state.refreshing = false
       }
-      state.list.push(...response.data.data)
+      state.list.push(...data)
       state.loading = false
       state.pages.page++
       if (state.list.length >= total) {
@@ -93,9 +126,9 @@ const onRefresh = () => {
   state.loading = true
   state.finished = false
   state.pages.page = 1
-  onLoad()
   store.dispatch('user/getInfo')
-};
+  onLoad()
+}
 
 const onCopy = async (value) => {
   let err, clipboard
@@ -112,7 +145,6 @@ const onTabChange = () => {
 const onGetIntegral = () => {
   integralPopup.value.init()
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -181,9 +213,7 @@ const onGetIntegral = () => {
       .list-header-r {
         padding: 10px;
         flex-shrink: 0;
-
       }
-
     }
 
     .list-datetime,
