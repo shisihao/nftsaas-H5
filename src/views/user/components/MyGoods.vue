@@ -20,13 +20,13 @@
     </div>
     <div v-if="activeTags === 0">
       <van-list
-        v-model:loading="loading"
-        :finished="finished"
+        v-model:loading="state.loading"
+        :finished="state.finished"
         finished-text="没有更多了"
         @load="onLoad"
       >
         <div class="goods-section">
-          <div class="goods-item" v-for="(item, index) in list" :key="index" @click="onGoodsList(item)">
+          <div class="goods-item" v-for="(item, index) in state.list" :key="index" @click="onGoodsList(item)">
             <div v-if="item.total > 1" class="num">
               x{{ item.total }}
             </div>
@@ -86,9 +86,9 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, reactive } from 'vue'
 import store from '@/store/index'
-import { pages as commonPages } from '@/utils/explain'
+import { pages } from '@/utils/explain'
 import { DominKey, getToken } from '@/utils/auth'
 import globleFun from '@/utils/link'
 import { getGoodsList, getGoodsTags, getGoodsTagsList } from '@/api/goods'
@@ -97,28 +97,30 @@ import DefaultAvatar from '@/components/DefaultAvatar/index.vue'
 
 const domin = getToken(DominKey)
 
-let info = computed(() => store.state.user.info)
+const info = computed(() => store.state.user.info)
 
-const pages = { ...commonPages }
-const list = ref([])
-const loading = ref(false)
-const finished = ref(false)
+const state = reactive({
+  loading: false,
+  finished: false,
+
+  pages: { ...pages },
+  list: []
+})
 
 const onLoad = () => {
   // 异步更新数据
   // setTimeout 仅做示例，真实场景中一般为 ajax 请求
-  getGoodsList(pages)
+  getGoodsList(state.pages)
     .then((response) => {
-      response.data.forEach(v => {
-        list.value.push(v)
-      })
-      pages.page++
-      // 加载状态结束
-      loading.value = false
+      const { total, data } = response.data
 
+      state.list.push(...data)
+      state.pages.page++
+      // 加载状态结束
+      state.loading = false
       // 数据全部加载完成
-      if (response.data.length < pages.limit) {
-        finished.value = true
+      if (state.list.length >=  total ) {
+        state.finished = true
       }
     })
 }
