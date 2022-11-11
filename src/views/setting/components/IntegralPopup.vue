@@ -11,7 +11,8 @@
         做任务，领取{{ paraphrase({ value: 'integral', options: integralOptions }) }}
       </div>
       <div class="content">
-        <div class="card" v-for="(item, index) in state.taskList" :key="index">
+        <van-empty v-if="state.taskList.length === 0" description="暂无数据" />
+        <div v-else class="card" v-for="(item, index) in state.taskList" :key="index">
           <div class="card-l">
             <img :src="paraphrase({ value: item.hook, options: taskOptions, l: 'icon' })" alt="">
             <div>
