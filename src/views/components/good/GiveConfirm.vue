@@ -47,6 +47,7 @@
     </div>
     <pay-pass-popup ref="payPassPopup" />
     <pay-input-popup ref="payInputPopup" @pay-password="onPayPassword" />
+    <pay-input-sms-popup ref="payInputSmsPopup" @pay-password="onPayPassword" />
   </div>
 </template>
 
@@ -64,15 +65,18 @@ import { boxGive } from '@/api/box'
 import SvgIcon from '@/components/YuSvgIcon'
 import PayPassPopup from '../order/PayPassPopup.vue'
 import PayInputPopup from '../order/PayInputPopup.vue'
+import PayInputSmsPopup from '../order/PayInputSmsPopup.vue'
 
 const domin = getToken(DominKey)
 
 const row = inject('item')
 
 const info = computed(() => store.state.user.info)
+const config = computed(() => store.state.user.config)
 
 const payPassPopup = ref(null)
 const payInputPopup = ref(null)
+const payInputSmsPopup = ref(null)
 
 const getInitialData = () => ({
   show: false,
@@ -117,12 +121,22 @@ const onSubmit = () => {
   if (!info.value.paypass_status) {
     payPassPopup.value.init()
   } else {
-    payInputPopup.value.init()
+    if(config.value.give.sms === 1) {
+      payInputSmsPopup.value.init()
+    } else {
+      payInputPopup.value.init()
+    }
   }
 }
 
 const onPayPassword = (value) => {
-  state.form.pay_password = value
+  if( value.code ) {
+    const { code, pay_password } = value
+    state.form.code = code
+    state.form.pay_password = pay_password
+  } else {
+    state.form.pay_password = value
+  }
   state.btnLoading = true
   const type = state.type === 'box'
   const api = type ? boxGive(state.form) : goodGive(state.form)
