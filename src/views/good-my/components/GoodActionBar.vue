@@ -10,7 +10,7 @@
       <div v-if="item.interest_status && props.giveStatus.type === 3" class="advance-wrapper" @click="onAdvance">
         提前赠x{{ item.interest_give_total || 0 }}
       </div>
-      <div v-if="[1, 2, 3].includes(giveStatus.type)" class="attestation-wrapper">
+      <div v-if="([1, 2, 3].includes(giveStatus.type) && config?.consignment_status === 0)" class="attestation-wrapper">
         <div class="attestation-tip">
           {{ giveStatus.time }}
         </div>
@@ -20,9 +20,10 @@
         class="btn certificate-button"
         @click="$globleFun.onGoto(`/goods-zs?id=${item.id}`)"
       >
-        证书
+        查看证书
       </van-button>
       <van-button
+        v-if="(config?.consignment_status === 0)"
         round
         class="btn give-button"
         :disabled="![4].includes(giveStatus.type) || config?.give?.switch === 'off'"
