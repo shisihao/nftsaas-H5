@@ -48,7 +48,7 @@
               </div>
             </template>
           </van-field>
-          <div class="login-type">
+          <div class="login-type" v-if="use_password">
             <div @click="onCheckType">
               {{ paraphrase({ value: state.form.type, options: typeOptions }) }}
             </div>
@@ -78,7 +78,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch, onBeforeUnmount, onMounted } from 'vue'
+import { ref, reactive, watch, onBeforeUnmount, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { showToast } from 'vant'
 import Cookies from 'js-cookie'
@@ -90,7 +90,9 @@ import { login } from '@/api/user'
 import { verificationCode } from '@/api/common'
 import Logo from '../components/common/Logo.vue'
 import Agreement from './components/Agreement.vue'
+import store from '@/store/index'
 
+const use_password = computed(() => store.state.user.config.login_pass === 'on')
 const route = useRoute()
 route.query.code && sessionStorage.setItem('invitation-code', route.query.code)
 
@@ -140,6 +142,10 @@ const state = reactive({
     ]
   }
 })
+
+if(use_password) {
+  state.form.type = 'code'
+}
 
 const typeOptions = [
   { label: '密码登录', value: 'code' },
