@@ -9,7 +9,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "cos-js-sdk-v5": "^1.4.5",
+    "esdk-obs-browserjs": "^3.22.3",
     "await-to-js": "^3.0.0",
     "axios": "^0.27.2",
     "js-cookie": "3.0.1",

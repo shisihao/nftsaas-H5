@@ -9,7 +9,11 @@ import axios from 'axios'
 import { showToast } from 'vant'
 import COS from 'cos-js-sdk-v5'
 import store from '@/store/index'
-import { OssKey, getToken } from '@/utils/auth'
+import ObsClient from 'esdk-obs-browserjs/src/obs'
+import { OssKey } from '@/utils/auth'
+import { getCookieByKey } from '@/utils/cookies'
+
+const oss = JSON.parse(getCookieByKey(OssKey) || '{}')
 
 const props = defineProps({
 	show: {
@@ -32,39 +36,55 @@ const props = defineProps({
 
 const emit = defineEmits(['handleBeforeUpload', 'handleSuccess'])
 
-const afterRead = file => {
-	const oss = JSON.parse(getToken(OssKey))
+const statusOptions = [
+  { status: 'uploading', message: '上传中...' },
+  { status: 'done', message: '上传成功' },
+  { status: 'failed', message: '上传失败' }
+]
 
-	const cos = new COS({
-		SecretId: oss.credentials.tmpSecretId,
-		SecretKey: oss.credentials.tmpSecretKey,
-		SecurityToken: oss.credentials.sessionToken
-	})
+const obs = {
+  access_key_id: '3QZLEIDMZ7TAWELJTF8D',
+  secret_access_key: 'U869tYGNQp1KnfUqGqeX61gP2Mm548DAk256YzH4',
+  server: 'https://obs.cn-east-3.myhuaweicloud.com',
+  timeout: 3000, // 设置超时时间
 
-	const filename = `${String(+new Date()) + Math.random().toString(36).substr(2)}.${file.file.name.split('.').pop()}`
+  Bucket: oss.bucket
+}
 
-	cos.putObject({
-			Bucket: oss.bucket,
-			Region: oss.region,
-			Key: oss.folder + '/' + filename,
-			Body: file.file,
-			onProgress: function (progressData) {
-				file.onProgress(progressData.percent)
-			}
-		},(err, data) => {
-			if (err) {
-				console.log(err)
+var obsClient = new ObsClient({
+  access_key_id: obs.access_key_id,
+  secret_access_key: obs.secret_access_key,
+  server: obs.server,
+  timeout: obs.timeout
+})
+
+const afterRead = response => {
+	// 上传中
+  Object.assign(response, statusOptions[0])
+
+  const { file, status, message } = response
+
+  const filename = `${oss.folder}/${String(+new Date()) + Math.random().toString(36).substring(2)}.${file.name.split('.').pop()}`
+  obsClient.putObject(
+    {
+      Bucket: obs.Bucket,
+      Key: filename,
+      SourceFile: file
+    },
+    function (err, result) {
+      if (err) {
+        // 上传失败
 				showToast('上传失败')
-				store.dispatch('user/getOssKey')
-			}
-			if (data.statusCode === 200) {
-				const newData = data.Location.split('/').splice(1).join('/')
-				emit('handleSuccess', newData)
-			} else {
-				showToast('上传失败')
-			}
-		}
-	)
+        Object.assign(response, statusOptions[2])
+      } else {
+        // 上传成功
+        Object.assign(response, statusOptions[1])
+        // props.fileList.splice(props.fileList.length - 1, 1, { url: `${getCookieByKey(DomainKey)}${filename}`, ...statusOptions[1]})
+        // emit('update:fileList', props.fileList)
+        emit('handleSuccess', filename)
+      }
+    }
+  )
 }
 
 const onOversize = () => {
