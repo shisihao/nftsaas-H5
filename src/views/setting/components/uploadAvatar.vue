@@ -7,7 +7,6 @@
 import { ref, computed } from 'vue'
 import axios from 'axios'
 import { showToast } from 'vant'
-import COS from 'cos-js-sdk-v5'
 import store from '@/store/index'
 import ObsClient from 'esdk-obs-browserjs/src/obs'
 import { OssKey } from '@/utils/auth'
